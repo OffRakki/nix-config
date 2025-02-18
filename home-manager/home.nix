@@ -10,12 +10,13 @@
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
+     inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
 	#./nvim.nix
 	../modules/hyprlandconfig.nix
 	#../modules/i3enablehome.nix
+	../modules/emacsconfig.nix
   ];
 
   nixpkgs = {
@@ -58,7 +59,7 @@
   # Add stuff for your user as you see fit:
    programs.neovim.enable = true;
    programs.kitty.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [ steam emacs ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
