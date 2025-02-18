@@ -24,11 +24,11 @@
   drivers.amdgpu.enable = false;
   drivers.intel.enable = false;
   drivers.nvidia.enable = true;
-  drivers.nvidia-prime = {
-    enable = true;
-    intelBusID = "0@0:2:0";
-    nvidiaBusID = "1@0:0:0";
-  };
+  #drivers.nvidia-prime = {
+   # enable = true;
+   # intelBusID = "0@0:2:0";
+   # nvidiaBusID = "1@0:0:0";
+  #};
   local.hardware-clock.enable = false;
 
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
