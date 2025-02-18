@@ -1,5 +1,3 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   lib,
@@ -10,15 +8,15 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    inputs.home-manager.nixosModules.home-manager
+    	inputs.home-manager.nixosModules.home-manager
 
-    # You can also split up your configuration and import pieces of it here:
 	../hosts/default/config.nix
-	../modules/hyprland.nix
+
+	../modules/nixosconfig/hyprland.nix
+
 	#../modules/i3enableconfig.nix
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    
+	./hardware-configuration.nix
   ];
 
 
@@ -83,7 +81,7 @@
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
       # Opinionated: disable global registry
-      flake-registry = "";
+      #flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
     };

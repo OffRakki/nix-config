@@ -10,10 +10,10 @@
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
     hyprland.url = "github:hyprwm/Hyprland";
-    hyrpland-plugins = {
-    	url = "github:hyprwm/hyprland_plugins";
-	inputs.hyprland.follows = "hyprland";
-	};
+    #hyrpland-plugins = {
+    #	url = "github:hyprwm/hyprland_plugins";
+    #	inputs.hyprland.follows = "hyprland";
+    #	};
 
     # Home manager
     home-manager = {

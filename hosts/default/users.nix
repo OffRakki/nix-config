@@ -29,7 +29,7 @@ in
       ];
     };
     
-    defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.fish;
   }; 
   
   environment.shells = with pkgs; [ zsh ];

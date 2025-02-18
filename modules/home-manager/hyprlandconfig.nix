@@ -13,7 +13,7 @@
 
      };
      extraConfig = let modifier = "SUPER";
-     term = "alacritty";
+     term = "${pkgs.alacritty}/bin/alacritty";
 
      in 
        ''
