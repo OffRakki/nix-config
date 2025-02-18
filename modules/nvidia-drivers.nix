@@ -29,7 +29,7 @@ in
 
   hardware.nvidia = {
     # Modesetting is required.
-    modesetting.enable = false;
+    modesetting.enable = true;
       
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement.enable = false;
