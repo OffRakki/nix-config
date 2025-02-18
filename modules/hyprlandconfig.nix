@@ -13,7 +13,7 @@
 
      };
      extraConfig = let modifier = "SUPER";
-     term = "kitty";
+     term = "alacritty";
 
      in 
        ''
@@ -107,7 +107,7 @@
 	env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 	env = NVD_BACKEND,direct 
 
-	env = AQ_DRM_DEVICES,/dev/dri/card0
+	env = AQ_DRM_DEVICES,/dev/dri/card1
 	
 	env = GBM_BACKEND,nvidia-drm 
 
@@ -137,7 +137,7 @@
 
 	# Monitors
 	monitor=DP-3,1920x1080@239.76,0x0,1
-	monitor=DP-2,1920x1080@60,1920x-210,1
+	monitor=HDMI-A-1,1920x1080@60,1920x-210,1
 
 
 	# workspaces - Monitor rules

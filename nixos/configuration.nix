@@ -53,7 +53,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim	
     wget
     bat
     curl
@@ -72,6 +72,8 @@
     pwvucontrol
     pipecontrol
     btop
+    google-chrome
+    qutebrowser
   ];
 
   nix = let
@@ -102,7 +104,16 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = [ "wheel" "networkmanager" "audio"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "libvirtd"
+        "scanner"
+        "lp"
+        "video" 
+        "input" 
+        "audio"
+      ];
     };
   };
 

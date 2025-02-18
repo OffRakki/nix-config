@@ -9,10 +9,10 @@ in
 {
   users = { 
     mutableUsers = true;
-    users."${username}" = {
+    users."rakki" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "${gitUsername}";
+      description = "rakki";
       extraGroups = [
         "networkmanager"
         "wheel"

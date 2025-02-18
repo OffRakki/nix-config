@@ -92,32 +92,31 @@
 
   # FONTS
   fonts.packages = with pkgs; [
-    noto-fonts
-    fira-code
-    noto-fonts-cjk-sans
-    jetbrains-mono
-    font-awesome
-	  terminus_font
-    #(nerdfonts.override {fonts = ["JetBrainsMono"];}) # stable banch
-    nerd-fonts.jetbrains-mono # unstable
-    nerd-fonts.fira-code # unstable
+	noto-fonts
+	fira-code
+    	noto-fonts-cjk-sans
+    	jetbrains-mono
+    	font-awesome
+	terminus_font
+    	nerd-fonts.jetbrains-mono # unstable
+    	nerd-fonts.fira-code # unstable
  	];
   
-	  programs.waybar.enable = true;
-	  programs.hyprlock.enable = true;
-	  programs.firefox.enable = true;
-	  programs.git.enable = true;
-    programs.nm-applet.indicator = true;
-    #neovim.enable = true;
+	programs.waybar.enable = true;
+	programs.hyprlock.enable = true;
+	programs.firefox.enable = true;
+	programs.git.enable = true;
+	programs.nm-applet.indicator = true;
+	programs.neovim.enable = true;
 
-	  programs.thunar.enable = true;
-	  programs.thunar.plugins = with pkgs.xfce; [
-		  exo
-		  mousepad
-		  thunar-archive-plugin
-		  thunar-volman
-		  tumbler
-  	  ];
+	programs.thunar.enable = true;
+	programs.thunar.plugins = with pkgs.xfce; [
+		exo
+		mousepad
+		thunar-archive-plugin
+		thunar-volman
+		tumbler
+	];
 	
    programs.virt-manager.enable = false;
     
@@ -139,7 +138,7 @@
   # Extra Portal Configuration
   xdg.portal = {
     enable = true;
-    wlr.enable = false;
+    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
