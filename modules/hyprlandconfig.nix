@@ -4,6 +4,7 @@
    wayland.windowManager.hyprland = {
      enable = true;
      xwayland.enable = true;
+     plugins = [];
      systemd = {
      	enable = true;
 	variables = ["--all"];
