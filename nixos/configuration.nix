@@ -10,7 +10,8 @@
   imports = [
     	inputs.home-manager.nixosModules.home-manager
 
-	../hosts/default/config.nix
+	../hosts/rakki/config.nix
+	../hosts/rakki/fish.nix
 
 	../modules/nixosconfig/hyprland.nix
 
@@ -60,7 +61,6 @@
     home-manager
     fish
     kitty
-    alacritty
     firefox
     starship
     fastfetch
@@ -72,6 +72,8 @@
     btop
     google-chrome
     qutebrowser
+    wasistlos
+    vesktop
   ];
 
   nix = let
@@ -81,7 +83,7 @@
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
       # Opinionated: disable global registry
-      #flake-registry = "";
+      flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
     };
@@ -95,25 +97,33 @@
 
   networking.hostName = "igris";
 
-  users.users = {
-    rakki = {
-      initialPassword = "123123123";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "libvirtd"
-        "scanner"
-        "lp"
-        "video" 
-        "input" 
-        "audio"
-      ];
+  users = {
+    defaultUserShell = "${pkgs.fish}/bin/fish";
+    mutableUsers = true;
+    users = {
+        rakki = {
+          initialPassword = "123123123";
+          isNormalUser = true;
+          openssh.authorizedKeys.keys = [
+            # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+          ];
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+            "libvirtd"
+            "scanner"
+            "lp"
+            "video" 
+            "input" 
+            "audio"
+          ];
+	packages = with pkgs; [  ];
+        };
     };
   };
+  
+  environment.shells = with pkgs ; [ fish ];
+
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
@@ -127,6 +137,7 @@
       PasswordAuthentication = false;
     };
   };
+  time.timeZone = lib.mkDefault "America/Sao_Paulo";
 
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
