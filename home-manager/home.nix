@@ -14,7 +14,8 @@
 
     # You can also split up your configuration and import pieces of it here:
 	#./nvim.nix
-	../modules/home-manager/hyprlandconfig.nix
+	./modules
+	./home-packages.nix
 	#../modules/i3enablehome.nix
 	#../modules/emacsconfig.nix
   ];

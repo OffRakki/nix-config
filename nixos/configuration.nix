@@ -11,7 +11,7 @@
     	inputs.home-manager.nixosModules.home-manager
 
 	../hosts/rakki/config.nix
-	../hosts/rakki/fish.nix
+	./modules
 
 	../modules/nixosconfig/hyprland.nix
 
@@ -23,6 +23,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
+    backupFileExtension = "backup";
     users = {
       # Import your home-manager config
       rakki = import ../home-manager/home.nix;
@@ -124,6 +125,11 @@
   
   environment.shells = with pkgs ; [ fish ];
 
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    plugins = ["git"];
+    theme = "rkj-mod"; 
+  };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

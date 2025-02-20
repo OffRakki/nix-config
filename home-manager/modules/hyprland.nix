@@ -11,7 +11,7 @@
 	settings = {
 
 	    "$mainMod" = "SUPER";
-	    "$terminal" = "${pkgs.alacritty}/bin/alacritty";
+	    "$terminal" = "${pkgs.kitty}/bin/kitty";
 
 	    monitor = [ 
 	    	"DP-3,1920x1080@239.76,0x0,1"
@@ -157,7 +157,7 @@
 
 	    env = [ 
 		"NIXOS_OZONE_WL,1"
-		"EDITOR,nvim #default editor"
+		#"EDITOR,nvim #default editor"
 		"CLUTTER_BACKEND,wayland"
 		"GDK_BACKEND,wayland,x11"
 		"QT_AUTO_SCREEN_SCALE_FACTOR,1"
@@ -219,14 +219,14 @@
 
 	    bind = [ 
 		"$mainMod, D, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #Main Menu
-		"$mainModCTRL, F, fullscreen, 1 # fake full screen"
+		"$mainMod CTRL, F, fullscreen, 1 # fake full screen"
 		"$mainMod, A, exec, pkill rofi || true && ags -t 'overview'"
-		"$mainMod, Return, exec, $terminal}"  #terminal
+		"$mainMod, Return, exec, $terminal"  #terminal
 		"$mainMod, T, exec, $files" #file manager
-		"$mainModALT, C, exec, $UserScripts/RofiCalc.sh" # calculator (qalculate)
-		"$mainModSHIFT, Return, exec, pypr toggle term" # Dropdown terminal
+		"$mainMod ALT, C, exec, $UserScripts/RofiCalc.sh" # calculator (qalculate)
+		"$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
 		"$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-		"$mainModSHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme
+		"$mainMod SHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme
 	    ];
 
 		# For passthrough keyboard into a VM

@@ -40,7 +40,7 @@
       ohMyZsh = {
         enable = true;
         plugins = ["git"];
-        theme = "funky"; 
+        theme = "rkj-mod"; 
       	};
       
       autosuggestions.enable = true;
