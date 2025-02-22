@@ -34,7 +34,7 @@
     # You can add overlays here
     overlays = [
       # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+      #neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -53,6 +53,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sublime
     neovim	
     wget
     bat
@@ -65,7 +66,6 @@
     firefox
     starship
     fastfetch
-    wayland
     wireplumber
     pipewire
     pwvucontrol

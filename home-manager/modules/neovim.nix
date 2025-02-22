@@ -1,11 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, config, lib, nix-colors, ... }: {
   programs.neovim = {
     enable = true;
+    defaultEditor= true;
     extraPackages = with pkgs; [
       lua-language-server
       python311Packages.python-lsp-server
       nixd
-      vimPlugins.nvim-treesitter-parsers.hyprlang
+      pkgs.vimPlugins.nvim-treesitter-parsers.hyprlang
     ];
+    viAlias = true;
+    vimAlias = true;
+    extraConfig = ''
+	set number relativenumber
+	set shiftwidth=4
+    '';
   };
 }

@@ -5,7 +5,7 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
-    # anki
+    anki
     imv
     mpv
     obs-studio
@@ -14,8 +14,13 @@
     teams-for-linux
     telegram-desktop
     vesktop
+    qalculate-gtk
+    vscode
 
     # CLI utils
+    ranger
+    libqalculate
+    comma
     bc
     bottom
     brightnessctl
@@ -43,6 +48,9 @@
     yt-dlp
     zip
 
+    # Gaming
+    prismlauncher
+
     # Coding stuff
     nodejs
     python311
@@ -52,6 +60,10 @@
     libnotify
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
+    aquamarine
+    hyprlang
+    hyprutils
+
 
     # Other
     bemoji

@@ -6,14 +6,16 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
-
+    alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
     hyprland.url = "github:hyprwm/Hyprland";
-    #hyrpland-plugins = {
-    #	url = "github:hyprwm/hyprland_plugins";
-    #	inputs.hyprland.follows = "hyprland";
-    #	};
+
+    # nix-colors
+    nix-colors.url = "github:misterio77/nix-colors";
+
+    # Games
+    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
     # Home manager
     home-manager = {
@@ -28,7 +30,7 @@
     home-manager,
     hyprland,
     ...
-  } @ inputs: let
+  } @inputs: let
     inherit (self) outputs;
   in {
     # NixOS configuration entrypoint
@@ -36,8 +38,8 @@
     nixosConfigurations = {
       igris = nixpkgs.lib.nixosSystem {
         specialArgs = {
-	  inherit inputs;
-	  inherit outputs;
+	inherit inputs;
+	inherit outputs;
 	};
 
         # Main config file

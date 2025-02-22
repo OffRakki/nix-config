@@ -61,7 +61,7 @@
     
     greetd = {
       enable = true;
-      vt = 3;
+      vt = 2;
       settings = {
         default_session = {
           user = "rakki";
@@ -202,10 +202,13 @@
       }
     })
   '';
-  security.pam.services.swaylock = {
+  security.pam.services = {
+    gdm-password.enableGnomeKeyring = true;
+    swaylock = {
     text = ''
       auth include login
     '';
+    };
   };
 
   nix = {

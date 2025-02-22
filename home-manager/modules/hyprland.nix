@@ -12,10 +12,12 @@
 
 	    "$mainMod" = "SUPER";
 	    "$terminal" = "${pkgs.kitty}/bin/kitty";
+	    "$files" = "${pkgs.ranger}/bin/ranger";
 
 	    monitor = [ 
 	    	"DP-3,1920x1080@239.76,0x0,1"
-	    	"HDMI-A-1,disable"
+	    	#"HDMI-A-1,highres,1920x0,1"
+		"HDMI-A-1,disable"
 		];
 
 	    dwindle = {	
@@ -202,7 +204,7 @@
 		"rog-control-center &"
 		"wl-paste --type text --watch cliphist store "
 		"wl-paste --type image --watch cliphist store"
-		"$UserScripts/RainbowBorders.sh &"
+		#"$UserScripts/RainbowBorders.sh &"
 		"hypridle &"
 		"pypr &"
 		"swww-daemon --format xrgb && swww img $HOME/Pictures/wallpapers/mecha-nostalgia.png  # persistent wallpaper"
@@ -240,7 +242,6 @@
 		"$HOME/.config/hypr/wallust/wallust-hyprland.conf"
 		"$HOME/.config/hypr/configs/Keybinds.conf"
 		"$HOME/.config/hypr/UserConfigs/WindowRules.conf"
-		"$HOME/.config/hypr/UserConfigs/UserAnimations.conf"
 		"$HOME/.config/hypr/UserConfigs/WorkspaceRules.conf"
 		];
 	};
