@@ -10,9 +10,10 @@
 	};
 	settings = {
 
-	    "$mainMod" = "SUPER";
-	    "$terminal" = "${pkgs.kitty}/bin/kitty";
-	    "$files" = "${pkgs.ranger}/bin/ranger";
+	    "$mainMod"    = "SUPER";
+	    "$terminal"   = "${pkgs.kitty}/bin/kitty";
+	    "$files"      = "${pkgs.kitty}/bin/kitty -e ${pkgs.ranger}/bin/ranger";
+	    "$qalc" = "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
 
 	    monitor = [ 
 	    	"DP-3,1920x1080@239.76,0x0,1"
@@ -225,7 +226,7 @@
 		"$mainMod, A, exec, pkill rofi || true && ags -t 'overview'"
 		"$mainMod, Return, exec, $terminal"  #terminal
 		"$mainMod, T, exec, $files" #file manager
-		"$mainMod ALT, C, exec, $UserScripts/RofiCalc.sh" # calculator (qalculate)
+		"$mainMod ALT, C, exec, $qalc" # calculator (qalculate)
 		"$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
 		"$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
 		"$mainMod SHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme

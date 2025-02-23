@@ -100,6 +100,7 @@
 	terminus_font
     	nerd-fonts.jetbrains-mono # unstable
     	nerd-fonts.fira-code # unstable
+	nerd-fonts.inconsolata
  	];
   
 	programs.waybar.enable = true;

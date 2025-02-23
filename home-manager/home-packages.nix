@@ -16,8 +16,10 @@
     vesktop
     qalculate-gtk
     vscode
+    vlc
 
     # CLI utils
+    gamescope
     ranger
     libqalculate
     comma

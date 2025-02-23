@@ -20,6 +20,11 @@
 	./hardware-configuration.nix
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
+
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
@@ -47,12 +52,13 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-    };
+  };
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    evil-helix
     sublime
     neovim	
     wget
@@ -97,39 +103,6 @@
   };
 
   networking.hostName = "igris";
-
-  users = {
-    defaultUserShell = "${pkgs.fish}/bin/fish";
-    mutableUsers = true;
-    users = {
-        rakki = {
-          initialPassword = "123123123";
-          isNormalUser = true;
-          openssh.authorizedKeys.keys = [
-            # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-          ];
-          extraGroups = [
-            "networkmanager"
-            "wheel"
-            "libvirtd"
-            "scanner"
-            "lp"
-            "video" 
-            "input" 
-            "audio"
-          ];
-	packages = with pkgs; [  ];
-        };
-    };
-  };
-  
-  environment.shells = with pkgs ; [ fish ];
-
-  programs.zsh.ohMyZsh = {
-    enable = true;
-    plugins = ["git"];
-    theme = "rkj-mod"; 
-  };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

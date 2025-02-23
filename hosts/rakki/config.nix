@@ -18,6 +18,7 @@
     ../../modules/drivers/intel-drivers.nix
     ../../modules/drivers/vm-guest-services.nix
     ../../modules/drivers/local-hardware-clock.nix
+    ./users.nix
   ];
 
   # Extra Module Options
@@ -208,14 +209,6 @@
     text = ''
       auth include login
     '';
-    };
-  };
-
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
     };
   };
 
