@@ -17,6 +17,7 @@
     qalculate-gtk
     vscode
     vlc
+    microsoft-edge
 
     # CLI utils
     gamescope
