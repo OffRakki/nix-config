@@ -18,6 +18,7 @@
     vscode
     vlc
     microsoft-edge
+		warp
 
     # CLI utils
     gamescope
