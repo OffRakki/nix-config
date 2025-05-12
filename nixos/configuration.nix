@@ -33,8 +33,6 @@
       rakki = import ../home-manager/home.nix;
     };
   };
-
-	programs.neovim.defaultEditor = true;
   
   nixpkgs = {
     # You can add overlays here

@@ -1,6 +1,3 @@
-# 💫 https://github.com/JaKooLit 💫 #
-# Packages and Fonts config including the "programs" options
-
 { pkgs, inputs, ...}: let
 
   python-packages = pkgs.python3.withPackages (
@@ -109,7 +106,7 @@
 	programs.git.enable = true;
 	programs.nm-applet.indicator = true;
 	programs.neovim.enable = true;
-
+	programs.neovim.defaultEditor = true;
 	programs.thunar.enable = true;
 	programs.thunar.plugins = with pkgs.xfce; [
 		exo
