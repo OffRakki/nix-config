@@ -25,7 +25,6 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
-
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     backupFileExtension = "backup";
@@ -81,6 +80,7 @@
     qutebrowser
     wasistlos
     vesktop
+		fastfetch
   ];
 
   nix = let

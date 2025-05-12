@@ -1,14 +1,14 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    wayland.windowManager.hyprland = {
-	enable = true;
-	xwayland.enable = true;
-	plugins = [];
-	systemd = {
+  wayland.windowManager.hyprland = {
+		enable = true;
+		xwayland.enable = true;
+		plugins = [];
+		systemd = {
 	    enable = true;
 	    variables = ["--all"];
-	};
-	settings = {
+		};
+		settings = {
 
 	    "$mainMod"    = "SUPER";
 	    "$terminal"   = "${pkgs.kitty}/bin/kitty";
@@ -17,8 +17,8 @@
 
 	    monitor = [ 
 	    	"DP-3,1920x1080@239.76,0x0,1"
-	    	#"HDMI-A-1,highres,1920x0,1"
-		"HDMI-A-1,disable"
+	    	"HDMI-A-1,highres,1920x-250,1"
+				#"HDMI-A-1,disable"
 		];
 
 	    dwindle = {	
@@ -41,8 +41,8 @@
 		gaps_in = 4;
 		gaps_out = 6;
 
-		"col.active_border" = "$color12";
-		"col.inactive_border" = "$color10";
+		#"col.active_border" = "$color12";
+		#"col.inactive_border" = "$color10";
 	    };
 
 	    input = {
@@ -106,8 +106,8 @@
 		    range = 3;
 		    render_power = 1;
 
-		    "color" = "$color12";
-		    "color_inactive" = "$color10";
+		    #"color" = "$color12";
+		    #"color_inactive" = "$color10";
 		};
 
 		blur = {
@@ -122,10 +122,10 @@
 	    };
 
 	    group = {
-		"col.border_active" = "$color15";
+		#"col.border_active" = "$color15";
 
 		groupbar = {
-		    "col.active" = "$color0";
+		    #"col.active" = "$color0";
 		};
 	    };
 
@@ -212,24 +212,90 @@
 		"$scriptsDir/Polkit-NixOS.sh"
 	    ];
 
+			binde = [
+				"$mainMod SHIFT, left, resizeactive,-50 0"
+				"$mainMod SHIFT, right, resizeactive,50 0"
+				"$mainMod SHIFT, up, resizeactive,0 -50"
+				"$mainMod SHIFT, down, resizeactive,0 50"
+			];
+
 	    bindr = [ 
-		"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" # Super Key to Launch rofi menu
+				"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" # Super Key to Launch rofi menu
 	    ];
 
 	    bindn = [ 
-		"ALT_L, SHIFT_L, exec, $scriptsDir/SwitchKeyboardLayout.sh" # Change keyboard layout
+				"ALT_L, SHIFT_L, exec, $scriptsDir/SwitchKeyboardLayout.sh" # Change keyboard layout
 	    ];
 
+			bindm = [
+				"$mainMod, mouse:272, movewindow # NOTE: mouse:272 = left click"
+				"$mainMod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
+			];
+
+			#bindl = [
+			#	"bindl = , xf86AudioPlayPause, exec, $scriptsDir/MediaCtrl.sh --pause"
+			#	"bindl = , xf86AudioPause, exec, $scriptsDir/MediaCtrl.sh --pause"
+			#	"bindl = , xf86AudioPlay, exec, $scriptsDir/MediaCtrl.sh --pause"
+			#	"bindl = , xf86AudioNext, exec, $scriptsDir/MediaCtrl.sh --nxt "
+			#	"bindl = , xf86AudioPrev, exec, $scriptsDir/MediaCtrl.sh --prv"
+			#	"bindl = , xf86audiostop, exec, $scriptsDir/MediaCtrl.sh --stop"
+			#];
+
 	    bind = [ 
-		"$mainMod, D, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #Main Menu
-		"$mainMod CTRL, F, fullscreen, 1 # fake full screen"
-		"$mainMod, A, exec, pkill rofi || true && ags -t 'overview'"
-		"$mainMod, Return, exec, $terminal"  #terminal
-		"$mainMod, T, exec, $files" #file manager
-		"$mainMod ALT, C, exec, $qalc" # calculator (qalculate)
-		"$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
-		"$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-		"$mainMod SHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme
+				"$mainMod, D, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #Main Menu
+				"$mainMod, SPACE, togglefloating"
+				"$mainMod CTRL, F, fullscreen, 1 # fake full screen"
+				"$mainMod, F, fullscreen"
+    		"$mainMod SHIFT, Q, killactive"
+				"$mainMod, A, exec, pkill rofi || true && ags -t 'overview'"
+				"$mainMod, Return, exec, $terminal"  #terminal
+				"$mainMod, T, exec, $files" #file manager
+				"$mainMod ALT, C, exec, [size 50% 50%;float] $terminal -e qalc" # calculator (qalculate)
+				"$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
+				"$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
+				"$mainMod SHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme
+
+				# Switch workspaces with mainMod + [0-9] 
+				"$mainMod, code:10, workspace, 1 # NOTE: code:10 = key 1"
+				"$mainMod, code:11, workspace, 2 # NOTE: code:11 = key 2"
+				"$mainMod, code:12, workspace, 3 # NOTE: code:12 = key 3"
+				"$mainMod, code:13, workspace, 4 # NOTE: code:13 = key 4"
+				"$mainMod, code:14, workspace, 5 # NOTE: code:14 = key 5"
+				"$mainMod, code:15, workspace, 6 # NOTE: code:15 = key 6"
+				"$mainMod, code:16, workspace, 7 # NOTE: code:16 = key 7"
+				"$mainMod, code:17, workspace, 8 # NOTE: code:17 = key 8"
+				"$mainMod, code:18, workspace, 9 # NOTE: code:18 = key 9"
+				"$mainMod, code:19, workspace, 10 # NOTE: code:19 = key 0"
+
+				# Move active window and follow to workspace mainMod + SHIFT [0-9]
+				"$mainMod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"
+				"$mainMod SHIFT, code:11, movetoworkspace, 2 # NOTE: code:11 = key 2"
+				"$mainMod SHIFT, code:12, movetoworkspace, 3 # NOTE: code:12 = key 3"
+				"$mainMod SHIFT, code:13, movetoworkspace, 4 # NOTE: code:13 = key 4"
+				"$mainMod SHIFT, code:14, movetoworkspace, 5 # NOTE: code:14 = key 5"
+				"$mainMod SHIFT, code:15, movetoworkspace, 6 # NOTE: code:15 = key 6"
+				"$mainMod SHIFT, code:16, movetoworkspace, 7 # NOTE: code:16 = key 7"
+				"$mainMod SHIFT, code:17, movetoworkspace, 8 # NOTE: code:17 = key 8"
+				"$mainMod SHIFT, code:18, movetoworkspace, 9 # NOTE: code:18 = key 9"
+				"$mainMod SHIFT, code:19, movetoworkspace, 10 # NOTE: code:19 = key 0"
+				"$mainMod SHIFT, bracketleft, movetoworkspace, -1 # brackets ["
+				"$mainMod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
+
+				# Move focus with mainMod + arrow keys
+				"$mainMod, left, movefocus, l"
+				"$mainMod, right, movefocus, r"
+				"$mainMod, up, movefocus, u"
+				"$mainMod, down, movefocus, d"
+
+				# Move windows
+				"$mainMod CTRL, left, movewindow, l"
+				"$mainMod CTRL, right, movewindow, r"
+				"$mainMod CTRL, up, movewindow, u"
+				"$mainMod CTRL, down, movewindow, d"
+
+				# Dwindle Layout
+				"$mainMod SHIFT, I, togglesplit # only works on dwindle layout"
+				"$mainMod, P, pseudo, # dwindle"
 	    ];
 
 		# For passthrough keyboard into a VM
@@ -239,12 +305,12 @@
 		#bind = $mainModALT, P, submap, reset
 		#submap = reset
 
-	source = [ 
-		"$HOME/.config/hypr/wallust/wallust-hyprland.conf"
-		"$HOME/.config/hypr/configs/Keybinds.conf"
-		"$HOME/.config/hypr/UserConfigs/WindowRules.conf"
-		"$HOME/.config/hypr/UserConfigs/WorkspaceRules.conf"
-		];
+	#source = [ 
+	#	"$HOME/.config/hypr/wallust/wallust-hyprland.conf"
+	#	"$HOME/.config/hypr/configs/Keybinds.conf"
+	#	"$HOME/.config/hypr/UserConfigs/WindowRules.conf"
+	#	"$HOME/.config/hypr/UserConfigs/WorkspaceRules.conf"
+	#	];
 	};
     };
 }

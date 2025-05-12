@@ -14,6 +14,7 @@
 		openssh.authorizedKeys.keys = [ ];
 		extraGroups = [
 		    "networkmanager"
+				"storage"
 		    "wheel"
 		    "libvirtd"
 		    "scanner"

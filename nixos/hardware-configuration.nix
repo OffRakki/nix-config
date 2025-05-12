@@ -16,18 +16,31 @@
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+	boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/811ebd8d-fcd3-4e31-9a03-fb8db6bb58bb";
+    { device = "/dev/disk/by-uuid/a5274005-99d5-4383-998c-33ae2233c689";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3880-F231";
+    { device = "/dev/disk/by-uuid/D874-93F7";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+	
+	fileSystems."/home/rakki/Mounts/ssd" = 
+		{	device = "/dev/disk/by-uuid/5E42A95B42A93923";
+			fsType = "ntfs";
+			options = [ "rw" "uid=1000" "nofail" ];
+		};
+
+	fileSystems."/home/rakki/Mounts/nvme" = 
+		{	device = "/dev/disk/by-uuid/01DA679184F3A5D0";
+			fsType = "ntfs";
+			options = [ "rw" "uid=1000" "nofail" ];
+		};
 
   swapDevices = [ ];
 
@@ -43,7 +56,6 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.graphics = {
     enable = true;
-    };
+  };
 
 }
-
