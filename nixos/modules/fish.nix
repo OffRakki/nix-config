@@ -62,19 +62,6 @@
 				mpvs="~/.scripts/mpv/mpvs";
 				mpvsa="~/.scripts/mpv/mpvsa";
 
-# music
-				mpa="~/.scripts/mpv/mpa.sh";
-				lofi="mpv --ytdl-format=bestaudio ytdl://ytsearch:'www.youtube.com/watch?v=hGvWS1pLb3g'";
-				lofi2="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=zRRq4Rd1lPs'";
-				hype="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=MTahu17Cgc8'";
-				lucas20="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=fLpCyU_SHRo'";
-				lucas19="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=PhfXQ58ywuI'";
-				violin="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=iceS6BvhuQ8'";
-				violin2="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=synJbsrk0k8'";
-				villain="mpv --ytdl-format=bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v=le1l4eeo8Ow'";
-				bnha="mpv --no-video ~/Music/BNHA/*";
-				supernova="mpv --no-video --loop ~/yt-downloads/From\ Fall\ to\ Spring\ -\ Supernova\ \(Official\ Lyric\ Video\).opus";
-				gambare="mpv --ytdl --no-video 'https://www.youtube.com/watch?v=gnxNdYi69Zg'";
 
 # git
 				gitall="git add -A && git commit -a && git push";
@@ -102,6 +89,9 @@
 				egrep="egrep --color=always";
 				fgrep="fgrep --color=always";
 			};
+			extraConfig = ''
+
+			'';
 		};
 	};
 }

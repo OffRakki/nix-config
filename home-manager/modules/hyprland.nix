@@ -216,7 +216,7 @@
 #"$UserScripts/RainbowBorders.sh &"
 				"hypridle &"
 				"pypr &"
-				"swww-daemon --format xrgb && swww img $HOME/Downloads/Kath.png  # persistent wallpaper"
+				"swww-daemon --format xrgb && swww img ../../hosts/rakki/wallpapers/agbg.png  # persistent wallpaper"
 #"$scriptsDir/Polkit-NixOS.sh"
 			];
 
@@ -228,7 +228,7 @@
 			];
 
 			bindr = [ 
-				"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" # Super Key to Launch rofi menu
+			#	"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" # Super Key to Launch rofi menu
 			];
 
 			bindn = [ 
@@ -250,7 +250,7 @@
 #];
 
 			bind = [ 
-				"$mainMod, D, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #Main Menu
+				"$mainMod, D, exec, pkill wofi || wofi --show drun --modi drun,filebrowser,run,window" #Main Menu
 				"$mainMod, SPACE, togglefloating"
 				"$mainMod SHIFT, F, fullscreen, 1 # fake full screen"
 				"$mainMod, F, fullscreen"

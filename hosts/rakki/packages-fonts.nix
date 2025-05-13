@@ -34,14 +34,15 @@ in {
 			wget
 			xdg-user-dirs
 			xdg-utils
-
 			fastfetch
+			oh-my-fish
 			(mpv.override {scripts = [mpvScripts.mpris];}) # with tray
 #ranger
 
 # Hyprland Stuff
 #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
 			ags_1 # desktop overview  
+			wofi
 			btop
 			brightnessctl # for brightness control
 			cava
@@ -54,6 +55,7 @@ in {
 			imagemagick 
 			inxi
 			jq
+			alacritty
 			kitty
 			libsForQt5.qtstyleplugin-kvantum #kvantum
 			networkmanagerapplet
