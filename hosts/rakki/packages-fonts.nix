@@ -24,7 +24,6 @@ in {
 			ffmpeg   
 			glib #for gsettings to work
 			gsettings-qt
-			git
 			killall  
 			libappindicator
 			libnotify
@@ -105,7 +104,6 @@ in {
 	programs.waybar.enable = true;
 	programs.hyprlock.enable = true;
 	programs.firefox.enable = true;
-	programs.git.enable = true;
 	programs.nm-applet.indicator = true;
 	programs.neovim.enable = true;
 	programs.neovim.defaultEditor = true;

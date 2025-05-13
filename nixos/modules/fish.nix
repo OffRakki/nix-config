@@ -89,9 +89,6 @@
 				egrep="egrep --color=always";
 				fgrep="fgrep --color=always";
 			};
-			extraConfig = ''
-
-			'';
 		};
 	};
 }
