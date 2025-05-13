@@ -16,7 +16,7 @@
 
 # nix
 				ncg="nix-collect-garbage";
-				nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
+				nrd ="sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
 
 # sudo
 				sv="sudo nvim";

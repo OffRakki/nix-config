@@ -218,7 +218,7 @@
 #"$UserScripts/RainbowBorders.sh &"
 				"hypridle &"
 				"pypr &"
-				"swww-daemon --format xrgb && swww img ./../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper"
+				"swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper"
 #"$scriptsDir/Polkit-NixOS.sh"
 			];
 
