@@ -9,9 +9,9 @@
 		extraConfig = {
 			init.defaultBranch = "main";
 			credential = {
-				helper = "manager";
+				helper = "libsecret";
 				"https://github.com".username = "offrakki";
-				credentialStore = "cache";
+				credentialStore = "";
 			};
 			commit.verbose = true;
 			column.ui = "auto";
