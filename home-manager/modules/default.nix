@@ -1,6 +1,6 @@
 {
     imports = [
-	./hyprland.nix
+	./hypr
 	./git.nix
 	./waybar
 	#./stylix.nix

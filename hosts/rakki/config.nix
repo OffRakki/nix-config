@@ -5,18 +5,18 @@
   in {
   imports = [
     ./packages-fonts.nix
-    ../../modules/drivers/amd-drivers.nix
+    #../../modules/drivers/amd-drivers.nix
     ../../modules/drivers/nvidia-drivers.nix
     ../../modules/drivers/nvidia-prime-drivers.nix
-    ../../modules/drivers/intel-drivers.nix
+    #../../modules/drivers/intel-drivers.nix
     ../../modules/drivers/vm-guest-services.nix
     ../../modules/drivers/local-hardware-clock.nix
     ./users.nix
   ];
 
   # Extra Module Options
-  drivers.amdgpu.enable = true;
-  drivers.intel.enable = false;
+  #drivers.amdgpu.enable = true;
+  #drivers.intel.enable = false;
   drivers.nvidia.enable = true;
   #drivers.nvidia-prime = {
    # enable = true;
@@ -235,5 +235,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

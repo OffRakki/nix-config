@@ -10,14 +10,14 @@
   imports = [
     	inputs.home-manager.nixosModules.home-manager
 
-	../hosts/rakki/config.nix
-	./modules
+		../hosts/rakki/config.nix
+		./modules
 
-	../modules/nixosconfig/hyprland.nix
+		../modules/nixosconfig/hyprland.nix
 
-	#../modules/i3enableconfig.nix
+		#../modules/i3enableconfig.nix
     
-	./hardware-configuration.nix
+		./hardware-configuration.nix
   ];
 
   xdg.portal = {
@@ -122,5 +122,5 @@
 
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

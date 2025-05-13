@@ -188,6 +188,7 @@
 				"__GLX_VENDOR_LIBRARY_NAME,nvidia"
 				"NVD_BACKEND,direct "
 				"AQ_DRM_DEVICES,/dev/dri/card1"
+				"WLR_DRM_DEVICES,/dev/dri/card1"
 				"GBM_BACKEND,nvidia-drm "
 				"__NV_PRIME_RENDER_OFFLOAD,1 "
 				"__VK_LAYER_NV_optimus,NVIDIA_only"

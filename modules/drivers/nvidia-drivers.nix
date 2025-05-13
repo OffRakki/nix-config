@@ -1,5 +1,3 @@
-# 💫 https://github.com/JaKooLit 💫 #
-
 { lib, pkgs, config, ... }:
 with lib;
 let
@@ -24,8 +22,8 @@ in
   	  vdpauinfo
 	    libva
  		  libva-utils	
-    	];
-      };
+    ];
+  };
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -40,7 +38,7 @@ in
       
     #dynamicBoost.enable = true; # Dynamic Boost
 
-    nvidiaPersistenced = false;
+    nvidiaPersistenced = true;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -49,7 +47,7 @@ in
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
+    open = true;
       
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.

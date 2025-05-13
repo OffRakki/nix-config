@@ -15,7 +15,7 @@
 	./home-packages.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
 
   nixpkgs = {
     # You can add overlays here
@@ -54,23 +54,14 @@
  };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ steam emacs ];
+  home.packages = with pkgs; [];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git = {
-  	enable = true;
-	package = pkgs.gitAndTools.gitFull;
-	userName = "OffRakki";
-	userEmail = "fernandomarques1505@gmail.com";
-	extraConfig = {
-		color.ui = "auto";
-	};
-  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 }
