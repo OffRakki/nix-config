@@ -58,6 +58,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		nushell
+		tmux
     evil-helix
     sublime
     neovim	
@@ -80,6 +82,7 @@
     qutebrowser
     wasistlos
     vesktop
+		waybar-mpris
   ];
 
   nix = let

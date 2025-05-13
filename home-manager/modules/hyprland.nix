@@ -17,7 +17,7 @@
 
 			monitor = [ 
 				"DP-3,1920x1080@239.76,0x0,1"
-				"HDMI-A-1,highres,1920x-250,1"
+				"HDMI-A-1,1920x1080@60,1920x-250,1"
 #"HDMI-A-1,disable"
 			];
 
@@ -42,7 +42,7 @@
 				resize_on_border = true;
 				allow_tearing = true;
 				layout = "dwindle";
-				border_size = 2;
+				border_size = 1;
 				gaps_in = 4;
 				gaps_out = 6;
 
@@ -162,6 +162,8 @@
 				];
 			};
 
+			layerrule = ["blur, waybar" "blur, wofi"];
+			
 			windowrule = [
 				"noblur, tag:games*"
 			];
@@ -216,7 +218,7 @@
 #"$UserScripts/RainbowBorders.sh &"
 				"hypridle &"
 				"pypr &"
-				"swww-daemon --format xrgb && swww img ../../hosts/rakki/wallpapers/agbg.png  # persistent wallpaper"
+				"swww-daemon --format xrgb && swww img ./../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper"
 #"$scriptsDir/Polkit-NixOS.sh"
 			];
 
@@ -288,6 +290,19 @@
 				"$mainMod SHIFT, code:19, movetoworkspace, 10 # NOTE: code:19 = key 0"
 				"$mainMod SHIFT, bracketleft, movetoworkspace, -1 # brackets ["
 				"$mainMod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
+
+
+# Move active window and do not follow to workspace mainMod + CTRL [0-9]
+				"$mainMod CTRL, code:10, movetoworkspacesilent, 1 # NOTE: code:10 = key 1"
+				"$mainMod CTRL, code:11, movetoworkspacesilent, 2 # NOTE: code:11 = key 2"
+				"$mainMod CTRL, code:12, movetoworkspacesilent, 3 # NOTE: code:12 = key 3"
+				"$mainMod CTRL, code:13, movetoworkspacesilent, 4 # NOTE: code:13 = key 4"
+				"$mainMod CTRL, code:14, movetoworkspacesilent, 5 # NOTE: code:14 = key 5"
+				"$mainMod CTRL, code:15, movetoworkspacesilent, 6 # NOTE: code:15 = key 6"
+				"$mainMod CTRL, code:16, movetoworkspacesilent, 7 # NOTE: code:16 = key 7"
+				"$mainMod CTRL, code:17, movetoworkspacesilent, 8 # NOTE: code:17 = key 8"
+				"$mainMod CTRL, code:18, movetoworkspacesilent, 9 # NOTE: code:18 = key 9"
+				"$mainMod CTRL, code:19, movetoworkspacesilent, 10 # NOTE: code:19 = key 0"
 
 # Move focus with mainMod + arrow keys
 				"$mainMod, left, movefocus, l"

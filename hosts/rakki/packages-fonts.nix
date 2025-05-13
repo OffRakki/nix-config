@@ -90,7 +90,7 @@ in {
 
 # FONTS
 	fonts.packages = with pkgs; [
-		noto-fonts
+			noto-fonts
 			fira-code
 			noto-fonts-cjk-sans
 			jetbrains-mono
@@ -118,12 +118,12 @@ in {
 
 	programs.virt-manager.enable = false;
 
-#steam = {
-#  enable = true;
-#  gamescopeSession.enable = true;
-#  remotePlay.openFirewall = true;
-#  dedicatedServer.openFirewall = true;
-#};
+	programs.steam = {
+  	enable = true;
+  	gamescopeSession.enable = true;
+  	remotePlay.openFirewall = true;
+  	dedicatedServer.openFirewall = true;
+	};
 
 	programs.seahorse.enable = true;
 	programs.fuse.userAllowOther = true;

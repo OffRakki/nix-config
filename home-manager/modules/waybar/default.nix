@@ -11,7 +11,7 @@
 				height = 30;
 				modules-left = ["hyprland/workspaces"];
 				modules-center = ["hyprland/window"];
-				modules-right = ["pulseaudio" "clock" "tray"];
+				modules-right = ["mpris" "pulseaudio" "clock" "tray"];
 				"hyprland/workspaces" = {
 					disable-scroll = true;
 					show-special = true;
@@ -41,7 +41,11 @@
 						"handsfree" = "";
 						"headset" = "";
 					};
-					on-click = "pavucontrol";
+					on-click = "exec pavucontrol";
+				};
+
+				"mpris" = {
+					format = "exec waybar-mpris";
 				};
 
 				"clock" = {

@@ -9,6 +9,7 @@
 				functions.enable = true;
 			};
 			interactiveShellInit= ''
+				set fish_greeting
 				fastfetch
 			'';
 			shellAbbrs = {
@@ -22,7 +23,7 @@
 
 # neofetch (uwufetch)
 #neofetch="neofetch --backend jp2a --source ~/.config/alacritty/uwuarch/uwuarch.png"
-				nf="neofetch";
+				ff="fastfetch";
 
 # fish
 				src="source ~/.config/fish/config.fish";
@@ -79,7 +80,7 @@
 				df="df -h";
 				du="du -hc --time";
 				tree="tree --du -h";
-				ls="ls -FahsSL --color=always";
+				ls="ls -FhSL --color=always";
 				la="ls -A";
 				exa="exa -lFs name --colour=always --colour-scale --group-directories-first";
 
