@@ -166,6 +166,8 @@
 			
 			windowrule = [
 				"noblur, tag:games*"
+				"float, size 50% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
+				"size 25% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
 			];
 
 			env = [ 
@@ -221,6 +223,7 @@
 				"pypr &"
 				"swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper"
 #"$scriptsDir/Polkit-NixOS.sh"
+				"hyprlock"
 			];
 
 			binde = [

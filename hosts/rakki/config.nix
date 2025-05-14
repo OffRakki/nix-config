@@ -49,17 +49,18 @@
       enable = false;
       xkb = {
         layout = "${keyboardLayout}";
-        variant = "";
+        variant = "alt-intl";
       };
     };
     
     greetd = {
       enable = true;
-      vt = 2;
+      vt = 1;
       settings = {
         default_session = {
           user = "rakki";
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
+					command = "${pkgs.uwsm}/bin/uwsm start default";
+          #command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
         };
       };
     };

@@ -33,6 +33,9 @@
 
 				"hyprland/window" = {
 					format = "{title}";
+					icon = true;
+					icon-size = 16;
+					max-lenght = 32;
 				};
 
 				"pulseaudio" = {

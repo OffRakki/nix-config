@@ -13,7 +13,7 @@
 			window_padding_width = 4;
 			background_opacity = "0.85";
 			background_blur = 5;
-			font_size = "12";
+			font_size = "10";
 			symbol_map = let
 				mappings = [
 					"U+23FB-U+23FE"
