@@ -39,10 +39,11 @@ in {
 			spotify
 			spicetify-cli
 			(mpv.override {scripts = [mpvScripts.mpris];}) # with tray
-#ranger
+			ranger
+			todo
 
-# Hyprland Stuff
-#(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
+			# Hyprland Stuff
+			#(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
 			ags_1 # desktop overview  
 			wofi
 			btop
@@ -84,9 +85,10 @@ in {
 			xarchiver
 			yad
 			yt-dlp
+			hyprshot
 
-#waybar  # if wanted experimental next line
-#(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
+			#waybar  # if wanted experimental next line
+			#(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
 			]) ++ [
 			python-packages
 			];

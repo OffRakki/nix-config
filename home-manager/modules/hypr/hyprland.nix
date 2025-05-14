@@ -13,7 +13,9 @@
 			"$mainMod"    = "SUPER";
 			"$terminal"   = "${pkgs.kitty}/bin/kitty";
 			"$files"      = "${pkgs.kitty}/bin/kitty -e ${pkgs.ranger}/bin/ranger";
-			"$qalc" = "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
+			"$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
+			"$slurp" 			= "${pkgs.slurp}/bin/slurp";
+			"$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
 
 			monitor = [ 
 				"DP-3,1920x1080@239.76,0x0,1"
@@ -43,16 +45,16 @@
 				allow_tearing = true;
 				layout = "dwindle";
 				border_size = 2;
-				gaps_in = 4;
-				gaps_out = 6;
+				gaps_in = 8;
+				gaps_out = 8;
 
-				"col.active_border" = "rgba(fe640baa) rgba(df8e1daa) 45deg";
+				"col.active_border" = "rgba(fab38788) rgba(f38ba888) 45deg";
 				"col.inactive_border" = "rgb(dd7878)";
 			};
 
 			input = {
 				kb_layout = "us";
-				kb_variant = ""; 
+				kb_variant = "intl, with dead keys"; 
 				kb_model = "";
 				kb_options = "";
 				kb_rules = "";
@@ -99,7 +101,7 @@
 				rounding = 6;
 
 				active_opacity = 2.0;
-				inactive_opacity = 0.9;
+				inactive_opacity = 0.8;
 				fullscreen_opacity = 1.0;
 
 				dim_inactive = true;
@@ -117,7 +119,7 @@
 
 				blur = {
 					enabled = true;
-					size = 6;
+					size = 4;
 					passes = 2;
 					ignore_opacity = true;
 					new_optimizations = true;
@@ -203,14 +205,16 @@
 				"HYPRCURSOR_THEME,Bibata-Modern-Ice"
 				"HYPRCURSOR_SIZE,24"
 				"MOZ_ENABLE_WAYLAND,1"
-				];
+				"GTK_IM_MODULE=cedilla"
+				"QT_IM_MODULE=cedilla"
+			];
 
 			exec-once = [ 
 				"swww-daemon --format xrgb"
-#"$SwwwRandom $wallDIR # random wallpaper switcher every 30 minutes "
+				#"$SwwwRandom $wallDIR # random wallpaper switcher every 30 minutes "
 				"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 				"systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-#"$scriptsDir/Polkit.sh"
+				#"$scriptsDir/Polkit.sh"
 				"nm-applet --indicator &"
 				"swaync &"
 				"ags &"
@@ -228,36 +232,36 @@
 
 			binde = [
 				"$mainMod CTRL, left, resizeactive,-50 0"
-					"$mainMod CTRL, right, resizeactive,50 0"
-					"$mainMod CTRL, up, resizeactive,0 -50"
-					"$mainMod CTRL, down, resizeactive,0 50"
+				"$mainMod CTRL, right, resizeactive,50 0"
+				"$mainMod CTRL, up, resizeactive,0 -50"
+				"$mainMod CTRL, down, resizeactive,0 50"
 			];
 
 			bindr = [ 
-			#	"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" # Super Key to Launch rofi menu
 			];
 
 			bindn = [ 
-				"ALT_L, SHIFT_L, exec, $scriptsDir/SwitchKeyboardLayout.sh" # Change keyboard layout
 			];
 
 			bindm = [
 				"$mainMod, mouse:272, movewindow # NOTE: mouse:272 = left click"
-					"$mainMod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
+				"$mainMod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
 			];
 
-#bindl = [
-#	"bindl = , xf86AudioPlayPause, exec, $scriptsDir/MediaCtrl.sh --pause"
-#	"bindl = , xf86AudioPause, exec, $scriptsDir/MediaCtrl.sh --pause"
-#	"bindl = , xf86AudioPlay, exec, $scriptsDir/MediaCtrl.sh --pause"
-#	"bindl = , xf86AudioNext, exec, $scriptsDir/MediaCtrl.sh --nxt "
-#	"bindl = , xf86AudioPrev, exec, $scriptsDir/MediaCtrl.sh --prv"
-#	"bindl = , xf86audiostop, exec, $scriptsDir/MediaCtrl.sh --stop"
-#];
+			bindl = [
+				", Print, exec, $hyprshot -z --clipboard-only -m region"
+				#	"bindl = , xf86AudioPlayPause, exec, $scriptsDir/MediaCtrl.sh --pause"
+				#	"bindl = , xf86AudioPause, exec, $scriptsDir/MediaCtrl.sh --pause"
+				#	"bindl = , xf86AudioPlay, exec, $scriptsDir/MediaCtrl.sh --pause"
+				#	"bindl = , xf86AudioNext, exec, $scriptsDir/MediaCtrl.sh --nxt "
+				#	"bindl = , xf86AudioPrev, exec, $scriptsDir/MediaCtrl.sh --prv"
+				#	"bindl = , xf86audiostop, exec, $scriptsDir/MediaCtrl.sh --stop"
+			];
 
 			bind = [ 
 				"$mainMod, L, exec, hyprlock"
-				"$mainMod, D, exec, pkill wofi || wofi --show drun --modi drun,filebrowser,run,window" #Main Menu
+				"$mainMod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
+				"$mainMod, V, exec, cliphist list | wofi --show dmenu -G | wl-copy"
 				"$mainMod, SPACE, togglefloating"
 				"$mainMod SHIFT, F, fullscreen, 1 # fake full screen"
 				"$mainMod, F, fullscreen"
@@ -268,9 +272,8 @@
 				"$mainMod ALT, C, exec, [size 50% 50%;float] $terminal -e qalc" # calculator (qalculate)
 				"$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
 				"$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-				"$mainMod SHIFT, O, exec, $UserScripts/ZshChangeTheme.sh" # Change oh-my-zsh theme
 
-# Switch workspaces with mainMod + [0-9] 
+				# Switch workspaces with mainMod + [0-9] 
 				"$mainMod, code:10, workspace, 1 # NOTE: code:10 = key 1"
 				"$mainMod, code:11, workspace, 2 # NOTE: code:11 = key 2"
 				"$mainMod, code:12, workspace, 3 # NOTE: code:12 = key 3"
@@ -282,7 +285,7 @@
 				"$mainMod, code:18, workspace, 9 # NOTE: code:18 = key 9"
 				"$mainMod, code:19, workspace, 10 # NOTE: code:19 = key 0"
 
-# Move active window and follow to workspace mainMod + SHIFT [0-9]
+				# Move active window and follow to workspace mainMod + SHIFT [0-9]
 				"$mainMod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"
 				"$mainMod SHIFT, code:11, movetoworkspace, 2 # NOTE: code:11 = key 2"
 				"$mainMod SHIFT, code:12, movetoworkspace, 3 # NOTE: code:12 = key 3"
@@ -297,7 +300,7 @@
 				"$mainMod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
 
 
-# Move active window and do not follow to workspace mainMod + CTRL [0-9]
+				# Move active window and do not follow to workspace mainMod + CTRL [0-9]
 				"$mainMod CTRL, code:10, movetoworkspacesilent, 1 # NOTE: code:10 = key 1"
 				"$mainMod CTRL, code:11, movetoworkspacesilent, 2 # NOTE: code:11 = key 2"
 				"$mainMod CTRL, code:12, movetoworkspacesilent, 3 # NOTE: code:12 = key 3"
@@ -309,36 +312,29 @@
 				"$mainMod CTRL, code:18, movetoworkspacesilent, 9 # NOTE: code:18 = key 9"
 				"$mainMod CTRL, code:19, movetoworkspacesilent, 10 # NOTE: code:19 = key 0"
 
-# Move focus with mainMod + arrow keys
+				# Move focus with mainMod + arrow keys
 				"$mainMod, left, movefocus, l"
 				"$mainMod, right, movefocus, r"
 				"$mainMod, up, movefocus, u"
 				"$mainMod, down, movefocus, d"
 
-# Move windows
+				# Move windows
 				"$mainMod SHIFT, left, movewindow, l"
 				"$mainMod SHIFT, right, movewindow, r"
 				"$mainMod SHIFT, up, movewindow, u"
 				"$mainMod SHIFT, down, movewindow, d"
 
-# Dwindle Layout
+				# Dwindle Layout
 				"$mainMod SHIFT, I, togglesplit # only works on dwindle layout"
 				"$mainMod, P, pseudo, # dwindle"
-				];
+			];
 
-# For passthrough keyboard into a VM
-# bind = $mainModALT, P, submap, passthru
-#submap = passthru
-# to unbind
-#bind = $mainModALT, P, submap, reset
-#submap = reset
-
-#source = [ 
-#	"$HOME/.config/hypr/wallust/wallust-hyprland.conf"
-#	"$HOME/.config/hypr/configs/Keybinds.conf"
-#	"$HOME/.config/hypr/UserConfigs/WindowRules.conf"
-#	"$HOME/.config/hypr/UserConfigs/WorkspaceRules.conf"
-#	];
+			# For passthrough keyboard into a VM
+			# bind = $mainModALT, P, submap, passthru
+			#submap = passthru
+			# to unbind
+			#bind = $mainModALT, P, submap, reset
+			#submap = reset
 		};
 	};
 																		}
