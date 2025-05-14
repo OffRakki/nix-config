@@ -15,7 +15,7 @@
 	./home-packages.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
 
   nixpkgs = {
     # You can add overlays here

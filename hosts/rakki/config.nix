@@ -18,7 +18,7 @@
   #drivers.amdgpu.enable = true;
   #drivers.intel.enable = false;
   drivers.nvidia.enable = true;
-  #drivers.nvidia-prime = {
+  #drivers.nvidia-prime = { # ja definido no arquivo em si
    # enable = true;
    # intelBusID = "0@0:2:0";
    # nvidiaBusID = "1@0:0:0";

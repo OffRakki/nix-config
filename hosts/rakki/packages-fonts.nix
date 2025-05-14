@@ -14,6 +14,7 @@ in {
 
 	environment.systemPackages = (with pkgs; [
 # System Packages
+			mangohud
 			baobab
 			btrfs-progs
 			clang
@@ -89,17 +90,35 @@ in {
 			];
 
 # FONTS
-	fonts.packages = with pkgs; [
-			noto-fonts
+	fonts = { 
+		packages = with pkgs; [
+			corefonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      noto-fonts-color-emoji
+      material-icons
+      font-awesome
+      fira-code-symbols
 			fira-code
-			noto-fonts-cjk-sans
-			jetbrains-mono
-			font-awesome
-			terminus_font
-			nerd-fonts.jetbrains-mono # unstable
-			nerd-fonts.fira-code # unstable
+      symbola
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.comic-shanns-mono
+      nerd-fonts.shure-tech-mono
+      nerd-fonts.lekton
+			nerd-fonts.fira-code
 			nerd-fonts.inconsolata
+			jetbrains-mono
+			terminus_font
 	];
+	fontconfig = {
+  	defaultFonts = {
+      serif = ["Lekton Nerd Font"];
+      sansSerif = ["Lekton Nerd Font"];
+      monospace = ["Lekton Nerd Font Mono"];
+    };
+	};
+};
 
 	programs.waybar.enable = true;
 	programs.hyprlock.enable = true;

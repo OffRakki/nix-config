@@ -11,8 +11,9 @@
 			enable_audio_bell = false;
 			mouse_hide_wait = "-1.0";
 			window_padding_width = 4;
-			background_opacity = "0.9";
+			background_opacity = "0.85";
 			background_blur = 5;
+			font_size = "12";
 			symbol_map = let
 				mappings = [
 					"U+23FB-U+23FE"

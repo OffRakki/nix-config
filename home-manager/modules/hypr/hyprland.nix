@@ -22,8 +22,8 @@
 			];
 
 			workspace = [
-				"1, monitor:DP-3"
-				"2, monitor:HDMI-A-1"
+				"1, monitor:DP-3, persistent:true"
+				"2, monitor:HDMI-A-1, persistent:true"
 			];
 
 			dwindle = {	
@@ -42,7 +42,7 @@
 				resize_on_border = true;
 				allow_tearing = true;
 				layout = "dwindle";
-				border_size = 1;
+				border_size = 2;
 				gaps_in = 4;
 				gaps_out = 6;
 
@@ -253,6 +253,7 @@
 #];
 
 			bind = [ 
+				"$mainMod, L, exec, hyprlock"
 				"$mainMod, D, exec, pkill wofi || wofi --show drun --modi drun,filebrowser,run,window" #Main Menu
 				"$mainMod, SPACE, togglefloating"
 				"$mainMod SHIFT, F, fullscreen, 1 # fake full screen"

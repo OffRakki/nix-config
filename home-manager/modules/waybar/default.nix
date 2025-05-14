@@ -8,9 +8,11 @@
 			mainBar = {
 				layer = "top";
 				position = "top";
-				height = 30;
-				modules-left = ["hyprland/workspaces"];
-				modules-center = ["hyprland/window"];
+				margin-top = 4;
+				margin-bottom = 2;
+				height = 34;
+				modules-left = ["cpu" "memory"];
+				modules-center = ["hyprland/workspaces"];
 				modules-right = ["pulseaudio" "clock" "tray"];
 				"hyprland/workspaces" = {
 					disable-scroll = true;
@@ -18,31 +20,34 @@
 					special-visible-only = false;
 					all-outputs = true;
 					format = "{icon}";
-					#format-icons = {
-					#	"1" = "";
-					#	"2" = "";
-					#	"3" = "";
-					#	"4" = "";
-					#	"5" = "";
-					#	"6" = "";
-					#	"7" = "";
-					#	"8" = "";
-					#	"9" = "";
-					#	"magic" = "";
-					#};
+					format-icons = {
+						"active" = "⦿";
+						"default" = "○";
+					};
 				};
 
 				"pulseaudio" = {
+					tooltip = false;
+					scroll-step = 5;
 					format = "{icon} {volume}%";
-					format-bluetooth = "{icon} {volume}% ";
-					format-muted = "";
+					format-muted = "{icon} {volume}%";
+					on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
 					format-icons = {
-						"headphones" = "";
-						"handsfree" = "";
-						"headset" = "";
+						default = ["" "" ""];
 					};
-					on-click = "exec pavucontrol";
 				};
+
+				"cpu" = {
+      		interval = 15;
+       		format = " {}%";
+       		max-length = 10;
+    		};
+				
+    		"memory" = {
+        	interval = 30;
+        	format = " {}%";
+        	max-length = 10;
+	    	};
 
 				"mpris" = {
 					format = "exec waybar-mpris";
@@ -54,8 +59,8 @@
 				};
 
 				"tray" = {
-					icon-size = 14;
-					spacing = 1;
+					icon-size = 18;
+					spacing = 10;
 				};
 			};
 		};

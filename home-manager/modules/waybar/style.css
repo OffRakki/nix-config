@@ -1,429 +1,236 @@
-@import "catppuccin-macchiato.css";
-
 * {
-  font-family: "JetBrainsMono Nerd Font";
-  font-weight: bold;
-  min-height: 0;
-  padding: 0;
-  border: 6;
-  margin: 0;
+	border: none;
+	border-radius: 20px;
+	font-family: "JetbrainsMono Nerd Font" ;
+	font-size: 14px;
+	min-height: 10px;
 }
-
-/* <<--< Main Background >-->> */
-
-window#waybar > box {
-  background-color: @main-bg;
-  margin: 2px;
-}
-
-/* <<--< Drop Shadow >-->> */
 
 window#waybar {
-  background: @shadow;
+	background: transparent;
 }
 
-/* <<--< Tooltip >-->> */
-
-tooltip {
-  background: @main-bg;
-  border: solid;
-  border-width: 1.5px;
-  border-radius: 8px;
-  border-color: @main-br;
-}
-tooltip label {
-  color: @main-fg;
-  font-weight: normal;
-  margin: -1.5px 3px;
+window#waybar.hidden {
+	opacity: 0;
 }
 
-/* <<--< Workspace Buttons >-->> */
-
-#workspaces button {
-  color: @module-fg;
-  border-radius: 8px;
-  box-shadow: none;
-  margin: 2px 0;
-  padding: 0 2px;
-  transition: none;
-}
-#workspaces button:hover {
-  color: @hover-fg;
-  background: @hover-bg;
-  text-shadow: none;
-}
-#workspaces button.active {
-  color: @active-fg;
-  background: @active-bg;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  margin: 2px;
-  padding: 0 6px;
-}
-
-/* <<--< General >-->> */
-
-#custom-ws,
-#workspaces,
-#window,
-#custom-cpuinfo,
-#memory,
-#cpu,
-#idle_inhibitor,
-#clock,
-#custom-wifi,
-#bluetooth,
-#custom-update,
-#mpris,
-#pulseaudio,
-#backlight,
-#battery,
-#custom-power {
-  opacity: 1;
-  color: @module-fg;
-  padding: 0 4px;
-}
-
-#custom-left1,
-#custom-left2,
-#custom-left3,
-#custom-left4,
-#custom-left5,
-#custom-left6,
-#custom-left7,
-#custom-left8 {
-  margin-bottom: 0;
-  text-shadow: -2px 0 2px rgba(0, 0, 0, 0.5);
-}
-
-#custom-right1,
-#custom-right2,
-#custom-right3,
-#custom-right4,
-#custom-right5 {
-  margin-bottom: 0;
-  padding-right: 3px;
-  text-shadow: 2px 0 2px rgba(0, 0, 0, 0.5);
-}
-
-/* <<--< Modules >-->> */
-
-/* Window Icon */
-
-#custom-ws {
-  background: @main-bg;
-}
-#custom-ws:hover {
-  color: @hover-fg;
-}
-
-/* Workspaces */
-
-#custom-left1 {
-  color: @workspaces;
-  background: @main-bg;
-  margin-bottom: 0;
-  padding-left: 2px;
+#window {
+	margin-top: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+  	color: transparent;
+	background: transparent;
 }
 #workspaces {
-  background: @workspaces;
-}
-#custom-right1 {
-  color: @workspaces;
-  background: @main-bg;
-  text-shadow: 3px 0 2px rgba(0, 0, 0, 0.4);
-  margin-bottom: 0;
-}
-
-/* Temperature */
-
-#custom-paddc {
-  padding-right: 22px;
-}
-#custom-left2 {
-  color: @cpuinfo;
-  background: @main-bg;
-  padding-left: 3px;
-}
-#custom-cpuinfo {
-  background: @cpuinfo;
-  padding-left: 1px;
-  padding-right: 0;
+	margin-top: 6px;
+	margin-left: 12px;
+	font-size: 4px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	background: #161320;
+	transition: none;
 }
 
-/* Memory */
-
-#custom-left3 {
-  color: @memory;
-  background: @cpuinfo;
-  padding-left: 3px;
-}
-#memory {
-  background: @memory;
-  padding-left: 1px;
-  padding-right: 0;
-}
-#memory.warning {
-  color: @warning;
-}
-#memory.critical {
-  color: @critical;
+#workspaces button {
+	transition: none;
+	color: #B5E8E0;
+	background: transparent;
+	font-size: 16px;
+	border-radius: 2px;
 }
 
-/* CPU */
-
-#custom-left4 {
-  color: @cpu;
-  background: @memory;
-  padding-left: 3px;
-}
-#cpu {
-  background: @cpu;
-}
-#custom-leftin1 {
-  color: @cpu;
-  margin-bottom: -1px;
+#workspaces button.occupied {
+	transition: none;
+	color: #F28FAD;
+	background: transparent;
+	font-size: 4px;
 }
 
-/* Distro Icon */
-
-#custom-left5 {
-  color: @distro-bg;
-  background: @main-bg;
-  text-shadow: none;
-  margin-bottom: -2px;
-  padding-left: 3px;
-}
-#custom-distro {
-  color: @distro-fg;
-  background: @distro-bg;
-  margin: 0 -1px -2px 0;
-  padding: 0 0 0 3px;
-  text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
-}
-#custom-right2 {
-  color: @distro-bg;
-  background: @main-bg;
-  text-shadow: none;
-  margin-bottom: -2px;
+#workspaces button.active {
+	color: #ABE9B3;
+  	border-top: 2px solid #ABE9B3;
+  	border-bottom: 2px solid #ABE9B3;
 }
 
-/* Time */
-
-#custom-rightin1 {
-  color: @time;
-  margin-bottom: -1px;
-}
-#idle_inhibitor {
-  background: @time;
-  margin-right: -2px;
-  padding: 0 0 0 7px;
-}
-#idle_inhibitor:hover {
-  color: @hover-fg;
-}
-#clock.time {
-  background: @time;
-  padding: 0 3px 0 0;
-}
-#custom-right3 {
-  color: @time;
-  background: @date;
+#workspaces button:hover {
+	transition: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+	color: #FAE3B0;
+	border-color: #E8A2AF;
+	color: #E8A2AF;
 }
 
-/* Date */
-
-#clock.date {
-  background: @date;
-}
-#clock.date:hover {
-  color: @hover-fg;
-}
-#custom-right4 {
-  color: @date;
-  background: @tray;
+#workspaces button.active:hover {
+	color: #E8A2AF;
 }
 
-/* Tray */
-
-#custom-wifi {
-  padding-left: 5px;
-  padding-right: 8px;
-  background: @tray;
-}
-#custom-wifi:hover {
-  color: @hover-fg;
-}
-
-#bluetooth {
-  padding-right: 5px;
-  background: @tray;
-}
-#bluetooth:hover {
-  color: @hover-fg;
+#network {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 18px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #bd93f9;
 }
 
-#custom-update {
-  padding-right: 8px;
-  background: @tray;
-}
-#custom-update:hover {
-  color: @hover-fg;
-}
-#custom-right5 {
-  color: @tray;
-  background: @main-bg;
-}
-
-/* Media Info */
-
-#mpris {
-  font-weight: normal;
-  background-color: @main-bg;
-  padding-right: 8px;
-  padding-left: 8px;
-}
-#mpris:hover {
-  color: @hover-fg;
-}
-
-/* Output Device */
-
-#custom-left6 {
-  color: @pulseaudio;
-  background: @main-bg;
-  padding-left: 3px;
-}
 #pulseaudio {
-  background: @pulseaudio;
-}
-#pulseaudio:hover {
-  color: @hover-fg;
-}
-
-/* Brightness */
-
-#custom-left7 {
-  color: @backlight;
-  background: @pulseaudio;
-  padding-left: 2px;
-}
-#backlight {
-  background: @backlight;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #1A1826;
+	background: #FAE3B0;
 }
 
-/* Battery */
-
-#custom-left8 {
-  color: @battery;
-  background: @backlight;
-  padding-left: 2px;
-}
 #battery {
-  color: @module-fg;
-  background: @battery;
-}
-#battery.warning {
-  color: @warning;
-}
-#battery.critical {
-  color: @critical;
-}
-#battery.charging {
-  color: @charging;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #B5E8E0;
 }
 
-/* Power Button */
-
-#custom-leftin2 {
-  color: @battery;
-  background: @main-bg;
-  margin-bottom: -1px;
+#battery.charging, #battery.plugged {
+	color: #161320;
+  background-color: #B5E8E0;
 }
+
+#battery.critical:not(.charging) {
+  background-color: #B5E8E0;
+  color: #161320;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+	to {
+  	background-color: #BF616A;
+    color: #B5E8E0;
+  }
+}
+
+#backlight {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F8BD96;
+}
+#clock {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #ABE9B3;
+	/*background: #1A1826;*/
+}
+
+#memory {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #DDB6F2;
+}
+
+#cpu {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #96CDFB;
+}
+
+#tray {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #B5E8E0;
+	background: #161320;
+}
+
+#custom-launcher {
+	font-size: 24px;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	border-radius: 10px;
+	transition: none;
+  color: #89DCEB;
+  background: #161320;
+}
+
 #custom-power {
-  color: @main-bg;
-  background: @power;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  margin: 2px 4px 2px 0;
-  padding: 0 6px 0 9px;
-}
-#custom-power:hover {
-  color: @hover-fg;
-  background: @hover-bg;
-  text-shadow: none;
-  box-shadow: none;
+	font-size: 20px;
+	margin-top: 6px;
+	margin-left: 8px;
+	margin-right: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F28FAD;
 }
 
-/* <<--< FONT SIZES >-->> */
-
-/*
-  Font sizes for modules and dividers can be problematic.
-  By problematic, I mean they may not align properly
-  when using only whole numbers.
-
-  If you wish to change them, consider adjusting only
-  the whole numbers and keeping the decimals as they are,
-  unless you know what you're doing.
-*/
-
-/* workspace icon and buttons, window and media title */
-* {
-  font-size: 14px;
+#custom-wallpaper {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #C9CBFF;
 }
 
-/* left and right arrows */
-#custom-left1,
-#custom-left2,
-#custom-left3,
-#custom-left4,
-#custom-left5,
-#custom-left6,
-#custom-left7,
-#custom-left8,
-#custom-right1,
-#custom-right2,
-#custom-right3,
-#custom-right4,
-#custom-right5 {
-  font-size: 14px;
+#custom-spotify {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F2CDCD;
 }
-
-/* left and right inverse */
-#custom-leftin1,
-#custom-leftin2,
-#custom-rightin1 {
-  font-size: 15px;
-}
-
-/* distro icon */
-#custom-distro {
-  font-size: 14px;
-}
-
-/* distro arrows override */
-#custom-left5,
-#custom-right2 {
-  font-size: 15px;
-}
-
-/*
-  NOTE: If none of your changes are taking effect,
-  they may be overridden by the font sizes set in
-  `animation.css`.
-
-  If so, copy your new font sizes from this file
-  and paste them into the corresponding
-  `*_expand` keyframes.
-
-  For example, if you change the font size of the
-  distro icon, you should also update it in
-  `distro_expand`.
-
-  - `distro_expand` for the distro icon (line 143)
-  - `power_expand` for the power button (line 158)
-  - `module_expand` for all other modules (line 172)
-*/
-
-/* @import "animation.css"; */
