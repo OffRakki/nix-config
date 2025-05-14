@@ -162,7 +162,7 @@
 				];
 			};
 
-			layerrule = ["blur, waybar" "blur, wofi"];
+			layerrule = ["blur, wofi"];
 			
 			windowrule = [
 				"noblur, tag:games*"

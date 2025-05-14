@@ -11,9 +11,9 @@
 				margin-top = 4;
 				margin-bottom = 2;
 				height = 34;
-				modules-left = ["cpu" "memory"];
-				modules-center = ["hyprland/workspaces"];
-				modules-right = ["pulseaudio" "clock" "tray"];
+				modules-left = ["custom/launcher" "group/hardware" "hyprland/workspaces"];
+				modules-center = ["hyprland/window"];
+				modules-right = ["mpris" "pulseaudio" "clock" "tray"];
 				"hyprland/workspaces" = {
 					disable-scroll = true;
 					show-special = true;
@@ -25,13 +25,21 @@
 						"default" = "○";
 					};
 				};
+				
+				"group/hardware" = {
+					orientation = "horizontal";
+					modules = ["cpu" "memory"];
+				};
+
+				"hyprland/window" = {
+					format = "{title}";
+				};
 
 				"pulseaudio" = {
 					tooltip = false;
 					scroll-step = 5;
 					format = "{icon} {volume}%";
 					format-muted = "{icon} {volume}%";
-					on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
 					format-icons = {
 						default = ["" "" ""];
 					};
@@ -50,17 +58,34 @@
 	    	};
 
 				"mpris" = {
-					format = "exec waybar-mpris";
+					format = "{dynamic}";
+					dynamic-len = 32;
 				};
 
 				"clock" = {
-					format = "{:%d.%m.%Y - %H:%M}";
-					format-alt = "{:%A, %B %d at %R}";
+					format = "{:%H:%M - %d/%m/%Y}";
 				};
 
 				"tray" = {
 					icon-size = 18;
 					spacing = 10;
+					expand = "true";
+				};
+
+				"custom/launcher" = {
+        	format = " ";
+        	on-click = "${pkgs.wofi}/bin/wofi --show drun --modi drun,filebrowser,run,window";
+        	on-click-right = "killall wofi";
+				};
+
+				"network" = {
+					#interface = "wlp2*"; # (Optional) To force the use of this interface
+					format-wifi = "";
+					format-ethernet = "";
+					tooltip-format = "{essid} ({signalStrength}%)";
+					format-linked = "{ifname} ";
+					format-disconnected = "⚠";
+					format-alt = "{ifname}: {ipaddr}/{cidr}";
 				};
 			};
 		};

@@ -36,6 +36,8 @@ in {
 			xdg-utils
 			fastfetch
 			oh-my-fish
+			spotify
+			spicetify-cli
 			(mpv.override {scripts = [mpvScripts.mpris];}) # with tray
 #ranger
 

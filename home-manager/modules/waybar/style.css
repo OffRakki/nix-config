@@ -50,8 +50,8 @@ window#waybar.hidden {
 
 #workspaces button.active {
 	color: #ABE9B3;
-  	border-top: 2px solid #ABE9B3;
-  	border-bottom: 2px solid #ABE9B3;
+  	border-top: 0px solid #ABE9B3;
+  	border-bottom: 0px solid #ABE9B3;
 }
 
 #workspaces button:hover {
@@ -103,21 +103,6 @@ window#waybar.hidden {
 	background: #B5E8E0;
 }
 
-#battery.charging, #battery.plugged {
-	color: #161320;
-  background-color: #B5E8E0;
-}
-
-#battery.critical:not(.charging) {
-  background-color: #B5E8E0;
-  color: #161320;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
 @keyframes blink {
 	to {
   	background-color: #BF616A;
@@ -125,7 +110,7 @@ window#waybar.hidden {
   }
 }
 
-#backlight {
+#mpris {
 	margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 10px;
@@ -223,7 +208,7 @@ window#waybar.hidden {
 	background: #C9CBFF;
 }
 
-#custom-spotify {
+#window {
 	margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 10px;
