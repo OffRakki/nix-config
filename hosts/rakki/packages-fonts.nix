@@ -12,8 +12,8 @@ in {
 
 	nixpkgs.config.allowUnfree = true;
 
-	environment.systemPackages = (with pkgs; [
-# System Packages
+	environment.systemPackages = with pkgs; [
+			# User Packages
 			mangohud
 			baobab
 			btrfs-progs
@@ -23,12 +23,12 @@ in {
 			duf
 			eza
 			ffmpeg   
-			glib #for gsettings to work
+			glib
 			gsettings-qt
 			killall  
 			libappindicator
 			libnotify
-			openssl #required by Rainbow borders
+			openssl
 			pciutils
 			vim
 			wget
@@ -86,10 +86,6 @@ in {
 			yad
 			yt-dlp
 			hyprshot
-
-			#waybar  # if wanted experimental next line
-			#(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
-			]) ++ [
 			python-packages
 			];
 

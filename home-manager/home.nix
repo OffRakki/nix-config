@@ -42,12 +42,9 @@
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
-    pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
-    };
+    #pointerCursor = {
+    #gtk.enable = true;
+    #};
   };
   gtk = {
    enable = true;
@@ -56,7 +53,7 @@
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [];
 
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs

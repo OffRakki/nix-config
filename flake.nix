@@ -1,5 +1,5 @@
 {
-  description = "NixOS awesome configuration!";
+  description = "!";
 
   inputs = {
     # Nix

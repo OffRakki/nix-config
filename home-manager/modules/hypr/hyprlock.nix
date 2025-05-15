@@ -14,7 +14,7 @@
       general = {
         hide_cursor = true;
         no_fade_in = false;
-        disable_loading_bar = true;
+        disable_loading_bar = false;
         ignore_empty_input = true;
         fractional_scaling = 0;
       };
@@ -22,7 +22,7 @@
       background = [
         {
           monitor = "";
-          path = "${./../../../hosts/rakki/wallpapers/agbg.jpg}";
+          path = "screenshot";
           blur_passes = 2;
           contrast = 0.8916;
           brightness = 0.8172;

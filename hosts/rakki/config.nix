@@ -199,11 +199,7 @@
   '';
   security.pam.services = {
     gdm-password.enableGnomeKeyring = true;
-    swaylock = {
-    text = ''
-      auth include login
-    '';
-    };
+    hyprlock = {};
   };
 
   # Virtualization / Containers

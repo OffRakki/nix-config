@@ -1,5 +1,6 @@
 {
 	imports = [
+		#./spicetify.nix
 		./fastfetch.nix
 		./hypr
 		./git.nix

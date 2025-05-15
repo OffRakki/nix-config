@@ -7,22 +7,24 @@
   ...
 }: {
 	
-	# Stylix color scheme
+	# Stylix
 	stylix = lib.mkForce {
 		enable = true;
-		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+		autoEnable = true;
 		image = ../hosts/rakki/wallpapers/agbg.jpg;
 		cursor = {
 			package = pkgs.bibata-cursors;
-			name = "Bibata-Modern-Amber-Right";
-			size = 16;
+			name = "Bibata-Modern-Amber";
+			size = 24;
 		};
 		fonts = {
 			monospace = {
-				package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+				package = pkgs.nerd-fonts.jetbrains-mono;
 				name = "JetBrainsMono Nerd Font Mono";
 			};
 		};
+		polarity = "either"; # "dark", "light" or "either"
 	};
 
   # You can import other NixOS modules here

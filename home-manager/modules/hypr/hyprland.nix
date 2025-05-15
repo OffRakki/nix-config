@@ -85,9 +85,9 @@
 			};
 
 			binds = {
-				workspace_back_and_forth = true;
+				workspace_back_and_forth = false;
 				allow_workspace_cycles = true;
-				pass_mouse_when_bound = false;
+				pass_mouse_when_bound = true;
 			};
 
 			cursor = {
@@ -202,8 +202,6 @@
 				"MOZ_DISABLE_RDD_SANDBOX,1"
 				"EGL_PLATFORM,wayland"
 				"GDK_SCALE,1 "
-				"HYPRCURSOR_THEME,Bibata-Modern-Ice"
-				"HYPRCURSOR_SIZE,24"
 				"MOZ_ENABLE_WAYLAND,1"
 				"GTK_IM_MODULE=cedilla"
 				"QT_IM_MODULE=cedilla"
@@ -227,7 +225,7 @@
 				"pypr &"
 				"swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper"
 #"$scriptsDir/Polkit-NixOS.sh"
-				"hyprlock"
+				"sleep 5 && hyprlock"
 			];
 
 			binde = [
@@ -259,6 +257,7 @@
 			];
 
 			bind = [ 
+				"$mainMod, M, exec, hyprctl dispatch exit"
 				"$mainMod, L, exec, hyprlock"
 				"$mainMod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
 				"$mainMod, V, exec, cliphist list | wofi --show dmenu -G | wl-copy"
