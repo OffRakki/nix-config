@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
-	wayland.windowManager.hyprland = {
+	wayland.windowManager.hyprland = lib.mkForce {
 		enable = true;
 		xwayland.enable = true;
 		plugins = [];
@@ -54,7 +54,7 @@
 
 			input = {
 				kb_layout = "us";
-				kb_variant = "intl, with dead keys"; 
+				kb_variant = ""; 
 				kb_model = "";
 				kb_options = "";
 				kb_rules = "";

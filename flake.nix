@@ -13,6 +13,9 @@
 
     # nix-colors
     nix-colors.url = "github:misterio77/nix-colors";
+		
+		# Stylix
+		stylix.url = "github:danth/stylix";
 
     # Games
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
@@ -38,12 +41,14 @@
     nixosConfigurations = {
       igris = nixpkgs.lib.nixosSystem {
         specialArgs = {
-	inherit inputs;
-	inherit outputs;
-	};
-
+					inherit inputs;
+					inherit outputs;
+				};
         # Main config file
-        modules = [./nixos/configuration.nix];
+        modules = [
+					./nixos/configuration.nix
+					inputs.stylix.nixosModules.stylix
+				];
       };
     };
   };

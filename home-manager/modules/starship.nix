@@ -1,5 +1,5 @@
 { pkgs, config, lib, nix-colors, ... }: {
-  programs.starship = {
+  programs.starship = lib.mkDefault {
     enable = true;
     enableFishIntegration = true;
     #enableNushellIntegration = true;

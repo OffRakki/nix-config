@@ -4,7 +4,6 @@
 		./hypr
 		./git.nix
 		./waybar
-		#./stylix.nix
 		./neovim.nix
 		./starship.nix
 		./nushell.nix

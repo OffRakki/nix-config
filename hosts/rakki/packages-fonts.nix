@@ -117,9 +117,9 @@ in {
 	];
 	fontconfig = {
   	defaultFonts = {
-      serif = ["Jetbrains"];
-      sansSerif = ["Jetbrains Nerd Font"];
-      monospace = ["Jetbrains Nerd Font Mono"];
+      serif = ["Lekton Nerd Font"];
+      sansSerif = ["Lekton Nerd Font"];
+      monospace = ["Lekton Nerd Font Mono"];
     };
 	};
 };

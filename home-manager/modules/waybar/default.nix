@@ -1,7 +1,7 @@
 { pkgs, lib, config, nix-colors, ... }:
 
 {
-	programs.waybar = {
+	programs.waybar = lib.mkDefault {
 		enable = true;
 		settings = {
 			mainBar = {
