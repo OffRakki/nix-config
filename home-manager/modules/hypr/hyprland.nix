@@ -168,8 +168,10 @@
 			
 			windowrule = [
 				"noblur, tag:games*"
-				"float, size 50% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
+				"float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
 				"size 25% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
+				"float, initialClass:org.pulseaudio.pavucontrol"
+				"size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
 			];
 
 			env = [ 

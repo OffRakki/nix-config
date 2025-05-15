@@ -209,6 +209,7 @@
     dockerCompat = false;
     defaultNetwork.settings.dns_enabled = false;
   };
+	virtualisation.waydroid.enable = true;
 
   # OpenGL
   hardware.graphics = {

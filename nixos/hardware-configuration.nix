@@ -15,6 +15,7 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-amd" ];
+	boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "vfio-pci.ids=10de:2504,10de:228e" ];
   boot.extraModulePackages = [ ];
 	boot.supportedFilesystems = [ "ntfs" ];
 

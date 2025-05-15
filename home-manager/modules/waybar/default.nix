@@ -45,6 +45,7 @@
 					format-icons = {
 						default = ["" "" ""];
 					};
+					on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
 				};
 
 				"cpu" = {
@@ -109,6 +110,10 @@
 			#custom-launcher {
 				font-size: 24px;
 				margin-left: 10px;
+			}
+
+			#pulseaudio {
+				font-size: 1.2em;
 			}
 
 			#tray {

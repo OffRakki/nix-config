@@ -14,6 +14,8 @@ in {
 
 	environment.systemPackages = with pkgs; [
 			# User Packages
+			libvirt
+			qemu
 			mangohud
 			baobab
 			btrfs-progs
@@ -135,7 +137,7 @@ in {
 			tumbler
 	];
 
-	programs.virt-manager.enable = false;
+	programs.virt-manager.enable = true;
 
 	programs.steam = {
   	enable = true;

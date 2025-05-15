@@ -10,9 +10,9 @@
 	# Stylix
 	stylix = lib.mkForce {
 		enable = true;
-		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+		#base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
 		autoEnable = true;
-		image = ../hosts/rakki/wallpapers/agbg.jpg;
+		image = ../hosts/rakki/wallpapers/knnw.jpg;
 		cursor = {
 			package = pkgs.bibata-cursors;
 			name = "Bibata-Modern-Amber";
@@ -24,7 +24,12 @@
 				name = "JetBrainsMono Nerd Font Mono";
 			};
 		};
-		polarity = "either"; # "dark", "light" or "either"
+		polarity = "dark"; # "dark", "light" or "either"
+	};
+
+	virtualisation.libvirtd = lib.mkForce {
+		enable = true;
+  	allowedBridges = [ "virbr0" ];
 	};
 
   # You can import other NixOS modules here
@@ -117,6 +122,8 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+			# Workaround to get rid of the download buffer size warning
+			download-buffer-size = 524288000;
     };
     # Opinionated: disable channels
     channel.enable = true;
