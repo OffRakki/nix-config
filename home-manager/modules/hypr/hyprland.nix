@@ -211,6 +211,7 @@
 			];
 
 			exec-once = [ 
+        "pkill waybar || waybar"
 				"swww-daemon --format xrgb"
 				#"$SwwwRandom $wallDIR # random wallpaper switcher every 30 minutes "
 				"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -263,6 +264,7 @@
 				"$mainMod, M, exec, hyprctl dispatch exit"
 				"$mainMod, L, exec, hyprlock"
 				"$mainMod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
+				"$mainMod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" #Main Menu
 				"$mainMod, V, exec, cliphist list | wofi --show dmenu -G | wl-copy"
 				"$mainMod, SPACE, togglefloating"
 				"$mainMod SHIFT, F, fullscreen, 1 # fake full screen"

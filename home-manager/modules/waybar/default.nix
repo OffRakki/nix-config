@@ -1,7 +1,7 @@
-{ pkgs, lib, config, nix-colors, ... }:
+{ pkgs, lib, stylix, ... }:
 
 {
-	programs.waybar = {
+	programs.waybar = lib.mkForce {
 		enable = true;
 		settings = {
 			mainBar = {
@@ -15,7 +15,7 @@
 				modules-right = ["mpris" "pulseaudio" "clock" "tray"];
 				"hyprland/workspaces" = {
 					disable-scroll = true;
-					show-special = true;
+					show-special = false;
 					special-visible-only = false;
 					all-outputs = true;
 					format = "{icon}";
@@ -23,6 +23,9 @@
 						"active" = "⦿";
 						"default" = "○";
 					};
+          window-rewrite = {
+            "title<.*chrome.*>" = "";
+          };
 				};
 				
 				"group/hardware" = {
@@ -94,18 +97,24 @@
 		};
 		style = ''
 			* {
-				border: none;
 				font-family: "JetbrainsMono Nerd Font" ;
-				min-height: 10px;
+        font-weight: bold;
 			}
 
 			#waybar {
-				border-radius: 32px;
+        border: 1px solid rgb(215,153,33);
+				border-radius: 1em;
 			}
 
 			#workspaces {
 				font-size: 4px;
+        border: none;
 			}
+
+      #worspaces button.active {
+        border: 1px solid rgb(215,153,33);
+        border-radius: 4;
+      }
 
 			#custom-launcher {
 				font-size: 24px;

@@ -57,6 +57,7 @@
           };
         };
         utility = {
+          surround.enable = true;
           motion = {
             hop.enable = true;
             leap.enable = true;

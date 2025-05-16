@@ -14,6 +14,7 @@ in {
 
 	environment.systemPackages = with pkgs; [
 			# User Packages
+      spotify-player
       todoman
 			libvirt
 			qemu
