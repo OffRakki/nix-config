@@ -168,6 +168,7 @@
 			
 			windowrule = [
 				"noblur, tag:games*"
+				"opacity 2 2 2, class:google-chrome"
 				"float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
 				"size 25% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
 				"float, initialClass:org.pulseaudio.pavucontrol"

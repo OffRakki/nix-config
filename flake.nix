@@ -5,6 +5,7 @@
     # Nix
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
@@ -20,9 +21,13 @@
     # Games
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
+		# Nixvim
+		nixvim.url = "github:nix-community/nixvim";
+
     # Home manager
     home-manager = {
     url = "github:nix-community/home-manager";
+
     inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -32,6 +37,8 @@
     nixpkgs,
     home-manager,
     hyprland,
+    stylix,
+    nixvim,
     ...
   } @inputs: let
     inherit (self) outputs;

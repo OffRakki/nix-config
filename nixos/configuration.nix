@@ -1,21 +1,14 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  outputs,
-  ...
-}: {
+{ inputs, lib, config, pkgs, outputs, ... }: {
 	
 	# Stylix
 	stylix = lib.mkForce {
 		enable = true;
 		#base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
 		autoEnable = true;
-		image = ../hosts/rakki/wallpapers/knnw.jpg;
+	  image = ../hosts/rakki/wallpapers/agbg.jpg;
 		cursor = {
 			package = pkgs.bibata-cursors;
-			name = "Bibata-Modern-Amber";
+			name = "Bibata-Modern-Classic";
 			size = 24;
 		};
 		fonts = {
@@ -26,7 +19,7 @@
 		};
 		polarity = "dark"; # "dark", "light" or "either"
 	};
-
+	
 	virtualisation.libvirtd = lib.mkForce {
 		enable = true;
   	allowedBridges = [ "virbr0" ];

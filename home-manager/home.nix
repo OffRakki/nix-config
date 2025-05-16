@@ -11,6 +11,7 @@
    in {
   imports = [
 	inputs.nix-colors.homeManagerModule
+	inputs.nixvim.homeManagerModules.nixvim
 	./modules
 	./home-packages.nix
   ];
@@ -42,9 +43,6 @@
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
-    #pointerCursor = {
-    #gtk.enable = true;
-    #};
   };
   gtk = {
    enable = true;
