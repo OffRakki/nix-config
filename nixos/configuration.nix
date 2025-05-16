@@ -1,28 +1,7 @@
 { inputs, lib, config, pkgs, outputs, ... }: {
 	
-	# Stylix
-	stylix = lib.mkForce {
-		enable = true;
-		#base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
-		autoEnable = true;
-	  image = ../hosts/rakki/wallpapers/agbg.jpg;
-		cursor = {
-			package = pkgs.bibata-cursors;
-			name = "Bibata-Modern-Classic";
-			size = 24;
-		};
-		fonts = {
-			monospace = {
-				package = pkgs.nerd-fonts.jetbrains-mono;
-				name = "JetBrainsMono Nerd Font Mono";
-			};
-		};
-		polarity = "dark"; # "dark", "light" or "either"
-	};
-	
 	virtualisation.libvirtd = lib.mkForce {
 		enable = true;
-  	allowedBridges = [ "virbr0" ];
 	};
 
   # You can import other NixOS modules here

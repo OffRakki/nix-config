@@ -1,5 +1,5 @@
 {
-  description = "!";
+  description = "yeah!";
 
   inputs = {
     # Nix
@@ -23,6 +23,9 @@
 
 		# Nixvim
 		nixvim.url = "github:nix-community/nixvim";
+    
+    # NVF (modular neovim)
+    nvf.url = "github:notashelf/nvf";
 
     # Home manager
     home-manager = {
@@ -39,24 +42,27 @@
     hyprland,
     stylix,
     nixvim,
+		nvf,
     ...
-  } @inputs: let
-    inherit (self) outputs;
-  in {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      igris = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-					inherit inputs;
-					inherit outputs;
-				};
-        # Main config file
-        modules = [
-					./nixos/configuration.nix
-					inputs.stylix.nixosModules.stylix
-				];
-      };
-    };
-  };
+  } @inputs: 
+		let
+    	inherit (self) outputs;
+  	in {
+    	# NixOS configuration entrypoint
+    	# Available through 'nixos-rebuild --flake .#your-hostname'
+    	nixosConfigurations = {
+      	igris = nixpkgs.lib.nixosSystem {
+        	specialArgs = {
+						inherit inputs;
+						inherit outputs;
+					};
+        	# Main config file
+        	modules = [
+						./nixos/configuration.nix
+						inputs.stylix.nixosModules.stylix
+          	inputs.nvf.nixosModules.default
+					];
+      	};
+    	};
+  	};
 }

@@ -1,6 +1,7 @@
 {
-    imports = [
-	./fish.nix
-	./automation.nix
-    ];
+  imports = [
+    ./fish.nix
+    ./automation.nix
+    ./stylix.nix
+  ];
 }

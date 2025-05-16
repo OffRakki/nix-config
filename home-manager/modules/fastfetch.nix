@@ -30,7 +30,7 @@
     	}
     	{
         type = "packages";
-        format = "{} (pacman)";
+        format = "{} (nixpkgs)";
         key = " ├ 󰏖 ";
         keyColor = "31";  
       }

@@ -10,10 +10,11 @@
 	nix-colors = import <nix-colors> { };
    in {
   imports = [
-	inputs.nix-colors.homeManagerModule
-	inputs.nixvim.homeManagerModules.nixvim
-	./modules
-	./home-packages.nix
+		inputs.nix-colors.homeManagerModule
+		inputs.nixvim.homeManagerModules.nixvim
+		inputs.nvf.homeManagerModules.default
+		./modules
+		./home-packages.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;

@@ -14,6 +14,7 @@ in {
 
 	environment.systemPackages = with pkgs; [
 			# User Packages
+      todoman
 			libvirt
 			qemu
 			mangohud
@@ -45,8 +46,8 @@ in {
 			todo
 
 			# Hyprland Stuff
-			#(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
 			ags_1 # desktop overview  
+      wl-color-picker
 			wofi
 			btop
 			brightnessctl # for brightness control

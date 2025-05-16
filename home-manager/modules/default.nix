@@ -1,7 +1,8 @@
 {
 	imports = [
 		#./spicetify.nix
-		./nixvim
+                #./nixvim # using NVF 
+		./nvf.nix
 		./fastfetch.nix
 		./hypr
 		./git.nix
