@@ -1,4 +1,4 @@
-{ pkgs, lib, stylix, ... }:
+{ pkgs, lib, stylix, config, ... }:
 
 {
 	programs.waybar = lib.mkForce {
@@ -31,12 +31,13 @@
 				"group/hardware" = {
 					orientation = "horizontal";
 					modules = ["cpu" "memory"];
+          padding = 4;
 				};
 
 				"hyprland/window" = {
 					format = "{title}";
 					icon = true;
-					icon-size = 16;
+					icon-size = 14;
 					max-lenght = 32;
 				};
 
@@ -99,21 +100,27 @@
 			* {
 				font-family: "JetbrainsMono Nerd Font" ;
         font-weight: bold;
+        font-size: 0.98em;
+        margin-right: 4px;
+        margin-left: 4px;
 			}
 
 			#waybar {
         border: 1px solid rgb(215,153,33);
-				border-radius: 1em;
+				border-radius: 2em;
 			}
 
 			#workspaces {
-				font-size: 4px;
-        border: none;
+				font-size: 1.1em;
+        margin-left: 0px;
+        margin-right: 0px;
 			}
 
       #worspaces button.active {
         border: 1px solid rgb(215,153,33);
         border-radius: 4;
+        margin-left: 0px;
+        margin-right: 0px;
       }
 
 			#custom-launcher {
@@ -122,7 +129,6 @@
 			}
 
 			#pulseaudio {
-				font-size: 1.2em;
 			}
 
 			#tray {

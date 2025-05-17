@@ -1,8 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.bat = {
     enable = true;
     themes = {
-      dracula = {
+      gruvbox = {
         src = pkgs.fetchFromGitHub {
           owner = "Briles";
           repo = "gruvbox";

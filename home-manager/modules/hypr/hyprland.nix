@@ -86,7 +86,7 @@
 
 			binds = {
 				workspace_back_and_forth = false;
-				allow_workspace_cycles = true;
+				allow_workspace_cycles = false;
 				pass_mouse_when_bound = true;
 			};
 

@@ -6,15 +6,17 @@
   config,
   pkgs,
   ...
-}: let
-	nix-colors = import <nix-colors> { };
-   in {
+}:
+let
+  nix-colors = import <nix-colors> { };
+in
+{
   imports = [
-		inputs.nix-colors.homeManagerModule
-		inputs.nixvim.homeManagerModules.nixvim
-		inputs.nvf.homeManagerModules.default
-		./modules
-		./home-packages.nix
+    inputs.nix-colors.homeManagerModule
+    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nvf.homeManagerModules.default
+    ./modules
+    ./home-packages.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
@@ -46,11 +48,11 @@
     homeDirectory = "/home/rakki";
   };
   gtk = {
-   enable = true;
- };
+    enable = true;
+  };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
   # Enable home-manager
   programs.home-manager.enable = true;

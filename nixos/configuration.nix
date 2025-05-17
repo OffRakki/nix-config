@@ -49,13 +49,13 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+    };
   };
-  };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    nixd
 		vulkan-tools
 		nushell
 		tmux

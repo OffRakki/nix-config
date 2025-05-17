@@ -43,6 +43,7 @@
     stylix,
     nixvim,
 		nvf,
+    alejandra,
     ...
   } @inputs: 
 		let
