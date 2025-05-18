@@ -6,7 +6,7 @@
 		./fastfetch.nix
 		./hypr
 		./git.nix
-		./waybar
+		./waybar.nix
 		./neovim.nix
 		./starship.nix
 		./nushell.nix
