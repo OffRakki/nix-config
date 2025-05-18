@@ -15,7 +15,7 @@ in {
 	environment.systemPackages = with pkgs; [
 			# User Packages
       spotify-player
-      todoman
+    #todoman
 			libvirt
 			qemu
 			mangohud
@@ -47,6 +47,7 @@ in {
 			todo
 
 			# Hyprland Stuff
+      hyprpaper
 			ags_1 # desktop overview  
       wl-color-picker
 			wofi

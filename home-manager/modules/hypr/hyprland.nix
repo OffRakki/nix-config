@@ -267,8 +267,8 @@
 				"$mainMod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" #Main Menu
 				"$mainMod, V, exec, cliphist list | wofi --show dmenu -G | wl-copy"
 				"$mainMod, SPACE, togglefloating"
-				"$mainMod SHIFT, F, fullscreen, 1 # fake full screen"
-				"$mainMod, F, fullscreen"
+				"$mainMod, F, fullscreen, 1 # fake full screen"
+				"$mainMod SHIFT, F, fullscreen"
 				"$mainMod SHIFT, Q, killactive"
 				"$mainMod, A, exec, pkill rofi || true && ags -t 'overview'"
 				"$mainMod, Return, exec, $terminal"  #terminal

@@ -1,5 +1,8 @@
 { pkgs, lib, stylix, config, ... }:
-
+  let
+    stylix_bg = config.lib.stylix.colors.base01;
+    stylix_fg = config.lib.stylix.colors.base0F;
+  in
 {
 	programs.waybar = lib.mkForce {
 		enable = true;
@@ -8,11 +11,11 @@
 				layer = "top";
 				position = "top";
 				margin-top = 4;
-				margin-bottom = 2;
+				margin-bottom = 0;
 				height = 34;
-				modules-left = ["custom/launcher" "group/hardware" "hyprland/workspaces"];
-				modules-center = ["hyprland/window"];
-				modules-right = ["mpris" "pulseaudio" "clock" "tray"];
+				modules-left = ["group/hardware"];
+				modules-center = ["hyprland/workspaces"];
+				modules-right = ["mpris" "pulseaudio" "clock"];
 				"hyprland/workspaces" = {
 					disable-scroll = true;
 					show-special = false;
@@ -30,8 +33,11 @@
 				
 				"group/hardware" = {
 					orientation = "horizontal";
-					modules = ["cpu" "memory"];
+					modules = ["cpu" "memory" "network"];
           padding = 4;
+          min-lenght = 70;
+          interval = 5;
+          justify = "center";
 				};
 
 				"hyprland/window" = {
@@ -39,6 +45,7 @@
 					icon = true;
 					icon-size = 14;
 					max-lenght = 32;
+          justify = "center";
 				};
 
 				"pulseaudio" = {
@@ -53,13 +60,13 @@
 				};
 
 				"cpu" = {
-      		interval = 15;
+      		interval = 5;
        		format = " {}%";
        		max-length = 10;
     		};
 				
     		"memory" = {
-        	interval = 30;
+        	interval = 5;
         	format = " {}%";
         	max-length = 10;
 	    	};
@@ -86,11 +93,11 @@
 				};
 
 				"network" = {
+          interval = 5;
+          justify = "center";
 					#interface = "wlp2*"; # (Optional) To force the use of this interface
-					format-wifi = "";
-					format-ethernet = "";
-					tooltip-format = "{essid} ({signalStrength}%)";
-					format-linked = "{ifname} ";
+					format = "↟{bandwidthUpBits} | ↡{bandwidthDownBits}";
+					tooltip-format = "bandwidthTotalBits";
 					format-disconnected = "⚠";
 					format-alt = "{ifname}: {ipaddr}/{cidr}";
 				};
@@ -98,42 +105,79 @@
 		};
 		style = ''
 			* {
+        color: #ffffff;
 				font-family: "JetbrainsMono Nerd Font" ;
         font-weight: bold;
         font-size: 0.98em;
-        margin-right: 4px;
-        margin-left: 4px;
+        margin-right: 2px;
+        margin-left: 2px;
+        border-radius: 0.5em;
+        padding: 0px 6px 0px 6px;
 			}
 
 			#waybar {
-        border: 1px solid rgb(215,153,33);
+        background: transparent;
+        border: 0px solid rgb(215,153,33);
 				border-radius: 2em;
 			}
 
 			#workspaces {
+        background: #${stylix_bg}; 
+        border: 1px solid #${stylix_fg};
 				font-size: 1.1em;
-        margin-left: 0px;
-        margin-right: 0px;
+        margin: 0px;
+        padding: 0px 0px 0px 0px;
 			}
 
       #worspaces button.active {
-        border: 1px solid rgb(215,153,33);
-        border-radius: 4;
-        margin-left: 0px;
-        margin-right: 0px;
+        border: 0px solid rgb(215,153,33);
+        border-radius: 0em;
+        margin: 0px;
+        padding: 0px 0px 0px 0px;
       }
 
 			#custom-launcher {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
 				font-size: 24px;
 				margin-left: 10px;
 			}
 
 			#pulseaudio {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
 			}
 
 			#tray {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
 				margin-right: 10px;
 			}
+
+      #cpu {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
+      }
+
+      #memory {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
+      }
+
+      #clock {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
+      }
+
+      #mpris {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
+      }
+ 
+      #network {
+        border: 1px solid #${stylix_fg};
+        background: #${stylix_bg}; 
+      }
 		'';
 	}; 
 }

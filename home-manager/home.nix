@@ -43,6 +43,8 @@ in
     };
   };
 
+  stylix.targets.waybar.enable = false;
+
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
