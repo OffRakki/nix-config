@@ -18,7 +18,6 @@
         modules-center = ["group/windowmod"];
         modules-right = ["tray" "group/mediamod" "group/audiomod" "group/clockmod" "custom/swaync"];
 
-
         "custom/launcher" = {
           format = "<span font='18'>❄️</span>";
           on-click = "wofi --show drun -G";
@@ -321,11 +320,9 @@
         border-radius: 8px;
       }
 
-
       window#waybar {
         background: transparent;
       }
-
 
       #custom-launcher,
       #networkmod,

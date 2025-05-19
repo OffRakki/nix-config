@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, stylix, lib, config, pkgs, ... }: {
 
   wayland.windowManager.hyprland = lib.mkForce {
     enable = true;
@@ -20,7 +20,6 @@
       monitor = [ 
         "DP-3,1920x1080@239.76,0x0,1"
         "HDMI-A-1,1920x1080@60,1920x-250,1"
-        #"HDMI-A-1,disable"
       ];
 
       workspace = [
@@ -45,8 +44,8 @@
         allow_tearing = true;
         layout = "dwindle";
         border_size = 2;
-        gaps_in = 8;
-        gaps_out = 8;
+        gaps_in = 4;
+        gaps_out = 6;
 
         "col.active_border" = "rgba(fab38788) rgba(f38ba888) 45deg";
         "col.inactive_border" = "rgb(dd7878)";
@@ -61,7 +60,7 @@
         repeat_rate = 50;
         repeat_delay = 300;
 
-        sensitivity = -0.7;
+        sensitivity = -0.8;
         numlock_by_default = true;
         left_handed = false;
         follow_mouse = true;
@@ -110,11 +109,11 @@
 
         shadow = {
           enabled = true;
-          range = 3;
+          range = 2;
           render_power = 1;
 
-          #"color" = "$color12";
-          #"color_inactive" = "$color10";
+          "color" = "rgb(${config.lib.stylix.colors.base0C})";
+          "color_inactive" = "rgb(${config.lib.stylix.colors.base0F})";
         };
 
         blur = {
@@ -129,10 +128,10 @@
       };
 
       group = {
-        #"col.border_active" = "$color15";
+        "col.border_active" = "rgb(${config.lib.stylix.colors.base15})";
 
         groupbar = {
-          #"col.active" = "$color0";
+          "col.active" = "rgb(${config.lib.stylix.colors.base00})";
         };
       };
 
@@ -278,6 +277,7 @@
         "$mainMod ALT, C, exec, [size 50% 50%;float] $terminal -e qalc" # calculator (qalculate)
         "$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
+        "$mainMod, E, exec, uwsm app -- thunar"
 
         # Switch workspaces with mainMod + [0-9] 
         "$mainMod, code:10, workspace, 1 # NOTE: code:10 = key 1"
