@@ -14,7 +14,12 @@ in {
 
   environment.systemPackages = with pkgs; [
     # User Packages
+    nvidia-container-toolkit
+    docker
+    docker-client
+    bitwarden
     spotify-player
+    dysk
     #todoman
     zenith-nvidia
     libvirt

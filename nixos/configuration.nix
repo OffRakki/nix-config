@@ -1,20 +1,19 @@
 { inputs, lib, config, pkgs, outputs, ... }: {
 	
-	virtualisation.libvirtd = lib.mkForce {
+	virtualisation = {
+    docker.enable = true;
+    libvirtd = lib.mkForce {
 		enable = true;
+    };
 	};
 
   # You can import other NixOS modules here
   imports = [
     	inputs.home-manager.nixosModules.home-manager
-
 		../hosts/rakki/config.nix
 		./modules
-
 		../modules/nixosconfig/hyprland.nix
-
 		#../modules/i3enableconfig.nix
-    
 		./hardware-configuration.nix
   ];
 
@@ -55,6 +54,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    refind
+    os-prober
     nixd
 		vulkan-tools
 		nushell

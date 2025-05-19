@@ -1,6 +1,6 @@
 { pkgs, lib, stylix, config, ... }:
   let
-    stylix_bg = config.lib.stylix.colors.base01;
+    stylix_bg = config.lib.stylix.colors.base00;
     stylix_fg = config.lib.stylix.colors.base0F;
   in
 {
@@ -8,8 +8,8 @@
 		enable = true;
 		settings = {
 			mainBar = {
-				layer = "top";
 				position = "top";
+				layer = "top";
 				margin-top = 4;
 				margin-bottom = 0;
 				height = 34;
@@ -17,14 +17,15 @@
 				modules-center = ["hyprland/workspaces"];
 				modules-right = ["mpris" "pulseaudio" "clock"];
 				"hyprland/workspaces" = {
+          justify = "center";
 					disable-scroll = true;
 					show-special = false;
 					special-visible-only = false;
 					all-outputs = true;
 					format = "{icon}";
 					format-icons = {
-						"active" = "⦿";
-						"default" = "○";
+						"active" = "🞊";
+						"default" = "⭘";
 					};
           window-rewrite = {
             "title<.*chrome.*>" = "";
