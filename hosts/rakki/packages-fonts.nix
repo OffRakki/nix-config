@@ -14,6 +14,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     # User Packages
+    hyprpicker
     nvidia-container-toolkit
     docker
     docker-client

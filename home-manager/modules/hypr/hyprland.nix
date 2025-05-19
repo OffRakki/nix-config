@@ -24,8 +24,8 @@
       ];
 
       workspace = [
-        "1, monitor:DP-3, persistent:true"
-        "2, monitor:HDMI-A-1, persistent:true"
+        "1, monitor:DP-3"
+        "2, monitor:HDMI-A-1"
       ];
 
       dwindle = {	
@@ -75,18 +75,18 @@
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        vfr = true;
+        vfr = false;
         vrr = 2;
         mouse_move_enables_dpms = true;
         enable_swallow = true;
         focus_on_activate = false;
-        initial_workspace_tracking = 0;
+        initial_workspace_tracking = 1;
         middle_click_paste = false;
       };
 
       binds = {
-        workspace_back_and_forth = false;
-        allow_workspace_cycles = false;
+        workspace_back_and_forth = true;
+        allow_workspace_cycles = true;
         pass_mouse_when_bound = true;
       };
 
