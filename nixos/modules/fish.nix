@@ -11,12 +11,15 @@
       interactiveShellInit =  ''
         set fish_greeting
         fastfetch
+        direnv hook fish | source
       '';
       shellAbbrs = {
 
         # nix
         ncg = "nix-collect-garbage";
         nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
+        nixdev = "nix develop -c $SHELL";
+        nix-shell = "nix-shell --command $SHELL";
 
         # sudo
         sv = "sudo nvim";

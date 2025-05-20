@@ -19,9 +19,9 @@
         modules-right = ["tray" "group/mediamod" "group/audiomod" "group/clockmod" "custom/swaync"];
 
         "custom/launcher" = {
-          format = "<span font='18'>❄️</span>";
-          on-click = "wofi --show drun -G";
-          on-click-right = "wofi --show run -G";
+          format = "<span font='18'>❄️</span.>";
+          on-click = "uwsm app -- wofi --show drun -G";
+          on-click-right = "uwsm app -- wofi --show run -G";
         };
 
         "hyprland/workspaces" = {
@@ -42,7 +42,6 @@
             sort-by-number = true;
           };
         };
-
 
         "network" = {
           format = "{ifname}";
@@ -101,7 +100,6 @@
           icon-size = 18;
           spacing = 8;
         };
-
 
         "mpris#icon" = {
           interval = 0.5;
@@ -341,9 +339,13 @@
     
       /* LAUNCHER */
       #custom-launcher {
+        background-image: url('/home/rakki/Documents/nix-config/hosts/rakki/svgs/nix-snowflake-white.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
         color: #1e1e2e;
         background-color: #1e1e2e;
-        padding: 0px 8px 0px 8px;
+        padding: 0px 18px 0px 18px;
         margin: 8px;
       }
     
