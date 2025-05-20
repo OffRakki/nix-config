@@ -8,6 +8,7 @@ in
     enable = mkEnableOption "Enable Nvidia Prime Hybrid GPU Offload";
     nvidiaBusID = mkOption {
       type = types.str;
+      # Correct this if needed! (Be sure to check it.)
       default = "PCI:7:0:0";
     };
   };

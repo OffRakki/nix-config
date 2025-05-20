@@ -1,4 +1,12 @@
 { inputs, lib, config, pkgs, outputs, ... }: {
+
+  # You can import other NixOS modules here
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+		../hosts/rakki/config.nix
+		./modules
+		./hardware-configuration.nix
+  ];
 	
 	virtualisation = {
     docker.enable = true;
@@ -7,15 +15,22 @@
     };
 	};
 
-  # You can import other NixOS modules here
-  imports = [
-    	inputs.home-manager.nixosModules.home-manager
-		../hosts/rakki/config.nix
-		./modules
-		../modules/nixosconfig/hyprland.nix
-		#../modules/i3enableconfig.nix
-		./hardware-configuration.nix
-  ];
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+
+  # Enable this to change to xserver + i3
+	services.xserver = {
+		enable = false;
+		autorun = false;
+		displayManager.startx.enable = false;
+		windowManager.i3.enable = false;
+	};
+
+	programs.dconf.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -54,6 +69,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    dragon-drop
     networkmanager
     refind
     os-prober
@@ -90,6 +106,9 @@
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
+      # Hyprland
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
       # Opinionated: disable global registry

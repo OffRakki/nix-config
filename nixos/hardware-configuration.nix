@@ -3,22 +3,11 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
-
 {
-
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ./extraHardwareOptions.nix  
     ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "i915" ];
-  boot.kernelModules = [ "kvm-amd" ];
-	# Uncomment if want to do GPU passthrough to a VM
-	#boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "vfio-pci.ids=10de:2504,10de:228e" ];
-  boot.extraModulePackages = [ ];
-	boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a5274005-99d5-4383-998c-33ae2233c689";
@@ -51,13 +40,8 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  networking.nameservers = ["8.8.8.8" "8.8.4.4"];
   # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.graphics = {
-    enable = true;
-  };
-
 }

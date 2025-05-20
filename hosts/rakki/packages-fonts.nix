@@ -13,6 +13,11 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    #gaming
+    lutris
+    wine
+    osu-lazer-bin
+
     # User Packages
     hyprpicker
     nvidia-container-toolkit

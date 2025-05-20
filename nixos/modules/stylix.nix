@@ -2,7 +2,7 @@
   
 	stylix = lib.mkForce {
 		enable = true;
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/uwunicorn.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 		autoEnable = true;
 	  image = ../../hosts/rakki/wallpapers/agbg.jpg;
 		cursor = {

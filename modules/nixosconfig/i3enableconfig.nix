@@ -1,6 +1,6 @@
 { pkgs, inputs, libs, config, ... }: {
 	services.xserver = {
-		enable = true;
+		enable = false;
 		autorun = false;
 		displayManager.startx.enable = true;
 		windowManager.i3.enable = true;
