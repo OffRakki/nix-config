@@ -43,12 +43,12 @@
         resize_on_border = true;
         allow_tearing = true;
         layout = "dwindle";
-        border_size = 2;
+        border_size = 0;
         gaps_in = 4;
         gaps_out = 6;
 
-        "col.active_border" = "rgba(fab38788) rgba(f38ba888) 45deg";
-        "col.inactive_border" = "rgb(dd7878)";
+        "col.active_border" = "rgba(255,255,255,10)";
+        "col.inactive_border" = "rgba(150,150,150,10)";
       };
 
       input = {
@@ -108,12 +108,12 @@
         dim_special = 0.8;
 
         shadow = {
-          enabled = true;
+          enabled = false;
           range = 2;
-          render_power = 1;
+          render_power = 2;
 
-          "color" = "rgb(${config.lib.stylix.colors.base0C})";
-          "color_inactive" = "rgb(${config.lib.stylix.colors.base0F})";
+          "color" = "rgb(50,50,50)";
+          "color_inactive" = "rgb(50,50,50)";
         };
 
         blur = {
