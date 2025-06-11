@@ -110,7 +110,6 @@
 		tree = "tree --du -h";
 		ls = "ls -FahsSL --color = always";
 		#la = "ls -A";
-		exa = "exa -lFs name --colour = always --colour-scale --group-directories-first";
 
 		fzf = "fzf --color = 16";
 

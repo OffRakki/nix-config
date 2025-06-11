@@ -12,12 +12,37 @@
         set fish_greeting
         fastfetch
         direnv hook fish | source
+        zoxide init fish --cmd cd | source
       '';
+      shellAliases = {
+        # file management
+
+        # better copy copy
+        cp = "rsync --archive --verbose --progress";
+        rsync = "rsync --archive --verbose --progress";
+
+        ls = "eza --colour=always --colour-scale all --colour-scale-mode gradient";
+        la = "eza --colour=always --colour-scale all --colour-scale-mode gradient -a";
+        eza = "eza --colour=always --colour-scale all --colour-scale-mode gradient";
+        ezaa = "eza --colour=always --colour-scale all --colour-scale-mode gradient -a";
+        mv = "mv -i";
+        rm = "rm -i";
+        df = "df -h";
+        du = "du -hc --time";
+        tree = "tree --du -h";
+
+        fzf = "fzf --color=16";
+
+        grep = "grep --color=always";
+        egrep = "egrep --color=always";
+        fgrep = "fgrep --color=always";
+      };
       shellAbbrs = {
 
         # nix
         ncg = "nix-collect-garbage";
         nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
+        nhos = "nh os switch ~/Documents/nix-config";
         nixdev = "nix develop -c $SHELL";
         nix-shell = "nix-shell --command $SHELL";
 
@@ -75,27 +100,6 @@
         htop = "btop";
         cat = "bat";
         localserver = "~/.scripts/localserver/startlocalserver";
-
-        # file management
-
-        # better copy copy
-        cp = "rsync --archive --verbose --progress";
-        rsync = "rsync --archive --verbose --progress";
-
-        mv = "mv -i";
-        rm = "rm -i";
-        df = "df -h";
-        du = "du -hc --time";
-        tree = "tree --du -h";
-        ls = "ls -FhSL --color=always";
-        la = "ls -A";
-        exa = "exa -lFs name --colour=always --colour-scale --group-directories-first";
-
-        fzf = "fzf --color=16";
-
-        grep = "grep --color=always";
-        egrep = "egrep --color=always";
-        fgrep = "fgrep --color=always";
       };
     };
   };

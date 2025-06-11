@@ -22,6 +22,22 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  services.mpd= {
+    enable = true;
+    musicDirectory = "/home/rakki/Music";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "Pipewire_Output"
+      }
+    '';
+  };
+  services.mpd.user = "rakki";
+  systemd.services.mpd.environment = {
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
+  };
+
   # Enable this to change to xserver + i3
 	services.xserver = {
 		enable = false;
@@ -70,6 +86,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    nh
+    nix-output-monitor
+    diffutils
+    matugen
+    oama
+    pass
+    msmtp
+    uutils-coreutils-noprefix
+    ueberzugpp
+    ueberzug
+    w3m
     direnv
     dragon-drop
     networkmanager
@@ -102,6 +129,15 @@
     wasistlos
     vesktop
 		waybar-mpris
+    wl-clipboard-rs
+    wl-clip-persist
+    clipse
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fishPlugins.grc
+    grc
   ];
 
   nix = let

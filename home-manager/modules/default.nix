@@ -2,6 +2,8 @@
   imports = [
     #./spicetify.nix
     #./nixvim # using NVF 
+    ./helix.nix
+    ./gmail.nix
     ./wofi.nix
     ./nvf.nix
     ./fastfetch.nix

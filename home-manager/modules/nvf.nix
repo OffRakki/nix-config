@@ -90,8 +90,8 @@
         comments.comment-nvim.enable = true;
         presence.neocord.enable = true;
         autocomplete = {
-          nvim-cmp.enable = false; #conflicts with blink-cmp
-          blink-cmp.enable = true;
+          nvim-cmp.enable = true; #conflicts with blink-cmp
+          blink-cmp.enable = false;
           enableSharedCmpSources = true;
         };
         terminal = {

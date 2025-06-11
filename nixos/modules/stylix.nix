@@ -4,7 +4,7 @@
 		enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 		autoEnable = true;
-	  image = ../../hosts/rakki/wallpapers/tokyo-night.png;
+	  image = ../../hosts/rakki/wallpapers/knnw.jpg;
 		cursor = {
 			package = pkgs.bibata-cursors;
 			name = "Bibata-Modern-Classic";

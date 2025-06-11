@@ -12,7 +12,7 @@
 
       "$mainMod"    = "SUPER";
       "$terminal"   = "${pkgs.kitty}/bin/kitty";
-      "$files"      = "${pkgs.kitty}/bin/kitty -e ${pkgs.ranger}/bin/ranger";
+      "$files"      = "${pkgs.nautilus}/bin/nautilus";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "$slurp" 			= "${pkgs.slurp}/bin/slurp";
       "$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
@@ -43,12 +43,12 @@
         resize_on_border = true;
         allow_tearing = true;
         layout = "dwindle";
-        border_size = 0;
-        gaps_in = 4;
+        border_size = 2;
+        gaps_in = 6;
         gaps_out = 6;
 
-        "col.active_border" = "rgba(255,255,255,10)";
-        "col.inactive_border" = "rgba(150,150,150,10)";
+        "col.active_border" = "rgb(255,255,255) rgb(161,42,119) 45deg";
+        "col.inactive_border" = "rgba(150,150,150,0)";
       };
 
       input = {
@@ -97,10 +97,10 @@
       };
 
       decoration = { 
-        rounding = 6;
+        rounding = 16;
 
         active_opacity = 2.0;
-        inactive_opacity = 0.8;
+        inactive_opacity = 0.7;
         fullscreen_opacity = 1.0;
 
         dim_inactive = true;
@@ -109,17 +109,19 @@
 
         shadow = {
           enabled = false;
-          range = 2;
-          render_power = 2;
+          range = 100;
+          render_power = 4;
+          #offset = "0 40";
+          scale = 0.95;
 
-          "color" = "rgb(50,50,50)";
-          "color_inactive" = "rgb(50,50,50)";
+          "color" = "rgb(0,0,0)";
+          "color_inactive" = "rgb(0,0,0)";
         };
 
         blur = {
           enabled = true;
           size = 4;
-          passes = 2;
+          passes = 4;
           ignore_opacity = true;
           new_optimizations = true;
           special = true;
@@ -166,6 +168,8 @@
       layerrule = ["blur, wofi"];
 
       windowrule = [
+        "float, class:(middleFloat)"
+        "size 50% 50%, class:(middleFloat)"
         "noblur, tag:games*"
         "opacity 2 2 2, class:google-chrome"
         "float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
@@ -212,20 +216,16 @@
       ];
 
       exec-once = [ 
+        "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- waybar"
         "uwsm app -- swww-daemon --format xrgb"
-        #"$SwwwRandom $wallDIR # random wallpaper switcher every 30 minutes "
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        #"$scriptsDir/Polkit.sh"
         "uwsm app -- nm-applet --indicator"
         "uwsm app -- swaync"
         "uwsm app -- ags"
         "uwsm app -- blueman-applet"
         "uwsm app -- rog-control-center"
-        "uwsm app -- wl-paste --type text --watch cliphist store "
-        "uwsm app -- wl-paste --type image --watch cliphist store"
-        #"$UserScripts/RainbowBorders.sh &"
         "uwsm app -- hypridle"
         "uwsm app -- pypr"
         #"uwsm app -- swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper" # Managed by stylix atm
@@ -253,12 +253,6 @@
 
       bindl = [
         ", Print, exec, $hyprshot -z --clipboard-only -m region"
-        #	"bindl = , xf86AudioPlayPause, exec, $scriptsDir/MediaCtrl.sh --pause"
-        #	"bindl = , xf86AudioPause, exec, $scriptsDir/MediaCtrl.sh --pause"
-        #	"bindl = , xf86AudioPlay, exec, $scriptsDir/MediaCtrl.sh --pause"
-        #	"bindl = , xf86AudioNext, exec, $scriptsDir/MediaCtrl.sh --nxt "
-        #	"bindl = , xf86AudioPrev, exec, $scriptsDir/MediaCtrl.sh --prv"
-        #	"bindl = , xf86audiostop, exec, $scriptsDir/MediaCtrl.sh --stop"
       ];
 
       bind = [ 
@@ -266,18 +260,17 @@
         "$mainMod, L, exec, uwsm app --  hyprlock"
         "$mainMod, D, exec, pkill wofi || uwsm app --  wofi --show drun -G --insensitive" #Main Menu
         "$mainMod ALT, D, exec, pkill wofi || uwsm app --  wofi --show run -G --insensitive" #Main Menu
-        "$mainMod, V, exec, cliphist list | uwsm app --  wofi --show dmenu -G | wl-copy"
+        "$mainMod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "$mainMod, SPACE, togglefloating"
         "$mainMod, F, fullscreen, 1 # fake full screen"
         "$mainMod SHIFT, F, fullscreen"
         "$mainMod SHIFT, Q, killactive"
         "$mainMod, A, exec, pkill wofi || true && ags -t 'overview'"
         "$mainMod, Return, exec, uwsm app --  $terminal"  #terminal
-        "$mainMod, T, exec, uwsm app -- $files" #file manager
-        "$mainMod ALT, C, exec, [size 50% 50%;float] $terminal -e qalc" # calculator (qalculate)
+        "$mainMod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-        "$mainMod, E, exec, uwsm app -- thunar"
+        "$mainMod, E, exec, uwsm app -- $files"
 
         # Switch workspaces with mainMod + [0-9] 
         "$mainMod, code:10, workspace, 1 # NOTE: code:10 = key 1"

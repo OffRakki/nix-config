@@ -19,6 +19,35 @@ in {
     osu-lazer-bin
 
     # User Packages
+    ripgrep
+    ripgrep-all
+    fd
+    zoxide
+    xh
+    zellij
+    gitui
+    du-dust
+    dua
+    hyperfine
+    evil-helix
+    bacon
+    cargo-info
+    fselect
+    ncspot
+    rusty-man
+    delta
+    tokei
+    wiki-tui
+    just
+    mask
+    mprocs
+    presenterm
+    kondo
+    rtx
+    espanso
+    neomutt
+    rmpc
+    mpd
     hyprpicker
     nvidia-container-toolkit
     docker
