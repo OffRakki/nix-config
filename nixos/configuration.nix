@@ -8,6 +8,24 @@
 		./hardware-configuration.nix
   ];
 	
+  # Defaults sudo-rs as sudo
+  security = {
+      sudo.enable = false;
+      sudo-rs = {
+        enable = true;
+        execWheelOnly = true;
+        wheelNeedsPassword = true;
+      };
+      wrappers.sudo-rs = {
+        #source = "${lib.getExe pkgs.sudo-rs}";
+        source = "${pkgs.sudo-rs}/bin/sudo";
+        setuid = true;
+        setgid = true;
+        owner = "0";
+        group = "0";
+      };
+    };
+
 	virtualisation = {
     docker.enable = true;
     libvirtd = lib.mkForce {
@@ -86,6 +104,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sudo-rs
+    mprime
     nh
     nix-output-monitor
     diffutils

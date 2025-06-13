@@ -6,7 +6,7 @@
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
       logo = {
-        source = "~/.local/share/fastfetch/images/hypr.png";
+        source = "~/Documents/nix-config/hosts/rakki/svgs/hypr.png";
         type = "kitty";
         height = 18;
         padding = {
