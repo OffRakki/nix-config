@@ -278,6 +278,10 @@
       };
     };
     style = ''
+
+        @define-color bg_color #3c3836;
+        @define-color text_color #d79921;
+
       * {
         border: none;
         border-radius: 0.5em;
@@ -290,7 +294,7 @@
 
       /* WORKSPACES */
       #workspaces {
-        background: #1e1e2e;
+        background: @bg_color;
         margin: 10px 8px 10px 0px;
         padding: 0px 0px 0px 0px;
         border-radius: 8px;
@@ -298,7 +302,7 @@
       }
 
       #workspaces button {
-        color: #f38ba8;
+        color: #b3abad;
         padding: 5px 7px 5px 5px;
         margin-left: 0em;
         margin-right: 0em;
@@ -306,14 +310,14 @@
       }
 
       #workspaces button.active {
-        color: #74c7ec;
+        color: @text_color;
         background-color: transparent;
         border-radius: 8px;
         transition: all 0.25s ease;
       }
 
       #workspaces button:hover {
-        background-color: #74c7ec;
+        background-color: @text_color;
         color: #000000;
         border-radius: 8px;
       }
@@ -344,7 +348,7 @@
         background-repeat: no-repeat;
         background-size: contain;
         color: #1e1e2e;
-        background-color: #1e1e2e;
+        background-color: @bg_color;
         padding: 0px 18px 0px 18px;
         margin: 8px;
       }
@@ -354,19 +358,19 @@
 
       /* NETWORK */
       #networkmod {
-        background-color: #74c7ec;
+        background-color: @bg_color;
         padding: 1px 1px 1px 6px;
       }
 
       #network {
-        background-color: #74c7ec ;
-        color: #1e1e2e;
+        background-color: @bg_color;
+        color: @text_color;
         padding: 0px 12px 0px 4px;
         margin-right: 0px;
       }
 
       #network.speed {
-        color: #74c7ec;
+        color: @text_color;
         background-color: #1E1E2E;
         font-size: 14px;
         border-radius: 8px;
@@ -377,7 +381,7 @@
 
       /* ACTIVE WINDOW */
       #windowmod {
-        background-color: #cba6f7;
+        background-color: @bg_color;
         padding: 1px 1px 1px 6px;
       }
       
@@ -387,13 +391,13 @@
       }
       
       #window.icon {
-        color: #1e1e2e;
+        color: @bg_color;
         padding: 0px 6px 0px 2px;
         margin-right: 0px;
       }
       
       #window.title {
-        color: #cba6f7;
+        color: @text_color;
         background-color: #1E1E2E;
         font-size: 14px;
         border-radius: 8px;
@@ -409,7 +413,7 @@
       
       /* MEDIA PLAYER */
       #mediamod {
-        background-color: #a6e3a1;
+        background-color: @bg_color;
         border-radius: 8px;
       }
       
@@ -418,13 +422,13 @@
       }
       
       #mpris.icon {
-        background-color: #a7e3a1;
-        color: #1e1e2e;
+        background-color: @bg_color;
+        color: @text_color;
         padding: 0px 12px 0px 8px;
       }
       
       #mpris.title {
-        color: #a6e3a1;
+        color: @text_color;
         background-color: #1E1E2E;
         font-size: 14px;
         border-radius: 8px;
@@ -435,18 +439,18 @@
       
       /* AUDIO */
       #audiomod {
-        background-color: #f38ba8;
+        background-color: @bg_color;
         border-radius: 8px;
       }
       
       #pulseaudio.icon {
-        background-color: #F38BA8;
-        color: #1e1e2e;
+        background-color: @bg_color;
+        color: @text_color;
         padding: 0px 12px 0px 10px;
       }
       
       #pulseaudio.volume {
-        color: #f38ba8;
+        color: @text_color;
         background-color: #1E1E2E;
         font-size: 14px;
         border-radius: 8px;
@@ -457,17 +461,17 @@
       
       /* CLOCK */
       #clockmod {
-        background-color: #89b4fa;
+        background-color: @bg_color;
       }
       
       #clock.icon {
-        background-color: #89b4fa;
-        color: #1e1e2e;
+        background-color: @bg_color;
+        color: @text_color;
         padding: 0px 12px 0px 10px;
       }
       
       #clock.date {
-        color: #89b4fa;
+        color: @text_color;
         background-color: #1E1E2E;
         font-size: 14px;
         border-radius: 8px;
@@ -478,8 +482,8 @@
       
       /* NOTIFICATIONS */
       #custom-swaync {
-        color: #1e1e2e;
-        background-color: #74c7ec;
+        color: @text_color;
+        background-color: @bg_color;
       
         padding: 0px 14px 0px 11px;
       }

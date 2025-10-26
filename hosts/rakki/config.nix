@@ -1,8 +1,8 @@
-{ config, pkgs, host, username, options, lib, inputs, system, ...}: let
-  
-  inherit (import ./variables.nix) keyboardLayout;
-    
-  in {
+{ config, pkgs, host, username, options, lib, inputs, system, ...}:
+  let
+  inherit (import ./variables.nix) consoleKeyMap;  
+   in 
+{
   imports = [
     ./packages-fonts.nix
     #../../modules/drivers/amd-drivers.nix
@@ -28,31 +28,23 @@
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale =  "pt_BR.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS =        "pt_BR.UTF-8";
+    LC_IDENTIFICATION = "pt_BR.UTF-8";
+    LC_MEASUREMENT =    "pt_BR.UTF-8";
+    LC_MONETARY =       "pt_BR.UTF-8";
+    LC_NAME =           "pt_BR.UTF-8";
+    LC_NUMERIC =        "pt_BR.UTF-8";
+    LC_PAPER =          "pt_BR.UTF-8";
+    LC_TELEPHONE =      "pt_BR.UTF-8";
+    LC_TIME =           "pt_BR.UTF-8";
   };
 
 
   # Services to start
   services = {
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "${keyboardLayout}";
-        variant = "alt-intl";
-      };
-    };
-    
     greetd = {
       enable = true;
       vt = 1;
@@ -79,7 +71,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
 	    wireplumber.enable = true;
-  	  };
+  	};
 	
     pulseaudio.enable = false; #unstable
 	  udev.enable = true;
@@ -89,7 +81,7 @@
 	  fstrim = {
       enable = true;
       interval = "weekly";
-      };
+    };
   
     libinput.enable = true;
 
@@ -147,7 +139,7 @@
 	  memoryPercent = 30;
 	  swapDevices = 1;
     algorithm = "zstd";
-    };
+  };
 
   powerManagement = {
   	enable = true;
@@ -216,7 +208,7 @@
     enable = true;
   };
 
-  console.keyMap = "${keyboardLayout}";
+  #console.keyMap = "${consoleKeyMap}";
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

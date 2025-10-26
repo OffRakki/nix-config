@@ -40,6 +40,8 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  services.tailscale.enable = true;
+
   services.mpd= {
     enable = true;
     musicDirectory = "/home/rakki/Music";
@@ -59,13 +61,26 @@
   # Enable this to change to xserver + i3
 	services.xserver = {
 		enable = false;
+    xkb = {
+      variant = "intl";
+      layout = "us";
+    };
 		autorun = false;
 		displayManager.startx.enable = false;
 		windowManager.i3.enable = false;
 	};
 
+  console = {
+    useXkbConfig = true;
+  };
+
 	programs.dconf.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jre;
+  };
 
   xdg.portal = {
     enable = true;
@@ -104,6 +119,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    javaPackages.compiler.temurin-bin.jre-24
+    tailscale
+    nyxt
     sudo-rs
     mprime
     nh
@@ -194,12 +212,12 @@
       # Opinionated: forbid root login through SSH.
       PermitRootLogin = "no";
       # Opinionated: use keys only.
-      # Remove if you want to SSH using passwords
-      PasswordAuthentication = false;
+      PasswordAuthentication = true;
     };
   };
-  time.timeZone = lib.mkDefault "America/Sao_Paulo";
 
+   # Set your time zone.
+   time.timeZone = lib.mkDefault "America/Sao_Paulo";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";

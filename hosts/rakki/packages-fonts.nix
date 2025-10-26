@@ -19,6 +19,7 @@ in {
     osu-lazer-bin
 
     # User Packages
+    ttyper
     ripgrep
     ripgrep-all
     fd

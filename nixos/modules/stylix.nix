@@ -2,9 +2,9 @@
   
 	stylix = lib.mkForce {
 		enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 		autoEnable = true;
-	  image = ../../hosts/rakki/wallpapers/knnw.jpg;
+	  image = ../../hosts/rakki/wallpapers/agbg.jpg;
 		cursor = {
 			package = pkgs.bibata-cursors;
 			name = "Bibata-Modern-Classic";

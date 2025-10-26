@@ -9,7 +9,6 @@
       variables = ["--all"];
     };
     settings = {
-
       "$mainMod"    = "SUPER";
       "$terminal"   = "${pkgs.kitty}/bin/kitty";
       "$files"      = "${pkgs.nautilus}/bin/nautilus";
@@ -19,12 +18,19 @@
 
       monitor = [ 
         "DP-3,1920x1080@239.76,0x0,1"
-        "HDMI-A-1,1920x1080@60,1920x-250,1"
+        #"HDMI-A-1,1920x1080@60,1920x-250,1"
       ];
 
       workspace = [
         "1, monitor:DP-3"
+        "3, monitor:DP-3"
+        "5, monitor:DP-3"
+        "7, monitor:DP-3"
+        "9, monitor:DP-3"
         "2, monitor:HDMI-A-1"
+        "4, monitor:HDMI-A-1"
+        "6, monitor:HDMI-A-1"
+        "8, monitor:HDMI-A-1"
       ];
 
       dwindle = {	
@@ -52,10 +58,10 @@
       };
 
       input = {
-        kb_layout = "us";
+        kb_layout = "us_intl";
         kb_variant = ""; 
         kb_model = "";
-        kb_options = "";
+        kb_options = "alt_shift_toggle";
         kb_rules = "";
         repeat_rate = 50;
         repeat_delay = 300;

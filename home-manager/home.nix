@@ -19,7 +19,7 @@ in
     ./home-packages.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   nixpkgs = {
     # You can add overlays here
