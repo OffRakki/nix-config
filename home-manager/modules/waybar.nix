@@ -1,4 +1,4 @@
-{ pkgs, lib, stylix, config, ... }:
+{ lib, ... }:
 
 {
   programs.waybar = lib.mkForce {
@@ -8,8 +8,8 @@
         position = "top";
         layer = "top";
 
-        height = 16;
-        margin-top = 0;
+        height = 4;
+        margin-top = 4;
         margin-bottom = 0;
         margin-left = 0;
         margin-right = 0;
@@ -51,7 +51,7 @@
           tooltip-format = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
           format-linked = "<span font='14'>󰈀<</span>";
           tooltip-format-wifi = "{essid} {icon} {signalStrength}%";
-          tooltip-format-ethernet = "{ifname} 󰈀";
+          tooltip-format-ethernet = " {bandwidthUpBytes}  {bandwidthDownBytes}";
           tooltip-format-disconnected = "󰣼 Disconnected";
           max-length = 30;
           format-icons = ["󰣾" "󰣴" "󰣶" "󰣸" "󰣺"];
@@ -74,7 +74,7 @@
         };
         "group/networkmod" = {
           orientation = "horizontal";
-          modules = ["network" "network#speed"];
+          modules = ["network"];
         };
 
         "hyprland/window#icon" = {
@@ -149,9 +149,9 @@
 
         "pulseaudio#icon" = {
           format = "<span font='14'>{icon}</span>";
-          format-muted = "";
+          format-muted = " ";
           format-icons = {
-            default = ["" "" ""];
+            default = [" " " " " "];
           };
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+";
@@ -168,7 +168,7 @@
         };
         "group/audiomod" = {
           orientation = "horizontal";
-          modules = ["pulseaudio#icon" "pulseaudio#volume"];
+          modules = ["pulseaudio#icon"];
           max-lenght = 30;
         };
 
@@ -279,8 +279,9 @@
     };
     style = ''
 
-        @define-color bg_color #3c3836;
-        @define-color text_color #d79921;
+        @define-color bg_color #282828;
+        @define-color bg2_color #3c3836;
+        @define-color text_color #ddc7a1;
 
       * {
         border: none;
@@ -302,7 +303,7 @@
       }
 
       #workspaces button {
-        color: #b3abad;
+        color: @text_color;
         padding: 5px 7px 5px 5px;
         margin-left: 0em;
         margin-right: 0em;
@@ -310,7 +311,7 @@
       }
 
       #workspaces button.active {
-        color: @text_color;
+        color: #d79921;
         background-color: transparent;
         border-radius: 8px;
         transition: all 0.25s ease;
@@ -347,13 +348,11 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        color: #1e1e2e;
+        color: @text_color;
         background-color: @bg_color;
         padding: 0px 18px 0px 18px;
         margin: 8px;
       }
-    
-    
     
 
       /* NETWORK */
@@ -398,7 +397,7 @@
       
       #window.title {
         color: @text_color;
-        background-color: #1E1E2E;
+        background-color: @bg2_color;
         font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
@@ -429,7 +428,7 @@
       
       #mpris.title {
         color: @text_color;
-        background-color: #1E1E2E;
+        background-color: @bg2_color;
         font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
@@ -472,7 +471,7 @@
       
       #clock.date {
         color: @text_color;
-        background-color: #1E1E2E;
+        background-color: #3c3836;
         font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;

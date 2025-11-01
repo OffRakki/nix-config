@@ -120,7 +120,7 @@ in {
     kdePackages.qt6ct
     kdePackages.qtwayland
     kdePackages.qtstyleplugin-kvantum #kvantum
-    rofi-wayland
+    rofi
     slurp
     swappy
     swaynotificationcenter

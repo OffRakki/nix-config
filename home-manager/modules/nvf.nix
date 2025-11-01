@@ -63,7 +63,7 @@
             leap.enable = true;
             precognition.enable = false;
           };
-          yanky-nvim.enable = true;
+          yanky-nvim.enable = false;
         };
         languages = {
           enableFormat = true;

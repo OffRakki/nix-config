@@ -50,18 +50,18 @@
         allow_tearing = true;
         layout = "dwindle";
         border_size = 2;
-        gaps_in = 6;
-        gaps_out = 6;
+        gaps_in = 4;
+        gaps_out = 4;
 
-        "col.active_border" = "rgb(255,255,255) rgb(161,42,119) 45deg";
-        "col.inactive_border" = "rgba(150,150,150,0)";
+        "col.active_border" = "rgba(d4be9888)"; # with transition
+        "col.inactive_border" = "rgba(221,199,161,50)";
       };
 
       input = {
-        kb_layout = "us_intl";
+        kb_layout = "us";
         kb_variant = ""; 
         kb_model = "";
-        kb_options = "alt_shift_toggle";
+        kb_options = "";
         kb_rules = "";
         repeat_rate = 50;
         repeat_delay = 300;
@@ -103,7 +103,7 @@
       };
 
       decoration = { 
-        rounding = 16;
+        rounding = 6;
 
         active_opacity = 2.0;
         inactive_opacity = 0.7;
@@ -217,7 +217,6 @@
         "MOZ_ENABLE_WAYLAND,1"
         "GTK_IM_MODULE=cedilla"
         "QT_IM_MODULE=cedilla"
-        "UWSM_USE_SESSION_SLICE,true"
         "UWSM_APP_UNIT_TYPE,service"
       ];
 
@@ -259,20 +258,23 @@
 
       bindl = [
         ", Print, exec, $hyprshot -z --clipboard-only -m region"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
       ];
 
       bind = [ 
         "$mainMod, M, exec, loginctl terminate-user '' "
-        "$mainMod, L, exec, uwsm app --  hyprlock"
-        "$mainMod, D, exec, pkill wofi || uwsm app --  wofi --show drun -G --insensitive" #Main Menu
-        "$mainMod ALT, D, exec, pkill wofi || uwsm app --  wofi --show run -G --insensitive" #Main Menu
+        "$mainMod, L, exec, uwsm app -- hyprlock"
+        "$mainMod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
+        "$mainMod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
         "$mainMod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "$mainMod, SPACE, togglefloating"
         "$mainMod, F, fullscreen, 1 # fake full screen"
         "$mainMod SHIFT, F, fullscreen"
         "$mainMod SHIFT, Q, killactive"
         "$mainMod, A, exec, pkill wofi || true && ags -t 'overview'"
-        "$mainMod, Return, exec, uwsm app --  $terminal"  #terminal
+        "$mainMod, Return, exec, uwsm app -- $terminal"  #terminal
         "$mainMod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
