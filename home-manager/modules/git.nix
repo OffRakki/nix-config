@@ -5,7 +5,7 @@
 		enable = true;
 		package = pkgs.gitAndTools.gitFull;
 		settings = {
-			init.defaultBranch = "main";
+			init.defaultBranch = "master";
 			credential.helper = "libsecret";
 			user.name = "offrakki";
 			user.email = "fernandomarques1505@gmail.com";
