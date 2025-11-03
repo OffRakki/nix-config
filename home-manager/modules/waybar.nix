@@ -8,15 +8,15 @@
         position = "top";
         layer = "top";
 
-        height = 4;
-        margin-top = 4;
-        margin-bottom = 0;
-        margin-left = 0;
+        height = 0;
+        margin-top = 0;
+        margin-bottom = -6;
+        margin-left = 10;
         margin-right = 0;
 
-        modules-left = ["custom/launcher" "hyprland/workspaces" "group/networkmod"];
+        modules-left = ["hyprland/workspaces"];
         modules-center = ["group/windowmod"];
-        modules-right = ["tray" "group/mediamod" "group/audiomod" "group/clockmod" "custom/swaync"];
+        modules-right = ["tray" "group/mediamod" "group/clockmod" "group/audiomod" "group/networkmod" "custom/swaync"];
 
         "custom/launcher" = {
           format = "<span font='18'>❄️</span.>";
@@ -25,7 +25,8 @@
         };
 
         "hyprland/workspaces" = {
-          active-only           = false;
+          margin-left           = 10;
+          active-only           = true;
           all-outputs           = true;
           disable-scroll        = false;
           on-scroll-up          = "hyprctl dispatch workspace -1";

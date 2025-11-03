@@ -269,6 +269,7 @@
         "$mainMod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
         "$mainMod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
         "$mainMod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
+        "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e nvim"
         "$mainMod, SPACE, togglefloating"
         "$mainMod, F, fullscreen, 1 # fake full screen"
         "$mainMod SHIFT, F, fullscreen"
