@@ -154,6 +154,8 @@
           format-icons = {
             default = [" " " " " "];
           };
+          tooltip = true;
+          tooltip-format = "{volume}%";
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+";
           on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-";

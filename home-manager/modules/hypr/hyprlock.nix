@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -45,8 +44,8 @@
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(date +"%-I:%M%p")"'';
-          color = "rgba(250, 189, 47, .75)";
-          font_size = 120;
+          color = "rgba(60, 56, 54, .75)";
+          font_size = 80;
           font_family = "SF Pro Display Bold";
           position = "0, -140";
           halign = "center";
@@ -58,7 +57,7 @@
           monitor = "";
           text = ''cmd[update:1000] echo "<span>$(date '+%A, %d %B')</span>"'';
           color = "rgba(225, 225, 225, 0.75)";
-          font_size = 10;
+          font_size = 8;
           font_family = "SF Pro Display Bold";
           position = "0, 200";
           halign = "center";
@@ -79,9 +78,9 @@
         # USER
         {
           monitor = "";
-          text = ''O.o'';
+          text = ''死んでください。'';
           color = "rgba(255, 255, 255, .65)";
-          font_size = 25;
+          font_size = 16;
           font_family = "SF Pro Display Bold";
           position = "0, -70";
           halign = "center";

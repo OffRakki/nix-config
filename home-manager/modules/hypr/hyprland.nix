@@ -49,7 +49,7 @@
         resize_on_border = true;
         allow_tearing = true;
         layout = "dwindle";
-        border_size = 2;
+        border_size = 1;
         gaps_in = 4;
         gaps_out = 4;
 
@@ -160,9 +160,9 @@
         ];
 
         animation = [ 
-          "windowsIn, 1, 5, slow, popin"
-          "windowsOut, 1, 5, winOut, popin"
-          "windowsMove, 1, 5, wind, slide"
+          "windowsIn, 1, 3, slow, popin"
+          "windowsOut, 1, 3, winOut, popin"
+          "windowsMove, 1, 3, wind, slide"
           "border, 1, 2, linear"
           "borderangle, 1, 180, linear, loop" #used by rainbow borders and rotating colors
           "fade, 1, 5, overshot"
@@ -230,12 +230,11 @@
         "uwsm app -- swaync"
         "uwsm app -- ags"
         "uwsm app -- blueman-applet"
-        "uwsm app -- rog-control-center"
         "uwsm app -- hypridle"
         "uwsm app -- pypr"
         #"uwsm app -- swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper" # Managed by stylix atm
         #"$scriptsDir/Polkit-NixOS.sh"
-        "sleep 5 && uwsm app -- hyprlock"
+        "sleep 3 && uwsm app -- hyprlock"
       ];
 
       binde = [
