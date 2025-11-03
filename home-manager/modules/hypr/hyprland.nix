@@ -183,6 +183,8 @@
         "float, initialClass:org.pulseaudio.pavucontrol"
         "size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
       ];
+      
+      windowrulev2 = ["idleinhibit fullscreen, class:.*"];
 
       env = [ 
         "NIXOS_OZONE_WL,1"
