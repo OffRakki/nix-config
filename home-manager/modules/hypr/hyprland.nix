@@ -160,14 +160,14 @@
         ];
 
         animation = [ 
-          "windowsIn, 1, 3, slow, popin"
-          "windowsOut, 1, 3, winOut, popin"
-          "windowsMove, 1, 3, wind, slide"
-          "border, 1, 2, linear"
+          "windowsIn, 1, 8, slow, popin"
+          "windowsOut, 1, 8, winOut, popin"
+          "windowsMove, 1, 8, wind, slide"
+          "border, 1, 8, linear"
           "borderangle, 1, 180, linear, loop" #used by rainbow borders and rotating colors
-          "fade, 1, 5, overshot"
-          "workspaces, 1, 5, wind"
-          "windows, 1, 5, bounce, popin"
+          "fade, 1, 8, overshot"
+          "workspaces, 1, 8, wind"
+          "windows, 1, 8, bounce, popin"
         ];
       };
 
