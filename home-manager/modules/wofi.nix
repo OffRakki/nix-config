@@ -1,54 +1,55 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, lib, config, ... }: {
 
   programs.wofi = {
     enable = true;
     settings = {
       image_size = 20;
       allow_images = true;
+      hide_scroll = true;
+      columns = 3;
+      insensitive = true;
     };
     style = ''
-      window {
-      margin: 0px;
-      border: 1px solid #bd93f9;
-      }
-      
-      #input {
-      margin: 5px;
-      border: none;
-      }
-      
-      #inner-box {
-      margin: 5px;
-      border: none;
-      }
-      
-      #outer-box {
-      margin: 5px;
-      border: none;
-      }
-      
-      #scroll {
-      margin: 0px;
-      border: none;
-      }
-      
-      #text {
-      margin: 5px;
-      border: none;
-      } 
-      
-      #entry.activatable #text {
-      }
-      
-      #entry > * {
-      }
-      
-      #entry:selected {
-      }
+    * {
+      font-family: JetBrainsMono;
+      color: #ddc7a1;
+      background: transparent;
+    }
 
-      #entry:selected #text {
-      font-weight: bold;
-      }
+    #window {
+      background: #282828;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      border: 4px solid #3c3836;
+    }
+
+    #input {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+
+    #outer-box {
+      padding: 20px;
+    }
+
+    #img {
+      margin-right: 6px;
+    }
+
+    #entry {
+      padding: 10px;
+      border-radius: 15px;
+    }
+
+    #entry:selected {
+      background-color: #928374;
+    }
+
+    #text {
+      margin: 2px;
+    }
     '';
   };
 }
