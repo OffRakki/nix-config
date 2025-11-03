@@ -44,8 +44,8 @@
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(date +"%-I:%M%p")"'';
-          color = "rgba(60, 56, 54, .75)";
-          font_size = 80;
+          color = "rgba(235, 219, 178, .75)";
+          font_size = 60;
           font_family = "SF Pro Display Bold";
           position = "0, -140";
           halign = "center";
@@ -57,7 +57,7 @@
           monitor = "";
           text = ''cmd[update:1000] echo "<span>$(date '+%A, %d %B')</span>"'';
           color = "rgba(225, 225, 225, 0.75)";
-          font_size = 8;
+          font_size = 16;
           font_family = "SF Pro Display Bold";
           position = "0, 200";
           halign = "center";

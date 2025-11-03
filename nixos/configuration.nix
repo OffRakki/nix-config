@@ -119,6 +119,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    dialog
+    freerdp
+    iproute2
+    libnotify
+    nmap
+    netcat
     hypridle
     tailscale
     nyxt

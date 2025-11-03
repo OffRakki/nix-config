@@ -8,10 +8,10 @@
         position = "top";
         layer = "top";
 
-        height = 0;
+        height = 4;
         margin-top = 0;
         margin-bottom = -6;
-        margin-left = 10;
+        margin-left = 8;
         margin-right = 0;
 
         modules-left = ["hyprland/workspaces"];
@@ -409,8 +409,12 @@
       
       /* TRAY */
       #tray {
-        margin: 5px 8px 5px 8px;
-        padding: 0px 5px;
+        margin: 8px 8px 8px 8px;
+        background-color: @bg_color;
+        padding: 0px 4px;
+      }
+      #tray.empty {
+        background-color: transparent;
       }
       
       /* MEDIA PLAYER */
