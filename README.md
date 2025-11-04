@@ -67,5 +67,3 @@ MIT © Fernando Marques
 ---
 
 **Note:** This configuration is tailored specifically for my personal hardware and usage preferences. Use at your own risk.
-
-```
