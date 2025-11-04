@@ -78,8 +78,8 @@
       };
 
       misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
+        disable_hyprland_logo = false;
+        disable_splash_rendering = false;
         vfr = false;
         vrr = 2;
         mouse_move_enables_dpms = true;
@@ -103,7 +103,7 @@
       };
 
       decoration = { 
-        rounding = 2;
+        rounding = 4;
 
         active_opacity = 2.0;
         inactive_opacity = 0.7;
@@ -285,16 +285,16 @@
         "$mainMod, E, exec, uwsm app -- $files"
 
         # Switch workspaces with mainMod + [0-9] 
-        "$mainMod, code:10, workspace, 1 # NOTE: code:10 = key 1"
-        "$mainMod, code:11, workspace, 2 # NOTE: code:11 = key 2"
-        "$mainMod, code:12, workspace, 3 # NOTE: code:12 = key 3"
-        "$mainMod, code:13, workspace, 4 # NOTE: code:13 = key 4"
-        "$mainMod, code:14, workspace, 5 # NOTE: code:14 = key 5"
-        "$mainMod, code:15, workspace, 6 # NOTE: code:15 = key 6"
-        "$mainMod, code:16, workspace, 7 # NOTE: code:16 = key 7"
-        "$mainMod, code:17, workspace, 8 # NOTE: code:17 = key 8"
-        "$mainMod, code:18, workspace, 9 # NOTE: code:18 = key 9"
-        "$mainMod, code:19, workspace, 10 # NOTE: code:19 = key 0"
+        "$mainMod, 1, workspace, 1 # NOTE: code:10 = key 1"
+        "$mainMod, 2, workspace, 2 # NOTE: code:11 = key 2"
+        "$mainMod, 3, workspace, 3 # NOTE: code:12 = key 3"
+        "$mainMod, 4, workspace, 4 # NOTE: code:13 = key 4"
+        "$mainMod, 5, workspace, 5 # NOTE: code:14 = key 5"
+        "$mainMod, 6, workspace, 6 # NOTE: code:15 = key 6"
+        "$mainMod, 7, workspace, 7 # NOTE: code:16 = key 7"
+        "$mainMod, 8, workspace, 8 # NOTE: code:17 = key 8"
+        "$mainMod, 9, workspace, 9 # NOTE: code:18 = key 9"
+        "$mainMod, 0, workspace, 10 # NOTE: code:19 = key 0"
 
         # Move active window and follow to workspace mainMod + SHIFT [0-9]
         "$mainMod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"

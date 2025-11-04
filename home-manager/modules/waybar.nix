@@ -14,7 +14,7 @@
         margin-left = 16;
         margin-right = 16;
 
-        modules-left = ["hyprland/workspaces" "cpu" "memory"];
+        modules-left = ["hyprland/workspaces" "group/hardwaremod"];
         modules-center = ["group/windowmod"];
         modules-right = ["group/mediamod" "tray" "group/clockmod" "group/right-icons"];
 
@@ -37,6 +37,11 @@
           tooltip = true;
           tooltip-format = "󰍛 {used}/{total} GiB";
           min-length  = 6;
+        };
+
+        "group/hardwaremod" = {
+          orientation = "horizontal";
+          modules = ["cpu" "memory"];
         };
 
         "custom/launcher" = {
@@ -469,28 +474,36 @@
         margin: 1px 1px 1px 0px;
       }
 
-      #cpu {
+      /* HARDWARE */
+      #hardwaremod {
         background-color: @bg_color;
+        padding: 1px 1px 1px 0px;
+        margin: 4px 4px 4px 4px
+      }
+
+      #cpu {
+        background-color: @bg2_color;
         padding: 4px 4px 4px 4px;
-         margin: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
       }
 
       #memory {
-        background-color: @bg_color;
+        background-color: @bg2_color;
         padding: 4px 4px 4px 4px;
-         margin: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
       }
+
       /* CLOCK */
       #clockmod {
         background-color: @bg_color;
         padding: 4px 4px 4px 4px;
-         margin: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
       }
       
       #clock.icon {
         background-color: @bg_color;
         color: @text_color;
-        padding: 0px 12px 0px 10px;
+        padding: 0px 10px 0px 10px;
       }
       
       #clock.date {
