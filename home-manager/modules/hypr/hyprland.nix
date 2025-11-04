@@ -11,7 +11,7 @@
     settings = {
       "$mainMod"    = "SUPER";
       "$terminal"   = "${pkgs.kitty}/bin/kitty";
-      "$files"      = "${pkgs.nautilus}/bin/nautilus";
+      "$files"      = "${pkgs.kdePackages.dolphin}/bin/dolphin";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "$slurp" 			= "${pkgs.slurp}/bin/slurp";
       "$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
@@ -180,6 +180,8 @@
         "opacity 2 2 2, class:google-chrome"
         "float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
         "size 25% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
+        "float, initialClass:Bitwarden"
+        "size 25% 50%, initialClass:Bitwarden"
         "float, initialClass:org.pulseaudio.pavucontrol"
         "size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
       ];

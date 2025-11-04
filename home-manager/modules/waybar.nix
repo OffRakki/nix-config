@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, config, ... }:
 
 {
   programs.waybar = lib.mkForce {
@@ -8,15 +8,36 @@
         position = "top";
         layer = "top";
 
-        height = 4;
+        height = 40;
         margin-top = 0;
-        margin-bottom = -6;
-        margin-left = 8;
-        margin-right = 0;
+        margin-bottom = -2;
+        margin-left = 16;
+        margin-right = 16;
 
-        modules-left = ["hyprland/workspaces"];
+        modules-left = ["hyprland/workspaces" "cpu" "memory"];
         modules-center = ["group/windowmod"];
-        modules-right = ["tray" "group/mediamod" "group/clockmod" "group/audiomod" "group/networkmod" "custom/swaync"];
+        modules-right = ["group/mediamod" "tray" "group/clockmod" "group/right-icons"];
+
+        "group/right-icons" = {
+          orientation = "horizontal";
+          modules = ["group/audiomod" "network" "custom/swaync"];
+        };
+
+        "cpu" = {
+          interval = 5;
+          format = "󰻠 {usage}%";
+          tooltip = true;
+          min-length  = 6;
+          tooltip-format = "{󰻠 {avg_frequency} GHz} | {load}";
+        };
+
+        "memory" = {
+          interval = 5;
+          format = "󰍛 {}%";
+          tooltip = true;
+          tooltip-format = "󰍛 {used}/{total} GiB";
+          min-length  = 6;
+        };
 
         "custom/launcher" = {
           format = "<span font='18'>❄️</span.>";
@@ -25,7 +46,7 @@
         };
 
         "hyprland/workspaces" = {
-          margin-left           = 10;
+          margin-left           = 0;
           active-only           = true;
           all-outputs           = true;
           disable-scroll        = false;
@@ -49,6 +70,7 @@
           format-wifi = "<span font='14'>{icon}</span>";
           format-ethernet = "󰈀";
           format-disconnected = "<span font='14'>󰣼</span>";
+          icon-size = 4;
           tooltip-format = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
           format-linked = "<span font='14'>󰈀<</span>";
           tooltip-format-wifi = "{essid} {icon} {signalStrength}%";
@@ -87,7 +109,7 @@
         };
         "hyprland/window#title" = {
           format = "{}";
-          max-length = 25;
+          max-length = 30;
           separate-outputs = true;
           offscreen-css = true;
           offscreen-css-text = "(inactive)";
@@ -149,13 +171,14 @@
         };
 
         "pulseaudio#icon" = {
-          format = "<span font='14'>{icon}</span>";
+          format = "<span font='12'>{icon}</span>";
           format-muted = " ";
           format-icons = {
             default = [" " " " " "];
           };
           tooltip = true;
           tooltip-format = "{volume}%";
+          icon-size = 4;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+";
           on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-";
@@ -229,14 +252,14 @@
           tooltip-format = "Left Click: Launch Notification Center\nRight Click: Do not Disturb";
           format = "{icon}";
           format-icons = {
-            notification = "<span font='14'>󱅫</span>";
-            none = "<span font='14'>󰂚</span>";
+            notification = "<span font='12'>󱅫</span>";
+            none = "<span font='12'>󰂚</span>";
             dnd-notification = "<span font='14'>󰂛</span>";
-            dnd-none = "<span font='14'>󰂛</span>";
-            inhibited-notification = "<span font='14'>󱅫</span>";
-            inhibited-none = "<span font='14'>󰂚</span>";
-            dnd-inhibited-notification = "<span font='14'>󰂛</span>";
-            dnd-inhibited-none = "<span font='14'>󰂛</span>";
+            dnd-none = "<span font='12'>󰂛</span>";
+            inhibited-notification = "<span font='12'>󱅫</span>";
+            inhibited-none = "<span font='12'>󰂚</span>";
+            dnd-inhibited-notification = "<span font='12'>󰂛</span>";
+            dnd-inhibited-none = "<span font='12'>󰂛</span>";
           };
           return-type = "json";
           exec-if = "which swaync-client";
@@ -259,18 +282,6 @@
           # format-good = ""; # An empty format will hide the module
           # format-full = "";
           format-icons = ["" "" "" "" ""];
-        };
-
-        "memory" = {
-          format = "󰍛 {}%";
-          format-alt = "󰍛 {used}/{total} GiB";
-          interval = 5;
-        };
-
-        "cpu" = {
-          format = "󰻠 {usage}%";
-          format-alt = "󰻠 {avg_frequency} GHz";
-          interval = 5;
         };
 
         "custom/hyprpicker" = {
@@ -299,7 +310,7 @@
       /* WORKSPACES */
       #workspaces {
         background: @bg_color;
-        margin: 10px 8px 10px 0px;
+        margin: 8px 8px 8px 0px;
         padding: 0px 0px 0px 0px;
         border-radius: 8px;
         border: solid 0px #f4d9e1;
@@ -330,21 +341,6 @@
         background: transparent;
       }
 
-      #custom-launcher,
-      #networkmod,
-      #windowmod,
-      #mediamod,
-      #audiomod,
-      #clockmod,
-      #battery,
-      #custom-swaync {
-        background-color: #1e1e2e;
-        margin: 8px 8px 8px 0px;
-        border-radius: 8px;
-      }
-
-
-    
       /* LAUNCHER */
       #custom-launcher {
         background-image: url('/home/rakki/Documents/nix-config/hosts/rakki/svgs/nix-snowflake-white.svg');
@@ -361,14 +357,13 @@
       /* NETWORK */
       #networkmod {
         background-color: @bg_color;
-        padding: 1px 1px 1px 6px;
+        padding: 0px 4px 0px 4px;
       }
 
       #network {
         background-color: @bg_color;
         color: @text_color;
-        padding: 0px 12px 0px 4px;
-        margin-right: 0px;
+        padding: 0px 8px 0px 4px;
       }
 
       #network.speed {
@@ -384,7 +379,8 @@
       /* ACTIVE WINDOW */
       #windowmod {
         background-color: @bg_color;
-        padding: 1px 1px 1px 6px;
+        padding: 4px 4px 4px 4px;
+         margin: 4px 4px 4px 4px;
       }
       
       window#waybar.empty #windowmod,
@@ -406,10 +402,16 @@
         padding-left: 8px;
         padding-right: 8px;
       }
+
+      #right-icons {
+         margin: 4px 4px 4px 4px;
+        background-color: @bg_color;
+        padding: 0px 0px;
+      }
       
       /* TRAY */
       #tray {
-        margin: 8px 8px 8px 8px;
+         margin: 4px 4px 4px 4px;
         background-color: @bg_color;
         padding: 0px 4px;
       }
@@ -421,6 +423,8 @@
       #mediamod {
         background-color: @bg_color;
         border-radius: 8px;
+        padding: 4px 4px 4px 4px;
+         margin: 4px 4px 4px 4px;
       }
       
       #mpris.title.stopped~#mediamod {
@@ -452,7 +456,7 @@
       #pulseaudio.icon {
         background-color: @bg_color;
         color: @text_color;
-        padding: 0px 12px 0px 10px;
+        padding: 4px 4px 4px 4px;
       }
       
       #pulseaudio.volume {
@@ -464,10 +468,23 @@
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
       }
-      
+
+      #cpu {
+        background-color: @bg_color;
+        padding: 4px 4px 4px 4px;
+         margin: 4px 4px 4px 4px;
+      }
+
+      #memory {
+        background-color: @bg_color;
+        padding: 4px 4px 4px 4px;
+         margin: 4px 4px 4px 4px;
+      }
       /* CLOCK */
       #clockmod {
         background-color: @bg_color;
+        padding: 4px 4px 4px 4px;
+         margin: 4px 4px 4px 4px;
       }
       
       #clock.icon {
@@ -490,8 +507,7 @@
       #custom-swaync {
         color: @text_color;
         background-color: @bg_color;
-      
-        padding: 0px 14px 0px 11px;
+        padding: 0px 4px 0px 4px;
       }
       
       #custom-power {
