@@ -5,6 +5,7 @@
 		enable = true;
 		package = pkgs.gitAndTools.gitFull;
 		settings = {
+			core.editor = "nvim";
 			init.defaultBranch = "master";
 			credential.helper = "libsecret";
 			user.name = "offrakki";

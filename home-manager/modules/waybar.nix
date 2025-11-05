@@ -182,7 +182,8 @@
             default = [" " " " " "];
           };
           tooltip = true;
-          tooltip-format = "{volume}%";
+          tooltip-format = " {volume}% \n 󰍬 {format_source}";
+          format-source-muted = " 󰍭";
           icon-size = 4;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+";

@@ -227,7 +227,8 @@
       exec-once = [ 
         "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- waybar"
-        "uwsm app -- swww-daemon --format xrgb"
+        "uwsm app -- hyprpaper"
+        #"uwsm app -- swww-daemon --format xrgb"
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- nm-applet --indicator"
@@ -236,7 +237,7 @@
         "uwsm app -- blueman-applet"
         "uwsm app -- hypridle"
         "uwsm app -- pypr"
-        #"uwsm app -- swww-daemon --format xrgb && swww img ./../../../hosts/rakki/wallpapers/agbg.jpg  # persistent wallpaper" # Managed by stylix atm
+        #"swww img ./../../../hosts/rakki/wallpapers/agbg.jpg"  # persistent wallpaper
         #"$scriptsDir/Polkit-NixOS.sh"
         "sleep 3 && uwsm app -- hyprlock"
       ];
@@ -267,6 +268,9 @@
       ];
 
       bind = [ 
+        "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%+"
+        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
         "$mainMod, M, exec, loginctl terminate-user '' "
         "$mainMod, L, exec, uwsm app -- hyprlock"
         "$mainMod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu

@@ -1,5 +1,5 @@
-{ pkgs, config, ...}: {
-
+{ pkgs, config, lib, ...}:
+{
   programs = {
     fish = {
       enable = true;
@@ -10,11 +10,17 @@
       };
       interactiveShellInit =  ''
         set fish_greeting
-        fastfetch
         direnv hook fish | source
         zoxide init fish --cmd cd | source
+        fastfetch
+
+        fish_vi_key_bindings
+        set fish_cursor_default     block      blink
+        set fish_cursor_insert      line       blink
+        set fish_cursor_replace_one underscore blink
+        set fish_cursor_visual      block
       '';
-      shellAliases = {
+     shellAliases = {
         # file management
 
         # better copy copy
