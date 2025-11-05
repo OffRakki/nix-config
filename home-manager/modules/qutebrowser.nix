@@ -47,6 +47,7 @@
 		};    
     extraConfig = ''
       c.tabs.padding = {"bottom": 2, "left": 4, "right": 4, "top": 2}
+      c.auto_save.session = True
 
       # aliases
       c.aliases['gm'] = 'open https://mail.google.com/mail/u/1/'

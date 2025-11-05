@@ -119,6 +119,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    kdePackages.kde-cli-tools
     dialog
     freerdp
     iproute2
