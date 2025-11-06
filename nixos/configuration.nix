@@ -1,5 +1,4 @@
 { inputs, lib, config, pkgs, outputs, ... }: {
-
   # You can import other NixOS modules here
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -58,21 +57,19 @@
     XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
+  console = {
+    useXkbConfig = true;
+  };
+	services.xserver.layout = "us";
+  services.xserver.xkbVariant = "intl";
+
   # Enable this to change to xserver + i3
 	services.xserver = {
 		enable = false;
-    xkb = {
-      variant = "intl";
-      layout = "us";
-    };
 		autorun = false;
 		displayManager.startx.enable = false;
 		windowManager.i3.enable = false;
 	};
-
-  console = {
-    useXkbConfig = true;
-  };
 
 	programs.dconf.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -119,6 +116,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    discordo
+    syncthing
     kdePackages.kde-cli-tools
     dialog
     freerdp

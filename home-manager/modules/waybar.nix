@@ -16,7 +16,7 @@
 
         modules-left = ["hyprland/workspaces" "group/hardwaremod"];
         modules-center = ["group/windowmod"];
-        modules-right = ["group/mediamod" "tray" "group/clockmod" "group/right-icons"];
+        modules-right = ["group/mediamod" "group/clockmod" "group/right-icons" "tray"];
 
         "group/right-icons" = {
           orientation = "horizontal";

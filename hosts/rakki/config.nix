@@ -28,18 +28,19 @@
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 
   # Select internationalisation properties.
-  i18n.defaultLocale =  "en_US.UTF-8";
+  i18n.defaultLocale =  "pt_BR.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS =        "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT =    "en_US.UTF-8";
-    LC_MONETARY =       "en_US.UTF-8";
-    LC_NAME =           "en_US.UTF-8";
-    LC_NUMERIC =        "en_US.UTF-8";
-    LC_PAPER =          "en_US.UTF-8";
-    LC_TELEPHONE =      "en_US.UTF-8";
-    LC_TIME =           "en_US.UTF-8";
+    LC_ALL =            "pt_BR.UTF-8";
+    LC_ADDRESS =        "pt_BR.UTF-8";
+    LC_IDENTIFICATION = "pt_BR.UTF-8";
+    LC_MEASUREMENT =    "pt_BR.UTF-8";
+    LC_MONETARY =       "pt_BR.UTF-8";
+    LC_NAME =           "pt_BR.UTF-8";
+    LC_NUMERIC =        "pt_BR.UTF-8";
+    LC_PAPER =          "pt_BR.UTF-8";
+    LC_TELEPHONE =      "pt_BR.UTF-8";
+    LC_TIME =           "pt_BR.UTF-8";
   };
 
 
@@ -206,8 +207,6 @@
   hardware.graphics = {
     enable = true;
   };
-
-  #console.keyMap = "${consoleKeyMap}";
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

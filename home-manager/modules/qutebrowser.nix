@@ -38,15 +38,16 @@
       };
       tabs = {
         show = "multiple";
-        position = "top";
-        # indicator.width = 0;
+        position = "left";
+        indicator.width = 0;
+        width = "10%";
       };
       new_instance_open_target = "window";
       #colors = {
       #};
 		};    
     extraConfig = ''
-      c.tabs.padding = {"bottom": 2, "left": 4, "right": 4, "top": 2}
+      c.tabs.padding = {"bottom": 4, "left": 2, "right": 2, "top": 4}
       c.auto_save.session = True
 
       # aliases
@@ -54,6 +55,7 @@
 
       # dark mode
       c.colors.webpage.preferred_color_scheme = "dark"
+      config.set('colors.webpage.darkmode.enabled', False, '*://youtube.com/*')
       
       config.bind('e', 'hint links spawn /home/rakki/Documents/nix-config/hosts/rakki/scripts/yt_mpv.sh {hint-url}')
       config.bind('E', 'hint links spawn /home/rakki/Documents/nix-config/hosts/rakki/scripts/yt_mpv.sh {url}')

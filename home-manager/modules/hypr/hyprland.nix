@@ -21,18 +21,6 @@
         #"HDMI-A-1,1920x1080@60,1920x-250,1"
       ];
 
-      workspace = [
-        "1, monitor:DP-3"
-        "3, monitor:DP-3"
-        "5, monitor:DP-3"
-        "7, monitor:DP-3"
-        "9, monitor:DP-3"
-        "2, monitor:HDMI-A-1"
-        "4, monitor:HDMI-A-1"
-        "6, monitor:HDMI-A-1"
-        "8, monitor:HDMI-A-1"
-      ];
-
       dwindle = {	
         pseudotile = "yes";
         preserve_split = "yes";
@@ -58,10 +46,10 @@
       };
 
       input = {
-        kb_layout = "us";
-        kb_variant = "intl"; 
+        kb_layout = "us,pt";
+        kb_variant = "alt-intl"; 
         kb_model = "";
-        kb_options = "";
+        kb_options = "grp:alt_space_toggle";
         kb_rules = "";
         repeat_rate = 50;
         repeat_delay = 300;
@@ -225,6 +213,7 @@
       ];
 
       exec-once = [ 
+        "uwsm app -- syncthing --no-gui" 
         "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- waybar"
         "uwsm app -- hyprpaper"
