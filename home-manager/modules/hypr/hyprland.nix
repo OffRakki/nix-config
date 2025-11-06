@@ -35,7 +35,7 @@
 
       general = {
         resize_on_border = true;
-        allow_tearing = true;
+        allow_tearing = false;
         layout = "dwindle";
         border_size = 1;
         gaps_in = 4;

@@ -52,13 +52,13 @@
 
         "hyprland/workspaces" = {
           margin-left           = 0;
-          active-only           = true;
+          active-only           = false;
           all-outputs           = true;
           disable-scroll        = false;
           on-scroll-up          = "hyprctl dispatch workspace -1";
           on-scroll-down        = "hyprctl dispatch workspace +1";
           persistent-workspaces = {
-            "*" = 7;
+            "*" = 4;
           };
           format = "{icon}";
           on-click = "activate";
