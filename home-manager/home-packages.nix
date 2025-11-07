@@ -15,12 +15,12 @@
     telegram-desktop
     vesktop
     qalculate-gtk
-    vscode
     vlc
     microsoft-edge
 		warp
 
     # CLI utils
+    todo
     gamescope
     ranger
     libqalculate
@@ -58,6 +58,7 @@
     # Coding stuff
     nodejs
     python311
+    vscode-fhs
 
     # WM stuff
     libnotify
@@ -66,7 +67,6 @@
     aquamarine
     hyprlang
     hyprutils
-
 
     # Other
     bemoji

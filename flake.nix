@@ -4,7 +4,7 @@
   inputs = {
     # Nix
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
@@ -16,7 +16,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 		
 		# Stylix
-		stylix.url = "github:danth/stylix";
+		stylix.url = "github:nix-community/stylix";
 
     # Games
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
@@ -59,11 +59,22 @@
 					};
         	# Main config file
         	modules = [
-						./nixos/configuration.nix
-						inputs.stylix.nixosModules.stylix
           	inputs.nvf.nixosModules.default
+          	inputs.stylix.nixosModules.default
+						./nixos/configuration.nix
 					];
       	};
     	};
-  	};
+    	homeConfigurations.rakki = home-manager.lib.homeManagerConfiguration {
+    	  specialArgs = {
+    	    inherit inputs;
+    	    inherit outputs;
+    	  };
+    	  pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    	  modules = [
+  				inputs.stylix.homeModules.stylix
+  				./home-manager/home.nix
+    	  ];
+    	};
+    };
 }

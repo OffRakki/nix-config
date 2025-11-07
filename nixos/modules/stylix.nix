@@ -2,8 +2,8 @@
   
 	stylix = lib.mkForce {
 		enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-		autoEnable = true;
+		autoEnable = false;
+		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 		cursor = {
 			package = pkgs.bibata-cursors;
 			name = "Bibata-Modern-Classic";
@@ -15,6 +15,9 @@
 				name = "JetBrainsMono Nerd Font Mono";
 			};
 		};
-		polarity = "dark"; # "dark", "light" or "either"
+		targets = {
+			chromium.enable = true;
+			plymouth.enable = true;
+		};
 	};
 }

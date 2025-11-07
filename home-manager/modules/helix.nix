@@ -1,20 +1,25 @@
 { pkgs, config, lib, ... }: {
 
-  programs.helix = lib.mkDefault {
+  programs.helix = lib.mkForce {
     enable = true;
     defaultEditor= false;
     settings = {
-      theme = "base16";
+      theme = "gruvbox";
       editor = {
-        soft-warp.enable = true;
+        cursorline = true;
+        soft-wrap.enable = true;
         color-modes = true;
         line-number = "relative";
         bufferline = "multiple";
         indent-guides.render = true;
-        lsp.display-messages = true;
+        lsp = {
+          enable = true;
+          display-messages = true;
+          display-inlay-hints = true;
+        };
         cursor-shape = {
           normal = "block";
-          inset = "bar";
+          insert = "bar";
           select = "underline";
         };
       };
@@ -24,6 +29,7 @@
         {
           name = "nix";
           language-servers = ["nixd" "nil"];
+          auto-format = true;
           formatter.command = "alejandra";
         }
       ];

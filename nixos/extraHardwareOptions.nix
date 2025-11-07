@@ -10,7 +10,7 @@
 	boot.supportedFilesystems = [ "ntfs" ];
 
   # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
-  networking.nameservers = ["192.168.15.12" "1.1.1.1"];
+  networking.nameservers = ["192.168.15.12" "8.8.8.8"];
 
   hardware.graphics = {
     enable = true;

@@ -43,11 +43,17 @@ in
     };
   };
 
-  stylix.targets   = {
-    waybar.enable  = false;
-    nixcord.enable = true;
-    vencord.enable = true;
-    vesktop.enable = true;
+  stylix.targets    = {
+    nixcord.enable  = true;
+    vencord.enable  = true;
+    vesktop.enable  = true;
+    swaync.enable   = true;
+    mangohud.enable = true;
+  };
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.google-chrome;
   };
 
   home = {

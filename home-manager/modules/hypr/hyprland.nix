@@ -10,7 +10,7 @@
     };
     settings = {
       "$mainMod"    = "SUPER";
-      "$terminal"   = "${pkgs.kitty}/bin/kitty";
+      "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
       "$files"      = "${pkgs.kdePackages.dolphin}/bin/dolphin";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "$slurp" 			= "${pkgs.slurp}/bin/slurp";
@@ -46,8 +46,8 @@
       };
 
       input = {
-        kb_layout = "us,pt";
-        kb_variant = "alt-intl"; 
+        kb_layout = "us";
+        kb_variant = "alt-intl,"; 
         kb_model = "";
         kb_options = "grp:alt_space_toggle";
         kb_rules = "";
@@ -57,7 +57,7 @@
         sensitivity = -0.8;
         numlock_by_default = true;
         left_handed = false;
-        follow_mouse = true;
+        follow_mouse = false;
         float_switch_override_focus = false;
         tablet = {
           transform = 0;
@@ -124,10 +124,10 @@
       };
 
       group = {
-        "col.border_active" = "rgb(${config.lib.stylix.colors.base15})";
+        "col.border_active" = "rgba(d4be9888)"; #"rgb(${config.lib.stylix.colors.base15})";
 
         groupbar = {
-          "col.active" = "rgb(${config.lib.stylix.colors.base00})";
+          "col.active" = "rgba(d4be9888)"; #"rgb(${config.lib.stylix.colors.base00})";
         };
       };
 
@@ -148,14 +148,14 @@
         ];
 
         animation = [ 
-          "windowsIn, 1, 8, slow, popin"
-          "windowsOut, 1, 8, winOut, popin"
-          "windowsMove, 1, 8, wind, slide"
-          "border, 1, 8, linear"
+          "windowsIn, 1, 6, slow, popin"
+          "windowsOut, 1, 6, winOut, popin"
+          "windowsMove, 1, 6, wind, slide"
+          "border, 1, 6, linear"
           "borderangle, 1, 180, linear, loop" #used by rainbow borders and rotating colors
-          "fade, 1, 8, overshot"
-          "workspaces, 1, 8, wind"
-          "windows, 1, 8, bounce, popin"
+          "fade, 1, 6, overshot"
+          "workspaces, 1, 6, wind"
+          "windows, 1, 6, bounce, popin"
         ];
       };
 

@@ -2,6 +2,7 @@
   imports = [
     #./spicetify.nix
     #./nixvim # using NVF 
+    ./alacritty.nix
     ./helix.nix
     ./gmail.nix
     ./wofi.nix
@@ -18,5 +19,6 @@
     ./zsh.nix
     ./kitty.nix
     ./qutebrowser.nix
+    #./todoman.nix
   ];
 }

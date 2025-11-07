@@ -1,12 +1,12 @@
 { pkgs, lib, config, ... }: {
 
-  programs.wofi = {
+  programs.wofi = lib.mkForce {
     enable = true;
     settings = {
       image_size = 20;
       allow_images = true;
       hide_scroll = true;
-      columns = 3;
+      columns = 2;
       insensitive = true;
     };
     style = ''

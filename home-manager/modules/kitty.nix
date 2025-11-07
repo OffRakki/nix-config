@@ -9,11 +9,11 @@
 			confirm_os_window_close = 0;
 			dynamic_background_opacity = true;
 			enable_audio_bell = false;
-			mouse_hide_wait = "-1.0";
+			mouse_hide_wait = "3";
 			window_padding_width = 4;
 			background_opacity = "0.85";
 			background_blur = 5;
-			font_size = "10";
+			font_size = "12";
 			symbol_map = let
 				mappings = [
 					"U+23FB-U+23FE"
