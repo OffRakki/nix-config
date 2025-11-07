@@ -349,7 +349,7 @@
 
       /* LAUNCHER */
       #custom-launcher {
-        background-image: url('/home/rakki/Documents/nix-config/hosts/rakki/svgs/nix-snowflake-white.svg');
+        background-image: url('${../../hosts/rakki/svgs/nix-snowflake-white.svg}');
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;

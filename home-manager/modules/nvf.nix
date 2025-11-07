@@ -39,6 +39,7 @@
           indent-blankline.enable = false;
         };
         ui = {
+          fastaction.enable = true;
           noice.enable = true;
           colorizer.enable = true;
           illuminate.enable = true;

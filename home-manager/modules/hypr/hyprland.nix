@@ -9,7 +9,7 @@
       variables = ["--all"];
     };
     settings = {
-      "$mainMod"    = "SUPER";
+      "$mod"    = "SUPER";
       "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
       "$files"      = "${pkgs.kdePackages.dolphin}/bin/dolphin";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
@@ -46,7 +46,7 @@
       };
 
       input = {
-        kb_layout = "us";
+        kb_layout = "us,us";
         kb_variant = "alt-intl,"; 
         kb_model = "";
         kb_options = "grp:alt_space_toggle";
@@ -216,7 +216,7 @@
         "uwsm app -- syncthing --no-gui" 
         "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- waybar"
-        # "sleep 2 && uwsm app -- hyprpaper"
+        "uwsm app -- hyprpaper"
         "uwsm app -- swww-daemon --format xrgb"
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -226,16 +226,16 @@
         "uwsm app -- blueman-applet"
         "uwsm app -- hypridle"
         "uwsm app -- pypr"
-        "swww img /home/rakki/Documents/nix-config/hosts/rakki/wallpapers/aesthetic.png"
+        #"swww img ${../../../hosts/rakki/wallpapers/aesthetic.png}"
         #"$scriptsDir/Polkit-NixOS.sh"
         "sleep 3 && uwsm app -- hyprlock"
       ];
 
       binde = [
-        "$mainMod CTRL, left, resizeactive,-50 0"
-        "$mainMod CTRL, right, resizeactive,50 0"
-        "$mainMod CTRL, up, resizeactive,0 -50"
-        "$mainMod CTRL, down, resizeactive,0 50"
+        "$mod CTRL, left, resizeactive,-50 0"
+        "$mod CTRL, right, resizeactive,50 0"
+        "$mod CTRL, up, resizeactive,0 -50"
+        "$mod CTRL, down, resizeactive,0 50"
       ];
 
       bindr = [ 
@@ -245,8 +245,8 @@
       ];
 
       bindm = [
-        "$mainMod, mouse:272, movewindow # NOTE: mouse:272 = left click"
-        "$mainMod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
+        "$mod, mouse:272, movewindow # NOTE: mouse:272 = left click"
+        "$mod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
       ];
 
       bindl = [
@@ -260,84 +260,84 @@
         "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%+"
         "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
-        "$mainMod, M, exec, loginctl terminate-user '' "
-        "$mainMod, L, exec, uwsm app -- hyprlock"
-        "$mainMod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
-        "$mainMod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
-        "$mainMod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
+        "$mod, M, exec, loginctl terminate-user '' "
+        "$mod, L, exec, uwsm app -- hyprlock"
+        "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
+        "$mod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
+        "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e nvim"
-        "$mainMod, SPACE, togglefloating"
-        "$mainMod, F, fullscreen, 1 # fake full screen"
-        "$mainMod SHIFT, F, fullscreen"
-        "$mainMod SHIFT, Q, killactive"
-        "$mainMod, A, exec, pkill wofi || true && ags -t 'overview'"
-        "$mainMod, Return, exec, uwsm app -- $terminal"  #terminal
-        "$mainMod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
-        "$mainMod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
-        "$mainMod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-        "$mainMod, E, exec, uwsm app -- $files"
+        "$mod, SPACE, togglefloating"
+        "$mod, F, fullscreen, 1 # fake full screen"
+        "$mod SHIFT, F, fullscreen"
+        "$mod SHIFT, Q, killactive"
+        "$mod, A, exec, pkill wofi || true && ags -t 'overview'"
+        "$mod, Return, exec, uwsm app -- $terminal"  #terminal
+        "$mod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
+        "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
+        "$mod, Z, exec, pypr zoom # Toggle Desktop Zoom"
+        "$mod, E, exec, uwsm app -- $files"
 
-        # Switch workspaces with mainMod + [0-9] 
-        "$mainMod, 1, workspace, 1 # NOTE: code:10 = key 1"
-        "$mainMod, 2, workspace, 2 # NOTE: code:11 = key 2"
-        "$mainMod, 3, workspace, 3 # NOTE: code:12 = key 3"
-        "$mainMod, 4, workspace, 4 # NOTE: code:13 = key 4"
-        "$mainMod, 5, workspace, 5 # NOTE: code:14 = key 5"
-        "$mainMod, 6, workspace, 6 # NOTE: code:15 = key 6"
-        "$mainMod, 7, workspace, 7 # NOTE: code:16 = key 7"
-        "$mainMod, 8, workspace, 8 # NOTE: code:17 = key 8"
-        "$mainMod, 9, workspace, 9 # NOTE: code:18 = key 9"
-        "$mainMod, 0, workspace, 10 # NOTE: code:19 = key 0"
+        # Switch workspaces with mod + [0-9] 
+        "$mod, 1, workspace, 1 # NOTE: code:10 = key 1"
+        "$mod, 2, workspace, 2 # NOTE: code:11 = key 2"
+        "$mod, 3, workspace, 3 # NOTE: code:12 = key 3"
+        "$mod, 4, workspace, 4 # NOTE: code:13 = key 4"
+        "$mod, 5, workspace, 5 # NOTE: code:14 = key 5"
+        "$mod, 6, workspace, 6 # NOTE: code:15 = key 6"
+        "$mod, 7, workspace, 7 # NOTE: code:16 = key 7"
+        "$mod, 8, workspace, 8 # NOTE: code:17 = key 8"
+        "$mod, 9, workspace, 9 # NOTE: code:18 = key 9"
+        "$mod, 0, workspace, 10 # NOTE: code:19 = key 0"
 
-        # Move active window and follow to workspace mainMod + SHIFT [0-9]
-        "$mainMod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"
-        "$mainMod SHIFT, code:11, movetoworkspace, 2 # NOTE: code:11 = key 2"
-        "$mainMod SHIFT, code:12, movetoworkspace, 3 # NOTE: code:12 = key 3"
-        "$mainMod SHIFT, code:13, movetoworkspace, 4 # NOTE: code:13 = key 4"
-        "$mainMod SHIFT, code:14, movetoworkspace, 5 # NOTE: code:14 = key 5"
-        "$mainMod SHIFT, code:15, movetoworkspace, 6 # NOTE: code:15 = key 6"
-        "$mainMod SHIFT, code:16, movetoworkspace, 7 # NOTE: code:16 = key 7"
-        "$mainMod SHIFT, code:17, movetoworkspace, 8 # NOTE: code:17 = key 8"
-        "$mainMod SHIFT, code:18, movetoworkspace, 9 # NOTE: code:18 = key 9"
-        "$mainMod SHIFT, code:19, movetoworkspace, 10 # NOTE: code:19 = key 0"
-        "$mainMod SHIFT, bracketleft, movetoworkspace, -1 # brackets ["
-        "$mainMod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
+        # Move active window and follow to workspace mod + SHIFT [0-9]
+        "$mod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"
+        "$mod SHIFT, code:11, movetoworkspace, 2 # NOTE: code:11 = key 2"
+        "$mod SHIFT, code:12, movetoworkspace, 3 # NOTE: code:12 = key 3"
+        "$mod SHIFT, code:13, movetoworkspace, 4 # NOTE: code:13 = key 4"
+        "$mod SHIFT, code:14, movetoworkspace, 5 # NOTE: code:14 = key 5"
+        "$mod SHIFT, code:15, movetoworkspace, 6 # NOTE: code:15 = key 6"
+        "$mod SHIFT, code:16, movetoworkspace, 7 # NOTE: code:16 = key 7"
+        "$mod SHIFT, code:17, movetoworkspace, 8 # NOTE: code:17 = key 8"
+        "$mod SHIFT, code:18, movetoworkspace, 9 # NOTE: code:18 = key 9"
+        "$mod SHIFT, code:19, movetoworkspace, 10 # NOTE: code:19 = key 0"
+        "$mod SHIFT, bracketleft, movetoworkspace, -1 # brackets ["
+        "$mod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
 
 
-        # Move active window and do not follow to workspace mainMod + CTRL [0-9]
-        "$mainMod CTRL, code:10, movetoworkspacesilent, 1 # NOTE: code:10 = key 1"
-        "$mainMod CTRL, code:11, movetoworkspacesilent, 2 # NOTE: code:11 = key 2"
-        "$mainMod CTRL, code:12, movetoworkspacesilent, 3 # NOTE: code:12 = key 3"
-        "$mainMod CTRL, code:13, movetoworkspacesilent, 4 # NOTE: code:13 = key 4"
-        "$mainMod CTRL, code:14, movetoworkspacesilent, 5 # NOTE: code:14 = key 5"
-        "$mainMod CTRL, code:15, movetoworkspacesilent, 6 # NOTE: code:15 = key 6"
-        "$mainMod CTRL, code:16, movetoworkspacesilent, 7 # NOTE: code:16 = key 7"
-        "$mainMod CTRL, code:17, movetoworkspacesilent, 8 # NOTE: code:17 = key 8"
-        "$mainMod CTRL, code:18, movetoworkspacesilent, 9 # NOTE: code:18 = key 9"
-        "$mainMod CTRL, code:19, movetoworkspacesilent, 10 # NOTE: code:19 = key 0"
+        # Move active window and do not follow to workspace mod + CTRL [0-9]
+        "$mod CTRL, code:10, movetoworkspacesilent, 1 # NOTE: code:10 = key 1"
+        "$mod CTRL, code:11, movetoworkspacesilent, 2 # NOTE: code:11 = key 2"
+        "$mod CTRL, code:12, movetoworkspacesilent, 3 # NOTE: code:12 = key 3"
+        "$mod CTRL, code:13, movetoworkspacesilent, 4 # NOTE: code:13 = key 4"
+        "$mod CTRL, code:14, movetoworkspacesilent, 5 # NOTE: code:14 = key 5"
+        "$mod CTRL, code:15, movetoworkspacesilent, 6 # NOTE: code:15 = key 6"
+        "$mod CTRL, code:16, movetoworkspacesilent, 7 # NOTE: code:16 = key 7"
+        "$mod CTRL, code:17, movetoworkspacesilent, 8 # NOTE: code:17 = key 8"
+        "$mod CTRL, code:18, movetoworkspacesilent, 9 # NOTE: code:18 = key 9"
+        "$mod CTRL, code:19, movetoworkspacesilent, 10 # NOTE: code:19 = key 0"
 
-        # Move focus with mainMod + arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        # Move focus with mod + arrow keys
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
 
         # Move windows
-        "$mainMod SHIFT, left, movewindow, l"
-        "$mainMod SHIFT, right, movewindow, r"
-        "$mainMod SHIFT, up, movewindow, u"
-        "$mainMod SHIFT, down, movewindow, d"
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
 
         # Dwindle Layout
-        "$mainMod SHIFT, I, togglesplit # only works on dwindle layout"
-        "$mainMod, P, pseudo, # dwindle"
+        "$mod SHIFT, I, togglesplit # only works on dwindle layout"
+        "$mod, P, pseudo, # dwindle"
       ];
 
       # For passthrough keyboard into a VM
-      # bind = $mainModALT, P, submap, passthru
+      # bind = $modALT, P, submap, passthru
       #submap = passthru
       # to unbind
-      #bind = $mainModALT, P, submap, reset
+      #bind = $modALT, P, submap, reset
       #submap = reset
     };
   };

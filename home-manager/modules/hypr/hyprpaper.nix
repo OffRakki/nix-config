@@ -4,8 +4,8 @@
     settings = {
       ipc = true;
       splash = true;
-      preload = "/home/rakki/Documents/nix-config/hosts/rakki/wallpapers/aesthetic.png";
-      wallpaper = ", /home/rakki/Documents/nix-config/hosts/rakki/wallpapers/aesthetic.png";
+      preload = "${../../../hosts/rakki/wallpapers/aesthetic.png}";
+      wallpaper = ", ${../../../hosts/rakki/wallpapers/aesthetic.png}";
     };
   };
 }
