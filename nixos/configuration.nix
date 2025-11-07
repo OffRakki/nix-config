@@ -6,7 +6,7 @@
 		./modules
 		./hardware-configuration.nix
   ];
-	
+
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     backupFileExtension = "backup";
@@ -15,7 +15,7 @@
       rakki = import ../home-manager/home.nix;
     };
   };
-  
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -35,7 +35,7 @@
       allowUnfree = true;
     };
   };
-  
+
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
@@ -178,7 +178,7 @@
 		tmux
     evil-helix
     sublime
-    neovim	
+    neovim
     wget
     bat
     curl

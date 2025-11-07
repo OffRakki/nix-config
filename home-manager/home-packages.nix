@@ -5,6 +5,7 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
+    evince
     anki
     imv
     mpv
@@ -16,10 +17,13 @@
     vesktop
     qalculate-gtk
     vlc
-    microsoft-edge
 		warp
 
+		# Langs
+		nil
+
     # CLI utils
+    yazi
     todo
     gamescope
     ranger

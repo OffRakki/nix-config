@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   programs.waybar = lib.mkForce {
@@ -8,55 +13,71 @@
         position = "top";
         layer = "top";
 
-        height = 40;
-        margin-top = 0;
-        margin-bottom = -2;
-        margin-left = 16;
-        margin-right = 16;
+        height = 10;
+        margin-top = -4;
+        margin-bottom = -8;
+        margin-left = 4;
+        margin-right = 4;
 
-        modules-left = ["hyprland/workspaces" "group/hardwaremod"];
-        modules-center = ["group/windowmod"];
-        modules-right = ["group/mediamod" "group/clockmod" "group/right-icons" "tray"];
+        modules-left = [
+          "hyprland/workspaces"
+          "group/hardwaremod"
+          "group/windowmod"
+        ];
+        modules-center = [];
+        modules-right = [
+          "group/mediamod"
+          "group/clockmod"
+          "group/right-icons"
+          "tray"
+        ];
 
         "group/right-icons" = {
           orientation = "horizontal";
-          modules = ["group/audiomod" "network" "custom/swaync"];
+          modules = [
+            "group/audiomod"
+            "network"
+            "custom/swaync"
+          ];
         };
 
         "cpu" = {
           interval = 5;
           format = "󰻠 {usage}%";
           tooltip = true;
-          min-length  = 6;
+          min-length = 6;
           tooltip-format = "{󰻠 {avg_frequency} GHz} | {load}";
         };
 
         "memory" = {
           interval = 5;
-          format = "󰍛 {}%";
+          format = "󰍛 {used}";
           tooltip = true;
-          tooltip-format = "󰍛 {used}/{total} GiB";
-          min-length  = 6;
+          tooltip-format = "󰍛 {}";
+          min-length = 6;
         };
 
         "group/hardwaremod" = {
           orientation = "horizontal";
-          modules = ["cpu" "memory"];
+          modules = [
+            "cpu"
+            "memory"
+          ];
         };
 
         "custom/launcher" = {
-          format = "<span font='18'>❄️</span.>";
+          format = "<span font='12'>❄️</span.>";
           on-click = "uwsm app -- wofi --show drun -G";
           on-click-right = "uwsm app -- wofi --show run -G";
         };
 
         "hyprland/workspaces" = {
-          margin-left           = 0;
-          active-only           = false;
-          all-outputs           = true;
-          disable-scroll        = false;
-          on-scroll-up          = "hyprctl dispatch workspace -1";
-          on-scroll-down        = "hyprctl dispatch workspace +1";
+          margin-left = 0;
+          active-only = false;
+          all-outputs = true;
+          disable-scroll = false;
+          on-scroll-up = "hyprctl dispatch workspace -1";
+          on-scroll-down = "hyprctl dispatch workspace +1";
           persistent-workspaces = {
             "*" = 4;
           };
@@ -72,17 +93,23 @@
 
         "network" = {
           format = "{ifname}";
-          format-wifi = "<span font='14'>{icon}</span>";
+          format-wifi = "<span font='12'>{icon}</span>";
           format-ethernet = "󰈀";
-          format-disconnected = "<span font='14'>󰣼</span>";
+          format-disconnected = "<span font='12'>󰣼</span>";
           icon-size = 4;
           tooltip-format = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
-          format-linked = "<span font='14'>󰈀<</span>";
+          format-linked = "<span font='12'>󰈀<</span>";
           tooltip-format-wifi = "{essid} {icon} {signalStrength}%";
           tooltip-format-ethernet = " {bandwidthUpBytes}  {bandwidthDownBytes}";
           tooltip-format-disconnected = "󰣼 Disconnected";
           max-length = 30;
-          format-icons = ["󰣾" "󰣴" "󰣶" "󰣸" "󰣺"];
+          format-icons = [
+            "󰣾"
+            "󰣴"
+            "󰣶"
+            "󰣸"
+            "󰣺"
+          ];
           on-click = "hyprctl dispatch exec '[float; size 512 512; center] kitty nmtui'";
         };
         "network#speed" = {
@@ -102,7 +129,7 @@
         };
         "group/networkmod" = {
           orientation = "horizontal";
-          modules = ["network"];
+          modules = [ "network" ];
         };
 
         "hyprland/window#icon" = {
@@ -119,9 +146,12 @@
           offscreen-css = true;
           offscreen-css-text = "(inactive)";
         };
-        "group/windowmod" =  {
+        "group/windowmod" = {
           orientation = "horizontal";
-          modules = ["hyprland/window#icon" "hyprland/window#title"];
+          modules = [
+            "hyprland/window#icon"
+            "hyprland/window#title"
+          ];
         };
 
         "tray" = {
@@ -131,8 +161,8 @@
 
         "mpris#icon" = {
           interval = 0.5;
-          format = "<span font='14'>{player_icon}</span>";
-          format-paused = "<span font='14'>{status_icon}</span>";
+          format = "<span font='12'>{player_icon}</span>";
+          format-paused = "<span font='12'>{status_icon}</span>";
           format-stopped = "";
           on-click-middle = "playerctl play-pause";
           on-click = "playerctl previous";
@@ -172,14 +202,21 @@
         };
         "group/mediamod" = {
           orientation = "horizontal";
-          modules = ["mpris#icon" "mpris#title"];
+          modules = [
+            "mpris#icon"
+            "mpris#title"
+          ];
         };
 
         "pulseaudio#icon" = {
           format = "<span font='12'>{icon}</span>";
           format-muted = " ";
           format-icons = {
-            default = [" " " " " "];
+            default = [
+              " "
+              " "
+              " "
+            ];
           };
           tooltip = true;
           tooltip-format = " {volume}% \n 󰍬 {format_source}";
@@ -200,27 +237,27 @@
         };
         "group/audiomod" = {
           orientation = "horizontal";
-          modules = ["pulseaudio#icon"];
+          modules = [ "pulseaudio#icon" ];
           max-lenght = 30;
         };
 
         "clock#icon" = {
-          format = "<span font='14'>󰸗</span>";
+          format = "<span font='12'>󰸗</span>";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
-            mode           = "year";
-            mode-mon-col   = 3;
-            weeks-pos      = "right";
-            on-scroll      = 1;
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
             format = {
-              months =     "<span color='#ffead3'><b>{}</b></span>";
-              days =       "<span color='#ecc6d9'><b>{}</b></span>";
-              weeks =      "<span color='#99ffdd'><b>W{}</b></span>";
-              weekdays =   "<span color='#ffcc66'><b>{}</b></span>";
-              today =      "<span color='#ff6699'><b><u>{}</u></b></span>";
+              months = "<span color='#ffead3'><b>{}</b></span>";
+              days = "<span color='#ecc6d9'><b>{}</b></span>";
+              weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+              weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+              today = "<span color='#ff6699'><b><u>{}</u></b></span>";
             };
           };
-          actions =    {
+          actions = {
             on-click-right = "mode";
             on-scroll-up = "shift_up";
             on-scroll-down = "shift_down";
@@ -230,19 +267,19 @@
           format = "{:%a %b %d %R}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
-            mode           = "year";
-            mode-mon-col   = 3;
-            weeks-pos      = "right";
-            on-scroll      = 1;
-            format =  {
-              months =     "<span color='#ffead3'><b>{}</b></span>";
-              days =       "<span color='#ecc6d9'><b>{}</b></span>";
-              weeks =      "<span color='#99ffdd'><b>W{}</b></span>";
-              weekdays =   "<span color='#ffcc66'><b>{}</b></span>";
-              today =      "<span color='#ff6699'><b><u>{}</u></b></span>";
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<span color='#ffead3'><b>{}</b></span>";
+              days = "<span color='#ecc6d9'><b>{}</b></span>";
+              weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+              weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+              today = "<span color='#ff6699'><b><u>{}</u></b></span>";
             };
           };
-          "actions" =  {
+          "actions" = {
             on-click-right = "mode";
             on-scroll-up = "shift_up";
             on-scroll-down = "shift_down";
@@ -250,7 +287,10 @@
         };
         "group/clockmod" = {
           orientation = "horizontal";
-          modules = ["clock#icon" "clock#date"];
+          modules = [
+            "clock#icon"
+            "clock#date"
+          ];
         };
 
         "custom/swaync" = {
@@ -287,7 +327,13 @@
           format-alt = "{icon} {time}";
           # format-good = ""; # An empty format will hide the module
           # format-full = "";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
 
         "custom/hyprpicker" = {
@@ -307,7 +353,7 @@
         border: none;
         border-radius: 0.5em;
         font-family: JetBrainsMono Nerd Font;
-        font-size: 14px;
+        font-size: 12px;
         font-style: normal;
         font-weight: bold;
         min-height: 0;
@@ -316,7 +362,7 @@
       /* WORKSPACES */
       #workspaces {
         background: @bg_color;
-        margin: 8px 8px 8px 0px;
+        margin: 8px 0px 8px 0px;
         padding: 0px 0px 0px 0px;
         border-radius: 8px;
         border: solid 0px #f4d9e1;
@@ -358,12 +404,12 @@
         padding: 0px 18px 0px 18px;
         margin: 8px;
       }
-    
+
 
       /* NETWORK */
       #networkmod {
         background-color: @bg_color;
-        padding: 0px 4px 0px 4px;
+        padding: 4px 4px 4px 4px;
       }
 
       #network {
@@ -375,7 +421,6 @@
       #network.speed {
         color: @text_color;
         background-color: #1E1E2E;
-        font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
       }
@@ -386,89 +431,86 @@
       #windowmod {
         background-color: @bg_color;
         padding: 4px 4px 4px 4px;
-         margin: 4px 4px 4px 4px;
+        margin: 8px 0px 8px;
       }
-      
+
       window#waybar.empty #windowmod,
       window#waybar.empty #window.title {
         background-color: transparent; /* make window module transparent when no windows present */
       }
-      
+
       #window.icon {
         color: @bg_color;
         padding: 0px 6px 0px 2px;
         margin-right: 0px;
       }
-      
+
       #window.title {
         color: @text_color;
         background-color: @bg2_color;
-        font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;
       }
 
       #right-icons {
-         margin: 4px 4px 4px 4px;
+        margin: 8px 0px 8px;
         background-color: @bg_color;
         padding: 0px 4px 0px 4px;
       }
-      
+
       /* TRAY */
       #tray {
-        margin: 4px 4px 4px 4px;
+        margin: 8px 4px 8px 4px;
         background-color: @bg_color;
         padding: 0px 4px 0px 4px;
       }
       #tray.empty {
         background-color: transparent;
       }
-      
+
       /* MEDIA PLAYER */
       #mediamod {
         background-color: @bg_color;
         border-radius: 8px;
         padding: 4px 4px 4px 4px;
-        margin: 4px 4px 4px 4px;
+        margin: 8px 4px 8px 4px;
       }
-      
+
       #mpris.title.stopped~#mediamod {
         background-color: transparent;
       }
-      
+
       #mpris.icon {
         background-color: @bg_color;
         color: @text_color;
-        padding: 0px 12px 0px 8px;
+        padding: 0px 8px 0px 4px;
       }
-      
+
       #mpris.title {
         color: @text_color;
         background-color: @bg2_color;
-        font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
       }
-      
+
       /* AUDIO */
       #audiomod {
         background-color: @bg_color;
         border-radius: 8px;
       }
-      
+
       #pulseaudio.icon {
         background-color: @bg_color;
         color: @text_color;
         padding: 4px 4px 4px 4px;
       }
-      
+
       #pulseaudio.volume {
         color: @text_color;
         background-color: #1E1E2E;
-        font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;
@@ -479,51 +521,50 @@
       #hardwaremod {
         background-color: @bg_color;
         padding: 1px 1px 1px 0px;
-        margin: 4px 4px 4px 4px
+        margin: 8px 4px 8px 4px;
       }
 
       #cpu {
         background-color: @bg2_color;
-        padding: 4px 4px 4px 4px;
-        margin: 4px 4px 4px 4px;
+        padding: 2px 2px 2px 2px;
+        margin: 4px;
       }
 
       #memory {
         background-color: @bg2_color;
-        padding: 4px 4px 4px 4px;
-        margin: 4px 4px 4px 4px;
+        padding: 2px 2px 2px 2px;
+        margin: 4px;
       }
 
       /* CLOCK */
       #clockmod {
         background-color: @bg_color;
         padding: 4px 4px 4px 4px;
-        margin: 4px 4px 4px 4px;
+        margin: 8px 4px 8px 4px;
       }
-      
+
       #clock.icon {
         background-color: @bg_color;
         color: @text_color;
-        padding: 0px 10px 0px 10px;
+        padding: 0px 8px 0px 4px;
       }
-      
+
       #clock.date {
         color: @text_color;
         background-color: #3c3836;
-        font-size: 14px;
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
       }
-      
+
       /* NOTIFICATIONS */
       #custom-swaync {
         color: @text_color;
         background-color: @bg_color;
         padding: 0px 4px 0px 4px;
       }
-      
+
       #custom-power {
         color: #24283b;
         background-color: #db4b4b;
@@ -534,7 +575,7 @@
         margin-left: 0px;
         padding: 5px 10px;
       }
-      
+
       #battery {
         color: #9ece6a;
       }
@@ -549,5 +590,5 @@
         border-radius: 5px 5px 5px 5px;
       }
     '';
-  }; 
+  };
 }

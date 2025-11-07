@@ -55,6 +55,13 @@ in {
     username = "rakki";
     homeDirectory = "/home/rakki";
   };
+
+  xdg.mimeApps = {
+    defaultApplications = {
+      "application/pdf" = "evince.desktop";
+    };
+  };
+
   gtk = {
     enable = true;
   };

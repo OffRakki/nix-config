@@ -10,9 +10,9 @@
         };
       };
       window = {
-        opacity = 0.85;
+        opacity = 0.95;
         blur = true;
-      };      
+      };
     };
   };
 }

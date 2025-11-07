@@ -11,7 +11,7 @@
     settings = {
       "$mod"    = "SUPER";
       "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
-      "$files"      = "${pkgs.kdePackages.dolphin}/bin/dolphin";
+      "$files"      = "${pkgs.yazi}/bin/yazi";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "$slurp" 			= "${pkgs.slurp}/bin/slurp";
       "$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
@@ -28,15 +28,16 @@
       };
 
       master = {
-        new_status = "master";	
-        new_on_top = 1;
+        new_status = "slave";	
+        new_on_top = true;
+        orientation = "right";
         mfact = 0.5;
       };
 
       general = {
         resize_on_border = true;
         allow_tearing = false;
-        layout = "dwindle";
+        layout = "master";
         border_size = 2;
         gaps_in = 4;
         gaps_out = 4;
@@ -94,7 +95,7 @@
         rounding = 4;
 
         active_opacity = 2.0;
-        inactive_opacity = 0.7;
+        inactive_opacity = 0.95;
         fullscreen_opacity = 1.0;
 
         dim_inactive = true;
@@ -172,13 +173,15 @@
         "size 25% 50%, initialClass:Bitwarden"
         "float, initialClass:org.pulseaudio.pavucontrol"
         "size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
+        "float, initialTitle:Open Folder"
+        "size 25% 50%, initialTitle:Open Folder"
       ];
       
       windowrulev2 = ["idleinhibit fullscreen, class:.*"];
 
       env = [ 
         "NIXOS_OZONE_WL,1"
-        "EDITOR,neovim #default editor"
+        "EDITOR,nvim #default editor"
         "CLUTTER_BACKEND,wayland"
         "GDK_BACKEND,wayland,x11"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
@@ -275,7 +278,7 @@
         "$mod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod, Z, exec, pypr zoom # Toggle Desktop Zoom"
-        "$mod, E, exec, uwsm app -- $files"
+        "$mod, E, exec, uwsm app -- $terminal -e $files"
 
         # Switch workspaces with mod + [0-9] 
         "$mod, 1, workspace, 1 # NOTE: code:10 = key 1"
