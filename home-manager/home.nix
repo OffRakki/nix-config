@@ -6,14 +6,12 @@
   config,
   pkgs,
   ...
-}:
-let
-  nix-colors = import <nix-colors> { };
-in
-{
+}: let
+  nix-colors = import <nix-colors> {};
+in {
   imports = [
     inputs.nix-colors.homeManagerModule
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     inputs.nvf.homeManagerModules.default
     ./modules
     ./home-packages.nix
@@ -43,18 +41,15 @@ in
     };
   };
 
-  stylix.targets    = {
-    nixcord.enable  = true;
-    vencord.enable  = true;
-    vesktop.enable  = true;
-    swaync.enable   = true;
-    mangohud.enable = true;
-  };
-
-  programs.chromium = {
-    enable = true;
-    package = pkgs.google-chrome;
-  };
+  # stylix.targets    = {
+  #   nixcord.enable  = true;
+  #   vencord.enable  = true;
+  #   vesktop.enable  = true;
+  #   swaync.enable   = true;
+  #   mangohud.enable = true;
+  #   gtk.enable      = true;
+  #   kde.enable      = true;
+  # };
 
   home = {
     username = "rakki";
@@ -63,9 +58,6 @@ in
   gtk = {
     enable = true;
   };
-
-  # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ ];
 
   # Enable home-manager
   programs.home-manager.enable = true;

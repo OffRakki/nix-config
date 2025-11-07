@@ -1,11 +1,11 @@
 {config, ...}: {
-  prorams.hyprpanel = {
-    enable = true;
+  programs.hyprpanel = {
+    enable = false;
     settings = {
       layout = {
         bar.layouts = {
           "0" = {
-            left = [ "dashboard" "workspaces" ];
+            left = [ "dashboard" "workspaces" "ram" "cpu" ];
             middle = [ "media" ];
             right = [ "volume" "systray" "notifications" ];
           };
@@ -29,8 +29,8 @@
       theme.bar.transparent = true;
 
       theme.font = {
-        name = "CaskaydiaCove NF";
-        size = "16px";
+        name = "JetBrainsMono Nerd Font Mono";
+        size = "14px";
       };
     };
   };

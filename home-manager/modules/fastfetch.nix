@@ -5,14 +5,14 @@
     enable = true;
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-      logo = {
-        source = "~/Documents/nix-config/hosts/rakki/svgs/hypr.png";
-        type = "auto";
-        height = 1;
-        padding = {
-          top = 1;
-        };
-      };
+      # logo = {
+      #   source = "~/Documents/nix-config/hosts/rakki/svgs/hypr.png";
+      #   type = "auto";
+      #   height = 1;
+      #   padding = {
+      #     top = 1;
+      #   };
+      # };
       display = {
         separator = " ➜  ";
       };

@@ -1,5 +1,5 @@
-{config, ...}: {
-  services.hyprpaper = {
+{config, lib, ...}: {
+  services.hyprpaper = lib.mkForce {
     enable = true;
     settings = {
       ipc = true;

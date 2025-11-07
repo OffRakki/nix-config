@@ -412,14 +412,14 @@
       #right-icons {
          margin: 4px 4px 4px 4px;
         background-color: @bg_color;
-        padding: 0px 0px;
+        padding: 0px 4px 0px 4px;
       }
       
       /* TRAY */
       #tray {
-         margin: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
         background-color: @bg_color;
-        padding: 0px 4px;
+        padding: 0px 4px 0px 4px;
       }
       #tray.empty {
         background-color: transparent;
@@ -430,7 +430,7 @@
         background-color: @bg_color;
         border-radius: 8px;
         padding: 4px 4px 4px 4px;
-         margin: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
       }
       
       #mpris.title.stopped~#mediamod {

@@ -37,7 +37,7 @@
         resize_on_border = true;
         allow_tearing = false;
         layout = "dwindle";
-        border_size = 1;
+        border_size = 2;
         gaps_in = 4;
         gaps_out = 4;
 
@@ -57,8 +57,8 @@
         sensitivity = -0.8;
         numlock_by_default = true;
         left_handed = false;
-        follow_mouse = false;
-        float_switch_override_focus = false;
+        follow_mouse = true;
+        float_switch_override_focus = true;
         tablet = {
           transform = 0;
           left_handed = 0;
@@ -216,8 +216,8 @@
         "uwsm app -- syncthing --no-gui" 
         "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- waybar"
-        "uwsm app -- hyprpaper"
-        #"uwsm app -- swww-daemon --format xrgb"
+        # "sleep 2 && uwsm app -- hyprpaper"
+        "uwsm app -- swww-daemon --format xrgb"
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- nm-applet --indicator"
@@ -226,7 +226,7 @@
         "uwsm app -- blueman-applet"
         "uwsm app -- hypridle"
         "uwsm app -- pypr"
-        #"swww img ./../../../hosts/rakki/wallpapers/agbg.jpg"  # persistent wallpaper
+        "swww img /home/rakki/Documents/nix-config/hosts/rakki/wallpapers/aesthetic.png"
         #"$scriptsDir/Polkit-NixOS.sh"
         "sleep 3 && uwsm app -- hyprlock"
       ];
