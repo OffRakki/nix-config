@@ -14,17 +14,19 @@
         layer = "top";
 
         height = 10;
-        margin-top = -4;
-        margin-bottom = -8;
-        margin-left = 4;
-        margin-right = 4;
+        margin-top = -2;
+        margin-bottom = -6;
+        margin-left = 6;
+        margin-right = 6;
 
         modules-left = [
           "hyprland/workspaces"
           "group/hardwaremod"
           "group/windowmod"
         ];
-        modules-center = [];
+        modules-center = [
+
+        ];
         modules-right = [
           "group/mediamod"
           "group/clockmod"
@@ -45,15 +47,15 @@
           interval = 5;
           format = "󰻠 {usage}%";
           tooltip = true;
+          tooltip-format = "{avg_frequency}";
           min-length = 6;
-          tooltip-format = "{󰻠 {avg_frequency} GHz} | {load}";
         };
 
         "memory" = {
           interval = 5;
           format = "󰍛 {used}";
           tooltip = true;
-          tooltip-format = "󰍛 {}";
+          tooltip-format = "󰍛 {total} GiB + {swapTotal} GiB Swap";
           min-length = 6;
         };
 
@@ -63,12 +65,6 @@
             "cpu"
             "memory"
           ];
-        };
-
-        "custom/launcher" = {
-          format = "<span font='12'>❄️</span.>";
-          on-click = "uwsm app -- wofi --show drun -G";
-          on-click-right = "uwsm app -- wofi --show run -G";
         };
 
         "hyprland/workspaces" = {
@@ -112,6 +108,7 @@
           ];
           on-click = "hyprctl dispatch exec '[float; size 512 512; center] kitty nmtui'";
         };
+
         "network#speed" = {
           interval = 1;
           format = "{ifname}";
@@ -127,6 +124,7 @@
           max-length = 24;
           on-click = "hyprctl dispatch exec '[float; size 512 512; center] kitty nmtui'";
         };
+
         "group/networkmod" = {
           orientation = "horizontal";
           modules = [ "network" ];
@@ -139,6 +137,7 @@
           offscreen-css = true;
           offscreen-css-text = "(inactive)";
         };
+
         "hyprland/window#title" = {
           format = "{}";
           max-length = 30;
@@ -146,6 +145,7 @@
           offscreen-css = true;
           offscreen-css-text = "(inactive)";
         };
+
         "group/windowmod" = {
           orientation = "horizontal";
           modules = [
@@ -184,6 +184,7 @@
             stopped = "";
           };
         };
+
         "mpris#title" = {
           interval = 0.5;
           format = "{title} - {artist}";
@@ -200,6 +201,7 @@
           };
           max-length = 20;
         };
+
         "group/mediamod" = {
           orientation = "horizontal";
           modules = [
@@ -219,7 +221,7 @@
             ];
           };
           tooltip = true;
-          tooltip-format = " {volume}% \n 󰍬 {format_source}";
+          tooltip-format = " {volume}%\n󰍬 {format_source}";
           format-source-muted = " 󰍭";
           icon-size = 4;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -227,6 +229,7 @@
           on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-";
           on-click-right = "hyprctl dispatch exec '[float; size 800 512; center] pavucontrol'";
         };
+
         "pulseaudio#volume" = {
           format = "{volume}%";
           format-muted = "Muted";
@@ -235,6 +238,7 @@
           on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-";
           on-click-right = "hyprctl dispatch exec '[float; size 800 512; center] pavucontrol'";
         };
+
         "group/audiomod" = {
           orientation = "horizontal";
           modules = [ "pulseaudio#icon" ];
@@ -263,6 +267,7 @@
             on-scroll-down = "shift_down";
           };
         };
+
         "clock#date" = {
           format = "{:%a %b %d %R}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
@@ -279,12 +284,14 @@
               today = "<span color='#ff6699'><b><u>{}</u></b></span>";
             };
           };
+
           "actions" = {
             on-click-right = "mode";
             on-scroll-up = "shift_up";
             on-scroll-down = "shift_down";
           };
         };
+
         "group/clockmod" = {
           orientation = "horizontal";
           modules = [
@@ -314,40 +321,12 @@
           on-click-right = "swaync-client -d -sw";
           escape = true;
         };
-
-        "battery" = {
-          states = {
-            good = 95;
-            warning = 30;
-            critical = 15;
-          };
-          format = "{icon}  {capacity}%";
-          format-charging = "{capacity}% ";
-          format-plugged = "{capacity}% ";
-          format-alt = "{icon} {time}";
-          # format-good = ""; # An empty format will hide the module
-          # format-full = "";
-          format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
-          ];
-        };
-
-        "custom/hyprpicker" = {
-          format = "󰈋";
-          on-click = "hyprpicker -a -f hex";
-          on-click-right = "hyprpicker -a -f rgb";
-        };
       };
     };
     style = ''
-
-        @define-color bg_color #282828;
-        @define-color bg2_color #3c3836;
-        @define-color text_color #ddc7a1;
+      @define-color bg_color #282828;
+      @define-color bg2_color #3c3836;
+      @define-color text_color #ddc7a1;
 
       * {
         border: none;
@@ -393,40 +372,6 @@
         background: transparent;
       }
 
-      /* LAUNCHER */
-      #custom-launcher {
-        background-image: url('${../../hosts/rakki/svgs/nix-snowflake-white.svg}');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        color: @text_color;
-        background-color: @bg_color;
-        padding: 0px 18px 0px 18px;
-        margin: 8px;
-      }
-
-
-      /* NETWORK */
-      #networkmod {
-        background-color: @bg_color;
-        padding: 4px 4px 4px 4px;
-      }
-
-      #network {
-        background-color: @bg_color;
-        color: @text_color;
-        padding: 0px 8px 0px 4px;
-      }
-
-      #network.speed {
-        color: @text_color;
-        background-color: #1E1E2E;
-        border-radius: 8px;
-        padding-left: 8px;
-      }
-
-
-
       /* ACTIVE WINDOW */
       #windowmod {
         background-color: @bg_color;
@@ -452,6 +397,26 @@
         padding-left: 8px;
         padding-right: 8px;
       }
+
+      /* NETWORK */
+      #networkmod {
+        background-color: @bg_color;
+        padding: 4px 4px 4px 4px;
+      }
+
+      #network {
+        background-color: @bg_color;
+        color: @text_color;
+        padding: 0px 8px 0px 4px;
+      }
+
+      #network.speed {
+        color: @text_color;
+        background-color: #1E1E2E;
+        border-radius: 8px;
+        padding-left: 8px;
+      }
+
 
       #right-icons {
         margin: 8px 0px 8px;
@@ -528,12 +493,14 @@
         background-color: @bg2_color;
         padding: 2px 2px 2px 2px;
         margin: 4px;
+        border-radius: 8px;
       }
 
       #memory {
         background-color: @bg2_color;
         padding: 2px 2px 2px 2px;
         margin: 4px;
+        border-radius: 8px;
       }
 
       /* CLOCK */
@@ -563,31 +530,6 @@
         color: @text_color;
         background-color: @bg_color;
         padding: 0px 4px 0px 4px;
-      }
-
-      #custom-power {
-        color: #24283b;
-        background-color: #db4b4b;
-        border-radius: 5px;
-        margin-right: 10px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 0px;
-        padding: 5px 10px;
-      }
-
-      #battery {
-        color: #9ece6a;
-      }
-
-      #battery.charging {
-        color: #9ece6a;
-      }
-
-      #battery.warning:not(.charging) {
-        background-color: #f7768e;
-        color: #24283b;
-        border-radius: 5px 5px 5px 5px;
       }
     '';
   };
