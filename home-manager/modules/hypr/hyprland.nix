@@ -1,6 +1,6 @@
 { inputs, stylix, lib, config, pkgs, ... }: {
 
-  wayland.windowManager.hyprland = lib.mkForce {
+  wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     plugins = [];
@@ -44,10 +44,10 @@
         layout = "dwindle";
         border_size = 2;
         gaps_in = 4;
-        gaps_out = 4;
+        gaps_out = 8;
 
-        "col.active_border" = "rgba(d4be9888)"; # with transition
-        "col.inactive_border" = "rgba(221,199,161,50)";
+        "col.active_border" = lib.mkForce "rgb(614821)";
+        "col.inactive_border" = lib.mkForce "rgba(ddc7a1aa)";
       };
 
       input = {
@@ -96,7 +96,7 @@
       };
 
       decoration = { 
-        rounding = 4;
+        rounding = 8;
 
         active_opacity = 2.0;
         inactive_opacity = 0.95;
@@ -113,8 +113,8 @@
           #offset = "0 40";
           scale = 0.95;
 
-          "color" = "rgb(0,0,0)";
-          "color_inactive" = "rgb(0,0,0)";
+          # "color" = "rgb(0,0,0)";
+          # "color_inactive" = "rgb(0,0,0)";
         };
 
         blur = {
@@ -125,14 +125,6 @@
           new_optimizations = true;
           special = true;
           popups = true;
-        };
-      };
-
-      group = {
-        "col.border_active" = "rgba(d4be9888)"; #"rgb(${config.lib.stylix.colors.base15})";
-
-        groupbar = {
-          "col.active" = "rgba(d4be9888)"; #"rgb(${config.lib.stylix.colors.base00})";
         };
       };
 
