@@ -18,7 +18,11 @@
 
       monitor = [ 
         "DP-3,1920x1080@239.76,0x0,1"
-        #"HDMI-A-1,1920x1080@60,1920x-250,1"
+        "HDMI-A-1,1920x1080@60,1920x0,1"
+      ];
+
+      workspace = [
+        "1,monitor:DP-3"
       ];
 
       dwindle = {	
@@ -232,6 +236,7 @@
         #"swww img ${../../../hosts/rakki/wallpapers/aesthetic.png}"
         #"$scriptsDir/Polkit-NixOS.sh"
         "sleep 3 && uwsm app -- hyprlock"
+        "sleep 2 && hyprctl dispatch workspace 1"
       ];
 
       binde = [
