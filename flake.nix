@@ -10,9 +10,6 @@
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
-
-    # nix-colors
-    nix-colors.url = "github:misterio77/nix-colors";
 		
 		# Stylix
 		stylix.url = "github:nix-community/stylix";
