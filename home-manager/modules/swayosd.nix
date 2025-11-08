@@ -8,7 +8,7 @@
         border: 10em;
         border-radius: 10em;
         background-color: rgba(000000);
-        opacity: 0.8;
+        opacity: 1;
       }
       #container {
         margin: 1em;
@@ -16,11 +16,11 @@
 
       image {
         color: rgb(ffffff);
-        opacity: 0.9;
+        opacity: 1;
       }
       image:disabled {
         color: rgb(999999);
-        opacity: 0.8;
+        opacity: 1;
       }
       label {
         color: rgb(222222);
@@ -32,17 +32,17 @@
         border-radius: inherit;
         border: none;
         background-color: rgb(dddddd);
-        opacity: 0.9;
+        opacity: 1;
       }
       progressbar {
         min-height: 0.5em;
         border-radius: 100em;
         background-color: transparent;
         border: none;
-        opacity: 0.9;
+        opacity: 1;
       }
       progressbar:disabled {
-        opacity: 0.5;
+        opacity: 1;
       }
 
       trough {

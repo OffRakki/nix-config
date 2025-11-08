@@ -25,11 +25,11 @@ in {
       "plugin:hyprbars" = lib.mkForce {
         enabled = true;
         # Local colors
-        bar_color = "rgba(ddc7a1aa)";
-        "col.text" = "rgb(000000)";
+        bar_color = "rgba(504945dd)";
+        "col.text" = "rgba(e78a4eff)";
         bar_height = 16;
         bar_text_font = "JetBrainsMono Nerd Font";
-        bar_text_size = 10;
+        bar_text_size = 12;
         bar_part_of_window = false;
         bar_precedence_over_border = false;
         hyprbars-button = let
@@ -43,21 +43,23 @@ in {
           maximizeAction = "hyprctl dispatch fullscreen 1";
         in [
           # Red close button
-          "rgba(b91414ff),10,,${closeAction}"
+          "rgba(b91414ff),12,,${closeAction}"
           # Yellow "minimize" (send to special workspace) button
-          "rgba(cb8d19ff),10,,${minimizeAction}"
+          "rgba(cb8d19ff),12,,${minimizeAction}"
           # Green "maximize" (fullscreen) button
-          "rgba(85cb19ff),10,,${maximizeAction}"
+          "rgba(85cb19ff),12,,${maximizeAction}"
         ];
       };
 
       windowrulev2 = [
         # Disable bars in floating pinned windows
         "plugin:hyprbars:nobar, floating:1, pinned:1"
+        # Disable bars on floating image render on yazi
+        "plugin:hyprbars:nobar, class:ueberzugpp.*"
 
         # Local focused colors (this host's colors)
-        "plugin:hyprbars:bar_color rgba(614821aa), focus:1"
-        "plugin:hyprbars:title_color rgb(000000), focus:1"
+        "plugin:hyprbars:bar_color rgba(e78a4eff), focus:1"
+        "plugin:hyprbars:title_color rgba(504945ff), focus:1"
       ];
     };
   };

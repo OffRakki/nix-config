@@ -57,8 +57,8 @@ in {
         gaps_in = 4;
         gaps_out = 8;
 
-        "col.active_border" = lib.mkForce "rgb(614821)";
-        "col.inactive_border" = lib.mkForce "rgba(ddc7a1aa)";
+        "col.active_border" = lib.mkForce "rgba(e78a4eff)";
+        "col.inactive_border" = lib.mkForce "rgba(504945dd)";
       };
 
       input = {
@@ -143,27 +143,28 @@ in {
         enabled = "yes, please :)";
 
         bezier = [ 
-          "myBezier, 0.05, 0.9, 0.1, 1.05"
-          "linear, 0.0, 0.0, 1.0, 1.0"
-          "wind, 0.05, 0.9, 0.1, 1.05"
-          "winIn, 0.1, 1.1, 0.1, 1.1"
-          "winOut, 0.3, -0.3, 0, 1"
-          "slow, 0, 0.85, 0.3, 1"
-          "overshot, 0.7, 0.6, 0.1, 1.1"
-          "bounce, 1.1, 1.6, 0.1, 0.85"
-          "sligshot, 1, -1, 0.15, 1.25"
-          "nice, 0, 6.9, 0.5, -4.20"
+          "easeout,0.5, 1, 0.9, 1"
+          "easeoutback,0.34,1.22,0.65,1"
         ];
 
         animation = [ 
-          "windowsIn, 1, 6, slow, popin"
-          "windowsOut, 1, 6, winOut, popin"
-          "windowsMove, 1, 6, wind, slide"
-          "border, 1, 6, linear"
-          "borderangle, 1, 180, linear, loop" #used by rainbow borders and rotating colors
-          "fade, 1, 6, overshot"
-          "workspaces, 1, 6, wind"
-          "windows, 1, 6, bounce, popin"
+          "fadeIn,1,3,easeout"
+          "fadeLayersIn,1,3,easeout"
+          "fadeOut,1,3,easeout"
+          "fadeLayersOut,1,3,easeout"
+          "fadeSwitch,1,2,easeout"
+          "fadeDim,1,3,easeout"
+          "fadeShadow,1,2,easeout"
+          "border,1,2,easeout"
+
+          "layersIn,1,3,easeoutback,slide"
+          "layersOut,1,3,easeoutback,slide"
+
+          "windowsOut,1,3,easeout,slide"
+          "windowsMove,1,3,easeoutback"
+          "windowsIn,1,3,easeoutback,slide"
+
+          "workspaces,1,2.5,easeoutback,slidefade"
         ];
       };
 
