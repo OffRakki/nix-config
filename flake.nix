@@ -10,7 +10,6 @@
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
-    hyprland.url = "github:hyprwm/Hyprland";
 
     # nix-colors
     nix-colors.url = "github:misterio77/nix-colors";
@@ -39,7 +38,6 @@
     self,
     nixpkgs,
     home-manager,
-    hyprland,
     stylix,
     nixvim,
 		nvf,
