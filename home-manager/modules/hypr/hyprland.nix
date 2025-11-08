@@ -1,4 +1,12 @@
-{ inputs, stylix, lib, config, pkgs, ... }: {
+{ inputs, stylix, lib, config, pkgs, ... }: let
+
+  swayosd = {
+    output-volume = "swayosd-client --output-volume +0";
+    input-volume = "swayosd-client --input-volume +0";
+    caps-lock = "sleep 0.2 && swayosd-client --caps-lock";
+  };
+
+in {
 
   imports = [
     ./hyprbars.nix
@@ -159,7 +167,10 @@
         ];
       };
 
-      layerrule = ["blur, wofi"];
+      layerrule = [
+        "blur, wofi"
+        "abovelock,swayosd"
+      ];
 
       windowrule = [
         "float, class:(middleFloat)"
@@ -252,17 +263,18 @@
         "$mod, mouse:273, resizewindow # NOTE: mouse:272 = right click"
       ];
 
-      bindl = [
-        ", Print, exec, $hyprshot -z --clipboard-only -m region"
+      bindl = [ 
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; ${swayosd.output-volume}"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; ${swayosd.output-volume}"
+        "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-; ${swayosd.input-volume}"
+        ",Caps_Lock,exec,${swayosd.caps-lock}"
       ];
 
       bind = [ 
-        "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%+"
-        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
+        ", Print, exec, $hyprshot -z --clipboard-only -m region"
         "$mod, M, exec, loginctl terminate-user '' "
         "$mod, L, exec, uwsm app -- hyprlock"
         "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./swayosd.nix
     ./jj.nix
     ./zed.nix
     #./spicetify.nix
