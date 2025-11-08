@@ -1,5 +1,6 @@
 {
   imports = [
+    ./jj.nix
     ./zed.nix
     #./spicetify.nix
     #./nixvim # using NVF 
