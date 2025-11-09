@@ -61,13 +61,21 @@ in {
         "plugin:hyprbars:bar_color rgba(e78a4eff), focus:1"
         "plugin:hyprbars:title_color rgba(141617ff), focus:1"
 
+        # fix for inconsistent colors on chrome
+        "plugin:hyprbars:bar_color rgba(14161766), title:.* - Google Chrome"
+        "plugin:hyprbars:title_color rgba(b0430cff), title:.* - Google Chrome"
+
+        # fix for inconsistent focused colors on chrome
+        "plugin:hyprbars:bar_color rgba(b0430cff), title:.* - Google Chrome, focus:1"
+        "plugin:hyprbars:title_color rgba(000000ff), title:.* - Google Chrome, focus:1"
+
         # Remote host colors
-        "plugin:hyprbars:bar_color rgba(7287fdaa), title:.* /home/deby.*"
-        "plugin:hyprbars:title_color rgba(000000ff), title:.* /home/deby.*"
+        "plugin:hyprbars:bar_color rgba(7287fdaa), title:.*/home/deby.*"
+        "plugin:hyprbars:title_color rgba(000000ff), title:.*/home/deby.*"
           
         # Remote host focused colors
-        "plugin:hyprbars:bar_color rgba(7287fdff), title:.* /home/deby.*, focus:1"
-        "plugin:hyprbars:title_color rgba(000000ff), title:.* /home/deby.*, focus:1"
+        "plugin:hyprbars:bar_color rgba(7287fdff), title:.*/home/deby.*, focus:1"
+        "plugin:hyprbars:title_color rgba(000000ff), title:.*/home/deby.*, focus:1"
       ];
     };
   };

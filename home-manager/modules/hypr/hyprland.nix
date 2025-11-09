@@ -210,7 +210,10 @@ in {
       
       windowrulev2 = [
         "idleinhibit fullscreen, class:.*"
-        "bordercolor rgba(7287fdff) rgba(7287fdaa), title:.* /home/deby.*"
+        "bordercolor rgba(7287fdff) rgba(7287fdaa), title:.*/home/deby.*"
+
+        # fix for inconsistent color on chrome
+        "bordercolor rgba(b0430cff) rgba(14161766), title:.* - Google Chrome"
       ];
 
       env = [ 
