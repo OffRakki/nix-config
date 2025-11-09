@@ -8,6 +8,7 @@
 {
   programs.waybar = lib.mkForce {
     enable = true;
+    systemd.enable = true;
     settings = {
       mainBar = {
         position = "top";

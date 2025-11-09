@@ -82,8 +82,8 @@ in {
       };
 
       misc = {
-        disable_hyprland_logo = false;
-        disable_splash_rendering = false;
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
         vfr = false;
         vrr = 2;
         mouse_move_enables_dpms = true;
@@ -232,9 +232,6 @@ in {
       exec-once = [ 
         "uwsm app -- syncthing --no-gui" 
         "uwsm app -- clipse -listen" # Clipboard history
-        "uwsm app -- waybar"
-        "uwsm app -- hyprpaper"
-        "uwsm app -- swww-daemon --format xrgb"
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- nm-applet --indicator"
