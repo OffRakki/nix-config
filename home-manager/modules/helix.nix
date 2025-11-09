@@ -28,15 +28,24 @@
       language = [
         {
           name = "nix";
-          language-servers = ["nixd" "nil"];
+          language-servers = ["nixd" "nil" "colors"];
           auto-format = true;
           formatter.command = "alejandra";
+        }
+        {
+          name = "json";
+          language-servers = ["colors"];
+        }
+        {
+          name = "css";
+          language-servers = ["colors"];
         }
       ];
       language-server = {
         nixd = {
           command = "nixd";
         };
+        colors.command = lib.getExe pkgs.uwu-colors;
       };
     };
   };
