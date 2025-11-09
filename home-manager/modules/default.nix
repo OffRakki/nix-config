@@ -1,5 +1,6 @@
 {
   imports = [
+    ./clipnotify.nix
     ./swayosd.nix
     ./jj.nix
     ./zed.nix
