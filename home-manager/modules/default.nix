@@ -2,7 +2,7 @@
   imports = [
     ./clipnotify.nix
     ./swayosd.nix
-    ./jj.nix
+    ./jujutsu.nix
     ./zed.nix
     #./spicetify.nix
     #./nixvim # using NVF 

@@ -6,7 +6,10 @@
         name = config.programs.git.settings.user.name;
         email = config.programs.git.settings.user.email;
       };
-      ui.pager = "less -FRX";
+      ui = {
+        pager = "less -FRX";
+        default-command = "log";
+      };
       templates = {
         draft_commit_description = ''
           concat(
