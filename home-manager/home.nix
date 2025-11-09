@@ -51,6 +51,9 @@ in {
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
+    sessionVariables = {
+      NH_FLAKE = "$HOME/Documents/nix-config";
+    };
   };
 
   xdg.mimeApps = {

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./fish.nix
     ./clipnotify.nix
     ./swayosd.nix
     ./jujutsu.nix

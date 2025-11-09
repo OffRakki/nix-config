@@ -43,7 +43,7 @@
         # nix
         ncg = "nix-collect-garbage";
         nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
-        nhos = "nh os switch ~/Documents/nix-config";
+        # nhos = "nh os switch ~/Documents/nix-config";
         nixdev = "nix develop -c $SHELL";
         nix-shell = "nix-shell --command $SHELL";
 
