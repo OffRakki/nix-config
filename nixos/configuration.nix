@@ -1,4 +1,5 @@
-{ inputs, lib, config, pkgs, outputs, ... }: {
+{ inputs, lib, config, pkgs, outputs, ... }:
+{
   # You can import other NixOS modules here
   imports = [
     inputs.home-manager.nixosModules.home-manager

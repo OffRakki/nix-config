@@ -13,6 +13,7 @@ in {
     inputs.nvf.homeManagerModules.default
     ./modules
     ./home-packages.nix
+    ../nixos/variables.nix
   ];
 
   nixpkgs = {
