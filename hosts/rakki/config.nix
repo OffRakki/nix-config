@@ -1,17 +1,9 @@
 { config, pkgs, host, username, options, lib, inputs, system, ...}:
-  let
-  inherit (import ./variables.nix) consoleKeyMap;  
-   in 
 {
   imports = [
     ./packages-fonts.nix
-    #../../modules/drivers/amd-drivers.nix
-    ../../modules/drivers/nvidia-drivers.nix
-    ../../modules/drivers/nvidia-prime-drivers.nix
-    #../../modules/drivers/intel-drivers.nix
-    ../../modules/drivers/vm-guest-services.nix
-    ../../modules/drivers/local-hardware-clock.nix
     ./users.nix
+    ./drivers
   ];
 
   # Extra Module Options
@@ -94,8 +86,8 @@
 	
   	blueman.enable = true;
   	
-  	#hardware.openrgb.enable = true;
-  	#hardware.openrgb.motherboard = "amd";
+  	hardware.openrgb.enable = true;
+  	hardware.openrgb.motherboard = "amd";
 
 	  fwupd.enable = true;
 
@@ -204,11 +196,6 @@
     defaultNetwork.settings.dns_enabled = false;
   };
 	virtualisation.waydroid.enable = true;
-
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
