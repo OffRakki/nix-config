@@ -160,19 +160,15 @@ in {
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["Lekton Nerd Font"];
-        sansSerif = ["Lekton Nerd Font"];
-        monospace = ["Lekton Nerd Font Mono"];
+        serif = ["JetBrainsMono Nerd Font"];
+        sansSerif = ["JetBrainsMono Nerd Font"];
+        monospace = ["JetBrainsMono Nerd Font"];
       };
     };
   };
 
-  programs.waybar.enable = true;
-  programs.hyprlock.enable = true;
   programs.firefox.enable = true;
   programs.nm-applet.indicator = true;
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     exo

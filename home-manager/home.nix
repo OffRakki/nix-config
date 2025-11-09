@@ -6,13 +6,13 @@
   config,
   pkgs,
   ...
-}: let
-  nix-colors = import <nix-colors> {};
-in {
+}:
+{
   imports = [
     inputs.nvf.homeManagerModules.default
     ./modules
     ./home-packages.nix
+    ./gtk.nix
     ../nixos/variables.nix
   ];
 
@@ -48,6 +48,8 @@ in {
   #   kde.enable      = true;
   # };
 
+  gtk.enable = true;
+
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
@@ -60,10 +62,6 @@ in {
     defaultApplications = {
       "application/pdf" = "evince.desktop";
     };
-  };
-
-  gtk = {
-    enable = true;
   };
 
   # Enable home-manager

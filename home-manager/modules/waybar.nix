@@ -427,6 +427,7 @@
 
       /* TRAY */
       #tray {
+        color: @text_color;
         margin: 8px 4px 8px 4px;
         background-color: @bg_color;
         padding: 0px 4px 0px 4px;
@@ -489,6 +490,7 @@
 
       /* HARDWARE */
       #hardwaremod {
+        color: @text_color;
         background-color: @bg_color;
         padding: 1px 1px 1px 0px;
         margin: 8px 4px 8px 4px;

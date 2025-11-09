@@ -6,11 +6,12 @@
       font = {
         size = 12;
         normal = {
-          family = "JetBrainsMono Nerd Font Mono";
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
         };
       };
       window = {
-        opacity = 0.95;
+        opacity = 0.85;
         blur = true;
       };
     };

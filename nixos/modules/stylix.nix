@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }: {
   
-	stylix = lib.mkDefault {
-		enable = true;
+	stylix = {
+		enable = false;
 		autoEnable = true;
 		base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 		cursor = {
