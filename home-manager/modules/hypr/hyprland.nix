@@ -107,13 +107,13 @@ in {
       };
 
       decoration = { 
-        rounding = 8;
+        rounding = 6;
 
-        active_opacity = 2.0;
+        active_opacity = 1.0;
         inactive_opacity = 0.95;
         fullscreen_opacity = 1.0;
 
-        dim_inactive = true;
+        dim_inactive = false;
         dim_strength = 0.1;
         dim_special = 0.8;
 
@@ -171,6 +171,9 @@ in {
       layerrule = [
         "blur, wofi"
         "abovelock,swayosd"
+        "animation fade,hyprpicker"
+        "animation fade,selection"
+        "animation fade,hyprpaper"
       ];
 
       windowrule = [
