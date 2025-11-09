@@ -10,6 +10,9 @@
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
+
+    # Ministerio
+    ministerio.url = "github:misterio77/nix-config";
 		
 		# Stylix
 		stylix.url = "github:nix-community/stylix";
@@ -17,9 +20,6 @@
     # Games
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
-		# Nixvim
-		nixvim.url = "github:nix-community/nixvim";
-    
     # NVF (modular neovim)
     nvf.url = "github:notashelf/nvf";
 
@@ -36,7 +36,6 @@
     nixpkgs,
     home-manager,
     stylix,
-    nixvim,
 		nvf,
     alejandra,
     ...

@@ -10,14 +10,10 @@
   nix-colors = import <nix-colors> {};
 in {
   imports = [
-    inputs.nix-colors.homeManagerModule
-    inputs.nixvim.homeModules.nixvim
     inputs.nvf.homeManagerModules.default
     ./modules
     ./home-packages.nix
   ];
-
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   nixpkgs = {
     # You can add overlays here
