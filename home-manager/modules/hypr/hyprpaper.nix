@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       ipc = true;
-      splash = true;
+      splash = false;
       preload = "${config.wallDir}/agbg.jpg";
       wallpaper = ", ${config.wallDir}/agbg.jpg";
     };
