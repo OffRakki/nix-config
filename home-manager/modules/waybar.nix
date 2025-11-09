@@ -11,6 +11,7 @@
     systemd.enable = true;
     settings = {
       mainBar = {
+        exclusive = false;
         position = "top";
         layer = "top";
 
@@ -23,7 +24,6 @@
         modules-left = [
           "hyprland/workspaces"
           "group/hardwaremod"
-          "group/windowmod"
         ];
         modules-center = [
 
@@ -446,7 +446,11 @@
       #mpris.title.stopped~#mediamod {
         background-color: transparent;
       }
-
+  
+      #mpris.empty {
+        background-color: transparent;
+      }
+    
       #mpris.icon {
         background-color: @bg_color;
         color: @text_color;

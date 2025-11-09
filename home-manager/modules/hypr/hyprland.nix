@@ -30,6 +30,8 @@ in {
       monitor = [ 
         "DP-3,1920x1080@239.76,0x0,1"
         "HDMI-A-1,1920x1080@60,1920x0,1"
+
+        ",addreserved,36,0,0,0"
       ];
 
       workspace = [
