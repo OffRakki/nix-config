@@ -60,7 +60,7 @@ in {
         gaps_out = 8;
 
         "col.active_border" = lib.mkForce "rgba(e78a4eff)";
-        "col.inactive_border" = lib.mkForce "rgba(504945dd)";
+        "col.inactive_border" = lib.mkForce "rgba(141617dd)";
       };
 
       input = {
@@ -173,9 +173,24 @@ in {
       layerrule = [
         "blur, wofi"
         "abovelock,swayosd"
+
         "animation fade,hyprpicker"
         "animation fade,selection"
         "animation fade,hyprpaper"
+
+        "animation slide,waybar"
+        "blur,waybar"
+        "ignorezero,waybar"
+
+        "blur,notifications"
+        "ignorezero,notifications"
+
+        "blur,wofi"
+        "ignorezero,wofi"
+
+        "noanim,wallpaper"
+
+        "abovelock,swayosd"
       ];
 
       windowrule = [
@@ -193,7 +208,10 @@ in {
         "size 25% 50%, initialTitle:Open Folder"
       ];
       
-      windowrulev2 = ["idleinhibit fullscreen, class:.*"];
+      windowrulev2 = [
+        "idleinhibit fullscreen, class:.*"
+        "bordercolor rgba(7287fdff) rgba(7287fdaa), title:.* /home/deby.*"
+      ];
 
       env = [ 
         "NIXOS_OZONE_WL,1"

@@ -25,10 +25,10 @@ in {
       "plugin:hyprbars" = lib.mkForce {
         enabled = true;
         # Local colors
-        bar_color = "rgba(504945dd)";
+        bar_color = "rgba(141617dd)";
         "col.text" = "rgba(e78a4eff)";
-        bar_height = 16;
-        bar_text_font = "JetBrainsMono Nerd Font";
+        bar_height = 20;
+        bar_text_font = "JetBrainsMono Nerd Font Bold";
         bar_text_size = 12;
         bar_part_of_window = false;
         bar_precedence_over_border = false;
@@ -59,7 +59,15 @@ in {
 
         # Local focused colors (this host's colors)
         "plugin:hyprbars:bar_color rgba(e78a4eff), focus:1"
-        "plugin:hyprbars:title_color rgba(504945ff), focus:1"
+        "plugin:hyprbars:title_color rgba(141617ff), focus:1"
+
+        # Remote host colors
+        "plugin:hyprbars:bar_color rgba(7287fdaa), title:.* /home/deby.*"
+        "plugin:hyprbars:title_color rgba(000000ff), title:.* /home/deby.*"
+          
+        # Remote host focused colors
+        "plugin:hyprbars:bar_color rgba(7287fdff), title:.* /home/deby.*, focus:1"
+        "plugin:hyprbars:title_color rgba(000000ff), title:.* /home/deby.*, focus:1"
       ];
     };
   };
