@@ -179,7 +179,6 @@
     sublime
     neovim
     wget
-    bat
     curl
     rofi
     home-manager

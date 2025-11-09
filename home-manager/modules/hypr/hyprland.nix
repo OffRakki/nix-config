@@ -121,7 +121,7 @@ in {
 
         shadow = {
           enabled = false;
-          range = 100;
+          range = 2;
           render_power = 4;
           #offset = "0 40";
           scale = 0.95;
