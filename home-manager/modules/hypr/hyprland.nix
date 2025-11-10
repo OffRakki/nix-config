@@ -207,6 +207,8 @@ in {
         "size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
         "float, initialTitle:Open Folder"
         "size 25% 50%, initialTitle:Open Folder"
+        "float, initialTitle:Bluetooth Devices"
+        "size 25% 50%, initialTitle:Bluetooth Devices"
       ];
       
       windowrulev2 = [
@@ -231,7 +233,6 @@ in {
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
-        "QT_QUICK_CONTROLS_STYLE,org.hyprland.style"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
         "LIBVA_DRIVER_NAME,nvidia "
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
@@ -259,15 +260,10 @@ in {
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- nm-applet --indicator"
-        "uwsm app -- swaync"
-        "uwsm app -- ags"
+        # "uwsm app -- ags"
         "uwsm app -- blueman-applet"
-        "uwsm app -- hypridle"
         "uwsm app -- pypr"
-        #"swww img ${../../../hosts/rakki/wallpapers/aesthetic.png}"
-        #"$scriptsDir/Polkit-NixOS.sh"
-        "sleep 3 && uwsm app -- hyprlock"
-        "sleep 2 && hyprctl dispatch workspace 1"
+        "sleep 3 && hyprlock"
       ];
 
       binde = [
@@ -299,6 +295,8 @@ in {
       ];
 
       bind = [ 
+        "SUPER,g,togglegroup"
+        "SUPER,i,pin"
         ", Print, exec, $hyprshot -z --clipboard-only -m region"
         "$mod, M, exec, loginctl terminate-user '' "
         "$mod, L, exec, uwsm app -- hyprlock"
@@ -307,14 +305,14 @@ in {
         "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e nvim"
         "$mod, SPACE, togglefloating"
-        "$mod, F, fullscreen, 1 # fake full screen"
+        "$mod, F, fullscreen, 1" # fake full screen 
         "$mod SHIFT, F, fullscreen"
         "$mod SHIFT, Q, killactive"
         "$mod, A, exec, pkill wofi || true && ags -t 'overview'"
         "$mod, Return, exec, uwsm app -- $terminal"  #terminal
         "$mod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
-        "$mod, Z, exec, pypr zoom # Toggle Desktop Zoom"
+        "$mod, Z, exec, pypr zoom" # Toggle Desktop Zoom
         "$mod, E, exec, uwsm app -- $terminal -e $files"
         "$mod SHIFT, E, exec, uwsm app -- $filesGUI"
 
