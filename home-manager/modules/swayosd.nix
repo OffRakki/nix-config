@@ -1,29 +1,30 @@
-{pkgs, config, lib, ...}:
+{pkgs, config, ...}:
 {
-  services.swayosd = lib.mkForce {
+  services.swayosd = {
     enable = true;
     stylePath = pkgs.writeText "style.css" ''
       window {
         padding: 0 1em;
         border: 10em;
         border-radius: 10em;
-        background-color: rgba(000000);
+        background-color: rgba(1b1b1bee);
         opacity: 1;
       }
+
       #container {
         margin: 1em;
       }
 
       image {
-        color: rgb(ffffff);
+        color: rgb(111111);
         opacity: 1;
       }
       image:disabled {
-        color: rgb(999999);
+        color: rgb(333333);
         opacity: 1;
       }
       label {
-        color: rgb(222222);
+        color: rgb(555555);
         opacity: 1;
       }
 
@@ -31,7 +32,7 @@
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background-color: rgb(dddddd);
+        background-color: rgb(1b1b1b);
         opacity: 1;
       }
       progressbar {
@@ -49,7 +50,7 @@
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background-color: rgb(aaaaaa);
+        background-color: rgb(1b1b1b);
         opacity: 1;
       }
     '';
