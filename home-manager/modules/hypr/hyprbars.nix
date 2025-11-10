@@ -43,11 +43,11 @@ in {
           maximizeAction = "hyprctl dispatch fullscreen 1";
         in [
           # Red close button
-          "rgba(b91414ff),12,,${closeAction}"
+          "rgba(ffffffaa),12,,${closeAction}"
           # Yellow "minimize" (send to special workspace) button
-          "rgba(cb8d19ff),12,,${minimizeAction}"
+          "rgba(ffffffaa),12,,${minimizeAction}"
           # Green "maximize" (fullscreen) button
-          "rgba(85cb19ff),12,,${maximizeAction}"
+          "rgba(ffffffaa),12,,${maximizeAction}"
         ];
       };
 
