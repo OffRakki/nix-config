@@ -189,12 +189,12 @@
   };
 
   # Virtualization / Containers
-  virtualisation.libvirtd.enable = false;
-  virtualisation.podman = {
-    enable = false;
-    dockerCompat = false;
-    defaultNetwork.settings.dns_enabled = false;
-  };
+  # virtualisation.libvirtd.enable = false;
+  # virtualisation.podman = {
+  #   enable = false;
+  #   dockerCompat = false;
+  #   defaultNetwork.settings.dns_enabled = false;
+  # };
 	virtualisation.waydroid.enable = true;
 
   # For Electron apps to use wayland

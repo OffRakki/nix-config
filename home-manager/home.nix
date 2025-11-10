@@ -39,18 +39,6 @@
     };
   };
 
-  # stylix.targets    = {
-  #   nixcord.enable  = true;
-  #   vencord.enable  = true;
-  #   vesktop.enable  = true;
-  #   swaync.enable   = true;
-  #   mangohud.enable = true;
-  #   gtk.enable      = true;
-  #   kde.enable      = true;
-  # };
-
-  gtk.enable = true;
-
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";

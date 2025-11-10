@@ -4,8 +4,6 @@
 		enable = true;
 		settings = {
 			shell = "${lib.getExe pkgs.fish}";
-			foreground = "rgb(dddddd)";
-			background = "rgb(000000)";
 			confirm_os_window_close = 0;
 			dynamic_background_opacity = true;
 			enable_audio_bell = false;
