@@ -150,19 +150,19 @@
   hardware.logitech.wireless.enable = false;
   hardware.logitech.wireless.enableGraphical = false;
 
-#  # Bluetooth
-#  hardware = {
-#  	bluetooth = {
-#	    enable = true;
-#	    powerOnBoot = true;
-#	    settings = {
-#		    General = {
-#		      Enable = "Source,Sink,Media,Socket";
-#		      Experimental = true;
-#		    };
-#      };
-#    };
-#  };
+  # Bluetooth
+  hardware = {
+  	bluetooth = {
+	    enable = true;
+	    powerOnBoot = true;
+	    settings = {
+		    General = {
+		      Enable = "Source,Sink,Media,Socket";
+		      Experimental = true;
+		    };
+      };
+    };
+  };
 
   # Security / Polkit
   security.rtkit.enable = true;
