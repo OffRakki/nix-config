@@ -1,6 +1,7 @@
 {
   imports = [
     ./kdeconnect.nix
+    ./mako.nix
     ./fish.nix
     ./clipnotify.nix
     ./swayosd.nix

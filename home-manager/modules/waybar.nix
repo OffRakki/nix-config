@@ -40,7 +40,6 @@
           modules = [
             "group/audiomod"
             "network"
-            "custom/swaync"
           ];
         };
 
@@ -107,7 +106,7 @@
             "󰣸"
             "󰣺"
           ];
-          on-click = "hyprctl dispatch exec '[float; size 512 512; center] kitty nmtui'";
+          on-click = "hyprctl dispatch exec '[float; size 512 512; center] alacritty nmtui'";
         };
 
         "network#speed" = {
@@ -158,6 +157,7 @@
         "tray" = {
           icon-size = 18;
           spacing = 8;
+          show-passive-items = "false";
         };
 
         "mpris#icon" = {
@@ -299,28 +299,6 @@
             "clock#icon"
             "clock#date"
           ];
-        };
-
-        "custom/swaync" = {
-          tooltip = true;
-          tooltip-format = "Left Click: Launch Notification Center\nRight Click: Do not Disturb";
-          format = "{icon}";
-          format-icons = {
-            notification = "<span font='12'>󱅫</span>";
-            none = "<span font='12'>󰂚</span>";
-            dnd-notification = "<span font='14'>󰂛</span>";
-            dnd-none = "<span font='12'>󰂛</span>";
-            inhibited-notification = "<span font='12'>󱅫</span>";
-            inhibited-none = "<span font='12'>󰂚</span>";
-            dnd-inhibited-notification = "<span font='12'>󰂛</span>";
-            dnd-inhibited-none = "<span font='12'>󰂛</span>";
-          };
-          return-type = "json";
-          exec-if = "which swaync-client";
-          exec = "swaync-client -swb";
-          on-click = "sleep 0.1 && swaync-client -t -sw";
-          on-click-right = "swaync-client -d -sw";
-          escape = true;
         };
       };
     };
@@ -530,13 +508,6 @@
         padding-left: 8px;
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
-      }
-
-      /* NOTIFICATIONS */
-      #custom-swaync {
-        color: @text_color;
-        background-color: @bg_color;
-        padding: 0px 4px 0px 4px;
       }
     '';
   };
