@@ -8,6 +8,9 @@
 	#boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "vfio-pci.ids=10de:2504,10de:228e" ];
   boot.extraModulePackages = [ ];
 	boot.supportedFilesystems = [ "ntfs" ];
+	boot.extraModprobeConfig = ''
+	  options hid_apple fnmode=0    
+	'';
 
   # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
   networking.nameservers = ["192.168.15.12" "8.8.8.8"];
