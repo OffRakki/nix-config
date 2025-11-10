@@ -19,6 +19,7 @@ in {
     osu-lazer-bin
 
     # User Packages
+    kdePackages.dolphin 
     ttyper
     ripgrep
     ripgrep-all
@@ -169,15 +170,6 @@ in {
 
   programs.firefox.enable = true;
   programs.nm-applet.indicator = true;
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-    exo
-    mousepad
-    thunar-archive-plugin
-    thunar-volman
-    tumbler
-  ];
-
   programs.virt-manager.enable = true;
 
   programs.steam = {

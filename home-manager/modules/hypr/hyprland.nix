@@ -23,6 +23,7 @@ in {
       "$mod"        = "SUPER";
       "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
       "$files"      = "${pkgs.yazi}/bin/yazi";
+      "$filesGUI"   = "${pkgs.kdePackages.dolphin}/bin/dolphin";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "$slurp" 			= "${pkgs.slurp}/bin/slurp";
       "$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
@@ -315,6 +316,7 @@ in {
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod, Z, exec, pypr zoom # Toggle Desktop Zoom"
         "$mod, E, exec, uwsm app -- $terminal -e $files"
+        "$mod SHIFT, E, exec, uwsm app -- $filesGUI"
 
         # Switch workspaces with mod + [0-9] 
         "$mod, 1, workspace, 1 # NOTE: code:10 = key 1"
