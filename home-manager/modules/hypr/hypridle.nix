@@ -11,12 +11,12 @@
       };
       listener = [
         {
-          timeout = 90;
+          timeout = 120;
           on-timeout = "if ! ${isLocked}; then hyprlock --grace 5; fi";
         }
         # If already locked
         {
-          timeout = 120;
+          timeout = 720;
           on-timeout = "if ${isLocked}; then hyprctl dispatch dpms off; fi";
           on-resume = "hyprctl dispatch dpms on";
         }
