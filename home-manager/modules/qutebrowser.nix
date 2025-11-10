@@ -55,7 +55,7 @@
 
       # dark mode
       c.colors.webpage.preferred_color_scheme = "dark"
-      config.set('colors.webpage.darkmode.enabled', False, '*://youtube.com/*')
+      # config.set('colors.webpage.darkmode.enabled', False, '*://youtube.com/*')
       
       config.bind('e', 'hint links spawn ${../../hosts/rakki/scripts/yt_mpv.sh} {hint-url}')
       config.bind('E', 'hint links spawn ${../../hosts/rakki/scripts/yt_mpv.sh} {url}')

@@ -13,6 +13,8 @@
       window = {
         opacity = 0.85;
         blur = true;
+        padding.x = 4;
+        padding.y = 4;
       };
     };
   };
