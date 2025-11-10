@@ -5,18 +5,10 @@
 }:
 {
 
-  services.hypridle = {
+   programs.hyprlock = {
     enable = true;
+
     settings = {
-      idle_timeout = 300;
-      lock_cmd = "${pkgs.hyprlock}/bin/hyprlock";
-    };
-  };
-
-  programs.hyprlock = {
-    enable = true;
-
-    settings = lib.mkForce {
       general = {
         hide_cursor = true;
         no_fade_in = false;
