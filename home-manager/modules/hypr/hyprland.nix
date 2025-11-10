@@ -20,7 +20,7 @@ in {
       variables = ["--all"];
     };
     settings = {
-      "$mod"    = "SUPER";
+      "$mod"        = "SUPER";
       "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
       "$files"      = "${pkgs.yazi}/bin/yazi";
       "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
@@ -241,7 +241,7 @@ in {
         "__NV_PRIME_RENDER_OFFLOAD,1 "
         "__VK_LAYER_NV_optimus,NVIDIA_only"
         "WLR_DRM_NO_ATOMIC,1"
-        "LIBGL_ALWAYS_SOFTWARE,1 # Warning. May cause hyprland to crash"
+        # "LIBGL_ALWAYS_SOFTWARE,1 # Warning. May cause hyprland to crash"
         "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "MOZ_DISABLE_RDD_SANDBOX,1"
         "EGL_PLATFORM,wayland"
