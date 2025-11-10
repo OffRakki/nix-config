@@ -45,8 +45,8 @@
       settings = {
         default_session = {
           user = "rakki";
-					command = "${pkgs.uwsm}/bin/uwsm start default";
-          #command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
+					command = "${lib.getExe pkgs.uwsm} start default";
+          #command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
         };
       };
     };

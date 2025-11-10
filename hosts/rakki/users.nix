@@ -1,8 +1,8 @@
-{ pkgs, username, ... }:
+{ pkgs, username, lib, ... }:
 
 {
   users = { 
-    defaultUserShell = "${pkgs.fish}/bin/fish";
+    defaultUserShell = "${lib.getExe pkgs.fish}";
     mutableUsers = true;
     users = {
       rakki = {

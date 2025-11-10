@@ -21,12 +21,12 @@ in {
     };
     settings = {
       "$mod"        = "SUPER";
-      "$terminal"   = "${pkgs.alacritty}/bin/alacritty";
-      "$files"      = "${pkgs.yazi}/bin/yazi";
-      "$filesGUI"   = "${pkgs.kdePackages.dolphin}/bin/dolphin";
-      "$qalc" 			= "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
-      "$slurp" 			= "${pkgs.slurp}/bin/slurp";
-      "$hyprshot"   = "${pkgs.hyprshot}/bin/hyprshot";
+      "$terminal"   = "${lib.getExe pkgs.alacritty}";
+      "$files"      = "${lib.getExe pkgs.yazi}";
+      "$filesGUI"   = "${lib.getExe' pkgs.kdePackages.dolphin "dolphin"}";
+      "$qalc" 			= "${lib.getExe pkgs.qalculate-gtk}";
+      "$slurp" 			= "${lib.getExe pkgs.slurp}";
+      "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
 
       monitor = [ 
         "DP-3,1920x1080@239.76,0x0,1"

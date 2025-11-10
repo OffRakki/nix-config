@@ -3,7 +3,7 @@
 	programs.kitty = lib.mkForce {
 		enable = true;
 		settings = {
-			shell = "${pkgs.fish}/bin/fish";
+			shell = "${lib.getExe pkgs.fish}";
 			foreground = "rgb(dddddd)";
 			background = "rgb(000000)";
 			confirm_os_window_close = 0;

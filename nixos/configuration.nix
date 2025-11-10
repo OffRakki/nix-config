@@ -68,7 +68,7 @@
       };
       wrappers.sudo-rs = {
         #source = "${lib.getExe pkgs.sudo-rs}";
-        source = "${pkgs.sudo-rs}/bin/sudo";
+        source = "${lib.getExe pkgs.sudo-rs}";
         setuid = true;
         setgid = true;
         owner = "0";
