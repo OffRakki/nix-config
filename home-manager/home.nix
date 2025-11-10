@@ -13,6 +13,7 @@
     ./modules
     ./home-packages.nix
     ./gtk.nix
+    ./qt.nix
     ../nixos/variables.nix
   ];
 
