@@ -219,7 +219,7 @@ in {
 
       env = [ 
         "NIXOS_OZONE_WL,1"
-        "EDITOR,nvim #default editor"
+        "EDITOR,hx" #default editor
         "CLUTTER_BACKEND,wayland"
         "GDK_BACKEND,wayland,x11"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"

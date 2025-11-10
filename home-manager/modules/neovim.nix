@@ -2,7 +2,7 @@
 
   programs.neovim = lib.mkDefault {
     enable = true;
-    defaultEditor= true;
+    defaultEditor= false;
     extraConfig = ''
 	set number relativenumber
 	set shiftwidth=2

@@ -2,7 +2,7 @@
 
   programs.helix = lib.mkForce {
     enable = true;
-    defaultEditor= false;
+    defaultEditor= true;
     settings = {
       theme = "gruvbox";
       editor = {
