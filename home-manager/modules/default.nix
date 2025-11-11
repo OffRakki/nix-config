@@ -1,5 +1,6 @@
 {
   imports = [
+    ./vicinae.nix
     ./kdeconnect.nix
     ./mako.nix
     ./fish.nix

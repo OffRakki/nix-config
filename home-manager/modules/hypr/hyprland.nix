@@ -255,6 +255,8 @@ in {
         # "uwsm app -- ags"
         "uwsm app -- blueman-applet"
         "uwsm app -- pypr"
+        "uwsm app -- vicinae server"
+        "uwsm app -- swww-daemon"
         "sleep 3 && hyprlock"
       ];
 
@@ -292,7 +294,8 @@ in {
         ", Print, exec, $hyprshot -z --clipboard-only -m region"
         "$mod, M, exec, loginctl terminate-user '' "
         "$mod, L, exec, uwsm app -- hyprlock"
-        "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
+        # "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
+        "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
         "$mod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
         "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e nvim"
