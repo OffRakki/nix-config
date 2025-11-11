@@ -33,5 +33,7 @@
   };
 
   environment.shells = with pkgs; [ fish ];
-  environment.systemPackages = with pkgs; [ fzf ]; 
+  environment.systemPackages = with pkgs; [
+    fzf
+  ]; 
 }
