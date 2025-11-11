@@ -40,6 +40,12 @@
       };
       shellAbbrs = {
 
+        # jujutsu
+        jjs  = "jj split -r";
+        jjm  = "jj b m master --to";
+        jjsq = "jj squash -r";
+        jjd  = "jj describe -r"; 
+
         # nix
         ncg = "nix-collect-garbage";
         nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
