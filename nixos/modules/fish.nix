@@ -53,11 +53,6 @@
         nixdev = "nix develop -c $SHELL";
         nix-shell = "nix-shell --command $SHELL";
 
-        # sudo
-        sv = "sudo nvim";
-
-        # neofetch (uwufetch)
-        #neofetch = "neofetch --backend jp2a --source ~/.config/alacritty/uwuarch/uwuarch.png"
         ff = "fastfetch";
 
         # fish
@@ -68,22 +63,8 @@
         #celumount = "fusermount -u ~/mount/"
 
 
-        # nvim
-        vfish = "nvim ~/.config/fish/config.fish";
-        nvfish = "neovide ~/.config/fish/config.fish";
-        vzsh = "nvim ~/.zshrc";
-        nvzsh = "neovide ~/.zshrc";
-        vi3 = "nvim ~/.i3/config";
-        nvi3 = "neovide ~/.i3/config";
-        vherb = "nvim ~/.config/herbstluftwm/autostart";
-        valias = "nvim ~/.aliases";
-        nvalias = "neovide ~/.aliases";
-        vim = "nvim";
-        v = "nvim";
-        nv = "neovide";
-        vstar = "nvim ~/.config/starship.toml";
-        vbkp = "nvim ~/.scripts/backup/backup.sh";
-
+        # text editor
+        v = "hx";
 
         # cd
         ".." = "cd ..";
@@ -94,11 +75,6 @@
         yta-mp3 = "youtube-dl --extract-audio --audio-format mp3 -o '~/yt-downloads/%(title)s.%(ext)s' ";
         ytd-best = "youtube-dl -f mp4+bestaudio -o '~/yt-downloads/%(title)s.%(ext)s' ";
 
-        # mpv
-        mpvs = "~/.scripts/mpv/mpvs";
-        mpvsa = "~/.scripts/mpv/mpvsa";
-
-
         # git
         gitall = "git add -A && git commit -a && git push";
 
@@ -106,7 +82,6 @@
         pipes = "pipes.sh -t 3 -f 100 -R -r 0";
         htop = "btop";
         cat = "bat";
-        localserver = "~/.scripts/localserver/startlocalserver";
       };
     };
   };
