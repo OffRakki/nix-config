@@ -120,22 +120,4 @@ in {
       auth_scope = "https://mail.google.com/ https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/contacts";
     };
   };
-
-  # Override oama to wrap with libsecret and/or gnupg
-  # Remove once https://github.com/NixOS/nixpkgs/pull/401420 is merged
-  nixpkgs.overlays = [
-    (final: prev: {
-      oama = prev.oama.overrideAttrs (old: {
-        nativeBuildInputs = [final.makeBinaryWrapper];
-        postInstall = ''
-          wrapProgram $out/bin/oama \
-            --prefix PATH : ${lib.makeBinPath [
-            final.coreutils
-            final.libsecret
-            final.gnupg
-          ]}
-        '';
-      });
-    })
-  ];
 }

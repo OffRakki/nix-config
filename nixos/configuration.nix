@@ -8,32 +8,32 @@
 		./hardware-configuration.nix
   ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    backupFileExtension = "backup";
-    users = {
-      # Import your home-manager config
-      rakki = import ../home-manager/home.nix;
-    };
-  };
-
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      #neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
+  nixpkgs ={
+    overlays = [(final: _: {
+      inputs =
+        builtins.mapAttrs (
+          _: flake: let
+            legacyPackages = (flake.legacyPackages or {}).${final.stdenv.system} or {};
+            packages = (flake.packages or {}).${final.stdenv.system} or {};
+          in
+            packages // legacyPackages
+        )
+        inputs;
+    })];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+    };
+  };
+  
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    users = {
+      # Import your home-manager config
+      rakki = import ../home-manager/home.nix;
     };
   };
 
@@ -135,6 +135,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    nix-ld
     networkmanager
     netplan
     jujutsu

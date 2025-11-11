@@ -10,8 +10,6 @@
 
 in {
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     #gaming
     lutris
