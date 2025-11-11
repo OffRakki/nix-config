@@ -4,10 +4,15 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [
+    "quiet"
+    # "splash"
+  ];
 	# Uncomment if want to do GPU passthrough to a VM
-	#boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "vfio-pci.ids=10de:2504,10de:228e" ];
   boot.extraModulePackages = [ ];
 	boot.supportedFilesystems = [ "ntfs" ];
+
+	# Fix for wireless keyboard's FN keys not working properly
 	boot.extraModprobeConfig = ''
 	  options hid_apple fnmode=0    
 	'';
