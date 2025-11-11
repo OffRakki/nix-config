@@ -4,6 +4,7 @@
     ./packages-fonts.nix
     ./users.nix
     ./drivers
+    ./tailscale.nix
   ];
 
   # Extra Module Options
