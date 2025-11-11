@@ -35,7 +35,6 @@
     self,
     nixpkgs,
     home-manager,
-    stylix,
 		nvf,
     alejandra,
     ...
@@ -54,7 +53,6 @@
         	# Main config file
         	modules = [
           	inputs.nvf.nixosModules.default
-          	inputs.stylix.nixosModules.default
 						./nixos/configuration.nix
 					];
       	};
@@ -66,7 +64,6 @@
     	  };
     	  pkgs = nixpkgs.legacyPackages.x86_64-linux;
     	  modules = [
-  				inputs.stylix.homeModules.stylix
   				./home-manager/home.nix
     	  ];
     	};
