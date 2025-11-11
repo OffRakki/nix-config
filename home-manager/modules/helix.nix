@@ -48,5 +48,11 @@
         colors.command = lib.getExe pkgs.uwu-colors;
       };
     };
+    themes = {
+      gruvbox = {
+        "inherits" = "gruvbox";
+        "ui.background" = { };
+      };
+    };
   };
 }

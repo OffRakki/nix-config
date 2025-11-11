@@ -108,7 +108,6 @@ in {
     jq
     alacritty
     kitty
-    libsForQt5.qtstyleplugin-kvantum #kvantum
     networkmanagerapplet
     nwg-look
     nvtopPackages.full	 
@@ -117,10 +116,9 @@ in {
     playerctl
     polkit_gnome
     pyprland
-    libsForQt5.qt5ct
-    kdePackages.qt6ct
-    kdePackages.qtwayland
-    kdePackages.qtstyleplugin-kvantum #kvantum
+    qt5.qtbase
+    qt6.qtbase
+    libsForQt5.qtstyleplugins
     rofi
     slurp
     swappy
@@ -161,9 +159,9 @@ in {
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["JetBrainsMono Nerd Font"];
-        sansSerif = ["JetBrainsMono Nerd Font"];
-        monospace = ["JetBrainsMono Nerd Font"];
+        serif = ["Noto Serif"];
+        sansSerif = ["Noto Sans"];
+        monospace = ["JetBrainsMono"];
       };
     };
   };
