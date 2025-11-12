@@ -42,12 +42,12 @@
   # Services to start
   services = {
     greetd = {
-      enable = true;
+      enable = false;
       settings = {
         default_session = {
           user = "rakki";
-					command = "${lib.getExe pkgs.uwsm} start default";
-          #command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
+					# command = "${lib.getExe pkgs.uwsm} start default";
+          command = "${lib.getExe pkgs.tuigreet} --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
         };
       };
     };

@@ -119,17 +119,24 @@
     XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
-  # Enable this to change to xserver + i3
 	services.xserver = {
-		enable = false;
+		enable = true;
     xkb = {
       layout = "us";
       variant = "intl";
     };
-		autorun = false;
-		displayManager.startx.enable = false;
-		windowManager.i3.enable = false;
-	};
+  };
+		services.displayManager = {
+		  sddm = {
+		    enable = true;
+		    wayland.enable = true;
+		    theme = "sddm-astronaut-theme";
+		    extraPackages = with pkgs; [
+		      kdePackages.qtmultimedia
+		      kdePackages.qt5compat  
+		    ];
+		  };
+		};
 
   console = {
     useXkbConfig = true;
@@ -146,6 +153,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sddm-astronaut
+    sddm-sugar-dark
     niriswitcher
     fuzzel
     nix-ld

@@ -1,4 +1,4 @@
-{ inputs, stylix, lib, config, pkgs, ... }: let
+{ inputs,lib, config, pkgs, ... }: let
 
   swayosd = {
     output-volume = "swayosd-client --output-volume +0";
@@ -105,7 +105,7 @@ in {
       cursor = {
         no_hardware_cursors = true;
         enable_hyprcursor = true;
-        warp_on_change_workspace = 2;
+        warp_on_change_workspace = 1;
         no_warps = true;
       };
 
@@ -257,7 +257,6 @@ in {
         "uwsm app -- pypr"
         "uwsm app -- vicinae server"
         "uwsm app -- swww-daemon"
-        "sleep 3 && hyprlock"
       ];
 
       binde = [
