@@ -37,66 +37,66 @@
     LC_TELEPHONE =      "en_US.UTF-8";
     LC_TIME =           "en_US.UTF-8";
   };
-
+  services = {
     smartd = {
       enable = false;
       autodetect = true;
     };
-    
-	  gvfs.enable = true;
-	  tumbler.enable = true;
+  
+    gvfs.enable = true;
+    tumbler.enable = true;
 
-	  pipewire = {
+    pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-	    wireplumber.enable = true;
+      wireplumber.enable = true;
   	};
-	
-    pulseaudio.enable = false; #unstable
-	  udev.enable = true;
-	  envfs.enable = true;
-	  dbus.enable = true;
 
-	  fstrim = {
+    pulseaudio.enable = false; #unstable
+    udev.enable = true;
+    envfs.enable = true;
+    dbus.enable = true;
+
+    fstrim = {
       enable = true;
       interval = "weekly";
     };
-  
+
     libinput.enable = true;
 
     rpcbind.enable = false;
     nfs.server.enable = false;
-  
+
     flatpak.enable = false;
-	
+
   	blueman.enable = true;
-  	
+	
   	hardware.openrgb.enable = true;
   	hardware.openrgb.motherboard = "amd";
 
-	  fwupd.enable = true;
+    fwupd.enable = true;
 
-	  upower.enable = true;
-    
+    upower.enable = true;
+  
     gnome.gnome-keyring.enable = true;
-    
+  
     #printing = {
     #  enable = false;
     #  drivers = [
         # pkgs.hplipWithPlugin
     #  ];
     #};
-    
+  
     #avahi = {
     #  enable = true;
     #  nssmdns4 = true;
     #  openFirewall = true;
     #};
-    
+  
     #ipp-usb.enable = true;
-    
+  
     #syncthing = {
     #  enable = false;
     #  user = "${username}";
@@ -105,7 +105,7 @@
     #};
 
   };
-  
+
   systemd.services.flatpak-repo = {
     path = [ pkgs.flatpak ];
     script = ''
