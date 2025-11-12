@@ -38,20 +38,6 @@
     LC_TIME =           "en_US.UTF-8";
   };
 
-
-  # Services to start
-  services = {
-    greetd = {
-      enable = false;
-      settings = {
-        default_session = {
-          user = "rakki";
-					# command = "${lib.getExe pkgs.uwsm} start default";
-          command = "${lib.getExe pkgs.tuigreet} --time --cmd uwsm start default"; # start Hyprland with a TUI login manager
-        };
-      };
-    };
-    
     smartd = {
       enable = false;
       autodetect = true;
