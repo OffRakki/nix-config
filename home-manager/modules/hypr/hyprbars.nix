@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
 
@@ -22,8 +23,7 @@ in {
   wayland.windowManager.hyprland = {
     plugins = [hyprbars];
     settings = {
-      "plugin:hyprbars" = lib.mkForce {
-        enabled = true;
+      "plugin:hyprbars" = {
         # Local colors
         bar_color = "rgba(141617dd)";
         "col.text" = "rgba(e78a4eff)";

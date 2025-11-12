@@ -10,6 +10,7 @@ in {
 
   imports = [
     ./hyprbars.nix
+    ./hyprscrolling.nix
   ];
 
   wayland.windowManager.hyprland = {
@@ -55,7 +56,7 @@ in {
       general = {
         resize_on_border = true;
         allow_tearing = false;
-        layout = "dwindle";
+        layout = "scrolling";
         border_size = 2;
         gaps_in = 4;
         gaps_out = 8;
@@ -252,7 +253,7 @@ in {
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- nm-applet --indicator"
-        # "uwsm app -- ags"
+        "uwsm app -- ags"
         "uwsm app -- blueman-applet"
         "uwsm app -- pypr"
         "uwsm app -- vicinae server"
@@ -290,7 +291,9 @@ in {
       bind = [ 
         "SUPER,g,togglegroup"
         "SUPER,i,pin"
-        ", Print, exec, $hyprshot -z --clipboard-only -m region"
+        ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
+        "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
+        "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
         "$mod, M, exec, loginctl terminate-user '' "
         "$mod, L, exec, uwsm app -- hyprlock"
         # "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
