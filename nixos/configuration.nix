@@ -26,6 +26,11 @@
       allowUnfree = true;
     };
   };
+
+  services.displayManager.sessionPackages = [
+    pkgs.niri
+    pkgs.hyprland
+  ];
   
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
@@ -90,6 +95,12 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
+
   services.tailscale.enable = true;
 
   services.mpd= {
@@ -135,6 +146,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    niriswitcher
+    fuzzel
     nix-ld
     networkmanager
     netplan
