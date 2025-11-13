@@ -1,124 +1,140 @@
-{ pkgs, config, nix-colors, ... }: {
-    programs = {
-	nushell = {
+{ pkgs, config, lib, ... }: {
+  programs = {
+		nushell = lib.mkForce {
 	    enable = true;
 	    extraConfig = ''
-		let carapace_completer = {|spans|
-		carapace $spans.0 nushell ...$spans | from json
-		}
-		$env.config = {
-		    show_banner: false,
-		    completions: {
-			case_sensitive: false # case-sensitive completions
-			quick: true    # set to false to prevent auto-selecting completions
-			partial: true    # set to false to prevent partial filling of the prompt
-			algorithm: "fuzzy"    # prefix or fuzzy
-			external: {
-			# set to false to prevent nushell looking into $env.PATH to find more suggestions
-			enable: true 
-			# set to lower can improve completion performance at the cost of omitting some options
-			max_results: 100 
-			completer: $carapace_completer # check 'carapace_completer' 
-			}
+
+				def create_left_prompt [] {
+          let dir = match (do { $env.PWD | path relative-to $nu.home-path }) {
+              null => $env.PWD
+              ''' => '~'
+              $relative_pwd => ([~ $relative_pwd] | path join)
+          }
+
+          let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
+          let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
+          let path_segment = $"($path_color)($dir)"
+
+          $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
+	      }
+
+	      def create_right_prompt [] {
+          # create a right prompt in magenta with green separators and am/pm underlined
+          let time_segment = ([
+              (ansi reset)
+              (ansi magenta)
+              (date now | format date '%x %X') # try to respect user's locale
+          ] | str join | str replace --regex --all "([/:])" $"(ansi green)''${1}(ansi magenta)" |
+              str replace --regex --all "([AP]M)" $"(ansi magenta_underline)''${1}")
+
+          let last_exit_code = if ($env.LAST_EXIT_CODE != 0) {([
+              (ansi rb)
+              ($env.LAST_EXIT_CODE)
+          ] | str join)
+          } else { "" }
+
+          ([$last_exit_code, (char space), $time_segment] | str join)
+	      }
+
+	      def create_title [] {
+	        let prefix = if SSH_TTY in $env {$"[(hostname | str replace -r "\\..*" "")] "}
+	        let path = pwd | str replace $env.HOME "~"
+	        ([$prefix, $path] | str join)
+	      }
+
+	      $env.PROMPT_COMMAND = { || create_left_prompt }
+	      $env.PROMPT_COMMAND_RIGHT = { || create_right_prompt }
+	      $env.PROMPT_INDICATOR = {|| "> " }
+	      $env.PROMPT_INDICATOR_VI_INSERT = {|| "> " }
+	      $env.PROMPT_INDICATOR_VI_NORMAL = {|| "| " }
+	      $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
+
+	    	
+				let carapace_completer = {|spans|
+				carapace $spans.0 nushell ...$spans | from json
+				}
+				$env.config.show_banner = false
+				$env.config.completions = {
+					case_sensitive: false # case-sensitive completions
+					quick: true    # set to false to prevent auto-selecting completions
+					partial: true    # set to false to prevent partial filling of the prompt
+					algorithm: "fuzzy"    # prefix or fuzzy
+					external: {
+					# set to false to prevent nushell looking into $env.PATH to find more suggestions
+					enable: true 
+					# set to lower can improve completion performance at the cost of omitting some options
+					max_results: 100 
+					completer: $carapace_completer # check 'carapace_completer' 
+					}
 		    }
-		} 
-		$env.PATH = ($env.PATH | 
-		split row (char esep) |
-		prepend /home/rakki/.apps |
-		append /usr/bin/env
-		)
+				$env.PATH = ($env.PATH | 
+				split row (char esep) |
+				prepend /home/rakki/.apps |
+				append /usr/bin/env
+				)
 	    '';
-	  shellAliases = {
-	    
-# nix
-		ncg = "nix-collect-garbage";
-		nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
+		  shellAliases = {
+	      # jujutsu
+	      jjs  = "jj split -r";
+	      jjm  = "jj b m master --to";
+	      jjd  = "jj describe -r"; 
+	      jjsq = "jj squash -r";
+	      jjgp = "jj git push";
 
-# sudo
-		sv = "sudo nvim";
+	      # nix
+	      ncg = "nix-collect-garbage";
+	      nrd = "sudo nixos-rebuild switch --flake ~/Documents/nix-config#igris";
+	      # nhos = "nh os switch ~/Documents/nix-config";
+	      nixdev = "nix develop -c $env.SHELL";
+	      nix-shell = "nix-shell --command $env.SHELL";
 
-# neofetch (uwufetch)
-#neofetch = "neofetch --backend jp2a --source ~/.config/alacritty/uwuarch/uwuarch.png"
-		nf = "neofetch";
+	      ff = "fastfetch";
 
-# fish
-		src = "source ~/.config/fish/config.fish";
-
-# mount-cel
-#celmount = "simple-mtpfs --device 1 ~/mount/"
-#celumount = "fusermount -u ~/mount/"
-
-
-# nvim
-		vfish = "nvim ~/.config/fish/config.fish";
-		nvfish = "neovide ~/.config/fish/config.fish";
-		vzsh = "nvim ~/.zshrc";
-		nvzsh = "neovide ~/.zshrc";
-		vi3 = "nvim ~/.i3/config";
-		nvi3 = "neovide ~/.i3/config";
-		vherb = "nvim ~/.config/herbstluftwm/autostart";
-		valias = "nvim ~/.aliases";
-		nvalias = "neovide ~/.aliases";
-		vim = "nvim";
-		v = "nvim";
-		nv = "neovide";
-		vstar = "nvim ~/.config/starship.toml";
-		vbkp = "nvim ~/.scripts/backup/backup.sh";
+	      # mount-cel
+	      #celmount = "simple-mtpfs --device 1 ~/mount/"
+	      #celumount = "fusermount -u ~/mount/"
 
 
-# cd
-		".." = "cd ..";
+	      # text editor
+	      v = "hx";
 
-# youtube-dl
-		ytd = "youtube-dl -o '~/yt-downloads/%(title)s.%(ext)s' ";
-		yta-best = "youtube-dl --extract-audio --audio-format best -o '~/yt-downloads/%(title)s.%(ext)s' ";
-		yta-mp3 = "youtube-dl --extract-audio --audio-format mp3 -o '~/yt-downloads/%(title)s.%(ext)s' ";
-		ytd-best = "youtube-dl -f mp4+bestaudio -o '~/yt-downloads/%(title)s.%(ext)s' ";
+	      # cd
+	      ".." = "cd ..";
 
-# mpv
-		mpvs = "~/.scripts/mpv/mpvs";
-		mpvsa = "~/.scripts/mpv/mpvsa";
+	      # youtube-dl
+	      ytd = "youtube-dl -o '~/yt-downloads/%(title)s.%(ext)s' ";
+	      yta-best = "youtube-dl --extract-audio --audio-format best -o '~/yt-downloads/%(title)s.%(ext)s' ";
+	      yta-mp3 = "youtube-dl --extract-audio --audio-format mp3 -o '~/yt-downloads/%(title)s.%(ext)s' ";
+	      ytd-best = "youtube-dl -f mp4+bestaudio -o '~/yt-downloads/%(title)s.%(ext)s' ";
 
-# music
-		mpa = "~/.scripts/mpv/mpa.sh";
-		lofi = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'www.youtube.com/watch?v = hGvWS1pLb3g'";
-		lofi2 = "mpv --ytdl-format = bestaudio ytdl://ytsearch:https://www.youtube.com/watch?v = zRRq4Rd1lPs";
-		hype = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = MTahu17Cgc8'";
-		lucas20 = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = fLpCyU_SHRo'";
-		lucas19 = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = PhfXQ58ywuI'";
-		violin = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = iceS6BvhuQ8'";
-		violin2 = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = synJbsrk0k8'";
-		villain = "mpv --ytdl-format = bestaudio ytdl://ytsearch:'https://www.youtube.com/watch?v = le1l4eeo8Ow'";
-		bnha = "mpv --no-video ~/Music/BNHA/*";
-		gambare = "mpv --ytdl --no-video 'https://www.youtube.com/watch?v = gnxNdYi69Zg'";
+	      # git
+	      gitall = "git add -A; git commit -a; git push";
 
-# git
-		gitall = "git add -A and git commit -a and git push";
+	      # misc
+	      pipes = "pipes.sh -t 3 -f 100 -R -r 0";
+	      htop = "btop";
+	      cat = "bat";
 
-# misc
-		pipes = "pipes.sh -t 3 -f 100 -R -r 0";
-		htop = "btop";
-		cat = "bat";
-		localserver = "~/.scripts/localserver/startlocalserver";
+	      cp = "rsync --archive --verbose --progress";
+	      rsync = "rsync --archive --verbose --progress";
 
-# file management
-		mv = "mv -i";
-		rm = "rm -i";
-		cp = "cp -i";
-		df = "df -h";
-		#du = "du -hc --time";
-		tree = "tree --du -h";
-		ls = "ls -FahsSL --color = always";
-		#la = "ls -A";
+	      ls = "eza --colour=always --colour-scale all --colour-scale-mode gradient";
+	      la = "eza --colour=always --colour-scale all --colour-scale-mode gradient -a";
+	      eza = "eza --colour=always --colour-scale all --colour-scale-mode gradient";
+	      ezaa = "eza --colour=always --colour-scale all --colour-scale-mode gradient -a";
+	      mv = "mv -i";
+	      rm = "rm -i";
+	      df = "df -h";
+	      tree = "tree --du -h";
 
-		fzf = "fzf --color = 16";
+	      fzf = "fzf --color=16";
 
-		grep = "grep --color = always";
-		egrep = "egrep --color = always";
-		fgrep = "fgrep --color = always";
+	      grep = "grep --color=always";
+	      egrep = "egrep --color=always";
+	      fgrep = "fgrep --color=always";
 	    };
+		};
+		carapace.enable = true;
+		carapace.enableNushellIntegration = true;
 	};
-	carapace.enable = true;
-	carapace.enableNushellIntegration = true;
-    };
 }
