@@ -40,6 +40,10 @@
           name = "css";
           language-servers = ["colors"];
         }
+        {
+          name = "qml";
+          language-servers = ["colors"];
+        }
       ];
       language-server = {
         nixd = {
