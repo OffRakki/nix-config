@@ -12,7 +12,7 @@
       settings = {
         "plugin:hyprscrolling" = {
           fullscreen_on_one_column = true;
-          focus_fit_method = 0;
+          focus_fit_method = 1; # fit to screen
           column_width = 0.5;
         };
       };

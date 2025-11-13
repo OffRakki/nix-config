@@ -57,7 +57,7 @@ in {
         resize_on_border = true;
         allow_tearing = false;
         layout = "scrolling";
-        border_size = 2;
+        border_size = 1;
         gaps_in = 4;
         gaps_out = 8;
 
@@ -258,6 +258,8 @@ in {
         "uwsm app -- pypr"
         "uwsm app -- vicinae server"
         "uwsm app -- swww-daemon"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
       ];
 
       binde = [
@@ -300,7 +302,7 @@ in {
         "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
         "$mod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
         "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
-        "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e nvim"
+        "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e hx"
         "$mod, SPACE, togglefloating"
         "$mod, F, fullscreen, 1" # fake full screen 
         "$mod SHIFT, F, fullscreen"
