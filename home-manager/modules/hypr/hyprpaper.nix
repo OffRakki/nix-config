@@ -4,8 +4,8 @@
     settings = {
       ipc = true;
       splash = false;
-      preload = "${config.wallDir}/agbg.jpg";
-      wallpaper = ", ${config.wallDir}/agbg.jpg";
+      preload = "${config.wallDir}/blackHole.png";
+      wallpaper = ", ${config.wallDir}/blackHole.png";
     };
   };
 }
