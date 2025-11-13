@@ -1,6 +1,5 @@
 { inputs, lib, config, pkgs, outputs, ... }:
 {
-  # You can import other NixOS modules here
   imports = [
     inputs.home-manager.nixosModules.home-manager
 		../hosts/rakki/config.nix
@@ -22,11 +21,10 @@
     })];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
-
+  
   services.displayManager.sessionPackages = [
     pkgs.niri
     pkgs.hyprland
@@ -95,12 +93,6 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
-
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-  };
-
   services.tailscale.enable = true;
 
   services.mpd= {
@@ -142,7 +134,10 @@
     useXkbConfig = true;
   };
 
-	programs.dconf.enable = true;
+	programs.dconf = {
+	  enable = true;
+	};
+
   programs.direnv.nix-direnv.enable = true;
 
   programs.java = {
@@ -153,6 +148,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-luminous
+    xdg-desktop-portal-shana
+    xdg-desktop-portal
+    xwayland-satellite
+    xwayland
+    xwayland-run
+    wayback-x11
     localsend
     sddm-astronaut
     sddm-sugar-dark

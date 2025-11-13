@@ -186,8 +186,10 @@ in {
   # Extra Portal Configuration
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = false;
     wlr.enable = true;
     extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
     configPackages = [
@@ -195,5 +197,4 @@ in {
       pkgs.xdg-desktop-portal
     ];
   };
-
 }
