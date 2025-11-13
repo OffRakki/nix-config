@@ -24,7 +24,7 @@ in {
       "$mod"        = "SUPER";
       "$terminal"   = "${lib.getExe pkgs.alacritty}";
       "$files"      = "${lib.getExe pkgs.yazi}";
-      "$filesGUI"   = "${lib.getExe' pkgs.kdePackages.dolphin "dolphin"}";
+      "$filesGUI"   = "${lib.getExe pkgs.xfce.thunar}";
       "$qalc" 			= "${lib.getExe pkgs.qalculate-gtk}";
       "$slurp" 			= "${lib.getExe pkgs.slurp}";
       "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
@@ -114,7 +114,7 @@ in {
         rounding = 6;
 
         active_opacity = 1.0;
-        inactive_opacity = 0.95;
+        inactive_opacity = 0.90;
         fullscreen_opacity = 1.0;
 
         dim_inactive = false;
@@ -122,10 +122,10 @@ in {
         dim_special = 0.8;
 
         shadow = {
-          enabled = false;
-          range = 2;
+          enabled = true;
+          range = 4;
           render_power = 4;
-          #offset = "0 40";
+          # offset = "0 40";
           scale = 0.95;
 
           # "color" = "rgb(0,0,0)";
@@ -134,7 +134,7 @@ in {
 
         blur = {
           enabled = true;
-          size = 4;
+          size = 2;
           passes = 4;
           ignore_opacity = true;
           new_optimizations = true;
@@ -229,12 +229,10 @@ in {
         "GBM_BACKEND,nvidia-drm "
         "GDK_BACKEND,wayland,x11"
         "GDK_SCALE,1 "
-        "GTK_IM_MODULE=cedilla"
         "LIBVA_DRIVER_NAME,nvidia "
         "MOZ_DISABLE_RDD_SANDBOX,1"
         "MOZ_ENABLE_WAYLAND,1"
         "NVD_BACKEND,direct "
-        "QT_IM_MODULE=cedilla"
         "UWSM_APP_UNIT_TYPE,service"
         "WLR_DRM_DEVICES,/dev/dri/card1"
         "WLR_DRM_NO_ATOMIC,1"
@@ -281,7 +279,7 @@ in {
       ];
 
       bindl = [ 
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${swayosd.output-volume}"
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; ${swayosd.output-volume}"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; ${swayosd.output-volume}"
         "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle; ${swayosd.input-volume}"
@@ -296,7 +294,6 @@ in {
         ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
         "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
-        "$mod, M, exec, loginctl terminate-user '' "
         "$mod, L, exec, uwsm app -- hyprlock"
         # "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
         "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
@@ -312,8 +309,8 @@ in {
         "$mod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod, Z, exec, pypr zoom" # Toggle Desktop Zoom
-        "$mod, E, exec, uwsm app -- $terminal -e $files"
-        "$mod SHIFT, E, exec, uwsm app -- $filesGUI"
+        "$mod, E, exec, uwsm app -- $filesGUI"
+        "$mod SHIFT, E, exec, uwsm app -- $terminal -e $files"
 
         # Switch workspaces with mod + [0-9] 
         "$mod, 1, workspace, 1 # NOTE: code:10 = key 1"
