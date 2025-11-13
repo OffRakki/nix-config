@@ -9,6 +9,7 @@
 }:
 {
   imports = [
+    inputs.niri.homeModules.niri
     inputs.nvf.homeManagerModules.default
     ./modules
     ./home-packages.nix

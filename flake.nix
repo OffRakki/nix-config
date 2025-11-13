@@ -1,5 +1,5 @@
 {
-  description = "yeah!";
+  description = "declarative mess";
 
   inputs = {
     # Nix
@@ -14,6 +14,9 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+
+    # Niri
+    niri.url = "github:sodiboo/niri-flake";
 
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
@@ -44,21 +47,20 @@
     alejandra,
     hyprland,
     hyprland-plugins,
+    niri,
     ...
   } @inputs: 
 		let
     	inherit (self) outputs;
   	in {
-    	# NixOS configuration entrypoint
-    	# Available through 'nixos-rebuild --flake .#your-hostname'
     	nixosConfigurations = {
       	sora = nixpkgs.lib.nixosSystem {
         	specialArgs = {
 						inherit inputs;
 						inherit outputs;
 					};
-        	# Main config file
         	modules = [
+        	  # inputs.niri.homeModules.niri
           	inputs.nvf.nixosModules.default
 						./nixos/configuration.nix
 					];

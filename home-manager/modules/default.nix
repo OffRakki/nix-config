@@ -1,6 +1,6 @@
 {
   imports = [
-    # ./niri.nix
+    ./niri.nix
     ./vicinae.nix
     ./kdeconnect.nix
     ./mako.nix
