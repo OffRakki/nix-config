@@ -52,7 +52,7 @@
     	# NixOS configuration entrypoint
     	# Available through 'nixos-rebuild --flake .#your-hostname'
     	nixosConfigurations = {
-      	igris = nixpkgs.lib.nixosSystem {
+      	sora = nixpkgs.lib.nixosSystem {
         	specialArgs = {
 						inherit inputs;
 						inherit outputs;
