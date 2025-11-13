@@ -16,6 +16,7 @@
     qalculate-gtk
     vlc
 		warp
+		xfce.thunar-volman
 
 		# Langs
 		nil
@@ -64,8 +65,6 @@
 
     # WM stuff
     libnotify
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
     aquamarine
     hyprlang
     hyprutils

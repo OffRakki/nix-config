@@ -6,6 +6,7 @@
 }: {
   gtk = {
     enable = true;
+    colorScheme = "dark";
     theme = {
       name = "gruvbox-dark";
       package = pkgs.gruvbox-dark-gtk;
@@ -18,6 +19,15 @@
       name = "JetBrainsMono Nerd Font";
       size = 12;
     };
+    gtk3 = {
+      enable = true;
+      extraConfig.Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+    gtk4.extraConfig.Settings = ''
+      gtk-application-prefer-dark-theme=1
+    '';
   };
   home.pointerCursor = {
     gtk.enable = true;

@@ -24,9 +24,16 @@
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/nixConfig";
       QT_QPA_PLATFORM = "wayland";
+      GTK_THEME = "gruvbox-dark";
     };
   };
 
+	dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+	};
+  
   xdg.mimeApps = {
     defaultApplications = {
       "application/pdf" = "evince.desktop";

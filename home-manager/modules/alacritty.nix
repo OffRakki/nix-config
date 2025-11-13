@@ -1,5 +1,5 @@
 {config, pkgs, lib, ...}: {
-  programs.alacritty = lib.mkForce {
+  programs.alacritty = {
     enable = true;
     settings = {
       terminal.shell = "${pkgs.fish}/bin/fish";
@@ -11,10 +11,13 @@
         };
       };
       window = {
-        opacity = 0.85;
+        dynamic_title = true;
+        # opacity = 0.85;
         blur = true;
-        padding.x = 4;
-        padding.y = 4;
+        padding = {
+          x = 4;
+          y = 4;
+        };
       };
     };
   };
