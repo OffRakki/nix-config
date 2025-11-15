@@ -37,9 +37,12 @@
   
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = {
+    defaultApplications = lib.mkBefore {
       "application/pdf" = "evince.desktop";
-    };
+  	  "text/html" = ["brave-browser.desktop"];
+      "text/xml" = ["brave-browser.desktop"];
+      "x-scheme-handler/http" = ["brave-browser.desktop"];
+      "x-scheme-handler/https" = ["brave-browser.desktop"];    };
   };
 
   # Enable home-manager

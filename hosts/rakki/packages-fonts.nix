@@ -87,7 +87,8 @@ in {
     ranger
     todo
 
-    # Hyprland Stuff
+    # WM Stuff
+    brave
     hyprpaper
     ags_1 # desktop overview  
     wl-color-picker

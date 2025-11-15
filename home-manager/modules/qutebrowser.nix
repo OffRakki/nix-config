@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
 
-	xdg.mimeApps.defaultApplications = lib.mkBefore {
+	xdg.mimeApps.defaultApplications = {
 	  "text/html" = ["org.qutebrowser.qutebrowser.desktop"];
     "text/xml" = ["org.qutebrowser.qutebrowser.desktop"];
     "x-scheme-handler/http" = ["org.qutebrowser.qutebrowser.desktop"];
