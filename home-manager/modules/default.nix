@@ -1,10 +1,11 @@
 {
   imports = [
+    ./fish
+    ./hypr
     ./niri.nix
     ./vicinae.nix
     ./kdeconnect.nix
     ./mako.nix
-    ./fish.nix
     ./clipnotify.nix
     ./swayosd.nix
     ./jujutsu.nix
@@ -17,7 +18,6 @@
     ./wofi.nix
     ./nvf.nix
     ./fastfetch.nix
-    ./hypr
     ./git.nix
     ./waybar.nix
     ./neovim.nix
