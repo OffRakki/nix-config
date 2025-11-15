@@ -26,7 +26,7 @@
   };
   
   services.displayManager.sessionPackages = [
-    pkgs.niri
+    inputs.niri.packages.${pkgs.system}.niri-unstable
     pkgs.hyprland
   ];
   

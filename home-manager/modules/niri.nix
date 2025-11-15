@@ -173,8 +173,8 @@ in
       };
       "Mod+Return".action.spawn = terminal;
       "Mod+Shift+M".action.spawn-sh = ["niri msg action quit"];
-      "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
-      # "Mod+D".action.spawn-sh = [ "wofi --show run -G --insensitive" ];
+      # "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
+      "Mod+D".action.spawn-sh = [ "wofi -S drun -x 10 -y 10 -W 14% -H 40%" ];
       "Mod+Shift+Q" = {
         action = close-window;
         cooldown-ms = 150;
@@ -264,8 +264,8 @@ in
       
       "Mod+Ctrl+left".action = focus-monitor-left;
       "Mod+Ctrl+right".action = focus-monitor-right;
-      "Mod+Ctrl+up".action = focus-monitor-up;
-      "Mod+Ctrl+down".action = focus-monitor-down;
+      "Mod+Ctrl+up".action = focus-workspace-up;
+      "Mod+Ctrl+down".action = focus-workspace-down;
 
       "Mod+Ctrl+Shift+left".action = move-column-to-monitor-left;
       "Mod+Ctrl+Shift+right".action = move-column-to-monitor-right;
