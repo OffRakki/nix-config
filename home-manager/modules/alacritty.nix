@@ -4,7 +4,7 @@
     settings = {
       terminal.shell = "${pkgs.fish}/bin/fish";
       font = {
-        size = 12;
+        size = 11;
         normal = {
           family = "JetBrainsMono Nerd Font";
           style = "Regular";

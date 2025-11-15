@@ -1,55 +1,58 @@
 { pkgs, lib, config, ... }: {
 
-  programs.wofi = lib.mkForce {
+  programs.wofi = {
     enable = true;
     settings = {
-      image_size = 20;
+      image_size = 16;
+      columns = 3;
       allow_images = true;
       hide_scroll = true;
-      columns = 2;
+      run-always_parse_args = true;
+      # run-cache_file = "/dev/null"; # Maybe
+      run-exec_search = true;
       insensitive = true;
+      matching = "multi-contains";
     };
     style = ''
-    * {
-      font-family: JetBrainsMono;
-      color: #ddc7a1;
-      background: transparent;
-    }
+      * {
+        font-family: FiraSans;
+        font-size: 14px;
+        color: #ddc7a1;
+        background: transparent;
+      }
 
-    #window {
-      background: #282828;
-      margin: auto;
-      padding: 20px;
-      border-radius: 10px;
-      border: 4px solid #3c3836;
-    }
+      #window {
+        background: #282828;
+        margin: auto;
+        padding: 20px;
+        border-radius: 6px;
+        border: 4px solid #3c3836;
+      }
 
-    #input {
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 15px;
-    }
+      #input {
+        padding: 4px;
+        margin-bottom: 4px;
+      }
 
-    #outer-box {
-      padding: 20px;
-    }
+      #outer-box {
+        padding: 8px;
+      }
 
-    #img {
-      margin-right: 6px;
-    }
+      #img {
+        margin-right: 4px;
+      }
 
-    #entry {
-      padding: 10px;
-      border-radius: 15px;
-    }
+      #entry {
+        padding: 4px;
+      }
 
-    #entry:selected {
-      background-color: #928374;
-    }
+      #entry:selected {
+        background-color: #928374;
+      }
 
-    #text {
-      margin: 2px;
-    }
+      #text {
+        margin: 2px;
+      }
     '';
   };
 }

@@ -16,7 +16,7 @@
       package= pkgs.gruvbox-dark-icons-gtk;
     };
     font = {
-      name = "JetBrainsMono Nerd Font";
+      name = "FiraSans";
       size = 12;
     };
     gtk3 = {
