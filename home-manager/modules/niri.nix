@@ -97,17 +97,19 @@ in
         default-column-width.proportion = 0.5;
         # drawn around the window (outside)
         focus-ring = {
-          enable = true;
+          enable = false;
           width = 2;
-          active.color = "#e78a4eff";
-          inactive.color = "#141617dd";
+          active.color = "#EFDECD";
+          inactive.color = "#CD9575";
+          urgent.color = "#E32636";
         };
         # drawn inside the window
         border = {
-          enable = false;
-          width = 1;
-          active.color = "#e78a4eff";
-          inactive.color = "#141617dd";
+          enable = true;
+          width = 2;
+          active.color = "#EFDECD";
+          inactive.color = "#CD9575";
+          urgent.color = "#E32636";
         };
         gaps = 8;
         struts = {
@@ -118,7 +120,7 @@ in
         };
         shadow = {
           enable = true;
-          draw-behind-window = false;
+          draw-behind-window = true;
           color = "#00000070";
           inactive-color = "#00000070";
           # offset = {
@@ -151,6 +153,7 @@ in
           ];
           excludes = [
             { app-id = "google-chrome"; }
+            { app-id = "org.qutebrowser.qutebrowser"; }
             { app-id  = "vesktop"; }
           ];
           opacity = 0.9;
@@ -161,8 +164,18 @@ in
             { app-id = "floatclass"; }
             { app-id = "chrome-nngceckbapebfimnlniiiahkandclblb-Default"; }
             { app-id  = ".*Bitwarden.*"; }
+            { app-id  = "org.pulseaudio.pavucontrol"; }
           ];
           open-floating = true;
+        }
+        {
+          matches = [
+            { title = ".*/home/deby.*"; }
+          ];
+          border = {
+            active.color = "#00FFFF";
+            inactive.color = "#5D8AA8";
+          };
         }
       ];
 
@@ -174,7 +187,7 @@ in
       "Mod+Return".action.spawn = terminal;
       "Mod+Shift+M".action.spawn-sh = ["niri msg action quit"];
       # "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
-      "Mod+D".action.spawn-sh = [ "wofi -S drun -x 10 -y 10 -W 14% -H 40%" ];
+      "Mod+D".action.spawn-sh = [ "wofi -S drun -W 14% -H 40%" ];
       "Mod+Shift+Q" = {
         action = close-window;
         cooldown-ms = 150;
