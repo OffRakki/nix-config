@@ -25,7 +25,6 @@
     # CLI utils
     yazi
     todo
-    gamescope
     ranger
     libqalculate
     comma

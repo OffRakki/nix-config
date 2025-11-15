@@ -168,13 +168,6 @@ in {
   programs.nm-applet.indicator = true;
   programs.virt-manager.enable = true;
 
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
-
   programs.seahorse.enable = true;
   programs.fuse.userAllowOther = true;
   programs.mtr.enable = true;
