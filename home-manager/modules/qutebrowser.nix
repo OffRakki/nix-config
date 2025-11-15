@@ -1,5 +1,13 @@
 { pkgs, config, lib, ... }: {
 
+	xdg.mimeApps.defaultApplications = lib.mkBefore {
+	  "text/html" = ["org.qutebrowser.qutebrowser.desktop"];
+    "text/xml" = ["org.qutebrowser.qutebrowser.desktop"];
+    "x-scheme-handler/http" = ["org.qutebrowser.qutebrowser.desktop"];
+    "x-scheme-handler/https" = ["org.qutebrowser.qutebrowser.desktop"];
+    "x-scheme-handler/qute" = ["org.qutebrowser.qutebrowser.desktop"];
+	};
+
 	programs.qutebrowser = {
 		enable = true;
     loadAutoconfig = true;
@@ -42,7 +50,7 @@
         indicator.width = 0;
         width = "10%";
       };
-      new_instance_open_target = "window";
+      new_instance_open_target = "tab";
       #colors = {
       #};
 		};    
@@ -62,4 +70,4 @@
       config.bind('xb', 'config-cycle statusbar.show always never')
     '';
 	};
-																				}
+}
