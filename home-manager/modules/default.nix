@@ -2,6 +2,7 @@
   imports = [
     ./fish
     ./hypr
+    ./rbw.nix
     ./niri.nix
     ./vicinae.nix
     ./kdeconnect.nix
