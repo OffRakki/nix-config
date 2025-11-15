@@ -25,13 +25,12 @@ in
         EGL_PLATFORM = "wayland";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         GBM_BACKEND = "nvidia-drm ";
-        # GDK_BACKEND = "wayland,x11";
-        # GDK_SCALE = "1";
+        GDK_BACKEND = "wayland,x11";
+        GDK_SCALE = "1";
         LIBVA_DRIVER_NAME = "nvidia";
         MOZ_DISABLE_RDD_SANDBOX = "1";
         MOZ_ENABLE_WAYLAND = "1";
         NVD_BACKEND = "direct";
-        UWSM_APP_UNIT_TYPE = "service";
         WLR_DRM_DEVICES = "/dev/dri/card1";
         WLR_DRM_NO_ATOMIC = "1";
         WLR_RENDERER_ALLOW_SOFTWARE = "1";
@@ -57,6 +56,7 @@ in
         { argv = [ "clipse" "-listen" ]; }
         { argv = [ "vicinae" "server" ]; }
         { sh = "sleep 3; pkill swww-daemon; swww-daemon"; }
+        { sh = "sleep 3; systemctl --user restart clip-notify"; }
         { argv = [ "xwayland-satellite" ]; }
         { sh = "dbus-update-activation-environment systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
         { sh = "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
