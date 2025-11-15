@@ -1,8 +1,11 @@
 {
   imports = [
+    ./steam.nix
     ./fish
     ./hypr
+    ./aerc.nix
     ./rbw.nix
+    ./oama.nix
     ./niri.nix
     ./vicinae.nix
     ./kdeconnect.nix
@@ -11,11 +14,9 @@
     ./swayosd.nix
     ./jujutsu.nix
     ./zed.nix
-    #./spicetify.nix
-    #./nixvim # using NVF 
     ./alacritty.nix
     ./helix.nix
-    ./gmail.nix
+    ./mail.nix
     ./wofi.nix
     ./nvf.nix
     ./fastfetch.nix
