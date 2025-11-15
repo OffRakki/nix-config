@@ -34,15 +34,15 @@
         }
         {
           name = "json";
-          language-servers = ["colors"];
         }
         {
           name = "css";
-          language-servers = ["colors"];
         }
         {
           name = "qml";
-          language-servers = ["colors"];
+        }
+        {
+          name = "python";
         }
       ];
       language-server = {
