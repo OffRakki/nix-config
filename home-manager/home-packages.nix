@@ -3,6 +3,7 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
+    r2modman
     evince
     anki
     imv
