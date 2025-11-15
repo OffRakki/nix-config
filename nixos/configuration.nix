@@ -148,15 +148,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-luminous
-    xdg-desktop-portal-shana
-    xdg-desktop-portal
     xwayland-satellite
     xwayland
     xwayland-run
-    wayback-x11
     localsend
     sddm-astronaut
     sddm-sugar-dark

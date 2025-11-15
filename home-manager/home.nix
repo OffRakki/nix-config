@@ -15,6 +15,7 @@
     ./home-packages.nix
     ./gtk.nix
     ./qt.nix
+    ./xdg-portals.nix
     ../nixos/variables.nix
   ];
 

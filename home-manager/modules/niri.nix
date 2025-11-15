@@ -25,8 +25,8 @@ in
         EGL_PLATFORM = "wayland";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         GBM_BACKEND = "nvidia-drm ";
-        GDK_BACKEND = "wayland,x11";
-        GDK_SCALE = "1";
+        # GDK_BACKEND = "wayland,x11";
+        # GDK_SCALE = "1";
         LIBVA_DRIVER_NAME = "nvidia";
         MOZ_DISABLE_RDD_SANDBOX = "1";
         MOZ_ENABLE_WAYLAND = "1";

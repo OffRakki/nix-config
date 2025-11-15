@@ -184,17 +184,4 @@ in {
   };
 
   # Extra Portal Configuration
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = false;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-  };
 }
