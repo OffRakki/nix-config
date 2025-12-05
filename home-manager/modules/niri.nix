@@ -42,7 +42,7 @@ in
         __VK_LAYER_NV_optimus = "NVIDIA_only";
       };
 
-      outputs.DP-3.mode = {
+      outputs.DP-1.mode = {
         height = 1080;
         width = 1920;
         refresh = 239.76;
@@ -82,7 +82,7 @@ in
           repeat-rate = 50;
           xkb = {
             layout = "us,us";
-            variant = "alt-intl,";
+            variant = "alt-intl,colemak";
             options = "grp:alt_space_toggle";
             rules = "";
             model = "pc105";
