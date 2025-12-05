@@ -87,7 +87,6 @@ in
             rules = "";
             model = "pc105";
           }; 
-          track-layout = "window";
         };
         power-key-handling.enable = false;
       };
