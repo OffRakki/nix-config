@@ -32,6 +32,7 @@
         ];
         modules-right = [
           "group/mediamod"
+          "niri/language"
           "group/clockmod"
           "group/right-icons"
           "tray"
@@ -79,6 +80,11 @@
             default = "󰊠";
             sort-by-number = true;
           };
+        };
+
+        "niri/language" = {
+          format-en = "US";
+          format-en-colemak = "CK";
         };
         
         "hyprland/workspaces" = {
@@ -418,6 +424,13 @@
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;
+      }
+
+      /* LAYOUT */
+      #language {
+        background-color: @bg_color;
+        padding: 4px 4px 4px 4px;
+        margin: 8px 0px 8px;
       }
 
       /* NETWORK */
