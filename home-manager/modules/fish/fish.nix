@@ -11,7 +11,6 @@ in
         set fish_greeting
         direnv hook fish | source
         zoxide init fish --cmd cd | source
-        fastfetch
         todo list
 
 
