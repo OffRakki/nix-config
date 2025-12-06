@@ -21,7 +21,7 @@ in
       environment = {
         AQ_DRM_DEVICES = "/dev/dri/card1";
         CLUTTER_BACKEND = "wayland";
-        EDITOR = "hx"; #default editor
+        EDITOR = "hx";
         EGL_PLATFORM = "wayland";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         GBM_BACKEND = "nvidia-drm ";
@@ -78,15 +78,14 @@ in
         { sh = "syncthing --no-gui"; }
         { argv = [ "clipse" "-listen" ]; }
         { argv = [ "vicinae" "server" ]; }
-        { sh = "sleep 3; pkill swww-daemon; swww-daemon"; }
-        { sh = "sleep 3; systemctl --user restart clip-notify"; }
         { argv = [ "xwayland-satellite" ]; }
+        # for steam to work (don't know why)
         { sh = "dbus-update-activation-environment systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
         { sh = "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
       ];
 
       cursor = {
-        size = 24;
+        size = 16;
         theme = "Catppuccin-Mocha-Peach";
         hide-when-typing = true;
       };
@@ -179,7 +178,7 @@ in
             { app-id = "org.qutebrowser.qutebrowser"; }
             { app-id = "brave-browser"; }
           ];
-          opacity = 0.95;
+          opacity = 0.98;
         }
         {
           matches = [
@@ -231,7 +230,7 @@ in
       "Mod+O".action = toggle-overview;
       "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} -e clipse" ];
       "Mod+Shift+P".action.spawn = [ "${config.scriptsDir}/pass-wofi.sh" ];
-      "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e qalc" ];
+      "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e ${qalc}" ];
       "Ctrl+Alt+N".action.spawn-sh = [ "${terminal} --class middleFloat -e hx" ];
 
       "XF86AudioMute" = {

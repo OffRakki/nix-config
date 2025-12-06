@@ -17,6 +17,7 @@ in {
     osu-lazer-bin
 
     # User Packages
+    spotify
     kdePackages.dolphin 
     ttyper
     ripgrep
@@ -81,7 +82,6 @@ in {
     xdg-utils
     fastfetch
     oh-my-fish
-    spotify
     spicetify-cli
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
     ranger
