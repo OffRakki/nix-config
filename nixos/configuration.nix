@@ -211,7 +211,6 @@
     pwvucontrol
     pipecontrol
     btop
-    google-chrome
     qutebrowser
     wasistlos
     vesktop
