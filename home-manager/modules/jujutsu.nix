@@ -2,6 +2,7 @@
   programs.jujutsu = {
     enable = true;
     settings = {
+      snapshot.max-new-file-size = "5MiB";
       user = {
         name = config.programs.git.settings.user.name;
         email = config.programs.git.settings.user.email;
