@@ -25,21 +25,23 @@ in
     ];
   };
 
+  # not need on desktop
+  drivers.nvidia-prime.enable = false;
+  
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
       
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-      
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-      
-    #dynamicBoost.enable = true; # Dynamic Boost
-
+    powerManagement= {
+      enable = true;
+      # Fine-grained power management. Turns off GPU when not in use.
+      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+      # needs nvidia-prime
+      finegrained = false;
+    };  
+    dynamicBoost.enable = true; # Dynamic Boost
     nvidiaPersistenced = true;
-
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
     # Support is limited to the Turing and later architectures. Full list of
