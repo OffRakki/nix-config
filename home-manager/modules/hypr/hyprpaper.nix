@@ -1,11 +1,21 @@
-{config, lib, ...}: {
-  services.hyprpaper = lib.mkForce {
+{config, pkgs, ...}:
+let
+  wallpaper = (
+    pkgs.fetchFromGitHub {
+      owner = "OffRakki";
+      repo = "walls-catppuccin-mocha";
+      rev = "master";
+      hash = "sha256-N+MZHSRcwOldS5Ai8B3YfKquKs9oeUW/GkV1iKM5+i8=";
+    } + "/samurai.jpg");
+in
+{
+  services.hyprpaper = {
     enable = true;
     settings = {
       ipc = true;
       splash = false;
-      preload = "${config.wallDir}/blackHole.png";
-      wallpaper = ", ${config.wallDir}/blackHole.png";
+      preload = "${wallpaper}";
+      wallpaper = ", ${wallpaper}";
     };
   };
 }
