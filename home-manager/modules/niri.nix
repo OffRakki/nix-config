@@ -149,12 +149,23 @@ in
         }
         {
           matches = [
+            { app-id = ".*"; is-focused = true; }
+          ];
+          excludes = [
+            { app-id = "google-chrome"; }
+            { app-id = "org.qutebrowser.qutebrowser"; }
+            { app-id = "brave-browser"; }
+          ];
+          opacity = 0.95;
+        }
+        {
+          matches = [
             { app-id = ".*"; is-focused = false; }
           ];
           excludes = [
             { app-id = "google-chrome"; }
             { app-id = "org.qutebrowser.qutebrowser"; }
-            { app-id  = "vesktop"; }
+            { app-id = "brave-browser"; }
           ];
           opacity = 0.9;
         }
