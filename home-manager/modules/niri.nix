@@ -220,9 +220,9 @@ in
       };
       "Mod+Return".action.spawn = terminal;
       "Mod+Shift+M".action.spawn-sh = ["niri msg action quit"];
-      # "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
-      "Mod+D".action.spawn-sh = [ "wofi -S drun -W 14% -H 40%" ];
+      "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
       "Mod+Shift+W".action.spawn = [ "waypaper" ];
+      # "Mod+D".action.spawn-sh = [ "wofi -S drun -W 14% -H 40%" ];
       "Mod+Shift+Q" = {
         action = close-window;
         cooldown-ms = 150;
@@ -230,7 +230,7 @@ in
       "Mod+E".action.spawn = filesGUI;
       "Mod+L".action.spawn = "hyprlock";
       "Mod+O".action = toggle-overview;
-      "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} -e clipse" ];
+      "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} --class floatclass --title clipse -e clipse" ];
       "Mod+Shift+P".action.spawn = [ "${config.scriptsDir}/pass-wofi.sh" ];
       "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e ${qalc}" ];
       "Ctrl+Alt+N".action.spawn-sh = [ "${terminal} --class middleFloat -e hx" ];
@@ -317,8 +317,8 @@ in
 
       "Mod+Ctrl+Shift+left".action = move-column-to-monitor-left;
       "Mod+Ctrl+Shift+right".action = move-column-to-monitor-right;
-      "Mod+Ctrl+Shift+up".action = move-column-to-monitor-up;
-      "Mod+Ctrl+Shift+down".action = move-column-to-monitor-down;
+      "Mod+Ctrl+Shift+up".action = move-column-to-workspace-up;
+      "Mod+Ctrl+Shift+down".action = move-column-to-workspace-down;
 
       "Mod+F".action = maximize-column;
       "Mod+Shift+F".action = fullscreen-window;
