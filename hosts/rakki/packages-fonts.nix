@@ -17,6 +17,7 @@ in {
     osu-lazer-bin
 
     # User Packages
+    waypaper
     spotify
     kdePackages.dolphin 
     ttyper

@@ -195,6 +195,7 @@ in
         {
           matches = [
             { app-id = "floatclass"; }
+            { app-id = "waypaper"; }
             { app-id = "chrome-nngceckbapebfimnlniiiahkandclblb-Default"; }
             { app-id  = ".*Bitwarden.*"; }
             { app-id  = "org.pulseaudio.pavucontrol"; }
@@ -221,6 +222,7 @@ in
       "Mod+Shift+M".action.spawn-sh = ["niri msg action quit"];
       # "Mod+D".action.spawn = [ "vicinae" "open" ]; #Main Menu
       "Mod+D".action.spawn-sh = [ "wofi -S drun -W 14% -H 40%" ];
+      "Mod+Shift+W".action.spawn = [ "waypaper" ];
       "Mod+Shift+Q" = {
         action = close-window;
         cooldown-ms = 150;
