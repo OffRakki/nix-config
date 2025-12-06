@@ -42,10 +42,33 @@ in
         __VK_LAYER_NV_optimus = "NVIDIA_only";
       };
 
-      outputs.DP-1.mode = {
-        height = 1080;
-        width = 1920;
-        refresh = 239.76;
+      outputs = {
+        DP-1 = {
+          mode = {
+            height = 1080;
+            width = 1920;
+            refresh = 240.00;
+          };
+          position = {
+            x = 1920;
+            y = 0;
+          };
+          variable-refresh-rate = "on-demand";
+          focus-at-startup = true;
+          backdrop-color = "#3C3836";
+        };
+        HDMI-A-1 = {
+          mode = {
+            height = 1080;
+            width = 1920;
+            refresh = 60.00;
+          };
+          position = {
+            x = 0;
+            y = 0;
+          };
+          backdrop-color = "#3C3836";
+        };
       };
 
       hotkey-overlay.skip-at-startup = true;
