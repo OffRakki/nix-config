@@ -11,7 +11,7 @@
       };
       listener = [
         {
-          timeout = 120;
+          timeout = 300;
           on-timeout = "if ! ${isLocked}; then hyprlock --grace 5; fi";
         }
         # If already locked
