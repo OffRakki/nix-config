@@ -414,7 +414,7 @@
 
       #window.icon {
         color: @bg_color;
-        padding: 0px 6px 0px 2px;
+        padding: 0px 2px 0px 2px;
         margin-right: 0px;
       }
 
