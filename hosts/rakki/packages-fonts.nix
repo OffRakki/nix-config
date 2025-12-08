@@ -17,6 +17,8 @@ in {
     osu-lazer-bin
 
     # User Packages
+    kanata-with-cmd
+    kanata
     waypaper
     spotify
     kdePackages.dolphin 
