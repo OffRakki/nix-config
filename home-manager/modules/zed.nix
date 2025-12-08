@@ -12,8 +12,8 @@
     userSettings = {
       theme = {
         mode = "system";
-        dark = "gruvbox";
-        light = "gruvbox";
+        dark = "catppuccin-mocha";
+        light = "catppucin-latte";
       };
       iconThemes = {
         dark = "Catppuccin Icons";

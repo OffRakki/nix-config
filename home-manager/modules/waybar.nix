@@ -347,9 +347,9 @@
       };
     };
     style = ''
-      @define-color bg_color #282828;
-      @define-color bg2_color #3c3836;
-      @define-color text_color #ddc7a1;
+      @define-color bg_color #1e1e2e;
+      @define-color bg2_color #181825;
+      @define-color text_color #b4befe;
 
       * {
         border: none;
@@ -379,7 +379,7 @@
       }
 
       #workspaces button.active {
-        color: #d79921;
+        color: #74c7ec;
         background-color: transparent;
         border-radius: 8px;
         transition: all 0.25s ease;
@@ -429,6 +429,7 @@
       /* LAYOUT */
       #language {
         background-color: @bg_color;
+        color: @text_color;
         padding: 4px 4px 4px 4px;
         margin: 8px 0px 8px;
       }
@@ -559,7 +560,7 @@
 
       #clock.date {
         color: @text_color;
-        background-color: #3c3836;
+        background-color: @bg2_color;
         border-radius: 8px;
         padding-left: 8px;
         padding-right: 8px;

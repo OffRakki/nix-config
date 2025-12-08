@@ -19,6 +19,8 @@ in
     settings = {
       xwayland-satellite.enable = true;
       environment = {
+        XCURSOR_THEME = "Catppuccin-Mocha-Peach";
+        XCURSOR_SIZE = "24";
         AQ_DRM_DEVICES = "/dev/dri/card1";
         CLUTTER_BACKEND = "wayland";
         EDITOR = "hx";
@@ -47,7 +49,7 @@ in
           mode = {
             height = 1080;
             width = 1920;
-            refresh = 240.00;
+            refresh = 239.760;
           };
           position = {
             x = 1920;
@@ -55,7 +57,7 @@ in
           };
           variable-refresh-rate = "on-demand";
           focus-at-startup = true;
-          backdrop-color = "#3C3836";
+          backdrop-color = "#1e1e2e";
         };
         HDMI-A-1 = {
           mode = {
@@ -67,7 +69,7 @@ in
             x = 0;
             y = 0;
           };
-          backdrop-color = "#3C3836";
+          backdrop-color = "#1e1e2e";
         };
       };
 
@@ -79,16 +81,12 @@ in
         { argv = [ "clipse" "-listen" ]; }
         { argv = [ "vicinae" "server" ]; }
         { argv = [ "xwayland-satellite" ]; }
+        { sh = "sleep 3 && systemctl --user restart clip-notify"; }
+        { sh = "sleep 3 && swww-daemon"; }
         # for steam to work (don't know why)
         { sh = "dbus-update-activation-environment systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
         { sh = "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"; }
       ];
-
-      cursor = {
-        size = 16;
-        theme = "Catppuccin-Mocha-Peach";
-        hide-when-typing = true;
-      };
 
       input = {
         mod-key = "SUPER";
@@ -121,17 +119,17 @@ in
         focus-ring = {
           enable = false;
           width = 2;
-          active.color = "#EFDECD";
-          inactive.color = "#CD9575";
-          urgent.color = "#E32636";
+          active.color = "#f9e2af";
+          inactive.color = "#b4befe";
+          urgent.color = "#f38ba8";
         };
         # drawn inside the window
         border = {
           enable = true;
           width = 2;
-          active.color = "#EFDECD";
-          inactive.color = "#CD9575";
-          urgent.color = "#E32636";
+          active.color = "#f9e2af";
+          inactive.color = "#b4befe";
+          urgent.color = "#f38ba8";
         };
         gaps = 8;
         struts = {
@@ -232,7 +230,7 @@ in
       "Mod+O".action = toggle-overview;
       "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} --class floatclass --title clipse -e clipse" ];
       "Mod+Shift+P".action.spawn = [ "${config.scriptsDir}/pass-wofi.sh" ];
-      "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e ${qalc}" ];
+      "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e qalc" ];
       "Ctrl+Alt+N".action.spawn-sh = [ "${terminal} --class middleFloat -e hx" ];
 
       "XF86AudioMute" = {
@@ -319,6 +317,9 @@ in
       "Mod+Ctrl+Shift+right".action = move-column-to-monitor-right;
       "Mod+Ctrl+Shift+up".action = move-column-to-workspace-up;
       "Mod+Ctrl+Shift+down".action = move-column-to-workspace-down;
+
+      "Mod+Alt+Left".action = move-workspace-to-monitor-left;
+      "Mod+Alt+Right".action = move-workspace-to-monitor-right;
 
       "Mod+F".action = maximize-column;
       "Mod+Shift+F".action = fullscreen-window;

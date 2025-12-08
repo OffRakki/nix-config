@@ -19,6 +19,11 @@
           y = 4;
         };
       };
+      colors = {
+        primary = {
+          background = "#11111b";
+        };
+      };
     };
   };
 }

@@ -9,10 +9,10 @@
       height = 150;
       border-size = 2;
       default-timeout = 12000;
-      background-color = "#282828dd";
-      border-color = "#3c3836ff";
+      background-color = "#1e1e2edd";
+      border-color = "#b4befeff";
       border-radius = 10;
-      text-color = "#EFDECD";
+      text-color = "#b4befe";
       layer = "overlay";
       max-history = 50;
     };

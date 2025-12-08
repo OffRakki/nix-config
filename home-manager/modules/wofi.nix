@@ -17,12 +17,12 @@
       * {
         font-family: FiraSans;
         font-size: 14px;
-        color: #ddc7a1;
+        color: #b4befe;
         background: transparent;
       }
 
       #window {
-        background: #282828;
+        background: #1e1e2e;
         margin: auto;
         padding: 20px;
         border-radius: 6px;
@@ -47,7 +47,7 @@
       }
 
       #entry:selected {
-        background-color: #928374;
+        background-color: #181825;
       }
 
       #text {

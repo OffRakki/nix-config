@@ -3,17 +3,29 @@
   pkgs,
   lib,
   ...
-}: {
+}:{
+  home.sessionVariables = {
+    GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
+  };
+    
   gtk = {
     enable = true;
     colorScheme = "dark";
     theme = {
-      name = "gruvbox-dark";
-      package = pkgs.gruvbox-dark-gtk;
+      name = "catppuccin-mocha-lavender-standard+normal";
+      package = pkgs.catppuccin-gtk.override {
+        accents = ["lavender"];
+        size = "standard";
+        tweaks = ["normal"];
+        variant = "mocha";
+      };
     };
     iconTheme = {
-      name = "oomox-gruvbox-dark";
-      package= pkgs.gruvbox-dark-icons-gtk;
+      name = "Papirus-Dark";
+      package= pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      };
     };
     font = {
       name = "FiraSans";
@@ -21,11 +33,11 @@
     };
     gtk3 = {
       enable = true;
-      extraConfig.Settings = ''
+      extraConfig.settings = ''
         gtk-application-prefer-dark-theme=1
       '';
     };
-    gtk4.extraConfig.Settings = ''
+    gtk4.extraConfig.settings = ''
       gtk-application-prefer-dark-theme=1
     '';
   };
@@ -38,8 +50,8 @@
   services.xsettingsd = {
     enable = true;
     settings = {
-      "Net/ThemeName" = "gruvbox-dark";
-      "Net/IconThemeName" = "oomox-gruvbox-dark";
+      "Net/ThemeName" = "catppuccin-mocha-lavender-standard+normal";
+      "Net/IconThemeName" = "Papirus-Dark";
     };
   };
 }

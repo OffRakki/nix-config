@@ -18,6 +18,9 @@
     # Niri
     niri.url = "github:sodiboo/niri-flake";
 
+    # Catppuccin
+    catppuccin.url = "github:catppuccin/nix";
+
     alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
@@ -43,6 +46,7 @@
     self,
     nixpkgs,
     home-manager,
+    catppuccin,
 		nvf,
     alejandra,
     hyprland,
@@ -74,6 +78,7 @@
     	  pkgs = nixpkgs.legacyPackages.x86_64-linux;
     	  modules = [
   				./home-manager/home.nix
+  				catppuccin.homeModules.catppuccin
     	  ];
     	};
     };

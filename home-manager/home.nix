@@ -9,6 +9,7 @@
 }:
 {
   imports = [
+    inputs.catppuccin.homeModules.catppuccin
     inputs.niri.homeModules.niri
     inputs.nvf.homeManagerModules.default
     ./modules
@@ -26,7 +27,6 @@
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/nixConfig";
       QT_QPA_PLATFORM = "wayland";
-      GTK_THEME = "gruvbox-dark";
     };
   };
 
@@ -50,7 +50,9 @@
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+  systemd.user = {
+    startServices = "sd-switch";
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";

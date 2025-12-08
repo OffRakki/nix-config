@@ -4,7 +4,7 @@
     enable = true;
     defaultEditor= true;
     settings = {
-      theme = "gruvbox";
+      theme = "catppuccin_mocha";
       editor = {
         cursorline = true;
         soft-wrap.enable = true;
@@ -53,8 +53,8 @@
       };
     };
     themes = {
-      gruvbox = {
-        "inherits" = "gruvbox";
+      catppuccin_mocha = {
+        "inherits" = "catppuccin_mocha";
         "ui.background" = { };
       };
     };
