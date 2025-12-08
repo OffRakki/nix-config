@@ -23,6 +23,8 @@
           "input" 
           "audio"
           "docker"
+          "input"
+          "uinput"
         ];
 
         packages = with pkgs; [

@@ -14,7 +14,7 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = [ "i915" ];
+      kernelModules = [ "i915" "uinput" ];
     };
     kernelModules = [ "kvm-amd" ];
     kernelParams = [
@@ -44,7 +44,20 @@
   # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
   
-  hardware.graphics = {
-    enable = true;
+  hardware = {
+    graphics.enable = true;
+    uinput.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  users.groups.uinput = { };
+  systemd.services.kanata-internalKeyboard.serviceConfig = {
+    SupplementaryGroups = [
+      "input"
+      "uinput"
+    ];
   };
 }
