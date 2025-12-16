@@ -45,7 +45,7 @@
   in {
     settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+      experimental-features = [ "nix-command flakes"] ;
       # Opinionated: disable global registry
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
@@ -157,7 +157,6 @@
     niriswitcher
     fuzzel
     nix-ld
-    networkmanager
     netplan
     jujutsu
     discordo
@@ -200,8 +199,6 @@
     wget
     curl
     rofi
-    home-manager
-    fish
     kitty
     firefox
     starship
@@ -221,7 +218,6 @@
     fishPlugins.forgit
     fishPlugins.hydro
     fishPlugins.grc
-    grc
   ];
 
   networking.hostName = "sora";

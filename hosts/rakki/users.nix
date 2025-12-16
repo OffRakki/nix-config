@@ -20,7 +20,6 @@
           "scanner"
           "lp"
           "video" 
-          "input" 
           "audio"
           "docker"
           "input"
