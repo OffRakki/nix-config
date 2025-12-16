@@ -1,5 +1,6 @@
 {
   imports = [
+    #./todoman.nix
     ./steam.nix
     ./fish
     ./hypr
@@ -30,6 +31,7 @@
     ./zsh.nix
     ./kitty.nix
     ./qutebrowser.nix
-    #./todoman.nix
+    ./niri.nix
+    ./opencode.nix
   ];
 }
