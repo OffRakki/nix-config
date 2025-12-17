@@ -188,8 +188,8 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 25565 ];
-  networking.firewall.allowedUDPPorts = [ 25565 ];
+  networking.firewall.allowedTCPPorts = [ 25565 4950 4955 ];
+  networking.firewall.allowedUDPPorts = [ 25565 4950 4955 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
    
