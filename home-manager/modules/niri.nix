@@ -102,7 +102,7 @@ in
           repeat-rate = 50;
           xkb = {
             layout = "us,us";
-            variant = "alt-intl,colemak";
+            variant = "alt-intl,colemak_dh";
             options = "grp:alt_space_toggle";
             rules = "";
             model = "pc105";

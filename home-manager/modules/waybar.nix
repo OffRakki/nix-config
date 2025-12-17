@@ -84,7 +84,7 @@
 
         "niri/language" = {
           format-en = "US";
-          format-en-colemak = "CK";
+          format-en-colemak_dh = "CK";
         };
         
         "hyprland/workspaces" = {
