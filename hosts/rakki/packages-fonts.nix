@@ -1,6 +1,6 @@
 { pkgs, inputs, ...}: let
 
-  python-packages = pkgs.python3.withPackages (
+ python-packages = pkgs.python3.withPackages (
     ps:
     with ps; [
       requests
@@ -17,6 +17,7 @@ in {
     osu-lazer-bin
 
     # User Packages
+    dnd-tools
     waypaper
     spotify
     kdePackages.dolphin 
@@ -28,7 +29,7 @@ in {
     xh
     zellij
     gitui
-    du-dust
+    dust
     dua
     hyperfine
     evil-helix
@@ -45,7 +46,7 @@ in {
     mprocs
     presenterm
     kondo
-    rtx
+    mise
     espanso
     neomutt
     rmpc
@@ -54,7 +55,7 @@ in {
     nvidia-container-toolkit
     docker
     docker-client
-    bitwarden
+    bitwarden-desktop
     spotify-player
     dysk
     #todoman
@@ -141,7 +142,6 @@ in {
       corefonts
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
       noto-fonts-color-emoji
       material-icons
       font-awesome

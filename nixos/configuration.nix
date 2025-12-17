@@ -194,7 +194,7 @@
 		nushell
 		tmux
     evil-helix
-    sublime
+    # sublime
     neovim
     wget
     curl

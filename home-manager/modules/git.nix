@@ -3,7 +3,6 @@
 {
 	programs.git = lib.mkDefault {
 		enable = true;
-		package = pkgs.gitAndTools.gitFull;
 		settings = {
 			core.editor = "hx";
 			init.defaultBranch = "master";
