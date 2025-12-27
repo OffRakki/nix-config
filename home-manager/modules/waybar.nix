@@ -32,7 +32,6 @@
         ];
         modules-right = [
           "group/mediamod"
-          "niri/language"
           "group/clockmod"
           "group/right-icons"
           "tray"

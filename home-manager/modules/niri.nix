@@ -101,8 +101,8 @@ in
           repeat-delay = 300;
           repeat-rate = 50;
           xkb = {
-            layout = "us,us";
-            variant = "alt-intl,colemak_dh";
+            layout = "us";
+            variant = "alt-intl";
             options = "grp:alt_space_toggle";
             rules = "";
             model = "pc105";
@@ -225,7 +225,7 @@ in
         action = close-window;
         cooldown-ms = 150;
       };
-      "Mod+E".action.spawn = filesGUI;
+      "Mod+W".action.spawn = filesGUI;
       "Mod+L".action.spawn = "hyprlock";
       "Mod+O".action = toggle-overview;
       "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} --class floatclass --title clipse -e clipse" ];
@@ -272,16 +272,24 @@ in
       "Mod+Shift+Space".action = switch-focus-between-floating-and-tiling;
       
       "Mod+left".action = focus-column-left;
+      "Mod+h".action = focus-column-left;
       "Mod+right".action = focus-column-right;
+      "Mod+i".action = focus-column-right;
       "Mod+up".action = focus-window-up;
+      "Mod+e".action = focus-window-up;
       "Mod+down".action = focus-window-down;
+      "Mod+a".action = focus-window-down;
       "Mod+Shift+WheelScrollUp".action = focus-column-left;
       "Mod+Shift+WheelScrollDown".action = focus-column-right;
 
       "Mod+Shift+left".action = move-column-left;
+      "Mod+Shift+h".action = move-column-left;
       "Mod+Shift+right".action = move-column-right;
+      "Mod+Shift+i".action = move-column-right;
       "Mod+Shift+up".action = move-window-up;
+      "Mod+Shift+e".action = move-window-up;
       "Mod+Shift+down".action = move-window-down;
+      "Mod+Shift+a".action = move-window-down;
 
       "Mod+Minus".action = set-column-width "-10%";
       "Mod+Equal".action = set-column-width "+10%";
@@ -309,17 +317,27 @@ in
       "Mod+Ctrl+End".action = move-column-to-last;
       
       "Mod+Ctrl+left".action = focus-monitor-left;
+      "Mod+Ctrl+h".action = focus-monitor-left;
       "Mod+Ctrl+right".action = focus-monitor-right;
+      "Mod+Ctrl+i".action = focus-monitor-right;
       "Mod+Ctrl+up".action = focus-workspace-up;
+      "Mod+Ctrl+e".action = focus-workspace-up;
       "Mod+Ctrl+down".action = focus-workspace-down;
+      "Mod+Ctrl+a".action = focus-workspace-down;
 
       "Mod+Ctrl+Shift+left".action = move-column-to-monitor-left;
+      "Mod+Ctrl+Shift+h".action = move-column-to-monitor-left;
       "Mod+Ctrl+Shift+right".action = move-column-to-monitor-right;
+      "Mod+Ctrl+Shift+i".action = move-column-to-monitor-right;
       "Mod+Ctrl+Shift+up".action = move-column-to-workspace-up;
+      "Mod+Ctrl+Shift+e".action = move-column-to-workspace-up;
       "Mod+Ctrl+Shift+down".action = move-column-to-workspace-down;
+      "Mod+Ctrl+Shift+a".action = move-column-to-workspace-down;
 
-      "Mod+Alt+Left".action = move-workspace-to-monitor-left;
-      "Mod+Alt+Right".action = move-workspace-to-monitor-right;
+      "Mod+Alt+left".action = move-workspace-to-monitor-left;
+      "Mod+Alt+h".action = move-workspace-to-monitor-left;
+      "Mod+Alt+right".action = move-workspace-to-monitor-right;
+      "Mod+Alt+i".action = move-workspace-to-monitor-right;
 
       "Mod+F".action = maximize-column;
       "Mod+Shift+F".action = fullscreen-window;
