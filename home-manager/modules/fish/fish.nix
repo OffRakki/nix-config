@@ -71,7 +71,7 @@ in
         la = "eza -a";
         mv = "mv -i";
         rm = "rm -i";
-        df = "df -h";
+        df = "duf";
         du = "du -hc --time";
         tree = "tree --du -h";
 
