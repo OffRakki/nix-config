@@ -17,6 +17,10 @@ in {
     osu-lazer-bin
 
     # User Packages
+    gitlogue
+    vial
+    abaddon
+    duf
     dnd-tools
     waypaper
     spotify
