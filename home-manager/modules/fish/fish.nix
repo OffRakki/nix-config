@@ -12,6 +12,7 @@ in
         direnv hook fish | source
         zoxide init fish --cmd cd | source
         todo list
+        fastfetch
 
 
         # fish_vi_key_bindings

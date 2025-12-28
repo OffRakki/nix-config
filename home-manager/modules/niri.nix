@@ -5,7 +5,7 @@ let
     input-volume = "swayosd-client --input-volume +0";
     caps-lock = "sleep 0.2 && swayosd-client --caps-lock";
   };
-  terminal = "${lib.getExe pkgs.alacritty}";
+  terminal = "${lib.getExe pkgs.kitty}";
   files    = "${lib.getExe pkgs.yazi}";
   filesGUI = "${lib.getExe pkgs.xfce.thunar}";
   qalc 		 = "${lib.getExe pkgs.qalculate-gtk}";
