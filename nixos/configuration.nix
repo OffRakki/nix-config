@@ -24,6 +24,16 @@
       allowUnfree = true;
     };
   };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [fuse glib];
+  };
+
+  programs.appimage = {
+  enable = true;
+  binfmt = true;
+};
   
   services.displayManager.sessionPackages = [
     inputs.niri.packages.${pkgs.system}.niri-unstable
@@ -147,6 +157,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    dotool
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
+    appimage-run
     grc
     xwayland-satellite
     xwayland
@@ -156,7 +170,6 @@
     sddm-sugar-dark
     niriswitcher
     fuzzel
-    nix-ld
     netplan
     jujutsu
     discordo
