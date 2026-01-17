@@ -9,8 +9,8 @@
 in {
 
   imports = [
-    ./hyprbars.nix
-    ./hyprscrolling.nix
+    # ./hyprbars.nix
+    # ./hyprscrolling.nix
   ];
 
   wayland.windowManager.hyprland = {
@@ -22,7 +22,7 @@ in {
     };
     settings = {
       "$mod"        = "SUPER";
-      "$terminal"   = "${lib.getExe pkgs.alacritty}";
+      "$terminal"   = "${lib.getExe pkgs.kitty}";
       "$files"      = "${lib.getExe pkgs.yazi}";
       "$filesGUI"   = "${lib.getExe pkgs.xfce.thunar}";
       "$qalc" 			= "${lib.getExe pkgs.qalculate-gtk}";
@@ -30,14 +30,19 @@ in {
       "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
 
       monitor = [ 
-        "DP-3,1920x1080@239.76,0x0,1"
-        "HDMI-A-1,1920x1080@60,1920x0,1"
+        "DP-1,1920x1080@239.76,1920x0,1"
+        "HDMI-A-1,1920x1080@60,0x0,1"
 
         ",addreserved,36,0,0,0"
       ];
 
       workspace = [
-        "1,monitor:DP-3"
+        "1,monitor:DP-1,persistent:true"
+        "2,monitor:HDMI-A-1,persistent:true"
+        "3,monitor:DP-1,persistent:true"
+        "4,monitor:HDMI-A-1,persistent:true"
+        "5,monitor:DP-1,persistent:true"
+        "6,monitor:HDMI-A-1,persistent:true"
       ];
 
       dwindle = {	
@@ -198,6 +203,8 @@ in {
       windowrule = [
         "float, class:(middleFloat)"
         "size 50% 50%, class:(middleFloat)"
+        "float, initialClass:waypaper"
+        "size 50% 50%, initialClass:waypaper"
         "noblur, tag:games*"
         "opacity 2 2 2, class:google-chrome"
         "float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
@@ -246,7 +253,7 @@ in {
       ];
 
       exec-once = [ 
-        "uwsm app -- syncthing --no-gui" 
+        "sleep 3 && syncthing --no-browser" 
         "uwsm app -- clipse -listen" # Clipboard history
         "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -258,6 +265,7 @@ in {
         "uwsm app -- swww-daemon"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "sleep 3 && systemctl --user restart clip-notify"
       ];
 
       binde = [
@@ -279,6 +287,9 @@ in {
       ];
 
       bindl = [ 
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${swayosd.output-volume}"
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; ${swayosd.output-volume}"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; ${swayosd.output-volume}"
@@ -289,8 +300,11 @@ in {
       ];
 
       bind = [ 
-        "SUPER,g,togglegroup"
-        "SUPER,i,pin"
+        "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
+        "$mod SHIFT, P, exec,  '${config.scriptsDir}/pass-wofi.sh'"
+        "$mod SHIFT, W, exec, waypaper"
+        "$mod,g,togglegroup"
+        "$mod,i,pin"
         ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
         "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"

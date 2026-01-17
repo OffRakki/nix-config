@@ -25,7 +25,8 @@
           "hyprland/workspaces"
           "niri/workspaces"
           "group/hardwaremod"
-          "group/niriwindowmod"
+          # "group/niriwindowmod"
+          "group/windowmod"
         ];
         modules-center = [
 
