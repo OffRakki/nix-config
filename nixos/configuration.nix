@@ -107,13 +107,15 @@
 
   services.mpd= {
     enable = true;
-    musicDirectory = "/home/rakki/Music";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "Pipewire_Output"
-      }
-    '';
+    settings = {
+      music_directory = "/home/rakki/Music";
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "Pipewire_Output";
+        }
+      ];
+    };
   };
   services.mpd.user = "rakki";
   systemd.services.mpd.environment = {

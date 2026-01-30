@@ -1,4 +1,4 @@
-{ inputs,lib, config, pkgs, ... }: let
+{ inputs, lib, config, pkgs, ... }: let
 
   swayosd = {
     output-volume = "swayosd-client --output-volume +0";
@@ -24,7 +24,7 @@ in {
       "$mod"        = "SUPER";
       "$terminal"   = "${lib.getExe pkgs.kitty}";
       "$files"      = "${lib.getExe pkgs.yazi}";
-      "$filesGUI"   = "${lib.getExe pkgs.xfce.thunar}";
+      "$filesGUI"   = "${lib.getExe pkgs.thunar}";
       "$qalc" 			= "${lib.getExe pkgs.qalculate-gtk}";
       "$slurp" 			= "${lib.getExe pkgs.slurp}";
       "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
@@ -33,7 +33,8 @@ in {
         "DP-1,1920x1080@239.76,1920x0,1"
         "HDMI-A-1,1920x1080@60,0x0,1"
 
-        ",addreserved,36,0,0,0"
+        "DP-1,addreserved,36,0,0,0"
+        "HDMI-A-1,addreserved,36,0,0,0"
       ];
 
       workspace = [
@@ -178,54 +179,118 @@ in {
       };
 
       layerrule = [
-        "blur, wofi"
-        "abovelock,swayosd"
-
-        "animation fade,hyprpicker"
-        "animation fade,selection"
-        "animation fade,hyprpaper"
-
-        "animation slide,waybar"
-        "blur,waybar"
-        "ignorezero,waybar"
-
-        "blur,notifications"
-        "ignorezero,notifications"
-
-        "blur,wofi"
-        "ignorezero,wofi"
-
-        "noanim,wallpaper"
-
-        "abovelock,swayosd"
+        {
+          name = "wofi";
+          "match:namespace" = "wofi";
+          blur = "on";
+          
+        }
+        {
+          name = "swayosd";
+          "match:namespace" = "swayosd";
+          above_lock = 2;
+          
+        }
+        {
+          name = "";
+          "match:namespace" = "waybar";
+          blur = "on";
+          ignore_alpha = 1;
+          # animation = "slide";
+          
+        }
+        {
+          name = "";
+          "match:namespace" = "notifications";
+          blur = "on";
+          ignore_alpha = 1;
+          
+        }
+        {
+          name = "hyprpicker";
+          "match:namespace" = "hyprpicker";
+          animation = "fade";
+          
+        }
+        {
+          name = "selection";
+          "match:namespace" = "selection";
+          animation = "fade";
+          
+        }
+        {
+          name = "hyprpaper";
+          "match:namespace" = "hyprpaper";
+          animation = "fade";
+          
+        }
       ];
 
       windowrule = [
-        "float, class:(middleFloat)"
-        "size 50% 50%, class:(middleFloat)"
-        "float, initialClass:waypaper"
-        "size 50% 50%, initialClass:waypaper"
-        "noblur, tag:games*"
-        "opacity 2 2 2, class:google-chrome"
-        "float, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
-        "size 25% 50%, initialClass:chrome-nngceckbapebfimnlniiiahkandclblb-Default"
-        "float, initialClass:Bitwarden"
-        "size 25% 50%, initialClass:Bitwarden"
-        "float, initialClass:org.pulseaudio.pavucontrol"
-        "size 50% 50%, initialClass:org.pulseaudio.pavucontrol"
-        "float, initialTitle:Open Folder"
-        "size 25% 50%, initialTitle:Open Folder"
-        "float, initialTitle:Bluetooth Devices"
-        "size 25% 50%, initialTitle:Bluetooth Devices"
+        {
+          name = "middleFloatClass";
+          "match:class" = "middleFloat";
+          float = "on";
+          size = "monitor_w/2 monitor_h/2";
+        }
+        {
+          name = "waypaper";
+          "match:initial_class" = "waypaper";
+          float = "on";
+          size = "monitor_w/2 monitor_h/2";
+        }
+        {
+          name = "games";
+          "match:tag" = "games*";
+          no_blur = "on";
+        }
+        {
+          name = "browser";
+          "match:class" = "brave-browser";
+          opacity = "2 2 2";
+        }
+        {
+          name = "bitwardenBrowser";
+          "match:initial_class" = "brave-nngceckbapebfimnlniiiahkandclblb-Default";
+          float = "on";
+          size = "window_w/2 window_h/2";
+        }
+        {
+          name = "bitwarden";
+         "match:initial_class" = "Bitwarden";
+         float = "on";
+         size = "window_w/4 window_h/2";
+        }
+        {
+          name = "pavucontrol";
+          "match:initial_class" = "org.pulseaudio.pavucontrol";
+          float = "on";
+          size = "window_w/2 window_h/2";
+        }
+        {
+          name = "folderSelector";
+          "match:initial_title" = "Open Folder";
+          float = "on";
+          size = "window_w/4 window_h/2";
+        }
+        {
+          name = "bluetooth";
+          "match:initial_title" = "Bluetooth Devices";
+          float = "on";
+          size = "window_w/4 window_h/2";
+        }
+        {
+          name = "idle_inhibitFullscreen";
+          "match:class" = "brave-browser"; #Change to ".*" if want to apply to any fullscreen application
+          idle_inhibit = "fullscreen";
+        }
+        {
+          name = "sshColorTmpst";
+          "match:title" = ".*/home/deby.*";
+          border_color = "rgba(7287fdff) rgba(7287fdaa)";
+        }
       ];
       
-      windowrulev2 = [
-        "idleinhibit fullscreen, class:.*"
-        "bordercolor rgba(7287fdff) rgba(7287fdaa), title:.*/home/deby.*"
-
-        # fix for inconsistent color on chrome
-        "bordercolor rgba(b0430cff) rgba(14161766), title:.* - Google Chrome"
-      ];
 
       env = [ 
         "AQ_DRM_DEVICES,/dev/dri/card1"
@@ -309,8 +374,8 @@ in {
         "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
         "$mod, L, exec, uwsm app -- hyprlock"
-        # "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
-        "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
+        "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
+        # "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
         "$mod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
         "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
         "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e hx"

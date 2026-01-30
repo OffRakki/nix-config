@@ -16,7 +16,7 @@
         layer = "top";
 
         height = 10;
-        margin-top = -2;
+        margin-top = -38;
         margin-bottom = -6;
         margin-left = 6;
         margin-right = 6;

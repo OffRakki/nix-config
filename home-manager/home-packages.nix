@@ -8,7 +8,6 @@
     anki
     imv
     mpv
-    obs-studio
     obsidian
     pavucontrol
     teams-for-linux
@@ -17,12 +16,13 @@
     qalculate-gtk
     vlc
 		warp
-		xfce.thunar-volman
+		thunar-volman
 
 		# Langs
 		nil
 
     # CLI utils
+    flatpak
     yazi
     todo
     ranger

@@ -7,7 +7,7 @@ let
   };
   terminal = "${lib.getExe pkgs.kitty}";
   files    = "${lib.getExe pkgs.yazi}";
-  filesGUI = "${lib.getExe pkgs.xfce.thunar}";
+  filesGUI = "${lib.getExe pkgs.thunar}";
   qalc 		 = "${lib.getExe pkgs.qalculate-gtk}";
   slurp 	 = "${lib.getExe pkgs.slurp}";
   hyprshot = "${lib.getExe pkgs.hyprshot}";
