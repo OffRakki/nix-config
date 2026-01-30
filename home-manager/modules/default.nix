@@ -1,6 +1,7 @@
 {
   imports = [
     #./todoman.nix
+    ./obs.nix
     ./steam.nix
     ./fish
     ./hypr
