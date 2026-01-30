@@ -33,5 +33,6 @@
     ./qutebrowser.nix
     ./niri.nix
     ./opencode.nix
+    ./hytale.nix
   ];
 }

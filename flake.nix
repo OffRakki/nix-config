@@ -28,6 +28,10 @@
     ministerio.url = "github:misterio77/nix-config";
 
     # Games
+    hytale = {
+      url = "github:TNAZEP/HytaleLauncherFlake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NVF (modular neovim)
     nvf.url = "github:notashelf/nvf";
