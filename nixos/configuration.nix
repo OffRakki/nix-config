@@ -35,11 +35,6 @@
   binfmt = true;
 };
   
-  services.displayManager.sessionPackages = [
-    inputs.niri.packages.${pkgs.system}.niri-unstable
-    pkgs.hyprland
-  ];
-  
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     backupFileExtension = "backup";
@@ -129,25 +124,28 @@
       variant = "intl";
     };
   };
-		services.displayManager = {
-		  sddm = {
-		    enable = true;
-		    wayland.enable = true;
-		    theme = "sddm-astronaut-theme";
-		    extraPackages = with pkgs; [
-		      kdePackages.qtmultimedia
-		      kdePackages.qt5compat  
-		    ];
-		  };
+		services = {
+		  displayManager = {
+        sessionPackages = [
+          inputs.niri.packages.${pkgs.system}.niri-unstable
+          pkgs.hyprland
+        ];
+		    defaultSession = "hyprland";
+  		  sddm = {
+  		    enable = true;
+  		    wayland.enable = true;
+  		    theme = "sddm-astronaut-theme";
+  		    extraPackages = with pkgs; [
+  		      kdePackages.qtmultimedia
+  		      kdePackages.qt5compat  
+  		    ];
+  		  };
+  		};
 		};
 
-  console = {
-    useXkbConfig = true;
-  };
+  console.useXkbConfig = true;
 
-	programs.dconf = {
-	  enable = true;
-	};
+	programs.dconf.enable = true;
 
   programs.direnv.nix-direnv.enable = true;
 
