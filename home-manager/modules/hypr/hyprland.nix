@@ -29,21 +29,28 @@ in {
       "$slurp" 			= "${lib.getExe pkgs.slurp}";
       "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
 
-      monitor = [ 
-        "DP-1,1920x1080@239.76,1920x0,1"
-        "HDMI-A-1,1920x1080@60,0x0,1"
-
-        "DP-1,addreserved,36,0,0,0"
-        "HDMI-A-1,addreserved,36,0,0,0"
+      monitorv2 = [
+        {
+          output = "DP-1";
+          mode = "1920x1080@239.76";
+          position = "0x0";
+          scale = 1;
+          addreserved = "30,0,0,0";
+        } 
+        {
+          output = "HDMI-A-1";
+          mode = "1920x1080@60";
+          position = "-1920x0";
+          scale = 1;
+          addreserved = "30,0,0,0";
+        } 
       ];
 
       workspace = [
-        "1,monitor:DP-1,persistent:true"
-        "2,monitor:HDMI-A-1,persistent:true"
-        "3,monitor:DP-1,persistent:true"
-        "4,monitor:HDMI-A-1,persistent:true"
-        "5,monitor:DP-1,persistent:true"
-        "6,monitor:HDMI-A-1,persistent:true"
+        "name:Browser,monitor:DP-1,persistent:true,default:true"
+        "name:Social,monitor:HDMI-A-1,persistent:true,default:true"
+        "name:Games,monitor:DP-1,persistent:true"
+        "name:Extra,monitor:DP-1,persistent:true"
       ];
 
       dwindle = {	
@@ -117,7 +124,7 @@ in {
       };
 
       decoration = { 
-        rounding = 6;
+        rounding = 12;
 
         active_opacity = 1.0;
         inactive_opacity = 0.90;
@@ -240,26 +247,71 @@ in {
           size = "monitor_w/2 monitor_h/2";
         }
         {
-          name = "games";
-          "match:tag" = "games*";
+          name = "prismLauncher";
+          "match:initial_class" = "org.prismlauncher.PrismLauncher";
+          no_initial_focus = "on";
+          workspace = "Extra";
+          monitor = "DP-1";
+        }
+        {
+          name = "steamClient";
+          "match:initial_class" = "steam";
+          no_initial_focus = "on";
+          tile = "on";
+          workspace = "Extra";
+          monitor = "DP-1";
+        }
+        {
+          name = "minceraft";
+          "match:initial_title" = "Minecraft.*";
           no_blur = "on";
+          no_initial_focus = "on";
+          tile = "on";
+          workspace = "Games";
+          monitor = "DP-1";
+        }
+        {
+          name = "steamGames";
+          "match:initial_class" = "steam_app.*";
+          no_blur = "on";
+          no_initial_focus = "on";
+          tile = "on";
+          workspace = "Games";
+          monitor = "DP-1";
+        }
+        {
+          name = "telegram";
+          "match:initial_class" = "org.telegram.desktop";
+          no_initial_focus = "on";
+          workspace = "Social";
+          monitor = "HDMI-A-1";
+        }
+        {
+          name = "vesktop";
+          "match:initial_class" = "vesktop";
+          no_initial_focus = "on";
+          workspace = "Social";
+          monitor = "HDMI-A-1";
+        }
+        {
+          name = "whatsapp";
+          "match:initial_title" = "web.whatsapp.com.*";
+          no_initial_focus = "on";
+          workspace = "Social";
+          monitor = "HDMI-A-1";
         }
         {
           name = "browser";
           "match:class" = "brave-browser";
           opacity = "2 2 2";
+          workspace = "Browser";
+          monitor = "DP-1";
         }
         {
           name = "bitwardenBrowser";
           "match:initial_class" = "brave-nngceckbapebfimnlniiiahkandclblb-Default";
           float = "on";
           size = "window_w/2 window_h/2";
-        }
-        {
-          name = "bitwarden";
-         "match:initial_class" = "Bitwarden";
-         float = "on";
-         size = "window_w/4 window_h/2";
         }
         {
           name = "pavucontrol";
@@ -319,18 +371,23 @@ in {
 
       exec-once = [ 
         "sleep 3 && syncthing --no-browser" 
-        "uwsm app -- clipse -listen" # Clipboard history
-        "uwsm app -- dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "uwsm app -- systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "uwsm app -- nm-applet --indicator"
-        "uwsm app -- ags"
-        "uwsm app -- blueman-applet"
-        "uwsm app -- pypr"
-        "uwsm app -- vicinae server"
-        "uwsm app -- swww-daemon"
+        "clipse -listen" # Clipboard history
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "nm-applet --indicator"
+        "ags"
+        "blueman-applet"
+        "pypr"
+        "vicinae server"
+        "swww-daemon"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "sleep 3 && systemctl --user restart clip-notify"
+        "steam"
+        "Telegram"
+        "prismlauncher"
+        "vesktop"
+        "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];
 
       binde = [
@@ -373,62 +430,61 @@ in {
         ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
         "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
-        "$mod, L, exec, uwsm app -- hyprlock"
-        "$mod, D, exec, pkill wofi || uwsm app -- wofi --show drun -G --insensitive" #Main Menu
-        # "$mod, D, exec, uwsm app -- vicinae open" #Main Menu
-        "$mod ALT, D, exec, pkill wofi || uwsm app -- wofi --show run -G --insensitive" #Main Menu
-        "$mod, V, exec, pkill clipse & uwsm app -- $terminal --class middleFloat -e clipse"
-        "CTRL ALT, N, exec, uwsm app -- $terminal --class middleFloat -e hx"
+        "$mod, L, exec, hyprlock"
+        # "$mod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
+        "$mod, D, exec, vicinae open" #Main Menu
+        "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" #Main Menu
+        "$mod, V, exec, pkill clipse & $terminal --class middleFloat -e clipse"
         "$mod, SPACE, togglefloating"
         "$mod, F, fullscreen, 1" # fake full screen 
         "$mod SHIFT, F, fullscreen"
         "$mod SHIFT, Q, killactive"
         "$mod, A, exec, pkill wofi || true && ags -t 'overview'"
-        "$mod, Return, exec, uwsm app -- $terminal"  #terminal
-        "$mod ALT, C, exec, pkill qalc & uwsm app -- $terminal --class middleFloat -e qalc" # calculator (qalculate)
+        "$mod, Return, exec, $terminal"  #terminal
+        "$mod ALT, C, exec, pkill qalc & $terminal --class middleFloat -e qalc" # calculator (qalculate)
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod, Z, exec, pypr zoom" # Toggle Desktop Zoom
-        "$mod, E, exec, uwsm app -- $filesGUI"
-        "$mod SHIFT, E, exec, uwsm app -- $terminal -e $files"
+        "$mod, E, exec, $filesGUI"
+        "$mod SHIFT, E, exec, $terminal -e $files"
 
         # Switch workspaces with mod + [0-9] 
-        "$mod, 1, workspace, 1 # NOTE: code:10 = key 1"
-        "$mod, 2, workspace, 2 # NOTE: code:11 = key 2"
-        "$mod, 3, workspace, 3 # NOTE: code:12 = key 3"
-        "$mod, 4, workspace, 4 # NOTE: code:13 = key 4"
-        "$mod, 5, workspace, 5 # NOTE: code:14 = key 5"
-        "$mod, 6, workspace, 6 # NOTE: code:15 = key 6"
-        "$mod, 7, workspace, 7 # NOTE: code:16 = key 7"
-        "$mod, 8, workspace, 8 # NOTE: code:17 = key 8"
-        "$mod, 9, workspace, 9 # NOTE: code:18 = key 9"
-        "$mod, 0, workspace, 10 # NOTE: code:19 = key 0"
+        "$mod, 1, workspace, Browser"
+        "$mod, 2, workspace, Social"
+        "$mod, 3, workspace, Games"
+        "$mod, 4, workspace, Extra"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
 
         # Move active window and follow to workspace mod + SHIFT [0-9]
-        "$mod SHIFT, code:10, movetoworkspace, 1 # NOTE: code:10 = key 1"
-        "$mod SHIFT, code:11, movetoworkspace, 2 # NOTE: code:11 = key 2"
-        "$mod SHIFT, code:12, movetoworkspace, 3 # NOTE: code:12 = key 3"
-        "$mod SHIFT, code:13, movetoworkspace, 4 # NOTE: code:13 = key 4"
-        "$mod SHIFT, code:14, movetoworkspace, 5 # NOTE: code:14 = key 5"
-        "$mod SHIFT, code:15, movetoworkspace, 6 # NOTE: code:15 = key 6"
-        "$mod SHIFT, code:16, movetoworkspace, 7 # NOTE: code:16 = key 7"
-        "$mod SHIFT, code:17, movetoworkspace, 8 # NOTE: code:17 = key 8"
-        "$mod SHIFT, code:18, movetoworkspace, 9 # NOTE: code:18 = key 9"
-        "$mod SHIFT, code:19, movetoworkspace, 10 # NOTE: code:19 = key 0"
+        "$mod SHIFT, 1, movetoworkspace, Browser"
+        "$mod SHIFT, 2, movetoworkspace, Social"
+        "$mod SHIFT, 3, movetoworkspace, Games"
+        "$mod SHIFT, 4, movetoworkspace, Extra"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 0, movetoworkspace, 10"
         "$mod SHIFT, bracketleft, movetoworkspace, -1 # brackets ["
         "$mod SHIFT, bracketright, movetoworkspace, +1 # brackets ]"
 
 
         # Move active window and do not follow to workspace mod + CTRL [0-9]
-        "$mod CTRL, code:10, movetoworkspacesilent, 1 # NOTE: code:10 = key 1"
-        "$mod CTRL, code:11, movetoworkspacesilent, 2 # NOTE: code:11 = key 2"
-        "$mod CTRL, code:12, movetoworkspacesilent, 3 # NOTE: code:12 = key 3"
-        "$mod CTRL, code:13, movetoworkspacesilent, 4 # NOTE: code:13 = key 4"
-        "$mod CTRL, code:14, movetoworkspacesilent, 5 # NOTE: code:14 = key 5"
-        "$mod CTRL, code:15, movetoworkspacesilent, 6 # NOTE: code:15 = key 6"
-        "$mod CTRL, code:16, movetoworkspacesilent, 7 # NOTE: code:16 = key 7"
-        "$mod CTRL, code:17, movetoworkspacesilent, 8 # NOTE: code:17 = key 8"
-        "$mod CTRL, code:18, movetoworkspacesilent, 9 # NOTE: code:18 = key 9"
-        "$mod CTRL, code:19, movetoworkspacesilent, 10 # NOTE: code:19 = key 0"
+        "$mod CTRL, 1, movetoworkspacesilent, Browser"
+        "$mod CTRL, 2, movetoworkspacesilent, Social"
+        "$mod CTRL, 3, movetoworkspacesilent, Games"
+        "$mod CTRL, 4, movetoworkspacesilent, extra"
+        "$mod CTRL, 5, movetoworkspacesilent, 5"
+        "$mod CTRL, 6, movetoworkspacesilent, 6"
+        "$mod CTRL, 7, movetoworkspacesilent, 7"
+        "$mod CTRL, 8, movetoworkspacesilent, 8"
+        "$mod CTRL, 9, movetoworkspacesilent, 9"
+        "$mod CTRL, 0, movetoworkspacesilent, 10"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"

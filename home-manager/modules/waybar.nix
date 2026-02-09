@@ -15,8 +15,8 @@
         position = "top";
         layer = "top";
 
-        height = 10;
-        margin-top = -38;
+        height = 47;
+        margin-top = -34;
         margin-bottom = -6;
         margin-left = 6;
         margin-right = 6;
@@ -89,21 +89,18 @@
         
         "hyprland/workspaces" = {
           margin-left = 0;
-          active-only = false;
+          active-only = true;
           all-outputs = true;
-          disable-scroll = false;
-          on-scroll-up = "hyprctl dispatch workspace -1";
-          on-scroll-down = "hyprctl dispatch workspace +1";
-          persistent-workspaces = {
-            "*" = 4;
-          };
-          format = "{icon}";
+          disable-scroll = true;
+          # on-scroll-up = "hyprctl dispatch workspace -1";
+          # on-scroll-down = "hyprctl dispatch workspace +1";
+          format = "{icon}{name}";
           on-click = "activate";
           format-icons = {
-            active = "󰮯";
-            empty = "<span font='6'></span>";
-            default = "󰊠";
-            sort-by-number = true;
+            active = "󰮯 ";
+            empty = "<span font='7'> </span>";
+            default = "󰊠 ";
+            sort-by-number = false;
           };
         };
 
