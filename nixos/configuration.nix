@@ -53,13 +53,11 @@
       experimental-features = [ "nix-command flakes"] ;
       # Opinionated: disable global registry
       flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
 			# Workaround to get rid of the download buffer size warning
 			download-buffer-size = 524288000;
     };
     # Opinionated: disable channels
-    channel.enable = true;
+    channel.enable = false;
 
     # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
@@ -93,7 +91,6 @@
 
   programs.hyprland = {
     enable = true;
-    withUWSM = true;
     package = pkgs.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
