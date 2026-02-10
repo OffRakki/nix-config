@@ -87,7 +87,7 @@ in {
         repeat_rate = 50;
         repeat_delay = 300;
 
-        sensitivity = -0.8;
+        sensitivity = -0.9;
         numlock_by_default = true;
         left_handed = false;
         follow_mouse = true;
