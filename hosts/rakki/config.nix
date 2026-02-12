@@ -5,6 +5,7 @@
     ./users.nix
     ./drivers
     ./tailscale.nix
+    ./containers
   ];
 
   # Extra Module Options
@@ -174,15 +175,6 @@
     gdm-password.enableGnomeKeyring = true;
     hyprlock = {};
   };
-
-  # Virtualization / Containers
-  # virtualisation.libvirtd.enable = false;
-  # virtualisation.podman = {
-  #   enable = false;
-  #   dockerCompat = false;
-  #   defaultNetwork.settings.dns_enabled = false;
-  # };
-	virtualisation.waydroid.enable = true;
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

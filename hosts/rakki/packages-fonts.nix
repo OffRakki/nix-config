@@ -16,8 +16,14 @@ in {
     wine
     osu-lazer-bin
 
+    # Containers
+    podman-compose
+    podman-tui
+    podman-desktop
+
     # User Packages
-    gitlogue
+    glow # Render markdown files on terminal
+    gitlogue # Screen protection with git logs animated
     vial
     abaddon
     duf

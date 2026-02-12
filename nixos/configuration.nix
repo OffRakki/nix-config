@@ -82,12 +82,7 @@
       };
     };
 
-	virtualisation = {
-    docker.enable = true;
-    libvirtd = lib.mkForce {
-		enable = true;
-    };
-	};
+	virtualisation.libvirtd.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -110,8 +105,18 @@
     };
   };
   services.mpd.user = "rakki";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
+  
+  systemd = {
+    services = {
+      podman-glance = {
+        restartIfChanged = false;
+      };
+      mpd = {
+        environment = {
+          XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
+        };
+      };
+    };
   };
 
 	services.xserver = {

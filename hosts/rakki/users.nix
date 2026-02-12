@@ -22,6 +22,7 @@
           "video" 
           "audio"
           "docker"
+          "podman"
           "input"
           "uinput"
         ];
