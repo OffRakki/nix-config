@@ -423,7 +423,7 @@ in {
 
       bind = [ 
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
-        "$mod SHIFT, P, exec,  '${config.scriptsDir}/pass-wofi.sh'"
+        "$mod SHIFT, P, exec,  '${config.customPaths.scriptsDir}/pass-wofi.sh'"
         "$mod SHIFT, W, exec, waypaper"
         "$mod,g,togglegroup"
         "$mod,i,pin"

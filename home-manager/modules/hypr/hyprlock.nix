@@ -23,7 +23,7 @@
       background = [
         {
           monitor = "";
-          path = "${config.wallDir}/knnw.jpg";
+          path = "${config.customPaths.wallDir}/knnw.jpg";
           blur_passes = 3;
           contrast = 0.8916;
           brightness = 0.8172;

@@ -5,6 +5,7 @@
 		../hosts/rakki/config.nix
 		./modules
 		./hardware-configuration.nix
+		./variables.nix
   ];
 
   nixpkgs ={
