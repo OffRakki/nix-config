@@ -220,11 +220,12 @@ pages:
             # read-only token from your Github account settings and use it here to increase the limit.
             token: ${GITTOKEN}
             repositories:
+              - offrakki/nix-config
               - glanceapp/glance
               - immich-app/immich
               - spacedriveapp/spacedrive
           - type: repository
-            repository: glanceapp/glance
+            repository: offrakki/nix-config
             pull-requests-limit: 5
             issues-limit: 3
             commits-limit: 3

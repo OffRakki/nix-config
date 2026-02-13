@@ -12,9 +12,12 @@
     oci-containers.containers = {
       glance = {
         image = "glanceapp/glance:latest";
-        ports = ["8090:8000"];
+        # ports = ["8090:8000"];
         autoStart = true;
         pull = "missing";
+        environmentFiles = [
+          /var/lib/glance/glance.env
+        ];
         volumes = [ "${config.customPaths.containerDataDir}/glance:/app/config"];
         extraOptions = [
           "--network=host"
