@@ -22,6 +22,10 @@ in {
     podman-desktop
 
     # User Packages
+    goofcord
+    imagemagick
+    ncdu
+    element-desktop
     glow # Render markdown files on terminal
     gitlogue # Screen protection with git logs animated
     vial
@@ -149,6 +153,7 @@ in {
   # FONTS
   fonts = { 
     packages = with pkgs; [
+      plemoljp
       corefonts
       noto-fonts
       noto-fonts-cjk-sans
