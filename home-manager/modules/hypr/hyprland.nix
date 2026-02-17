@@ -70,12 +70,12 @@ in {
         resize_on_border = true;
         allow_tearing = false;
         layout = "scrolling";
-        border_size = 1;
+        border_size = 2;
         gaps_in = 4;
         gaps_out = 8;
 
-        "col.active_border" = lib.mkForce "rgba(e78a4eff)";
-        "col.inactive_border" = lib.mkForce "rgba(141617dd)";
+        "col.active_border" = "rgba(3e3f4044)";
+        "col.inactive_border" = "rgba(3e3f4022)";
       };
 
       input = {
@@ -136,13 +136,13 @@ in {
 
         shadow = {
           enabled = true;
-          range = 4;
-          render_power = 4;
-          # offset = "0 40";
-          scale = 0.95;
+          range = 1;
+          render_power = 1;
+          offset = "2.5 5";
+          scale = 1;
 
-          # "color" = "rgb(0,0,0)";
-          # "color_inactive" = "rgb(0,0,0)";
+          color = "rgba(00000044)";
+          color_inactive = "rgba(00000022)";
         };
 
         blur = {
@@ -287,8 +287,8 @@ in {
           monitor = "HDMI-A-1";
         }
         {
-          name = "vesktop";
-          "match:initial_class" = "vesktop";
+          name = "goofcord";
+          "match:initial_class" = "goofcord";
           no_initial_focus = "on";
           workspace = "Social";
           monitor = "HDMI-A-1";
@@ -386,7 +386,7 @@ in {
         "steam"
         "Telegram"
         "prismlauncher"
-        "vesktop"
+        "goofcord"
         "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];
 

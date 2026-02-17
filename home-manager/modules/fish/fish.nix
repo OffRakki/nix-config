@@ -7,19 +7,19 @@ in
     fish = {
       enable = true;
       interactiveShellInit =  ''
-        export BW_SESSION=(cat $HOME/.bwenv)
+        export BW_SESSION=(cat /home/rakki/.bwenv)
         set fish_greeting
         direnv hook fish | source
         zoxide init fish --cmd cd | source
         fastfetch
 
 
-        # fish_vi_key_bindings
-        # ${lib.optionalString useHelix "fish_helix_key_bindings"}
-        # set fish_cursor_default     block      blink
-        # set fish_cursor_insert      line       blink
-        # set fish_cursor_replace_one underscore blink
-        # set fish_cursor_visual      block
+        # helix keybinds
+        # ${if useHelix then "fish_helix_key_bindings" else "fish_vi_key_bindings"}
+        set fish_cursor_default     block      blink
+        set fish_cursor_insert      line       blink
+        set fish_cursor_replace_one underscore blink
+        set fish_cursor_visual      block
 
 
         # Use terminal colors

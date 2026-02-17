@@ -23,7 +23,7 @@
 
         modules-left = [
           "hyprland/workspaces"
-          "niri/workspaces"
+          # "niri/workspaces"
           "group/hardwaremod"
           # "group/niriwindowmod"
           "group/windowmod"
@@ -56,10 +56,24 @@
 
         "memory" = {
           interval = 5;
-          format = "󰍛 {used}";
+          format = " {used}";
           tooltip = true;
-          tooltip-format = "󰍛 {total} GiB + {swapTotal} GiB Swap";
+          tooltip-format = " {total} GiB + {swapTotal} GiB Swap";
           min-length = 6;
+        };
+
+        "custom/gpuUtil" = {
+          interval = 5;
+          exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
+          format = "󰢮 {}%";
+          min-lenght = 6;
+        };
+
+        "custom/gpuMemUtil" = {
+          interval = 5;
+          exec = "nvidia-smi --query-gpu=utilization.memory --format=csv,noheader,nounits";
+          format = "󰢮  {}%";
+          min-lenght = 6;
         };
 
         "group/hardwaremod" = {
@@ -67,6 +81,8 @@
           modules = [
             "cpu"
             "memory"
+            "custom/gpuUtil"
+            "custom/gpuMemUtil"
           ];
         };
 
@@ -344,7 +360,7 @@
       };
     };
     style = ''
-      @define-color bg_color #1e1e2e;
+      @define-color bg_color #24242C;
       @define-color bg2_color #181825;
       @define-color text_color #b4befe;
 
@@ -363,7 +379,7 @@
         background: @bg_color;
         margin: 8px 0px 8px 0px;
         padding: 0px 0px 0px 0px;
-        border-radius: 8px;
+        border-radius: 4px;
         border: solid 0px #f4d9e1;
       }
 
@@ -378,14 +394,14 @@
       #workspaces button.active {
         color: #74c7ec;
         background-color: transparent;
-        border-radius: 8px;
+        border-radius: 4px;
         transition: all 0.25s ease;
       }
 
       #workspaces button:hover {
         background-color: @text_color;
         color: #000000;
-        border-radius: 8px;
+        border-radius: 4px;
       }
 
       window#waybar {
@@ -418,7 +434,7 @@
       #window.title {
         color: @text_color;
         background-color: @bg2_color;
-        border-radius: 8px;
+        border-radius: 4px;
         padding-left: 8px;
         padding-right: 8px;
       }
@@ -446,7 +462,7 @@
       #network.speed {
         color: @text_color;
         background-color: #1E1E2E;
-        border-radius: 8px;
+        border-radius: 4px;
         padding-left: 8px;
       }
 
@@ -471,7 +487,7 @@
       /* MEDIA PLAYER */
       #mediamod {
         background-color: @bg_color;
-        border-radius: 8px;
+        border-radius: 4px;
         padding: 4px 4px 4px 4px;
         margin: 8px 4px 8px 4px;
       }
@@ -493,7 +509,7 @@
       #mpris.title {
         color: @text_color;
         background-color: @bg2_color;
-        border-radius: 8px;
+        border-radius: 4px;
         padding-left: 8px;
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
@@ -502,7 +518,7 @@
       /* AUDIO */
       #audiomod {
         background-color: @bg_color;
-        border-radius: 8px;
+        border-radius: 4px;
       }
 
       #pulseaudio.icon {
@@ -514,7 +530,7 @@
       #pulseaudio.volume {
         color: @text_color;
         background-color: #1E1E2E;
-        border-radius: 8px;
+        border-radius: 4px;
         padding-left: 8px;
         padding-right: 8px;
         margin: 1px 1px 1px 0px;
@@ -532,16 +548,29 @@
         background-color: @bg2_color;
         padding: 2px 2px 2px 2px;
         margin: 4px;
-        border-radius: 8px;
+        border-radius: 4px;
       }
 
       #memory {
         background-color: @bg2_color;
         padding: 2px 2px 2px 2px;
         margin: 4px;
-        border-radius: 8px;
+        border-radius: 4px;
       }
 
+      #custom-gpuUtil {
+        background-color: @bg2_color;
+        padding: 2px 2px 2px 2px;
+        margin: 4px;
+        border-radius: 4px;
+      }
+
+      #custom-gpuMemUtil {
+        background-color: @bg2_color;
+        padding: 2px 2px 2px 2px;
+        margin: 4px;
+        border-radius: 4px;
+      }
       /* CLOCK */
       #clockmod {
         background-color: @bg_color;
@@ -558,9 +587,9 @@
       #clock.date {
         color: @text_color;
         background-color: @bg2_color;
-        border-radius: 8px;
-        padding-left: 8px;
-        padding-right: 8px;
+        border-radius: 4px;
+        padding-left: 4px;
+        padding-right: 4px;
         margin: 1px 1px 1px 0px;
       }
     '';
