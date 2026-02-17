@@ -7,6 +7,9 @@
     nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # Secrets
+    sops-nix.url = "github:Mic92/sops-nix";
+
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {

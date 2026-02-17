@@ -1,6 +1,7 @@
 { inputs, lib, config, pkgs, outputs, ... }:
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
 		../hosts/rakki/config.nix
 		./modules
@@ -24,6 +25,14 @@
     config = {
       allowUnfree = true;
     };
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.keyFile = "/home/rakki/.config/sops/age/keys.txt";
+
+    secrets.syncthing_cert = { owner = "rakki"; };
+    secrets.syncthing_key = { owner = "rakki"; };
   };
 
   programs.gpu-screen-recorder = {
@@ -164,6 +173,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sops
+    age
     gpu-screen-recorder
     gpu-screen-recorder-gtk
     dotool

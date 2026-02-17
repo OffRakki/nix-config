@@ -3,6 +3,7 @@
     ./steam.nix
     ./fish.nix
     ./automation.nix
-    ./kanata.nix
+    # ./kanata.nix
+    ./syncthing.nix
   ];
 }
