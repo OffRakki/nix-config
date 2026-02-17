@@ -5,5 +5,6 @@
     ./hypridle.nix
     # ./hyprpaper.nix
     ./hyprpanel.nix
+    ./pyprland.nix
   ];
 }
