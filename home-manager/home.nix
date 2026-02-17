@@ -28,8 +28,15 @@
       NH_FLAKE = "$HOME/Documents/nixConfig";
       QT_QPA_PLATFORM = "wayland";
     };
+    file = {
+      ".config/hypr/pyprland.toml".source = "${config.customPaths.homeConfigDir}/pyprland/pyprland.toml";
+      ".config/hypr/pyprland.d" = {
+        source = "${config.customPaths.homeConfigDir}/pyprland/pyprland.d";
+        recursive = true;
+      };
+    };
   };
-
+  
 	dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
