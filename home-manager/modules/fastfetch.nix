@@ -6,21 +6,18 @@
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
       logo = {
-        # source = "${../../hosts/rakki/svgs/hypr.png}";
+        source = "${../../hosts/rakki/svgs/animePurpleHair.png}";
         type = "auto";
-        position = "right";
-        height = 4;
+        position = "left";
+        height = 14;
         padding = {
-          top = 0;
+          top = 4;
         };
       };
       display = {
         separator = " ➜  ";
       };
       modules = [
-        "break"
-        "break"
-        "break"
         {
           type = "os";
           key = "OS   ";
