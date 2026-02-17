@@ -26,6 +26,10 @@
     };
   };
 
+  programs.gpu-screen-recorder = {
+    enable = true;
+  };
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [fuse glib];
@@ -160,9 +164,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    dotool
     gpu-screen-recorder
     gpu-screen-recorder-gtk
+    dotool
     appimage-run
     grc
     xwayland-satellite
