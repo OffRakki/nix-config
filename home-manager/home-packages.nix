@@ -56,7 +56,13 @@
     zip
 
     # Gaming
-    prismlauncher
+    (prismlauncher.override {
+      jdks = [
+        pkgs.temurin-bin-8
+        pkgs.temurin-bin-17
+        pkgs.temurin-bin-21
+      ];
+    })
 
     # Coding stuff
     nodejs
