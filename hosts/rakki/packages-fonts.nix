@@ -15,6 +15,7 @@ in {
     lutris
     wine
     osu-lazer-bin
+    heroic
 
     # Containers
     podman-compose

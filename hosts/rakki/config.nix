@@ -98,13 +98,6 @@
   
     #ipp-usb.enable = true;
   
-    #syncthing = {
-    #  enable = false;
-    #  user = "${username}";
-    #  dataDir = "/home/${username}";
-    #  configDir = "/home/${username}/.config/syncthing";
-    #};
-
   };
 
   systemd.services.flatpak-repo = {
@@ -184,9 +177,4 @@
   networking.firewall.allowedUDPPorts = [ 25565 4950 4955 4534 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-   
-  networking.firewall.interfaces."tailscale0" = {
-    allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
-    allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
-  };
 }

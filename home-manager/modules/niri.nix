@@ -77,7 +77,6 @@ in
       prefer-no-csd = true;
 
       spawn-at-startup = [
-        { sh = "syncthing --no-gui"; }
         { argv = [ "clipse" "-listen" ]; }
         { argv = [ "vicinae" "server" ]; }
         { argv = [ "xwayland-satellite" ]; }

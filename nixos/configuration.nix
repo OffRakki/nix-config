@@ -104,8 +104,6 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
-  services.tailscale.enable = true;
-
   services.mpd= {
     enable = true;
     settings = {
@@ -190,8 +188,6 @@
     fuzzel
     netplan
     jujutsu
-    discordo
-    syncthing
     kdePackages.kde-cli-tools
     dialog
     freerdp

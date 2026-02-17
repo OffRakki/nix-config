@@ -370,7 +370,6 @@ in {
       ];
 
       exec-once = [ 
-        "sleep 3 && syncthing --no-browser" 
         "clipse -listen" # Clipboard history
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -422,6 +421,11 @@ in {
       ];
 
       bind = [ 
+        # pypr
+        "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
+        "$mod SHIFT, V, exec, pypr toggle volume" # Pavucontrol
+
+        
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
         "$mod SHIFT, P, exec,  '${config.customPaths.scriptsDir}/pass-wofi.sh'"
         "$mod SHIFT, W, exec, waypaper"
@@ -442,7 +446,6 @@ in {
         "$mod, A, exec, pkill wofi || true && ags -t 'overview'"
         "$mod, Return, exec, $terminal"  #terminal
         "$mod ALT, C, exec, pkill qalc & $terminal --class middleFloat -e qalc" # calculator (qalculate)
-        "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod, Z, exec, pypr zoom" # Toggle Desktop Zoom
         "$mod, E, exec, $filesGUI"
         "$mod SHIFT, E, exec, $terminal -e $files"
