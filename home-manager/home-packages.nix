@@ -16,7 +16,7 @@
     qalculate-gtk
     vlc
 		warp
-		thunar-volman
+		lxqt.pcmanfm-qt
 
 		# Langs
 		nil
