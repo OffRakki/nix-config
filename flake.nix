@@ -75,16 +75,5 @@
 					];
       	};
     	};
-    	homeConfigurations.rakki = home-manager.lib.homeManagerConfiguration {
-    	  specialArgs = {
-    	    inherit inputs;
-    	    inherit outputs;
-    	  };
-    	  pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    	  modules = [
-  				./home-manager/home.nix
-  				catppuccin.homeModules.catppuccin
-    	  ];
-    	};
     };
 }
