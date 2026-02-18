@@ -33,6 +33,10 @@
 
     secrets.syncthing_cert = { owner = "rakki"; };
     secrets.syncthing_key = { owner = "rakki"; };
+
+    secrets.user-password = {
+      neededForUsers = true;
+    };
   };
 
   programs.gpu-screen-recorder = {
@@ -240,6 +244,7 @@
     wl-clipboard-rs
     wl-clip-persist
     clipse
+    fzf
     fishPlugins.done
     fishPlugins.fzf-fish
     fishPlugins.forgit

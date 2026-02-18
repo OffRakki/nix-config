@@ -1,13 +1,11 @@
-{ pkgs, username, lib, ... }:
-
-{
+{ pkgs, config, username, lib, ... }: {
   users = { 
     defaultUserShell = "${lib.getExe pkgs.fish}";
-    mutableUsers = true;
+    mutableUsers = false;
     users = {
       rakki = {
-        initialPassword = "123123123";
         isNormalUser = true;
+        hashedPasswordFile = config.sops.secrets.user-password.path;
         openssh.authorizedKeys.keys = [ ];
         extraGroups = [
           "networkmanager"
@@ -26,7 +24,6 @@
           "input"
           "uinput"
         ];
-
         packages = with pkgs; [
         ];
       };
@@ -35,7 +32,4 @@
   };
 
   environment.shells = with pkgs; [ fish ];
-  environment.systemPackages = with pkgs; [
-    fzf
-  ]; 
 }
