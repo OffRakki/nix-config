@@ -28,6 +28,7 @@ in {
       "$qalc" 			= "${lib.getExe pkgs.qalculate-gtk}";
       "$slurp" 			= "${lib.getExe pkgs.slurp}";
       "$hyprshot"   = "${lib.getExe pkgs.hyprshot}";
+      "$lock"       = "caelestia shell lock lock";
 
       monitorv2 = [
         {
@@ -431,12 +432,14 @@ in {
         "$mod SHIFT, W, exec, waypaper"
         "$mod,g,togglegroup"
         "$mod,i,pin"
-        ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
-        "SHIFT, Print, exec, $hyprshot -z --clipboard-only -m window --freeze"
+        ", Print, exec, caelestia shell picker openFreezeClip"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
-        "$mod, L, exec, hyprlock"
+        "$mod, L, exec, $lock"
         # "$mod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
-        "$mod, D, exec, vicinae open" #Main Menu
+        "$mod, D, exec, caelestia shell drawers toggle launcher"
+        "$mod SHIFT, D, exec, vicinae open"
+        "$mod, K, exec, caelestia shell drawers toggle sidebar"
+        "$mod SHIFT, K, exec, caelestia toggle music"
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" #Main Menu
         "$mod, V, exec, pkill clipse & $terminal --class middleFloat -e clipse"
         "$mod, SPACE, togglefloating"

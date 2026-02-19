@@ -1,6 +1,6 @@
 {config, ...}: {
   services.mako = {
-    enable = true;
+    enable = false;
     settings = {
       font = "FiraSans";
       padding = "10,20";
