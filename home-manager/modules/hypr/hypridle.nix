@@ -1,6 +1,6 @@
 {config, lib, ...}: {
   services.hypridle = {
-    enable = true;
+    enable = false;
     settings = let
       isLocked = "pgrep hyprlock";
     in {
