@@ -8,7 +8,10 @@
 {
   programs.waybar = lib.mkForce {
     enable = true;
-    systemd.enable = true;
+    systemd = {
+      enable = false;
+      target = "graphical-session.target";
+    };
     settings = {
       mainBar = {
         exclusive = false;

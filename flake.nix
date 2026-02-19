@@ -10,15 +10,17 @@
     # Secrets
     sops-nix.url = "github:Mic92/sops-nix";
 
-    # Hyprland
+    # WM
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
 
-    # Niri
+    caelestia-shell.url = "github:caelestia-dots/shell";
+
     niri.url = "github:sodiboo/niri-flake";
+
 
     # Catppuccin
     catppuccin.url = "github:catppuccin/nix";
@@ -50,6 +52,7 @@
   outputs = {
     self,
     nixpkgs,
+    caelestia-shell,
     home-manager,
     catppuccin,
 		nvf,
@@ -61,6 +64,7 @@
   } @inputs: 
 		let
     	inherit (self) outputs;
+    	system = "x86_64-linux";
   	in {
     	nixosConfigurations = {
       	sora = nixpkgs.lib.nixosSystem {
@@ -72,6 +76,14 @@
         	  # inputs.niri.homeModules.niri
           	inputs.nvf.nixosModules.default
 						./nixos/configuration.nix
+						{
+						  nixpkgs.overlays = [
+						    (final: prev: {
+						      caelestia-shell = caelestia-shell.packages.${system}.caelestia-shell;
+						      caelestia-cli   = caelestia-shell.inputs.caelestia-cli.packages.${system}.caelestia-cli;
+						    })
+						  ];
+						}
 					];
       	};
     	};

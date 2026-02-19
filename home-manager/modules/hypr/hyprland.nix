@@ -35,14 +35,14 @@ in {
           mode = "1920x1080@239.76";
           position = "0x0";
           scale = 1;
-          addreserved = "30,0,0,0";
+          # addreserved = "30,0,0,0";
         } 
         {
           output = "HDMI-A-1";
           mode = "1920x1080@60";
           position = "-1920x0";
           scale = 1;
-          addreserved = "30,0,0,0";
+          # addreserved = "30,0,0,0";
         } 
       ];
 
@@ -411,13 +411,13 @@ in {
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${swayosd.output-volume}"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; ${swayosd.output-volume}"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; ${swayosd.output-volume}"
-        "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle; ${swayosd.input-volume}"
-        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+; ${swayosd.input-volume}"
-        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-; ${swayosd.input-volume}"
-        ",Caps_Lock,exec,${swayosd.caps-lock}"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" #; ${swayosd.output-volume}"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"#; ${swayosd.output-volume}"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"#; ${swayosd.output-volume}"
+        "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"#; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"#; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"#; ${swayosd.input-volume}"
+        # ",Caps_Lock,exec,${swayosd.caps-lock}"
       ];
 
       bind = [ 
