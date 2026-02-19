@@ -4,8 +4,8 @@
   ...
 }: {
   services.kdeconnect = {
-    enable = true;
-    indicator = true;
+    enable = false;
+    indicator = false;
     package = pkgs.kdePackages.kdeconnect-kde;
   };
 }

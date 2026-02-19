@@ -23,6 +23,7 @@ in {
     podman-desktop
 
     # User Packages
+    dgop
     goofcord
     imagemagick
     ncdu
@@ -124,7 +125,6 @@ in {
     jq
     alacritty
     kitty
-    networkmanagerapplet
     nwg-look
     nvtopPackages.full	 
     pamixer

@@ -217,7 +217,6 @@
     w3m
     direnv
     dragon-drop
-    networkmanager
     refind
     os-prober
     nixd
