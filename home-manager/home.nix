@@ -44,7 +44,9 @@
   	  "text/html" = ["brave-browser.desktop"];
       "text/xml" = ["brave-browser.desktop"];
       "x-scheme-handler/http" = ["brave-browser.desktop"];
-      "x-scheme-handler/https" = ["brave-browser.desktop"];    };
+      "x-scheme-handler/https" = ["brave-browser.desktop"];
+      "inode/directory" = [ "pcmanfm-qt.desktop" ];
+    };
   };
 
   # Enable home-manager
