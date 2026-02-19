@@ -2,7 +2,7 @@ theme:
   background-color: 50 1 6
   primary-color: 24 97 58
   negative-color: 209 88 54
-  background: "/home/rakki/Documents/nixConfig/hosts/rakki/wallpapers/agbg.jpg"
+  background: "/home/rakki/Documents/nixConfig/hosts/sora/wallpapers/agbg.jpg"
 
 branding:
   custom-footer: |

@@ -3,7 +3,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
-		../hosts/rakki/config.nix
+		../hosts/sora/config.nix
 		./modules
 		./hardware-configuration.nix
 		./variables.nix
