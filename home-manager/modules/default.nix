@@ -35,7 +35,6 @@
     ./niri.nix
     ./opencode.nix
     ./hytale.nix
-    ./flameshot.nix
     ./caelestiaShell.nix
   ];
 }
