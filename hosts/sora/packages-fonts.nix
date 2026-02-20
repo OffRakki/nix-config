@@ -23,6 +23,7 @@ in {
     podman-desktop
 
     # User Packages
+    silicon
     dgop
     goofcord
     imagemagick

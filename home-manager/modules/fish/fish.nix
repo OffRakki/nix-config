@@ -110,6 +110,7 @@ in
 
         # text editor
         v = "hx";
+        silicon = "silicon --to-clipboard --theme Dracula --no-line-number --no-window-controls --font 'JetBrainsMono Nerd Font Mono' --background '#24242C' --window-title";
 
         # cd
         ".." = "cd ..";

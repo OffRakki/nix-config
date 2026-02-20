@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     # Packages in each category are sorted alphabetically
 
@@ -22,6 +22,7 @@
 		nil
 
     # CLI utils
+    satty
     flatpak
     yazi
     todo
