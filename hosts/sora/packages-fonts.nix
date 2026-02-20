@@ -127,7 +127,7 @@ in {
     alacritty
     kitty
     nwg-look
-    nvtopPackages.full	 
+    nvitop	 
     pamixer
     pavucontrol
     playerctl
