@@ -36,5 +36,6 @@
     ./opencode.nix
     ./hytale.nix
     ./caelestiaShell.nix
+    ./quickshell/quickshell.nix
   ];
 }
