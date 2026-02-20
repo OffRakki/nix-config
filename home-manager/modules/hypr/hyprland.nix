@@ -75,8 +75,8 @@ in {
         gaps_in = 4;
         gaps_out = 4;
 
-        "col.active_border" = "rgba(3e3f4044)";
-        "col.inactive_border" = "rgba(3e3f4022)";
+        "col.active_border" = "rgba(BFA16Eff)";
+        "col.inactive_border" = "rgba(BFA16E44)";
       };
 
       input = {
@@ -235,6 +235,12 @@ in {
       ];
 
       windowrule = [
+        # fix for brave border color not being displayed correctly.
+        {
+          name = "braveBorderColorFix";
+          "match:class" = "brave-browser";
+          border_color = "rgba(5c4826ff) rgba(5c482644)";
+        }
         {
           name = "middleFloatClass";
           "match:class" = "middleFloat";
