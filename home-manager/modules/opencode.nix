@@ -21,8 +21,8 @@
       description: nixos specialist
       permission:
         read: "allow"
-        write: "allow"
-        bash: "allow"
+        write: "ask"
+        bash: "ask"
         grep: "allow"
         webfetch: "allow"
       ---
@@ -53,7 +53,7 @@
       description: Summarizes the chat and saves it directly to the Obsidian vault localized at /home/rakki/sync/geral/Obsidian/Summaries.
       permission:
         write: "allow"
-        read: "allow"
+        read: "ask"
       ---
       # Role
       You are a technical documentarian for this Obsidian vault.
