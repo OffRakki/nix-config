@@ -26,6 +26,16 @@
       allowUnfree = true;
     };
   };
+  
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    users = {
+      # Import your home-manager config
+      rakki = import ../home-manager/home.nix;
+    };
+  };
 
   sops = {
     defaultSopsFile = ./secrets.yaml;
@@ -39,27 +49,34 @@
     };
   };
 
-  programs.gpu-screen-recorder = {
-    enable = true;
-  };
+  console.useXkbConfig = true;
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [fuse glib];
-  };
+  programs = {
+    gpu-screen-recorder.enable = true;
 
-  programs.appimage = {
-  enable = true;
-  binfmt = true;
-};
-  
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    backupFileExtension = "backup";
-    useGlobalPkgs = true;
-    users = {
-      # Import your home-manager config
-      rakki = import ../home-manager/home.nix;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [fuse glib];
+    };
+
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+
+    hyprland = {
+      enable = true;
+      package = pkgs.hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    };
+
+  	dconf.enable = true;
+
+    direnv.nix-direnv.enable = true;
+
+    java = {
+      enable = true;
+      package = pkgs.jre;
     };
   };
 
@@ -102,26 +119,54 @@
 
 	virtualisation.libvirtd.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
-  };
-
-  services.mpd= {
-    enable = true;
-    settings = {
-      music_directory = "/home/rakki/Music";
-      audio_output = [
-        {
-          type = "pipewire";
-          name = "Pipewire_Output";
-        }
+  services = {
+    mpd= {
+      enable = true;
+      user = "rakki";
+      settings = {
+        music_directory = "/home/rakki/Music";
+        audio_output = [
+          {
+            type = "pipewire";
+            name = "Pipewire_Output";
+          }
+        ];
+      };
+    };
+  	xserver = {
+  		enable = true;
+      xkb = {
+        layout = "us";
+        variant = "intl";
+      };
+    };
+	  displayManager = {
+      sessionPackages = [
+        inputs.niri.packages.${pkgs.system}.niri-unstable
+        pkgs.hyprland
       ];
+	    defaultSession = "hyprland";
+		  sddm = {
+		    enable = true;
+		    wayland.enable = true;
+		    theme = "sddm-astronaut-theme";
+		    extraPackages = with pkgs; [
+		      kdePackages.qtmultimedia
+		      kdePackages.qt5compat  
+		    ];
+		  };
+		};
+    openssh = {
+      enable = true;
+      settings = {
+        # Opinionated: forbid root login through SSH.
+        PermitRootLogin = "no";
+        # Opinionated: use keys only.
+        PasswordAuthentication = true;
+      };
     };
   };
-  services.mpd.user = "rakki";
-  
+
   systemd = {
     services = {
       podman-glance = {
@@ -135,43 +180,6 @@
     };
   };
 
-	services.xserver = {
-		enable = true;
-    xkb = {
-      layout = "us";
-      variant = "intl";
-    };
-  };
-		services = {
-		  displayManager = {
-        sessionPackages = [
-          inputs.niri.packages.${pkgs.system}.niri-unstable
-          pkgs.hyprland
-        ];
-		    defaultSession = "hyprland";
-  		  sddm = {
-  		    enable = true;
-  		    wayland.enable = true;
-  		    theme = "sddm-astronaut-theme";
-  		    extraPackages = with pkgs; [
-  		      kdePackages.qtmultimedia
-  		      kdePackages.qt5compat  
-  		    ];
-  		  };
-  		};
-		};
-
-  console.useXkbConfig = true;
-
-	programs.dconf.enable = true;
-
-  programs.direnv.nix-direnv.enable = true;
-
-  programs.java = {
-    enable = true;
-    package = pkgs.jre;
-  };
-  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -251,22 +259,7 @@
     fishPlugins.grc
   ];
 
-  networking.hostName = "sora";
-
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Opinionated: forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Opinionated: use keys only.
-      PasswordAuthentication = true;
-    };
-  };
-
-   # Set your time zone.
-   time.timeZone = lib.mkDefault "America/Sao_Paulo";
+  time.timeZone = lib.mkDefault "America/Sao_Paulo";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";

@@ -1,5 +1,4 @@
-{config, pkgs, ...}:
-{
+{config, pkgs, ...}: {
   boot = {
     loader = {
       timeout = 0;
@@ -42,9 +41,6 @@
     initrd.verbose = false;
   };
 
-  # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
-  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
-  
   hardware = {
     graphics.enable = true;
     uinput.enable = true;
@@ -60,5 +56,10 @@
       "input"
       "uinput"
     ];
+  };
+
+  networking = {
+    hostName = "sora";
+    nameservers = ["1.1.1.1" "8.8.8.8"]; # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
   };
 }
