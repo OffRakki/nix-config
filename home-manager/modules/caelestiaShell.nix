@@ -26,25 +26,25 @@
           extraArgs = [ "--audio" ];
         };
         theme = {
-          enableGTK = false;
-          enableTerm = false;
-          enableHypr = false;
-          enableDiscord = false;
+          enableGTK       = false;
+          enableTerm      = false;
+          enableHypr      = false;
+          enableDiscord   = false;
           enableSpicetify = false;
-          enableFuzzel = false;
-          enableBtop = false;
-          enableQt = false;
+          enableFuzzel    = false;
+          enableBtop      = false;
+          enableQt        = false;
         };
-        # toggles = {
-        #   communication = {
-        #     discord = {
-        #       enable = true;
-        #       match = [{ class = "goofcord"; }];
-        #       command = [ "goofcord" ];
-        #       move = true;
-        #     };
-        #   };
-        # };
+        toggles = {
+          music = {
+            spotify = {
+              enable = true;
+              match = [{ class = "spotify"; }];
+              command = [ "spotify" ];
+              move = true;
+            };
+          };
+        };
       };
     };
     package = inputs.caelestia-shell.packages.${pkgs.system}.with-cli;
@@ -73,7 +73,14 @@
       };
       paths.wallpaperDir = "${config.customPaths.wallDir}";
       wallpaper.postHook = "echo $WALLPAPER_PATH";
+      border = {
+        thickness = 6;
+        rounding = 12;
+      };
       appearence = {
+        padding.scale = 0.5;
+        spacing.scale = 0.5;
+        rounding.scale = 0.5;
         transparency.enabled = true;
         font = {
           family = {

@@ -426,6 +426,8 @@ in {
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod SHIFT, V, exec, pypr toggle volume" # Pavucontrol
 
+        "$mod, F2, exec, caelestia toggle music"
+
         
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
         "$mod SHIFT, P, exec,  '${config.customPaths.scriptsDir}/pass-wofi.sh'"
