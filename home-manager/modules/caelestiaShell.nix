@@ -105,7 +105,14 @@
           showRam     = true;
         };
         workspaces = {
-          perMonitorWorkspaces = false;
+          shown = 4;
+          perMonitorWorkspaces = true;
+          custom = {
+            Browser = " ";
+            Social = " ";
+            Games = " ";
+            Extra = " ";
+          };
         };
       };
     };

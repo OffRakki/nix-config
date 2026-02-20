@@ -39,6 +39,9 @@
     LC_TIME =           "en_US.UTF-8";
   };
   services = {
+    dbus = {
+      packages = [ pkgs.gsettings-desktop-schemas pkgs.dconf ];
+    };
     smartd = {
       enable = false;
       autodetect = true;
@@ -170,7 +173,13 @@
   };
 
   # For Electron apps to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    XDG_DATA_DIRS = [
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+    ];
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 25565 4950 4955 4534 ];

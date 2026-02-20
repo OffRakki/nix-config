@@ -84,6 +84,7 @@
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
+      accept-flake-config = true;
       # Enable flakes and new 'nix' command
       experimental-features = [ "nix-command flakes"] ;
       # Opinionated: disable global registry
@@ -178,6 +179,12 @@
         };
       };
     };
+    settings.Manager = {
+      DefaultTimeoutStopSec = "10s";
+    };
+    user.extraConfig = ''
+      DefaultTimeoutStopSec=10s;
+    '';
   };
 
   # List packages installed in system profile. To search, run:

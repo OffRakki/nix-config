@@ -269,6 +269,13 @@ in {
           monitor = "DP-1";
         }
         {
+          name = "steamSettings";
+          "match:initial_title" = "Steam Settings";
+          float = "on";
+          workspace = "Extra";
+          monitor = "DP-1";
+        }
+        {
           name = "minceraft";
           "match:initial_title" = "Minecraft.*";
           no_blur = "on";
@@ -377,9 +384,9 @@ in {
       ];
 
       exec-once = [ 
-        "clipse -listen" # Clipboard history
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "clipse -listen" # Clipboard history
         "nm-applet --indicator"
         "ags"
         "blueman-applet"

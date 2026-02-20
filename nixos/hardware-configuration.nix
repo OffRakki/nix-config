@@ -30,7 +30,7 @@
 	fileSystems."/home/rakki/Mounts/nvme" = 
 		{	device = "/dev/disk/by-uuid/01DA679184F3A5D0";
 			fsType = "ntfs";
-			options = [ "rw" "uid=1000" "nofail" ];
+			options = [ "rw" "nosuid" "uid=1000" "nofail" "gid=100" "umask=000" ];
 		};
 
   swapDevices = [ ];

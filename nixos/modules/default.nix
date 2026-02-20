@@ -5,5 +5,6 @@
     ./automation.nix
     # ./kanata.nix
     ./syncthing.nix
+    ./ai.nix
   ];
 }
