@@ -73,7 +73,7 @@ in {
         layout = "scrolling";
         border_size = 2;
         gaps_in = 4;
-        gaps_out = 8;
+        gaps_out = 4;
 
         "col.active_border" = "rgba(3e3f4044)";
         "col.inactive_border" = "rgba(3e3f4022)";
@@ -136,7 +136,7 @@ in {
         dim_special = 0.8;
 
         shadow = {
-          enabled = true;
+          enabled = false;
           range = 1;
           render_power = 1;
           offset = "2.5 5";
