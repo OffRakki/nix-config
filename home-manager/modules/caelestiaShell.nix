@@ -55,21 +55,23 @@
           audio    = ["pavucontrol"];
           playback = ["mpv"];
         };
-        idle = {
-          # lockBeforeSleep = true;
-          inhibitWhenAudio = false;
-          timeouts = [
-          {
-            timeout = 300;
-            idleAction = "caelestia shell lock lock";
-          }
-          {
-            timeout = 600;
-            idleAction = "hyprctl dispatch dpms off";
-            returnAction = "hyprctl dispatch dpms on";
-          }
-          ];
-        };
+        # Not working for some reason, migrated to hypridle
+        
+        # idle = {
+        #   # lockBeforeSleep = true;
+        #   inhibitWhenAudio = false;
+        #   timeouts = [
+        #   {
+        #     timeout = 300;
+        #     idleAction = "caelestia shell lock lock";
+        #   }
+        #   {
+        #     timeout = 600;
+        #     idleAction = "hyprctl dispatch dpms off";
+        #     returnAction = "hyprctl dispatch dpms on";
+        #   }
+        #   ];
+        # };
       };
       paths.wallpaperDir = "${config.customPaths.wallDir}";
       wallpaper.postHook = "echo $WALLPAPER_PATH";

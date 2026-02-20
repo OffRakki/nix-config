@@ -1,23 +1,23 @@
-{config, lib, ...}: {
+{config, pkgs, lib, ...}: {
   services.hypridle = {
-    enable = false;
+    enable = true;
     settings = let
-      isLocked = "pgrep hyprlock";
+      locker = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
     in {
       general = {
-        lock_cmd = "if ! ${isLocked}; then hyprlock --grace 5; fi";
+        lock_cmd = "caelestia shell lock lock";
         inhibit_sleep = 3;
-        after_sleep_cmd = "hyprctl dispatch dpms off";
+        before_sleep_cmd = "${locker}";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
       };
       listener = [
         {
           timeout = 300;
-          on-timeout = "if ! ${isLocked}; then hyprlock --grace 5; fi";
+          on-timeout = "${locker}";
         }
-        # If already locked
         {
           timeout = 720;
-          on-timeout = "if ${isLocked}; then hyprctl dispatch dpms off; fi";
+          on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
       ];
