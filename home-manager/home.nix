@@ -11,7 +11,6 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     inputs.niri.homeModules.niri
-    inputs.nvf.homeManagerModules.default
     inputs.caelestia-shell.homeManagerModules.default
     ./modules
     ./home-packages.nix

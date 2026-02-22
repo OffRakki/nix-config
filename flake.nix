@@ -42,9 +42,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NVF (modular neovim)
-    nvf.url = "github:notashelf/nvf";
-
     # Home manager
     home-manager = {
     url = "github:nix-community/home-manager";
@@ -68,7 +65,6 @@
     caelestia-shell,
     home-manager,
     catppuccin,
-		nvf,
     alejandra,
     hyprland,
     hyprland-plugins,
@@ -87,7 +83,6 @@
 					};
         	modules = [
         	  # inputs.niri.homeModules.niri
-          	inputs.nvf.nixosModules.default
 						./nixos/hosts/sora/configuration.nix
 						{
 						  nixpkgs.overlays = [

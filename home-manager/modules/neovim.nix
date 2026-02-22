@@ -1,4 +1,4 @@
-{ pkgs, config, lib, nix-colors, nvf, ... }: {
+{ pkgs, config, lib, nix-colors, ... }: {
 
   programs.neovim = lib.mkDefault {
     enable = true;

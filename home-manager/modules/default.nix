@@ -20,7 +20,6 @@
     ./helix.nix
     ./mail.nix
     ./wofi.nix
-    ./nvf.nix
     ./fastfetch.nix
     ./git.nix
     ./waybar.nix
