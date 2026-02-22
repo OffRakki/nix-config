@@ -355,7 +355,9 @@ in {
       ];
       
 
-      env = [ 
+      env = [
+        "HYPRCURSOR_THEME,catppuccin-mocha-peach-cursors"
+        "HYPRCURSOR_SIZE,24"
         "AQ_DRM_DEVICES,/dev/dri/card1"
         "CLUTTER_BACKEND,wayland"
         "EDITOR,hx" #default editor

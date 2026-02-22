@@ -3,26 +3,27 @@
   pkgs,
   lib,
   ...
-}:{
+}:
+{
   home.sessionVariables = {
     GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
   };
-    
+
   gtk = {
     enable = true;
     colorScheme = "dark";
     theme = {
       name = "catppuccin-mocha-lavender-standard+normal";
       package = pkgs.catppuccin-gtk.override {
-        accents = ["lavender"];
+        accents = [ "lavender" ];
         size = "standard";
-        tweaks = ["normal"];
+        tweaks = [ "normal" ];
         variant = "mocha";
       };
     };
     iconTheme = {
       name = "Papirus-Dark";
-      package= pkgs.catppuccin-papirus-folders.override {
+      package = pkgs.catppuccin-papirus-folders.override {
         flavor = "mocha";
         accent = "lavender";
       };
@@ -41,11 +42,17 @@
       gtk-application-prefer-dark-theme=1
     '';
   };
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.catppuccin-cursors.mochaPeach;
-    name = "Catppuccin-Mocha-Peach";
-    size = 24;
+  home = {
+    pointerCursor = {
+      gtk.enable = true;
+      x11 = {
+        enable = true;
+        defaultCursor = "catppuccin-mocha-peach-cursors";
+      };
+      package = pkgs.catppuccin-cursors.mochaPeach;
+      name = "catppuccin-mocha-peach-cursors";
+      size = 24;
+    };
   };
   services.xsettingsd = {
     enable = true;
