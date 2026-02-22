@@ -34,5 +34,6 @@
     ./hytale.nix
     ./caelestiaShell.nix
     ./quickshell/quickshell.nix
+    ./brave.nix
   ];
 }
