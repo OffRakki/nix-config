@@ -27,6 +27,14 @@
       QT_QPA_PLATFORM = "wayland";
       TERMINAL = "kitty";
     };
+    persistence."/persist".directories = [
+      "Documents"
+      "Downloads"
+      "Pictures"
+      "Videos"
+      ".local/bin"
+      ".local/share/nix" # trusted settings and repl history
+    ];
   };
   
 	dconf.settings = {
