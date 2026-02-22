@@ -26,9 +26,7 @@
 
         modules-left = [
           "hyprland/workspaces"
-          # "niri/workspaces"
           "group/hardwaremod"
-          # "group/niriwindowmod"
           "group/windowmod"
         ];
         modules-center = [
@@ -89,23 +87,6 @@
           ];
         };
 
-        "niri/workspaces" = {
-          margin-left = 0;
-          all-outputs = true;
-          format = "{icon}";
-          format-icons = {
-            active = "󰮯";
-            empty = "<span font='6'></span>";
-            default = "󰊠";
-            sort-by-number = true;
-          };
-        };
-
-        "niri/language" = {
-          format-en = "US";
-          format-en-colemak_dh = "CK";
-        };
-        
         "hyprland/workspaces" = {
           margin-left = 0;
           active-only = true;
@@ -187,30 +168,6 @@
           modules = [
             "hyprland/window#icon"
             "hyprland/window#title"
-          ];
-        };
-
-        "niri/window#icon" = {
-          format = "";
-          icon = true;
-          icon-size = 20;
-          offscreen-css = true;
-          offscreen-css-text = "(inactive)";
-        };
-
-        "niri/window#title" = {
-          format = "{}";
-          max-length = 30;
-          separate-outputs = true;
-          offscreen-css = true;
-          offscreen-css-text = "(inactive)";
-        };
-
-        "group/niriwindowmod" = {
-          orientation = "horizontal";
-          modules = [
-            "niri/window#icon"
-            "niri/window#title"
           ];
         };
 
@@ -413,11 +370,6 @@
 
       /* ACTIVE WINDOW */
       #windowmod {
-        background-color: @bg_color;
-        padding: 4px 4px 4px 4px;
-        margin: 8px 0px 8px;
-      }
-      #niriwindowmod {
         background-color: @bg_color;
         padding: 4px 4px 4px 4px;
         margin: 8px 0px 8px;

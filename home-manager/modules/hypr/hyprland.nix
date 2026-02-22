@@ -8,10 +8,7 @@
 
 in {
 
-  imports = [
-    # ./hyprbars.nix
-    # ./hyprscrolling.nix
-  ];
+  imports = [];
 
   wayland.windowManager.hyprland = {
     enable = true;

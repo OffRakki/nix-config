@@ -19,6 +19,8 @@
             packages // legacyPackages
         )
         inputs;
+	      caelestia-shell = inputs.caelestia-shell.packages.${pkgs.system}.caelestia-shell;
+	      caelestia-cli   = inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.system}.caelestia-cli;
     })];
     # Configure your nixpkgs instance
     config = {
@@ -142,7 +144,6 @@
     };
 	  displayManager = {
       sessionPackages = [
-        inputs.niri.packages.${pkgs.system}.niri-unstable
         pkgs.hyprland
       ];
 	    defaultSession = "hyprland";
@@ -202,7 +203,6 @@
     localsend
     sddm-astronaut
     sddm-sugar-dark
-    niriswitcher
     fuzzel
     netplan
     jujutsu

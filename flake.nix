@@ -15,21 +15,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     # WM
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     caelestia-shell.url = "github:caelestia-dots/shell";
-
-    niri.url = "github:sodiboo/niri-flake";
-
 
     # Catppuccin
     catppuccin.url = "github:catppuccin/nix";
 
-    alejandra.url = "github:kamadorueda/alejandra/3.1.0";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
 
@@ -44,9 +34,8 @@
 
     # Home manager
     home-manager = {
-    url = "github:nix-community/home-manager";
-
-    inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -65,35 +54,18 @@
     caelestia-shell,
     home-manager,
     catppuccin,
-    alejandra,
-    hyprland,
-    hyprland-plugins,
-    niri,
     ...
-  } @inputs: 
-		let
-    	inherit (self) outputs;
-    	system = "x86_64-linux";
-  	in {
-    	nixosConfigurations = {
-      	sora = nixpkgs.lib.nixosSystem {
-        	specialArgs = {
-						inherit inputs;
-						inherit outputs;
-					};
-        	modules = [
-        	  # inputs.niri.homeModules.niri
-						./nixos/hosts/sora/configuration.nix
-						{
-						  nixpkgs.overlays = [
-						    (final: prev: {
-						      caelestia-shell = caelestia-shell.packages.${system}.caelestia-shell;
-						      caelestia-cli   = caelestia-shell.inputs.caelestia-cli.packages.${system}.caelestia-cli;
-						    })
-						  ];
-						}
-					];
-      	};
+  } @inputs:  {
+  	nixosConfigurations = {
+    	sora = nixpkgs.lib.nixosSystem {
+      	specialArgs = {
+					inherit inputs;
+					inherit (self) outputs;
+				};
+      	modules = [
+					./nixos/hosts/sora/configuration.nix
+				];
     	};
-    };
+  	};
+  };
 }

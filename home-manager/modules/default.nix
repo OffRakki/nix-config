@@ -8,7 +8,6 @@
     ./aerc.nix
     ./rbw.nix
     ./oama.nix
-    ./niri.nix
     ./vicinae.nix
     ./kdeconnect.nix
     ./mako.nix
@@ -31,7 +30,6 @@
     ./zsh.nix
     ./kitty.nix
     ./qutebrowser.nix
-    ./niri.nix
     ./opencode.nix
     ./hytale.nix
     ./caelestiaShell.nix
