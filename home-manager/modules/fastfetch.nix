@@ -1,6 +1,6 @@
-{ pkgs, config, ...  }:
+{ pkgs, config, ... }:
 
-  {
+{
   programs.fastfetch = {
     enable = true;
     settings = {
@@ -21,7 +21,7 @@
         {
           type = "os";
           key = "OS   ";
-          keyColor = "31";  /* = color1 */
+          keyColor = "31"; # = color1
         }
         {
           type = "kernel";
@@ -32,18 +32,18 @@
           type = "packages";
           format = "❄️ {nix-system} (nix-system), {nix-user} (nix-user)";
           key = " ├ 󰏖 ";
-          keyColor = "31";  
+          keyColor = "31";
         }
         {
           type = "shell";
           key = " └  ";
-          keyColor = "31"; 
+          keyColor = "31";
         }
         "break"
         {
           type = "wm";
           key = "WM   ";
-          keyColor = "32"; 
+          keyColor = "32";
         }
         {
           type = "wmtheme";
@@ -58,7 +58,7 @@
         {
           type = "cursor";
           key = " ├  ";
-          keyColor = "32"; 
+          keyColor = "32";
         }
         {
           type = "terminal";
@@ -69,7 +69,7 @@
         {
           type = "terminalfont";
           key = " └  ";
-          keyColor = "32"; 
+          keyColor = "32";
         }
         "break"
         {
@@ -86,7 +86,7 @@
         }
         {
           type = "gpu";
-          format = "{1} {2} @ {12} GHz";            
+          format = "{1} {2} @ {12} GHz";
           key = " ├ 󰢮 ";
           keyColor = "33";
         }

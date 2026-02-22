@@ -1,4 +1,10 @@
-{config, pkgs, lib, ...}:{
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   home.packages = [
     pkgs.gamescope

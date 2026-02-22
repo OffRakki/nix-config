@@ -1,12 +1,18 @@
-{ pkgs, config, username, lib, ... }: {
-  users = { 
+{
+  pkgs,
+  config,
+  username,
+  lib,
+  ...
+}:
+{
+  users = {
     defaultUserShell = "${lib.getExe pkgs.fish}";
     mutableUsers = false;
     users = {
       rakki = {
         isNormalUser = true;
-        # hashedPasswordFile = config.sops.secrets.user-password.path;
-        initialPassword = "12345";
+        hashedPasswordFile = config.sops.secrets.user-password.path;
         openssh.authorizedKeys.keys = [ ];
         extraGroups = [
           "networkmanager"
@@ -18,7 +24,7 @@
           "qemu-libvirtd"
           "scanner"
           "lp"
-          "video" 
+          "video"
           "audio"
           "docker"
           "podman"
@@ -28,7 +34,7 @@
         packages = with pkgs; [
         ];
       };
-    }; 
+    };
 
   };
 

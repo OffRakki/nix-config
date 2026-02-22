@@ -6,23 +6,23 @@
       wantedBy = [ "multi-user.target" ];
     };
   };
-  
-	virtualisation = {
+
+  virtualisation = {
     oci-containers.containers = {
       glance = {
         image = "glanceapp/glance:latest";
-        # ports = ["8090:8000"];
+        ports = [ "8080:8000" ];
         autoStart = true;
         pull = "missing";
         environmentFiles = [
-          /var/lib/glance/glance.env
+          /home/rakki/Documents/Env/Glance.env
         ];
-        volumes = [ "${./data/glance}:/app/config"];
+        volumes = [ "${./data/glance}:/app/config" ];
         extraOptions = [
           "--network=host"
           "--restart=on-failure"
         ];
       };
     };
-	};
+  };
 }

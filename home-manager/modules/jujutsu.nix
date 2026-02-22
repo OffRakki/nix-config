@@ -1,4 +1,5 @@
-{ config, ...}: {
+{ config, ... }:
+{
   programs.jujutsu = {
     enable = true;
     settings = {
@@ -40,7 +41,7 @@
       #       if(commit.conflict(), label("conflict", "conflict")),
       #       if(config("ui.show-cryptographic-signatures").as_boolean(),
       #         format_short_cryptographic_signature(commit.signature())),
-      #     )  
+      #     )
       #   '';
       # };
     };

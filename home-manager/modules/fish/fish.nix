@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   useHelix = config.programs.helix.enable;
 in
@@ -6,8 +11,7 @@ in
   programs = {
     fish = {
       enable = true;
-      interactiveShellInit =  ''
-        export BW_SESSION=(cat /home/rakki/.bwenv)
+      interactiveShellInit = ''
         set fish_greeting
         direnv hook fish | source
         zoxide init fish --cmd cd | source
@@ -84,12 +88,12 @@ in
       shellAbbrs = {
 
         # jujutsu
-        jjs  = "jj split -r";
-        jjm  = "jj b m master --to";
-        jjd  = "jj describe -r"; 
+        jjs = "jj split -r";
+        jjm = "jj b m master --to";
+        jjd = "jj describe -r";
         jjsq = "jj squash -r";
         jjgp = "jj git push";
-        jjl  = "jj -r 'all()'";
+        jjl = "jj -r 'all()'";
 
         # nix
         ncg = "nix-collect-garbage";
@@ -106,7 +110,6 @@ in
         # mount-cel
         #celmount = "simple-mtpfs --device 1 ~/mount/"
         #celumount = "fusermount -u ~/mount/"
-
 
         # text editor
         v = "hx";

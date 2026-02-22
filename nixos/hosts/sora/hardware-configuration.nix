@@ -13,14 +13,17 @@
     };
     initrd = {
       availableKernelModules = [
-        "nvme"  
+        "nvme"
         "xhci_pci"
         "ahci"
         "usbhid"
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = [ "i915" "uinput" ];
+      kernelModules = [
+        "i915"
+        "uinput"
+      ];
     };
     kernelModules = [ "kvm-amd" ];
     kernelParams = [
@@ -34,10 +37,10 @@
     ];
     extraModulePackages = [ ];
     supportedFilesystems = [ "ntfs" ];
-  	# Fix for wireless keyboard's FN keys not working properly
-  	extraModprobeConfig = ''
-  	  options hid_apple fnmode=0    
-  	'';
+    # Fix for wireless keyboard's FN keys not working properly
+    extraModprobeConfig = ''
+      	  options hid_apple fnmode=0    
+      	'';
     plymouth = {
       enable = true;
       theme = "bgrt";
@@ -61,7 +64,10 @@
 
   networking = {
     hostName = "sora";
-    nameservers = ["1.1.1.1" "8.8.8.8"]; # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ]; # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
   };
 
   networking.useDHCP = true;

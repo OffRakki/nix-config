@@ -1,10 +1,11 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 let
   term = "kitty";
   term_classed = "${term} --class";
-in{
+in
+{
   xdg.enable = true;
-  
+
   xdg.configFile."hypr/pyprland.toml".source = (pkgs.formats.toml { }).generate "pyprland-config" {
     pyprland.plugins = [
       "scratchpads"

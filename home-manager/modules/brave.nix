@@ -1,7 +1,8 @@
-{pkgs,...}: {
-  home.packages = [pkgs.brave];
+{ pkgs, ... }:
+{
+  home.packages = [ pkgs.brave ];
 
   home.persistence = {
-    "/persist".directories = [".config/BraveSoftware/Brave-Browser"];
+    "/persist".directories = [ ".config/BraveSoftware/Brave-Browser" ];
   };
 }

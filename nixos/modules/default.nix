@@ -4,7 +4,7 @@
     ./fish.nix
     ./automation.nix
     ./syncthing.nix
-    ./ai.nix
+    # ./ai.nix
     ./btrfs-ephemeral.nix
     ./optin-persistence.nix
   ];

@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.disko.nixosModules.disko
   ];
@@ -9,7 +10,10 @@
       content = {
         type = "gpt";
         partitions = {
-          boot = { size = "1M"; type = "EF02"; };
+          boot = {
+            size = "1M";
+            type = "EF02";
+          };
           esp = {
             name = "ESP";
             size = "512M";
@@ -36,19 +40,25 @@
                 '';
                 subvolumes = {
                   "/root" = {
-                    mountOptions = ["compress=zstd"];
+                    mountOptions = [ "compress=zstd" ];
                     mountpoint = "/";
                   };
                   "/nix" = {
-                    mountOptions = ["compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                     mountpoint = "/nix";
                   };
                   "/persist" = {
-                    mountOptions = ["compress=zstd"];
+                    mountOptions = [ "compress=zstd" ];
                     mountpoint = "/persist";
                   };
                   "/swap" = {
-                    mountOptions = ["compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                     mountpoint = "/swap";
                     swap.swapfile = {
                       size = "8196M";
@@ -75,7 +85,7 @@
               type = "btrfs";
               subvolumes = {
                 "/data" = {
-                  mountOptions = ["compress=zstd"];
+                  mountOptions = [ "compress=zstd" ];
                   mountpoint = "/data";
                 };
               };

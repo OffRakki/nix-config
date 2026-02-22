@@ -1,10 +1,16 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
 
   programs.helix = lib.mkForce {
     enable = true;
-    defaultEditor= true;
+    defaultEditor = true;
     settings = {
-      theme = "catppuccin_mocha";
+      theme = "kanagawa";
       editor = {
         cursorline = true;
         soft-wrap.enable = true;
@@ -28,7 +34,11 @@
       language = [
         {
           name = "nix";
-          language-servers = ["nixd" "nil" "colors"];
+          language-servers = [
+            "nixd"
+            "nil"
+            "colors"
+          ];
           auto-format = true;
           formatter.command = "alejandra";
         }

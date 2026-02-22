@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   home.packages = with pkgs; [
     # Packages in each category are sorted alphabetically
 
@@ -15,11 +16,11 @@
     vesktop
     qalculate-gtk
     vlc
-		warp
-		lxqt.pcmanfm-qt
+    warp
+    lxqt.pcmanfm-qt
 
-		# Langs
-		nil
+    # Langs
+    nil
 
     # CLI utils
     satty

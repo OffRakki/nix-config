@@ -6,7 +6,7 @@
 }:
 {
 
-   programs.hyprlock = {
+  programs.hyprlock = {
     enable = true;
 
     settings = {
@@ -18,7 +18,7 @@
         ignore_empty_input = true;
         fractional_scaling = 0;
       };
-      
+
       # BACKGROUND
       background = [
         {
@@ -71,7 +71,7 @@
         # USER
         {
           monitor = "";
-          text = ''死んでください。'';
+          text = "死んでください。";
           color = "rgba(255, 255, 255, .65)";
           font_size = 16;
           font_family = "SF Pro Display Bold";
@@ -81,9 +81,8 @@
         }
       ];
 
-
       # INPUT FIELD
-      input-field =[
+      input-field = [
         {
           monitor = "";
           size = "290, 60";
@@ -102,7 +101,7 @@
           halign = "center";
           valign = "center";
         }
-      ]; 
+      ];
     };
   };
 }

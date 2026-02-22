@@ -1,14 +1,15 @@
-{ pkgs, inputs, ...}: let
+{ pkgs, inputs, ... }:
+let
 
- python-packages = pkgs.python3.withPackages (
-    ps:
-    with ps; [
+  python-packages = pkgs.python3.withPackages (
+    ps: with ps; [
       requests
       pyquery # needed for hyprland-dots Weather script
     ]
   );
 
-in {
+in
+{
 
   environment.systemPackages = with pkgs; [
     #gaming
@@ -38,7 +39,7 @@ in {
     dnd-tools
     waypaper
     spotify
-    kdePackages.dolphin 
+    kdePackages.dolphin
     ttyper
     ripgrep
     ripgrep-all
@@ -88,10 +89,10 @@ in {
     cpufrequtils
     duf
     eza
-    ffmpeg   
+    ffmpeg
     glib
     gsettings-qt
-    killall  
+    killall
     libappindicator
     libnotify
     openssl
@@ -103,13 +104,13 @@ in {
     fastfetch
     oh-my-fish
     spicetify-cli
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+    (mpv.override { scripts = [ mpvScripts.mpris ]; }) # with tray
     ranger
     todo
 
     # WM Stuff
     hyprpaper
-    ags_1 # desktop overview  
+    ags_1 # desktop overview
     wl-color-picker
     wofi
     btop
@@ -119,15 +120,15 @@ in {
     eog
     gnome-system-monitor
     grim
-    gtk-engine-murrine #for gtk themes
+    gtk-engine-murrine # for gtk themes
     hypridle
-    imagemagick 
+    imagemagick
     inxi
     jq
     alacritty
     kitty
     nwg-look
-    nvitop	 
+    nvitop
     pamixer
     pavucontrol
     playerctl
@@ -139,7 +140,6 @@ in {
     rofi
     slurp
     swappy
-    swaynotificationcenter
     swww
     unzip
     wallust
@@ -153,7 +153,7 @@ in {
   ];
 
   # FONTS
-  fonts = { 
+  fonts = {
     packages = with pkgs; [
       plemoljp
       corefonts
@@ -176,9 +176,9 @@ in {
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
-        monospace = ["JetBrainsMono"];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "JetBrainsMono" ];
       };
     };
   };

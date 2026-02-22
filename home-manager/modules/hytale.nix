@@ -1,3 +1,4 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.inputs.hytale.default];
+{ pkgs, ... }:
+{
+  home.packages = [ pkgs.inputs.hytale.default ];
 }

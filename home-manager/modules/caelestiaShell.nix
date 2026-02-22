@@ -1,4 +1,11 @@
-{ lib, config, pkgs, inputs, ...}:{
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   systemd.user.services.caelestia = {
     Unit = {
       Description = "Caelestia Shell Service";
@@ -10,13 +17,18 @@
       ExecStart = "${inputs.caelestia-shell.packages.${pkgs.system}.default}/bin/caelestia shell -d";
       Restart = "on-failure";
       RestartSec = "2";
-      Environment = "PATH=${pkgs.lib.makeBinPath [ pkgs.bash pkgs.coreutils ]}";
+      Environment = "PATH=${
+        pkgs.lib.makeBinPath [
+          pkgs.bash
+          pkgs.coreutils
+        ]
+      }";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
     };
   };
-  
+
   programs.caelestia = {
     enable = true;
     cli = {
@@ -26,20 +38,20 @@
           extraArgs = [ "--audio" ];
         };
         theme = {
-          enableGTK       = false;
-          enableTerm      = false;
-          enableHypr      = false;
-          enableDiscord   = false;
+          enableGTK = false;
+          enableTerm = false;
+          enableHypr = false;
+          enableDiscord = false;
           enableSpicetify = false;
-          enableFuzzel    = false;
-          enableBtop      = false;
-          enableQt        = false;
+          enableFuzzel = false;
+          enableBtop = false;
+          enableQt = false;
         };
         toggles = {
           music = {
             spotify = {
               enable = true;
-              match = [{ class = "spotify"; }];
+              match = [ { class = "spotify"; } ];
               command = [ "spotify" ];
               move = true;
             };
@@ -51,12 +63,12 @@
     settings = {
       general = {
         apps = {
-          terminal = ["kitty"];
-          audio    = ["pavucontrol"];
-          playback = ["mpv"];
+          terminal = [ "kitty" ];
+          audio = [ "pavucontrol" ];
+          playback = [ "mpv" ];
         };
         # Not working for some reason, migrated to hypridle
-        
+
         # idle = {
         #   # lockBeforeSleep = true;
         #   inhibitWhenAudio = false;
@@ -101,8 +113,8 @@
         status = {
           showBattery = false;
           showNetwork = false;
-          showCpu     = true;
-          showRam     = true;
+          showCpu = true;
+          showRam = true;
         };
         workspaces = {
           shown = 4;
@@ -117,7 +129,7 @@
       };
     };
     # extraConfig = ''
-        
+
     # '';
   };
 }

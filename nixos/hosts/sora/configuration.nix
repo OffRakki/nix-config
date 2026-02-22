@@ -1,33 +1,41 @@
-{ inputs, lib, config, pkgs, outputs, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  outputs,
+  ...
+}:
 {
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
-		../../modules
-		./config.nix
-		./hardware-configuration.nix
+    ../../modules
+    ./config.nix
+    ./hardware-configuration.nix
   ];
 
-  nixpkgs ={
-    overlays = [(final: _: {
-      inputs =
-        builtins.mapAttrs (
-          _: flake: let
-            legacyPackages = (flake.legacyPackages or {}).${final.stdenv.system} or {};
-            packages = (flake.packages or {}).${final.stdenv.system} or {};
+  nixpkgs = {
+    overlays = [
+      (final: _: {
+        inputs = builtins.mapAttrs (
+          _: flake:
+          let
+            legacyPackages = (flake.legacyPackages or { }).${final.stdenv.system} or { };
+            packages = (flake.packages or { }).${final.stdenv.system} or { };
           in
-            packages // legacyPackages
-        )
-        inputs;
-	      caelestia-shell = inputs.caelestia-shell.packages.${pkgs.system}.caelestia-shell;
-	      caelestia-cli   = inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.system}.caelestia-cli;
-    })];
+          packages // legacyPackages
+        ) inputs;
+        caelestia-shell = inputs.caelestia-shell.packages.${pkgs.system}.caelestia-shell;
+        caelestia-cli = inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.system}.caelestia-cli;
+      })
+    ];
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
     };
   };
-  
+
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     backupFileExtension = "backup";
@@ -40,10 +48,13 @@
 
   sops = {
     defaultSopsFile = ../../secrets.yaml;
-    age.keyFile = "/home/rakki/.config/sops/age/keys.txt";
 
-    secrets.syncthing_cert = { owner = "rakki"; };
-    secrets.syncthing_key = { owner = "rakki"; };
+    secrets.syncthing_cert = {
+      owner = "rakki";
+    };
+    secrets.syncthing_key = {
+      owner = "rakki";
+    };
 
     secrets.user-password = {
       neededForUsers = true;
@@ -57,7 +68,10 @@
 
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [fuse glib];
+      libraries = with pkgs; [
+        fuse
+        glib
+      ];
     };
 
     appimage = {
@@ -67,11 +81,12 @@
 
     hyprland = {
       enable = true;
+      withUWSM = true;
       package = pkgs.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
 
-  	dconf.enable = true;
+    dconf.enable = true;
 
     direnv.nix-direnv.enable = true;
 
@@ -81,48 +96,50 @@
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      accept-flake-config = true;
-      # Enable flakes and new 'nix' command
-      experimental-features = [ "nix-command flakes"] ;
-      # Opinionated: disable global registry
-      flake-registry = "";
-			# Workaround to get rid of the download buffer size warning
-			download-buffer-size = 524288000;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        accept-flake-config = true;
+        # Enable flakes and new 'nix' command
+        experimental-features = [ "nix-command flakes" ];
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround to get rid of the download buffer size warning
+        download-buffer-size = 524288000;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   # Defaults sudo-rs as sudo
   security = {
-      sudo.enable = false;
-      sudo-rs = {
-        enable = true;
-        execWheelOnly = true;
-        wheelNeedsPassword = true;
-      };
-      wrappers.sudo-rs = {
-        #source = "${lib.getExe pkgs.sudo-rs}";
-        source = "${lib.getExe pkgs.sudo-rs}";
-        setuid = true;
-        setgid = true;
-        owner = "0";
-        group = "0";
-      };
+    sudo.enable = false;
+    sudo-rs = {
+      enable = true;
+      execWheelOnly = true;
+      wheelNeedsPassword = true;
     };
+    wrappers.sudo-rs = {
+      #source = "${lib.getExe pkgs.sudo-rs}";
+      source = "${lib.getExe pkgs.sudo-rs}";
+      setuid = true;
+      setgid = true;
+      owner = "0";
+      group = "0";
+    };
+  };
 
-	virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   services = {
-    mpd= {
+    mpd = {
       enable = true;
       user = "rakki";
       settings = {
@@ -135,41 +152,62 @@
         ];
       };
     };
-  	xserver = {
-  		enable = true;
+    xserver = {
+      enable = true;
+      displayManager = {
+        lightdm.enable = false;
+      };
       xkb = {
         layout = "us";
         variant = "intl";
       };
     };
-	  displayManager = {
+    displayManager = {
       sessionPackages = [
         pkgs.hyprland
       ];
-	    defaultSession = "hyprland";
-		  sddm = {
-		    enable = true;
-		    wayland.enable = true;
-		    theme = "sddm-astronaut-theme";
-		    extraPackages = with pkgs; [
-		      kdePackages.qtmultimedia
-		      kdePackages.qt5compat  
-		    ];
-		  };
-		};
+      defaultSession = "hyprland";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "sddm-astronaut-theme";
+        extraPackages = with pkgs; [
+          kdePackages.qtmultimedia
+          kdePackages.qt5compat
+        ];
+        settings = {
+          Wayland = {
+            CompositorCommand = "${pkgs.weston}/bin/weston --shell=kiosk -c /etc/sddm-weston.ini";
+          };
+        };
+      };
+    };
     openssh = {
       enable = true;
       settings = {
         # Opinionated: forbid root login through SSH.
         PermitRootLogin = "no";
-        # Opinionated: use keys only.
         PasswordAuthentication = true;
       };
-      hostKeys = [{
-        path = "/persist/etc/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }];
+      hostKeys = [
+        {
+          path = "/persist/etc/ssh/ssh_host_ed25519_key";
+          type = "ed25519";
+        }
+      ];
     };
+  };
+
+  environment = {
+    etc."sddm-weston.ini".text = ''
+      [output]
+      name=HDMI-A-1
+      mode=off
+
+      [output]
+      name=DP-1
+      mode=preferred
+    '';
   };
 
   systemd = {
@@ -199,14 +237,14 @@
     gpu-screen-recorder
     gpu-screen-recorder-gtk
     dotool
+    sddm-astronaut
+    sddm-sugar-dark
     appimage-run
     grc
     xwayland-satellite
     xwayland
     xwayland-run
     localsend
-    sddm-astronaut
-    sddm-sugar-dark
     fuzzel
     netplan
     jujutsu
@@ -239,9 +277,9 @@
     os-prober
     nixd
     nixfmt
-		vulkan-tools
-		nushell
-		tmux
+    vulkan-tools
+    nushell
+    tmux
     evil-helix
     # sublime
     neovim
@@ -258,7 +296,7 @@
     btop
     qutebrowser
     vesktop
-		waybar-mpris
+    waybar-mpris
     wl-clipboard-rs
     wl-clip-persist
     clipse

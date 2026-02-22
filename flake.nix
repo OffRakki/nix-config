@@ -53,24 +53,26 @@
     ];
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    caelestia-shell,
-    home-manager,
-    catppuccin,
-    ...
-  } @inputs:  {
-  	nixosConfigurations = {
-    	sora = nixpkgs.lib.nixosSystem {
-      	specialArgs = {
-					inherit inputs;
-					inherit (self) outputs;
-				};
-      	modules = [
-					./nixos/hosts/sora/configuration.nix
-				];
-    	};
-  	};
-  };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      caelestia-shell,
+      home-manager,
+      catppuccin,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations = {
+        sora = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit (self) outputs;
+          };
+          modules = [
+            ./nixos/hosts/sora/configuration.nix
+          ];
+        };
+      };
+    };
 }

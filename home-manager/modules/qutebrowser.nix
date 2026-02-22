@@ -1,15 +1,21 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
 
-	xdg.mimeApps.defaultApplications = {
-	  "text/html" = ["org.qutebrowser.qutebrowser.desktop"];
-    "text/xml" = ["org.qutebrowser.qutebrowser.desktop"];
-    "x-scheme-handler/http" = ["org.qutebrowser.qutebrowser.desktop"];
-    "x-scheme-handler/https" = ["org.qutebrowser.qutebrowser.desktop"];
-    "x-scheme-handler/qute" = ["org.qutebrowser.qutebrowser.desktop"];
-	};
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = [ "org.qutebrowser.qutebrowser.desktop" ];
+    "text/xml" = [ "org.qutebrowser.qutebrowser.desktop" ];
+    "x-scheme-handler/http" = [ "org.qutebrowser.qutebrowser.desktop" ];
+    "x-scheme-handler/https" = [ "org.qutebrowser.qutebrowser.desktop" ];
+    "x-scheme-handler/qute" = [ "org.qutebrowser.qutebrowser.desktop" ];
+  };
 
-	programs.qutebrowser = {
-		enable = true;
+  programs.qutebrowser = {
+    enable = true;
     loadAutoconfig = true;
     searchEngines = rec {
       kagi = "https://kagi.com/search?q={}";
@@ -23,7 +29,7 @@
       youtube = "https://www.youtube.com/results?search_query={}";
       tweeter = "https://x.com/search?q={}";
       anilist = "https://anilist.co/search/anime?search={}";
-      
+
       # abbrs
       k = kagi;
       ddg = duckduckgo;
@@ -39,10 +45,10 @@
       # default engine
       DEFAULT = kagi;
     };
-		settings = {
+    settings = {
       url = rec {
         default_page = "192.168.15.12:1202/fernando";
-        start_pages = [default_page];
+        start_pages = [ default_page ];
       };
       tabs = {
         show = "multiple";
@@ -53,7 +59,7 @@
       new_instance_open_target = "tab";
       #colors = {
       #};
-		};    
+    };
     extraConfig = ''
       c.tabs.padding = {"bottom": 4, "left": 2, "right": 2, "top": 4}
       c.auto_save.session = True
@@ -64,10 +70,10 @@
       # dark mode
       c.colors.webpage.preferred_color_scheme = "dark"
       # config.set('colors.webpage.darkmode.enabled', False, '*://youtube.com/*')
-      
+
       config.bind('e', 'hint links spawn ${../../scripts/yt_mpv.sh} {hint-url}')
       config.bind('E', 'hint links spawn ${../../scripts/yt_mpv.sh} {url}')
       config.bind('xb', 'config-cycle statusbar.show always never')
     '';
-	};
+  };
 }

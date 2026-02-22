@@ -1,4 +1,14 @@
-{ config, pkgs, host, username, options, lib, inputs, system, ...}:
+{
+  config,
+  pkgs,
+  host,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
+  ...
+}:
 {
   imports = [
     ./packages-fonts.nix
@@ -13,40 +23,43 @@
   #drivers.intel.enable = false;
   drivers.nvidia.enable = true;
   #drivers.nvidia-prime = { # ja definido no arquivo em si
-   # enable = true;
-   # intelBusID = "0@0:2:0";
-   # nvidiaBusID = "1@0:0:0";
+  # enable = true;
+  # intelBusID = "0@0:2:0";
+  # nvidiaBusID = "1@0:0:0";
   #};
   local.hardware-clock.enable = false;
 
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 
   # Select internationalisation properties.
-  i18n.defaultLocale =  "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LANGUAGE =          "en_US.UTF-8";
-    LC_CTYPE =          "en_US.UTF-8";
-    LC_ALL =            "en_US.UTF-8";
-    LC_ADDRESS =        "en_US.UTF-8";
+    LANGUAGE = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT =    "en_US.UTF-8";
-    LC_MONETARY =       "en_US.UTF-8";
-    LC_NAME =           "en_US.UTF-8";
-    LC_NUMERIC =        "en_US.UTF-8";
-    LC_PAPER =          "en_US.UTF-8";
-    LC_TELEPHONE =      "en_US.UTF-8";
-    LC_TIME =           "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
   services = {
     dbus = {
-      packages = [ pkgs.gsettings-desktop-schemas pkgs.dconf ];
+      packages = [
+        pkgs.gsettings-desktop-schemas
+        pkgs.dconf
+      ];
     };
     smartd = {
       enable = false;
       autodetect = true;
     };
-  
+
     gvfs.enable = true;
     tumbler.enable = true;
 
@@ -56,9 +69,9 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       wireplumber.enable = true;
-  	};
+    };
 
-    pulseaudio.enable = false; #unstable
+    pulseaudio.enable = false; # unstable
     udev.enable = true;
     envfs.enable = true;
     dbus.enable = true;
@@ -75,32 +88,32 @@
 
     flatpak.enable = false;
 
-  	blueman.enable = true;
-	
-  	hardware.openrgb.enable = true;
-  	hardware.openrgb.motherboard = "amd";
+    blueman.enable = true;
+
+    hardware.openrgb.enable = true;
+    hardware.openrgb.motherboard = "amd";
 
     fwupd.enable = true;
 
     upower.enable = true;
-  
+
     gnome.gnome-keyring.enable = true;
-  
+
     #printing = {
     #  enable = false;
     #  drivers = [
-        # pkgs.hplipWithPlugin
+    # pkgs.hplipWithPlugin
     #  ];
     #};
-  
+
     #avahi = {
     #  enable = true;
     #  nssmdns4 = true;
     #  openFirewall = true;
     #};
-  
+
     #ipp-usb.enable = true;
-  
+
   };
 
   systemd.services.flatpak-repo = {
@@ -112,16 +125,16 @@
 
   # zram
   zramSwap = {
-	  enable = true;
-	  priority = 100;
-	  memoryPercent = 30;
-	  swapDevices = 1;
+    enable = true;
+    priority = 100;
+    memoryPercent = 30;
+    swapDevices = 1;
     algorithm = "zstd";
   };
 
   powerManagement = {
-  	enable = true;
-	  cpuFreqGovernor = "schedutil";
+    enable = true;
+    cpuFreqGovernor = "schedutil";
   };
 
   #hardware.sane = {
@@ -136,14 +149,14 @@
 
   # Bluetooth
   hardware = {
-  	bluetooth = {
-	    enable = true;
-	    powerOnBoot = true;
-	    settings = {
-		    General = {
-		      Enable = "Source,Sink,Media,Socket";
-		      Experimental = true;
-		    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
       };
     };
   };
@@ -169,7 +182,7 @@
   '';
   security.pam.services = {
     gdm-password.enableGnomeKeyring = true;
-    hyprlock = {};
+    hyprlock = { };
   };
 
   # For Electron apps to use wayland
@@ -182,8 +195,18 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 25565 4950 4955 4534 ];
-  networking.firewall.allowedUDPPorts = [ 25565 4950 4955 4534 ];
+  networking.firewall.allowedTCPPorts = [
+    25565
+    4950
+    4955
+    4534
+  ];
+  networking.firewall.allowedUDPPorts = [
+    25565
+    4950
+    4955
+    4534
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }

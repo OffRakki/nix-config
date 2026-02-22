@@ -1,13 +1,23 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.hyprpanel = {
     enable = false;
     settings = {
       layout = {
         bar.layouts = {
           "0" = {
-            left = [ "dashboard" "workspaces" "ram" "cpu" ];
+            left = [
+              "dashboard"
+              "workspaces"
+              "ram"
+              "cpu"
+            ];
             middle = [ "media" ];
-            right = [ "volume" "systray" "notifications" ];
+            right = [
+              "volume"
+              "systray"
+              "notifications"
+            ];
           };
         };
       };

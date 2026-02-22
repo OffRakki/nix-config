@@ -1,7 +1,8 @@
-{ config, ... }: {
+{ config, ... }:
+{
 
   programs.zsh = {
-    enable = true;
+    enable = false;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -9,7 +10,8 @@
     shellAliases =
       let
         flakeDir = "~/flake";
-      in {
+      in
+      {
         sw = "nh os switch";
         upd = "nh os switch --update";
         hms = "nh home switch";

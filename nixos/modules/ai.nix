@@ -1,28 +1,22 @@
-{config, pkgs, lib, ...}:{
-  systemd.services = {
-    ollama.serviceConfig = {
-      ReadWritePaths = [ "/home/rakki/Mounts/nvme/linux/ollamaModels" ];
-      BindPaths = [ 
-        "/home/rakki/Mounts/nvme/linux/ollamaModels:/home/rakki/Mounts/nvme/linux/ollamaModels" 
-      ];
-      ProtectHome = lib.mkForce "tmpfs";
-    };
-    ollama-model-loader.serviceConfig = {
-      ProtectHome = lib.mkForce "tmpfs";
-      BindPaths = [ "/home/rakki/Mounts/nvme/linux/ollamaModels" ];
-      ReadWritePaths = [ "/home/rakki/Mounts/nvme/linux/ollamaModels" ];
-    };
-  };
-  
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  modelsPath = "/home/rakki/Opencode/Models";
+in
+{
   services = {
     open-webui = {
       enable = false;
-      port = 8000;
+      port = 8090;
     };
     ollama = {
       enable = true;
       package = pkgs.ollama-cuda;
-      models = "/home/rakki/Mounts/nvme/linux/ollamaModels";
+      models = "${modelsPath}";
       loadModels = [
         "tinyllama"
         "llama3.1"
