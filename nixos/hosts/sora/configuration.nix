@@ -234,6 +234,7 @@
     refind
     os-prober
     nixd
+    nixfmt
 		vulkan-tools
 		nushell
 		tmux
