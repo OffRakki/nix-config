@@ -1,7 +1,9 @@
 keys:
-  - &rakki age1athe8haxlwekk9n739pat4dwa00tdrzy4mdejvp959z8nmww3y8s530t9w
+  - &admin_rakki age1athe8haxlwekk9n739pat4dwa00tdrzy4mdejvp959z8nmww3y8s530t9w
+  - &host_sora age1w4846zm4th0cjeep39gv6cks5cem7w9dtc9p6qjn9svnqpnrh44qg5etcm
 creation_rules:
   - path_regex: secrets\.yaml$
     key_groups:
       - age:
-          - *rakki
+          - *admin_rakki
+          - *host_sora
