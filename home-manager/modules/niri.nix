@@ -228,7 +228,7 @@ in
       "Mod+L".action.spawn = "hyprlock";
       "Mod+O".action = toggle-overview;
       "Mod+V".action.spawn-sh = [ "pkill clipse; ${terminal} --class floatclass --title clipse -e clipse" ];
-      "Mod+Shift+P".action.spawn = [ "${config.customPaths.scriptsDir}/pass-wofi.sh" ];
+      "Mod+Shift+P".action.spawn = [ "${../../scripts/pass-wofi.sh}" ];
       "Mod+Alt+C".action.spawn-sh = [ "pkill qalc; ${terminal} --class floatclass --title qalc -e qalc" ];
       "Ctrl+Alt+N".action.spawn-sh = [ "${terminal} --class middleFloat -e hx" ];
 

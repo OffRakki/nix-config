@@ -19,7 +19,6 @@
     ./qt.nix
     ./oama.nix
     ./xdg-portals.nix
-    ../nixos/variables.nix
   ];
 
   home = {

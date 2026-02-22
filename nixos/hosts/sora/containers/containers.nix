@@ -1,5 +1,4 @@
-{config, lib, ...}:{
-
+{
   systemd.services = {
     podman-glance = {
       # This ensures the service is "wanted" (optional) by multi-user.target
@@ -18,7 +17,7 @@
         environmentFiles = [
           /var/lib/glance/glance.env
         ];
-        volumes = [ "${config.customPaths.containerDataDir}/glance:/app/config"];
+        volumes = [ "${./data/glance}:/app/config"];
         extraOptions = [
           "--network=host"
           "--restart=on-failure"

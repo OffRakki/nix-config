@@ -3,10 +3,9 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
-		../hosts/sora/config.nix
-		./modules
+		../../modules
+		./config.nix
 		./hardware-configuration.nix
-		./variables.nix
   ];
 
   nixpkgs ={
@@ -33,12 +32,12 @@
     useGlobalPkgs = true;
     users = {
       # Import your home-manager config
-      rakki = import ../home-manager/home.nix;
+      rakki = import ../../../home-manager/home.nix;
     };
   };
 
   sops = {
-    defaultSopsFile = ./secrets.yaml;
+    defaultSopsFile = ../../secrets.yaml;
     age.keyFile = "/home/rakki/.config/sops/age/keys.txt";
 
     secrets.syncthing_cert = { owner = "rakki"; };

@@ -84,7 +84,7 @@
         	modules = [
         	  # inputs.niri.homeModules.niri
           	inputs.nvf.nixosModules.default
-						./nixos/configuration.nix
+						./nixos/hosts/sora/configuration.nix
 						{
 						  nixpkgs.overlays = [
 						    (final: prev: {

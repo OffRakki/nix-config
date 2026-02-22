@@ -73,7 +73,7 @@
         #   ];
         # };
       };
-      paths.wallpaperDir = "${config.customPaths.wallDir}";
+      paths.wallpaperDir = "${../../assets/wallpapers}";
       wallpaper.postHook = "echo $WALLPAPER_PATH";
       border = {
         thickness = 6;

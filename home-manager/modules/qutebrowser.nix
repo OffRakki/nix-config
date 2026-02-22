@@ -65,8 +65,8 @@
       c.colors.webpage.preferred_color_scheme = "dark"
       # config.set('colors.webpage.darkmode.enabled', False, '*://youtube.com/*')
       
-      config.bind('e', 'hint links spawn ${../../hosts/sora/scripts/yt_mpv.sh} {hint-url}')
-      config.bind('E', 'hint links spawn ${../../hosts/sora/scripts/yt_mpv.sh} {url}')
+      config.bind('e', 'hint links spawn ${../../scripts/yt_mpv.sh} {hint-url}')
+      config.bind('E', 'hint links spawn ${../../scripts/yt_mpv.sh} {url}')
       config.bind('xb', 'config-cycle statusbar.show always never')
     '';
 	};
