@@ -4,17 +4,18 @@
   config,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.drivers.nvidia;
-in
-{
+in {
+  imports = [
+    ./nvidia-prime-drivers.nix
+  ];
   options.drivers.nvidia = {
     enable = mkEnableOption "Enable Nvidia Drivers";
   };
 
   config = mkIf cfg.enable {
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = ["nvidia"];
 
     hardware = {
       uinput.enable = true;
@@ -48,8 +49,8 @@ in
         # needs nvidia-prime
         finegrained = false;
       };
-      dynamicBoost.enable = false; # Dynamic Boost
-      nvidiaPersistenced = false;
+      dynamicBoost.enable = true; # Dynamic Boost
+      nvidiaPersistenced = true;
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
       # Support is limited to the Turing and later architectures. Full list of
@@ -57,7 +58,7 @@ in
       # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
       # Only available from driver 515.43.04+
       # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = false;
+      open = true;
 
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.

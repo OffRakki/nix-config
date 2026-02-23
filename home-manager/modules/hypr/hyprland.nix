@@ -358,23 +358,22 @@ in {
         "EDITOR,hx" # default editor
         "EGL_PLATFORM,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        "GBM_BACKEND,nvidia-drm "
+        "GBM_BACKEND,nvidia-drm"
         "GDK_BACKEND,wayland,x11"
-        "GDK_SCALE,1 "
-        "LIBVA_DRIVER_NAME,nvidia "
+        "GDK_SCALE,1"
+        "LIBVA_DRIVER_NAME,nvidia"
         "MOZ_DISABLE_RDD_SANDBOX,1"
         "MOZ_ENABLE_WAYLAND,1"
         "NVD_BACKEND,direct "
-        "UWSM_APP_UNIT_TYPE,service"
         "WLR_DRM_DEVICES,/dev/dri/card1"
-        "WLR_DRM_NO_ATOMIC,1"
-        "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "__NV_PRIME_RENDER_OFFLOAD,1 "
-        "__VK_LAYER_NV_optimus,NVIDIA_only"
+        # "WLR_DRM_NO_ATOMIC,1"
+        # Usable only if have both GPU and integrated
+        # "__NV_PRIME_RENDER_OFFLOAD,1 "
+        # "__VK_LAYER_NV_optimus,NVIDIA_only"
       ];
 
       exec-once = [
