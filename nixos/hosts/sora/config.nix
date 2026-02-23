@@ -186,6 +186,11 @@
 
   # For Electron apps to use wayland
   environment.sessionVariables = {
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    NVD_BACKEND = "direct";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
     XDG_DATA_DIRS = [
       "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"

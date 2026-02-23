@@ -23,12 +23,9 @@ in {
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
-          libva-vdpau-driver
-          libvdpau
-          libvdpau-va-gl
           nvidia-vaapi-driver
-          vdpauinfo
           libva
+          vdpauinfo
           libva-utils
         ];
       };
@@ -49,8 +46,8 @@ in {
         # needs nvidia-prime
         finegrained = false;
       };
-      dynamicBoost.enable = true; # Dynamic Boost
-      nvidiaPersistenced = true;
+      dynamicBoost.enable = false; # Dynamic Boost for laptops
+      nvidiaPersistenced = false; # Not useful atm
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
       # Support is limited to the Turing and later architectures. Full list of
@@ -63,7 +60,7 @@ in {
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.
 
-      nvidiaSettings = true;
+      nvidiaSettings = false;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
       package = config.boot.kernelPackages.nvidiaPackages.latest;
