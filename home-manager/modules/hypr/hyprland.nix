@@ -71,7 +71,7 @@ in {
         resize_on_border = true;
         allow_tearing = false;
         layout = "scrolling";
-        border_size = 2;
+        border_size = 0;
         gaps_in = 4;
         gaps_out = 4;
 
@@ -128,7 +128,7 @@ in {
         rounding = 12;
 
         active_opacity = 1.0;
-        inactive_opacity = 0.90;
+        inactive_opacity = 0.8;
         fullscreen_opacity = 1.0;
 
         dim_inactive = false;
@@ -346,6 +346,7 @@ in {
         {
           name = "sshColorTmpst";
           "match:title" = ".*/home/deby.*";
+          border_size = 2;
           border_color = "rgba(7287fdff) rgba(7287fdaa)";
         }
       ];
