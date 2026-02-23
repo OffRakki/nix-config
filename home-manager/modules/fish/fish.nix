@@ -3,12 +3,16 @@
   config,
   lib,
   ...
-}: let
-  useHelix = config.programs.helix.enable;
-in {
+}: {
   programs = {
     fish = {
       enable = true;
+      plugins = [
+        {
+          name = "tide";
+          src = pkgs.fishPlugins.tide;
+        }
+      ];
       interactiveShellInit = ''
         set fish_greeting
         direnv hook fish | source
@@ -16,12 +20,6 @@ in {
         fastfetch
 
 
-        # helix keybinds
-        # ${
-          if useHelix
-          then "fish_helix_key_bindings"
-          else "fish_vi_key_bindings"
-        }
         set fish_cursor_default     block      blink
         set fish_cursor_insert      line       blink
         set fish_cursor_replace_one underscore blink
