@@ -8,10 +8,10 @@
   inputs,
   system,
   ...
-}:
-{
+}: {
   imports = [
-    ./packages-fonts.nix
+    ./packages.nix
+    ./fonts.nix
     ./users.nix
     ./drivers
     ./tailscale.nix
@@ -29,7 +29,7 @@
   #};
   local.hardware-clock.enable = false;
 
-  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
+  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -113,11 +113,10 @@
     #};
 
     #ipp-usb.enable = true;
-
   };
 
   systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
+    path = [pkgs.flatpak];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -182,7 +181,7 @@
   '';
   security.pam.services = {
     gdm-password.enableGnomeKeyring = true;
-    hyprlock = { };
+    hyprlock = {};
   };
 
   # For Electron apps to use wayland

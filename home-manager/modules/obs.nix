@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.obs-studio = {
     enable = true;
-    plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+    plugins = [pkgs.obs-studio-plugins.wlrobs];
   };
 }

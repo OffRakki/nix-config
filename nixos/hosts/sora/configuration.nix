@@ -5,8 +5,7 @@
   pkgs,
   outputs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
@@ -18,14 +17,15 @@
   nixpkgs = {
     overlays = [
       (final: _: {
-        inputs = builtins.mapAttrs (
-          _: flake:
-          let
-            legacyPackages = (flake.legacyPackages or { }).${final.stdenv.system} or { };
-            packages = (flake.packages or { }).${final.stdenv.system} or { };
-          in
-          packages // legacyPackages
-        ) inputs;
+        inputs =
+          builtins.mapAttrs (
+            _: flake: let
+              legacyPackages = (flake.legacyPackages or {}).${final.stdenv.system} or {};
+              packages = (flake.packages or {}).${final.stdenv.system} or {};
+            in
+              packages // legacyPackages
+          )
+          inputs;
         caelestia-shell = inputs.caelestia-shell.packages.${pkgs.system}.caelestia-shell;
         caelestia-cli = inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.system}.caelestia-cli;
       })
@@ -37,7 +37,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     users = {
@@ -96,27 +96,25 @@
     };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        accept-flake-config = true;
-        # Enable flakes and new 'nix' command
-        experimental-features = [ "nix-command flakes" ];
-        # Opinionated: disable global registry
-        flake-registry = "";
-        # Workaround to get rid of the download buffer size warning
-        download-buffer-size = 524288000;
-      };
-      # Opinionated: disable channels
-      channel.enable = false;
-
-      # Opinionated: make flake registry and nix path match flake inputs
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      accept-flake-config = true;
+      # Enable flakes and new 'nix' command
+      experimental-features = ["nix-command flakes"];
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround to get rid of the download buffer size warning
+      download-buffer-size = 524288000;
     };
+    # Opinionated: disable channels
+    channel.enable = false;
+
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  };
 
   # Defaults sudo-rs as sudo
   security = {
@@ -177,6 +175,7 @@
         ];
         settings = {
           Wayland = {
+            # File to tell which monitor the SDDM should go *see environment.etc*
             CompositorCommand = "${pkgs.weston}/bin/weston --shell=kiosk -c /etc/sddm-weston.ini";
           };
         };
@@ -228,85 +227,6 @@
       DefaultTimeoutStopSec=10s;
     '';
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    sops
-    age
-    gpu-screen-recorder
-    gpu-screen-recorder-gtk
-    dotool
-    sddm-astronaut
-    sddm-sugar-dark
-    appimage-run
-    grc
-    xwayland-satellite
-    xwayland
-    xwayland-run
-    localsend
-    fuzzel
-    netplan
-    jujutsu
-    kdePackages.kde-cli-tools
-    dialog
-    freerdp
-    iproute2
-    libnotify
-    nmap
-    netcat
-    hypridle
-    tailscale
-    nyxt
-    sudo-rs
-    mprime
-    nh
-    nix-output-monitor
-    diffutils
-    matugen
-    oama
-    pass
-    msmtp
-    uutils-coreutils-noprefix
-    ueberzugpp
-    ueberzug
-    w3m
-    direnv
-    dragon-drop
-    refind
-    os-prober
-    nixd
-    nixfmt
-    vulkan-tools
-    nushell
-    tmux
-    evil-helix
-    # sublime
-    neovim
-    wget
-    curl
-    rofi
-    kitty
-    firefox
-    starship
-    fastfetch
-    wireplumber
-    pwvucontrol
-    pipecontrol
-    btop
-    qutebrowser
-    vesktop
-    waybar-mpris
-    wl-clipboard-rs
-    wl-clip-persist
-    clipse
-    fzf
-    fishPlugins.done
-    fishPlugins.fzf-fish
-    fishPlugins.forgit
-    fishPlugins.hydro
-    fishPlugins.grc
-  ];
 
   time.timeZone = lib.mkDefault "America/Sao_Paulo";
 

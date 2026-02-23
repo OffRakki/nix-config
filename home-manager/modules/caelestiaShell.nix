@@ -4,14 +4,13 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   systemd.user.services.caelestia = {
     Unit = {
       Description = "Caelestia Shell Service";
-      BindsTo = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-      Requesite = [ "graphical-session.target" ];
+      BindsTo = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+      Requesite = ["graphical-session.target"];
     };
     service = {
       ExecStart = "${inputs.caelestia-shell.packages.${pkgs.system}.default}/bin/caelestia shell -d";
@@ -25,7 +24,7 @@
       }";
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 
@@ -35,7 +34,7 @@
       enable = true;
       settings = {
         record = {
-          extraArgs = [ "--audio" ];
+          extraArgs = ["--audio"];
         };
         theme = {
           enableGTK = false;
@@ -51,8 +50,8 @@
           music = {
             spotify = {
               enable = true;
-              match = [ { class = "spotify"; } ];
-              command = [ "spotify" ];
+              match = [{class = "spotify";}];
+              command = ["spotify"];
               move = true;
             };
           };
@@ -63,9 +62,9 @@
     settings = {
       general = {
         apps = {
-          terminal = [ "kitty" ];
-          audio = [ "pavucontrol" ];
-          playback = [ "mpv" ];
+          terminal = ["kitty"];
+          audio = ["pavucontrol"];
+          playback = ["mpv"];
         };
         # Not working for some reason, migrated to hypridle
 

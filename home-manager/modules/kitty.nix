@@ -4,9 +4,7 @@
   lib,
   nix-colors,
   ...
-}:
-{
-
+}: {
   programs.kitty = {
     themeFile = "kanagawa";
     enable = true;

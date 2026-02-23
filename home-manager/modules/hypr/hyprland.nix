@@ -4,26 +4,21 @@
   config,
   pkgs,
   ...
-}:
-let
-
+}: let
   swayosd = {
     output-volume = "swayosd-client --output-volume +0";
     input-volume = "swayosd-client --input-volume +0";
     caps-lock = "sleep 0.2 && swayosd-client --caps-lock";
   };
-
-in
-{
-
-  imports = [ ];
+in {
+  imports = [];
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd = {
       enable = true;
-      variables = [ "--all" ];
+      variables = ["--all"];
     };
     settings = {
       "$mod" = "SUPER";
@@ -196,13 +191,11 @@ in
           name = "wofi";
           "match:namespace" = "wofi";
           blur = "on";
-
         }
         {
           name = "swayosd";
           "match:namespace" = "swayosd";
           above_lock = 2;
-
         }
         {
           name = "";
@@ -210,32 +203,27 @@ in
           blur = "on";
           ignore_alpha = 1;
           # animation = "slide";
-
         }
         {
           name = "";
           "match:namespace" = "notifications";
           blur = "on";
           ignore_alpha = 1;
-
         }
         {
           name = "hyprpicker";
           "match:namespace" = "hyprpicker";
           animation = "fade";
-
         }
         {
           name = "selection";
           "match:namespace" = "selection";
           animation = "fade";
-
         }
         {
           name = "hyprpaper";
           "match:namespace" = "hyprpaper";
           animation = "fade";
-
         }
       ];
 

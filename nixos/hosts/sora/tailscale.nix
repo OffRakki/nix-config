@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   networking.firewall.interfaces."tailscale0" = {
     allowedTCPPortRanges = [
       {
@@ -19,5 +18,5 @@
     enable = true;
     useRoutingFeatures = lib.mkDefault "client";
   };
-  networking.firewall.allowedUDPPorts = [ 41641 ]; # Facilitate firewall punching
+  networking.firewall.allowedUDPPorts = [41641]; # Facilitate firewall punching
 }

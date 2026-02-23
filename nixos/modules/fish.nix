@@ -1,4 +1,4 @@
-{config, ...}:{
+{config, ...}: {
   programs.fish = {
     enable = true;
     vendor = {

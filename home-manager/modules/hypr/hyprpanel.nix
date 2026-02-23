@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   programs.hyprpanel = {
     enable = false;
     settings = {
@@ -12,7 +11,7 @@
               "ram"
               "cpu"
             ];
-            middle = [ "media" ];
+            middle = ["media"];
             right = [
               "volume"
               "systray"

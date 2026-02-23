@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   programs.aerc = {
     enable = true;
     extraConfig = {

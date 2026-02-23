@@ -3,12 +3,14 @@
   config,
   lib,
   ...
-}:
-{
-
+}: {
   programs.helix = lib.mkForce {
     enable = true;
     defaultEditor = true;
+    extraPackages = [
+      pkgs.alejandra
+      pkgs.nixfmt
+    ];
     settings = {
       theme = "kanagawa";
       editor = {
@@ -34,13 +36,13 @@
       language = [
         {
           name = "nix";
+          auto-format = true;
+          formatter.command = "alejandra";
           language-servers = [
             "nixd"
             "nil"
             "colors"
           ];
-          auto-format = true;
-          formatter.command = "alejandra";
         }
         {
           name = "json";
@@ -64,8 +66,8 @@
     };
     themes = {
       catppuccin_mocha = {
-        "inherits" = "catppuccin_mocha";
-        "ui.background" = { };
+        "inherits" = "kanagawa";
+        "ui.background" = {};
       };
     };
   };

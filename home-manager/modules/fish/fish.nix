@@ -3,11 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   useHelix = config.programs.helix.enable;
-in
-{
+in {
   programs = {
     fish = {
       enable = true;
@@ -19,7 +17,11 @@ in
 
 
         # helix keybinds
-        # ${if useHelix then "fish_helix_key_bindings" else "fish_vi_key_bindings"}
+        # ${
+          if useHelix
+          then "fish_helix_key_bindings"
+          else "fish_vi_key_bindings"
+        }
         set fish_cursor_default     block      blink
         set fish_cursor_insert      line       blink
         set fish_cursor_replace_one underscore blink
@@ -86,7 +88,6 @@ in
         fgrep = "fgrep --color=always";
       };
       shellAbbrs = {
-
         # jujutsu
         jjs = "jj split -r";
         jjm = "jj b m master --to";

@@ -1,5 +1,4 @@
-{config, ...}:
-let
+{config, ...}: let
   syncDir = "/home/rakki/sync";
 in {
   services.syncthing = {
@@ -13,16 +12,16 @@ in {
       overrideDevices = true;
       overrideFolders = true;
       devices = {
-        "shiro" = { id = "IHSH3FE-EF36SEW-KKWASQM-7MKQTJO-AO46UT2-JR4JGQV-ISEAPWW-AK3KVQX"; };
+        "shiro" = {id = "IHSH3FE-EF36SEW-KKWASQM-7MKQTJO-AO46UT2-JR4JGQV-ISEAPWW-AK3KVQX";};
       };
       folders = {
         "geral" = {
           path = "${syncDir}/geral";
-          devices = [ "shiro" ];
+          devices = ["shiro"];
         };
         "sops" = {
           path = "${syncDir}/sops";
-          devices = [ "shiro" ];
+          devices = ["shiro"];
         };
       };
     };

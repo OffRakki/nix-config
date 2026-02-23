@@ -1,17 +1,84 @@
-{ pkgs, inputs, ... }:
-let
-
-  python-packages = pkgs.python3.withPackages (
-    ps: with ps; [
-      requests
-      pyquery # needed for hyprland-dots Weather script
-    ]
-  );
-
-in
-{
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    # NH
+    nh
+    nix-output-monitor
+    nvd
+
+    # Secrets
+    sops
+    age
+
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
+    dotool
+    sddm-astronaut
+    sddm-sugar-dark
+    appimage-run
+    grc
+    xwayland-satellite
+    xwayland
+    xwayland-run
+    localsend
+    fuzzel
+    netplan
+    jujutsu
+    kdePackages.kde-cli-tools
+    dialog
+    freerdp
+    iproute2
+    libnotify
+    nmap
+    netcat
+    hypridle
+    tailscale
+    nyxt
+    sudo-rs
+    mprime
+    diffutils
+    matugen
+    oama
+    pass
+    msmtp
+    uutils-coreutils-noprefix
+    ueberzugpp
+    ueberzug
+    w3m
+    direnv
+    dragon-drop
+    refind
+    os-prober
+    nixd
+    nixfmt
+    vulkan-tools
+    nushell
+    tmux
+    evil-helix
+    # sublime
+    neovim
+    wget
+    curl
+    rofi
+    kitty
+    firefox
+    starship
+    fastfetch
+    wireplumber
+    pwvucontrol
+    pipecontrol
+    btop
+    qutebrowser
+    vesktop
+    waybar-mpris
+    wl-clipboard-rs
+    wl-clip-persist
+    clipse
+    fzf
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fishPlugins.grc
     #gaming
     lutris
     wine
@@ -24,6 +91,7 @@ in
     podman-desktop
 
     # User Packages
+    rust-paddle-ocr
     television
     silicon
     dgop
@@ -39,7 +107,6 @@ in
     dnd-tools
     waypaper
     spotify
-    kdePackages.dolphin
     ttyper
     ripgrep
     ripgrep-all
@@ -104,7 +171,7 @@ in
     fastfetch
     oh-my-fish
     spicetify-cli
-    (mpv.override { scripts = [ mpvScripts.mpris ]; }) # with tray
+    mpv
     ranger
     todo
 
@@ -149,44 +216,10 @@ in
     yad
     yt-dlp
     hyprshot
-    python-packages
   ];
 
-  # FONTS
-  fonts = {
-    packages = with pkgs; [
-      plemoljp
-      corefonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      material-icons
-      font-awesome
-      fira-code-symbols
-      fira-code
-      symbola
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.comic-shanns-mono
-      nerd-fonts.shure-tech-mono
-      nerd-fonts.lekton
-      nerd-fonts.fira-code
-      nerd-fonts.inconsolata
-      jetbrains-mono
-      terminus_font
-    ];
-    fontconfig = {
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "JetBrainsMono" ];
-      };
-    };
-  };
-
-  programs.firefox.enable = true;
   programs.nm-applet.indicator = true;
   programs.virt-manager.enable = true;
-
   programs.seahorse.enable = true;
   programs.fuse.userAllowOther = true;
   programs.mtr.enable = true;

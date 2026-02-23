@@ -1,18 +1,21 @@
-{pkgs, lib, ... }: {
-
-    # Automatic update
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  # Automatic update
   system.autoUpgrade = {
-	  enable = true;
-	  dates = "weekly";
+    enable = true;
+    dates = "weekly";
   };
 
-    # Automatic cleanup
+  # Automatic cleanup
   nix = {
-	  settings.auto-optimise-store = true;
-	  gc = {
-	    automatic = true;
-	    dates = "daily";
-	    options = "--delete-older-than 7d";
-	  };
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 7d";
+    };
   };
 }

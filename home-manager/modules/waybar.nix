@@ -3,9 +3,7 @@
   pkgs,
   config,
   ...
-}:
-
-{
+}: {
   programs.waybar = lib.mkForce {
     enable = true;
     systemd = {
@@ -30,7 +28,6 @@
           "group/windowmod"
         ];
         modules-center = [
-
         ];
         modules-right = [
           "group/mediamod"
@@ -144,7 +141,7 @@
 
         "group/networkmod" = {
           orientation = "horizontal";
-          modules = [ "network" ];
+          modules = ["network"];
         };
 
         "hyprland/window#icon" = {
@@ -259,7 +256,7 @@
 
         "group/audiomod" = {
           orientation = "horizontal";
-          modules = [ "pulseaudio#icon" ];
+          modules = ["pulseaudio#icon"];
           max-lenght = 30;
         };
 

@@ -6,8 +6,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     inputs.caelestia-shell.homeManagerModules.default
@@ -50,16 +49,16 @@
     mimeApps = {
       enable = true;
       defaultApplications = lib.mkBefore {
-        "application/pdf" = [ "evince.desktop" ];
-        "text/html" = [ "brave-browser.desktop" ];
-        "text/xml" = [ "brave-browser.desktop" ];
-        "x-scheme-handler/http" = [ "brave-browser.desktop" ];
-        "x-scheme-handler/https" = [ "brave-browser.desktop" ];
-        "inode/directory" = [ "pcmanfm-qt.desktop" ];
-        "text/plain" = [ "helix.desktop" ];
-        "text/x-ini" = [ "helix.desktop" ];
-        "application/x-ini" = [ "helix.desktop" ];
-        "text/markdown" = [ "helix.desktop" ];
+        "application/pdf" = ["evince.desktop"];
+        "text/html" = ["brave-browser.desktop"];
+        "text/xml" = ["brave-browser.desktop"];
+        "x-scheme-handler/http" = ["brave-browser.desktop"];
+        "x-scheme-handler/https" = ["brave-browser.desktop"];
+        "inode/directory" = ["pcmanfm-qt.desktop"];
+        "text/plain" = ["helix.desktop"];
+        "text/x-ini" = ["helix.desktop"];
+        "application/x-ini" = ["helix.desktop"];
+        "text/markdown" = ["helix.desktop"];
       };
     };
     desktopEntries = {

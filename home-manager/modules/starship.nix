@@ -4,8 +4,7 @@
   lib,
   nix-colors,
   ...
-}:
-{
+}: {
   programs.starship = {
     enable = true;
     enableFishIntegration = true;

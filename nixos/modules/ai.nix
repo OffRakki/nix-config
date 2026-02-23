@@ -3,11 +3,9 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   modelsPath = "/home/rakki/Opencode/Models";
-in
-{
+in {
   services = {
     open-webui = {
       enable = false;

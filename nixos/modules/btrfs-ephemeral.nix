@@ -27,7 +27,7 @@
   '';
 
   # Convert a device path to a systemd .device
-  toSystemdDevice = device: lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d" ) (lib.splitString "/" device))) + ".device";
+  toSystemdDevice = device: lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" device))) + ".device";
 
   phase1Systemd = config.boot.initrd.systemd.enable;
 in {

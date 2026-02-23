@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   wallpaper = (
     pkgs.fetchFromGitHub {
       owner = "OffRakki";
@@ -9,8 +12,7 @@ let
     }
     + "/solidBackground.png"
   );
-in
-{
+in {
   services.hyprpaper = {
     enable = true;
     settings = {

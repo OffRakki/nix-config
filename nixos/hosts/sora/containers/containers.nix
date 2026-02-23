@@ -3,7 +3,7 @@
     podman-glance = {
       # This ensures the service is "wanted" (optional) by multi-user.target
       # instead of "required", preventing rebuild failures if it cannot start.
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
     };
   };
 
@@ -11,13 +11,13 @@
     oci-containers.containers = {
       glance = {
         image = "glanceapp/glance:latest";
-        ports = [ "8080:8000" ];
+        ports = ["8080:8000"];
         autoStart = true;
         pull = "missing";
         environmentFiles = [
           /home/rakki/Documents/Env/Glance.env
         ];
-        volumes = [ "${./data/glance}:/app/config" ];
+        volumes = ["${./data/glance}:/app/config"];
         extraOptions = [
           "--network=host"
           "--restart=on-failure"

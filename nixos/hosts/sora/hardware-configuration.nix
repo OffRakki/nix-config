@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./partitions.nix
   ];
@@ -25,7 +27,7 @@
         "uinput"
       ];
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = ["kvm-amd"];
     kernelParams = [
       "quiet"
       "splash"
@@ -35,12 +37,12 @@
       "rd.udev.log_level=3"
       "vt.global_cursor_default=0"
     ];
-    extraModulePackages = [ ];
-    supportedFilesystems = [ "ntfs" ];
+    extraModulePackages = [];
+    supportedFilesystems = ["ntfs"];
     # Fix for wireless keyboard's FN keys not working properly
     extraModprobeConfig = ''
-      	  options hid_apple fnmode=0    
-      	'';
+      options hid_apple fnmode=0
+    '';
     plymouth = {
       enable = true;
       theme = "bgrt";
@@ -54,7 +56,7 @@
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
-  users.groups.uinput = { };
+  users.groups.uinput = {};
   systemd.services.kanata-internalKeyboard.serviceConfig = {
     SupplementaryGroups = [
       "input"

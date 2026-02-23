@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-let
-  rbw = "${pkgs.rbw}/bin/rbw get google_client_secret";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  rbw = "${pkgs.rbw}/bin/rbw get google_client_secret";
+in {
   programs.oama = {
     enable = true;
     settings = {

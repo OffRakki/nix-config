@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -17,8 +16,8 @@
         "hyprland"
       ];
       common = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        default = ["gtk"];
+        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
       };
     };
   };

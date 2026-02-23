@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   home.sessionVariables = {
     GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
   };
@@ -15,9 +14,9 @@
     theme = {
       name = "catppuccin-mocha-lavender-standard+normal";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "lavender" ];
+        accents = ["lavender"];
         size = "standard";
-        tweaks = [ "normal" ];
+        tweaks = ["normal"];
         variant = "mocha";
       };
     };

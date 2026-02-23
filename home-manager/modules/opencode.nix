@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   programs.opencode = {
     enable = true;
     settings = {
@@ -122,7 +121,7 @@
          - Use `> [!INFO]` or `> [!SUMMARY]` callouts for key takeaways.
          - Use `[[links]]` for any technical terms or project names you recognize.
          - Include a YAML frontmatter block with `tags: [chat-summary, opencode]` and `date: {{date}}`.
-      2. **File Path**: Save the summary to the `Summaries/` folder (create it if missing). 
+      2. **File Path**: Save the summary to the `Summaries/` folder (create it if missing).
       3. **Naming**: Use a concise, descriptive filename like `Chat-Summary-Topic-YYYY-MM-DD.md`.
 
       # Tool Usage

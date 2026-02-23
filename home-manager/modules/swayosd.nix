@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   services.swayosd = {
     enable = true;
     stylePath = pkgs.writeText "style.css" ''

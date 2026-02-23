@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   accounts.email = {
     accounts.offrakki = rec {
       primary = true;
