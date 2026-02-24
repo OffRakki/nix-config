@@ -71,7 +71,7 @@ in {
         resize_on_border = true;
         allow_tearing = false;
         layout = "scrolling";
-        border_size = 0;
+        border_size = 2;
         gaps_in = 4;
         gaps_out = 4;
 
@@ -125,7 +125,7 @@ in {
       };
 
       decoration = {
-        rounding = 12;
+        rounding = 0;
 
         active_opacity = 1.0;
         inactive_opacity = 0.8;
