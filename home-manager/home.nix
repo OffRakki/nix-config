@@ -17,6 +17,7 @@
     ./oama.nix
     ./xdg-portals.nix
     ./persistence.nix
+    ./onedrive.nix
   ];
 
   home = {

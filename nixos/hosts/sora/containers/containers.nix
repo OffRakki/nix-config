@@ -4,6 +4,7 @@
       # This ensures the service is "wanted" (optional) by multi-user.target
       # instead of "required", preventing rebuild failures if it cannot start.
       wantedBy = ["multi-user.target"];
+      restartIfChanged = true;
     };
   };
 

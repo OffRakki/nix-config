@@ -59,6 +59,21 @@
     secrets.user-password = {
       neededForUsers = true;
     };
+
+    secrets.onedriveToken = {
+      owner = "rakki";
+    };
+  };
+
+  sops.templates."rclone-onedrive.conf" = {
+    owner = "rakki";
+    content = ''
+      [onedrive]
+      type = onedrive
+      token = ${config.sops.placeholder.onedriveToken}
+      drive_id = FA1D85EC1252599A
+      drive_type = personal
+    '';
   };
 
   console.useXkbConfig = true;
@@ -211,9 +226,6 @@
 
   systemd = {
     services = {
-      podman-glance = {
-        restartIfChanged = false;
-      };
       mpd = {
         environment = {
           XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.rakki.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.

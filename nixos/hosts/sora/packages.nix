@@ -9,6 +9,8 @@
     sops
     age
 
+    rclone
+    rclone-browser
     gpu-screen-recorder
     gpu-screen-recorder-gtk
     dotool
