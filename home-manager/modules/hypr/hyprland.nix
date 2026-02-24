@@ -369,6 +369,7 @@ in {
       exec-once = [
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "caelestia-shell -d"
         "clipse -listen" # Clipboard history
         "nm-applet --indicator"
         "ags"
@@ -381,7 +382,6 @@ in {
         "sleep 3 && systemctl --user restart clip-notify"
         "steam"
         "Telegram"
-        "prismlauncher"
         "goofcord"
         "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];

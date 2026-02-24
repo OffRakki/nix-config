@@ -5,28 +5,28 @@
   inputs,
   ...
 }: {
-  systemd.user.services.caelestia = {
-    Unit = {
-      Description = "Caelestia Shell Service";
-      BindsTo = ["graphical-session.target"];
-      After = ["graphical-session.target"];
-      Requesite = ["graphical-session.target"];
-    };
-    service = {
-      ExecStart = "${inputs.caelestia-shell.packages.${pkgs.system}.default}/bin/caelestia shell -d";
-      Restart = "on-failure";
-      RestartSec = "2";
-      Environment = "PATH=${
-        pkgs.lib.makeBinPath [
-          pkgs.bash
-          pkgs.coreutils
-        ]
-      }";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
-  };
+  # systemd.user.services.caelestia = {
+  #   Unit = {
+  #     Description = "Caelestia Shell Service";
+  #     BindsTo = ["graphical-session.target"];
+  #     After = ["graphical-session.target"];
+  #     Requesite = ["graphical-session.target"];
+  #   };
+  #   service = {
+  #     ExecStart = "${inputs.caelestia-shell.packages.${pkgs.system}.default}/bin/caelestia shell -d";
+  #     Restart = "on-failure";
+  #     RestartSec = "2";
+  #     Environment = "PATH=${
+  #       pkgs.lib.makeBinPath [
+  #         pkgs.bash
+  #         pkgs.coreutils
+  #       ]
+  #     }";
+  #   };
+  #   Install = {
+  #     WantedBy = ["graphical-session.target"];
+  #   };
+  # };
 
   programs.caelestia = {
     enable = true;
