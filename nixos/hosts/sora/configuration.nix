@@ -59,6 +59,13 @@
     secrets.user-password = {
       neededForUsers = true;
     };
+
+    secrets.piholePass = {
+      owner = "rakki";
+    };
+    secrets.gitToken = {
+      owner = "rakki";
+    };
   };
 
   console.useXkbConfig = true;
