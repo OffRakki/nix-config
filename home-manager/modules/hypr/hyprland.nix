@@ -45,6 +45,8 @@ in {
         }
       ];
 
+      ecosystem.no_update_news = true;
+
       workspace = [
         "name:Browser,monitor:DP-1,persistent:true,default:true"
         "name:Social,monitor:HDMI-A-1,persistent:true,default:true"
