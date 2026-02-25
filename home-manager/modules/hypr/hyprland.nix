@@ -125,7 +125,8 @@ in {
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 4;
+        rounding_power = 4;
 
         active_opacity = 1.0;
         inactive_opacity = 0.8;
@@ -369,7 +370,6 @@ in {
       exec-once = [
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "caelestia-shell -d"
         "clipse -listen" # Clipboard history
         "nm-applet --indicator"
         "ags"
@@ -432,9 +432,9 @@ in {
         ", Print, exec, caelestia shell picker openFreezeClip"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
         "$mod, L, exec, $lock"
-        # "$mod, D, exec, pkill wofi || wofi --show drun -G --insensitive" #Main Menu
+        "$mod SHIFT, D, exec, pkill wofi || wofi --show drun -G --insensitive" # Main Menu
+        # "$mod SHIFT, D, exec, vicinae open"
         "$mod, D, exec, caelestia shell drawers toggle launcher"
-        "$mod SHIFT, D, exec, vicinae open"
         "$mod, K, exec, caelestia shell drawers toggle sidebar"
         "$mod SHIFT, K, exec, caelestia toggle music"
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" # Main Menu

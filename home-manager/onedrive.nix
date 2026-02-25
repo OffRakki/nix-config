@@ -24,12 +24,12 @@
         '';
 
         # Proper unmount on stop
-        ExecStop = "${pkgs.fuse3}/bin/fusermount3 -u %h/Onedrive";
+        ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/Onedrive";
         Restart = "on-failure";
         RestartSec = "10s";
       };
       Install = {
-        WantedBy = ["multi-user.target"];
+        WantedBy = ["graphical-session.target"];
       };
     };
   };

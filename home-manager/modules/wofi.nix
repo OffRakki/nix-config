@@ -7,10 +7,11 @@
   programs.wofi = {
     enable = true;
     settings = {
-      image_size = 16;
+      image_size = 64;
       columns = 3;
       allow_images = true;
       hide_scroll = true;
+      no_actions = true;
       run-always_parse_args = true;
       # run-cache_file = "/dev/null"; # Maybe
       run-exec_search = true;
@@ -27,7 +28,6 @@
 
       #window {
         background: #1e1e2e;
-        margin: auto;
         padding: 20px;
         border-radius: 6px;
         border: 4px solid #3c3836;
@@ -35,7 +35,7 @@
 
       #input {
         padding: 4px;
-        margin-bottom: 4px;
+        margin-bottom: 10px;
       }
 
       #outer-box {
@@ -43,19 +43,31 @@
       }
 
       #img {
-        margin-right: 4px;
+        margin-right: 0px;
+        margin-bottom: 8px;
+        halign: center;
       }
 
       #entry {
-        padding: 4px;
+        padding: 10px;
+      }
+
+      #entry box {
+        orientation: vertical;
+      }
+
+      #inner-box {
+        orientation: vertical;
       }
 
       #entry:selected {
         background-color: #181825;
+        border-radius: 8px
       }
 
       #text {
-        margin: 2px;
+        text-align: center;
+        halign: center;
       }
     '';
   };
