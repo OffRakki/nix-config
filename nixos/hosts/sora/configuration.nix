@@ -14,6 +14,9 @@
     ./hardware-configuration.nix
   ];
 
+  programs.river-classic.enable = true;
+  programs.river-classic.xwayland.enable = true;
+
   nixpkgs = {
     overlays = [
       (final: _: {
@@ -96,7 +99,7 @@
 
     hyprland = {
       enable = true;
-      withUWSM = true;
+      withUWSM = false;
       package = pkgs.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };

@@ -9,6 +9,7 @@
     sops
     age
 
+    libreoffice-fresh
     rclone
     rclone-browser
     gpu-screen-recorder
