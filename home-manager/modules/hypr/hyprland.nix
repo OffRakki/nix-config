@@ -380,6 +380,7 @@ in {
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "sleep 3 && systemctl --user restart clip-notify"
+        "sleep 10 && systemctl --user restart caelestia"
         "steam"
         "Telegram"
         "goofcord"
@@ -432,9 +433,11 @@ in {
         ", Print, exec, caelestia shell picker openFreezeClip"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
         "$mod, L, exec, $lock"
-        "$mod SHIFT, D, exec, pkill wofi || wofi --show drun -G --insensitive" # Main Menu
+        # "$mod SHIFT, D, exec, pkill wofi || wofi --show drun -G --insensitive" # Main Menu
         # "$mod SHIFT, D, exec, vicinae open"
-        "$mod, D, exec, caelestia shell drawers toggle launcher"
+        # "$mod, D, exec, caelestia shell drawers toggle launcher"
+        "$mod, D, exec, walker"
+        "$mod SHIFT, D, exec, fuzzel"
         "$mod, K, exec, caelestia shell drawers toggle sidebar"
         "$mod SHIFT, K, exec, caelestia toggle music"
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" # Main Menu

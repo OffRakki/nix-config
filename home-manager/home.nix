@@ -8,6 +8,7 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     inputs.caelestia-shell.homeManagerModules.default
+    inputs.walker.homeManagerModules.default
     ./modules
     ./home-packages.nix
     ./gtk.nix

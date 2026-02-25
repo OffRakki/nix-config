@@ -35,5 +35,7 @@
     ./caelestiaShell.nix
     ./quickshell/quickshell.nix
     ./brave.nix
+    ./fuzzel.nix
+    ./walker.nix
   ];
 }
