@@ -3,6 +3,7 @@
     directories = [
       "sync"
       "Games"
+      "Tailscale"
       ".local/share/Steam"
       ".local/share/TelegramDesktop"
       ".local/share/PrismLauncher"

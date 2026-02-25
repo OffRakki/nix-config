@@ -1,4 +1,4 @@
-# nix-config
+# NixConfig
 
 Personal NixOS configuration repository
 

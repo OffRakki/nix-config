@@ -14,6 +14,8 @@
     vlc
     warp
     lxqt.pcmanfm-qt
+    foot
+    swaybg
 
     # Langs
     nil

@@ -9,6 +9,8 @@
     sops
     age
 
+    marksman
+    bitwarden-cli
     libreoffice-fresh
     rclone
     rclone-browser
@@ -100,6 +102,7 @@
     dgop
     goofcord
     imagemagick
+    gdu
     ncdu
     element-desktop
     glow # Render markdown files on terminal
