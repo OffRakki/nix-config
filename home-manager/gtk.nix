@@ -1,26 +1,25 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  colloidGruvbox = pkgs.colloid-gtk-theme.override {
+    tweaks = ["gruvbox"];
+    colorVariants = ["dark"];
+  };
+  themeName = "Colloid-Dark-Gruvbox";
+in {
   home.sessionVariables = {
-    GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
+    GTK_THEME = themeName;
+    ADW_DEBUG_COLOR_SCHEME = "prefer-dark";
   };
 
   gtk = {
     enable = true;
     colorScheme = "dark";
     theme = {
-      name = "catppuccin-mocha-lavender-standard+normal";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["lavender"];
-        size = "standard";
-        tweaks = ["normal"];
-        variant = "mocha";
-      };
+      name = themeName;
+      package = colloidGruvbox;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "lavender";
-      };
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-plus-icons;
     };
     font = {
       name = "FiraSans";
@@ -36,6 +35,7 @@
       gtk-application-prefer-dark-theme=1
     '';
   };
+
   home = {
     pointerCursor = {
       gtk.enable = true;
@@ -51,8 +51,8 @@
   services.xsettingsd = {
     enable = true;
     settings = {
-      "Net/ThemeName" = "catppuccin-mocha-lavender-standard+normal";
-      "Net/IconThemeName" = "Papirus-Dark";
+      "Net/ThemeName" = themeName;
+      "Net/IconThemeName" = "Gruvbox-Plus-Dark";
     };
   };
 }

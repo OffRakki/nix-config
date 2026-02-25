@@ -4,7 +4,7 @@
   ...
 }: {
   programs.kitty = {
-    themeFile = "kanagawa";
+    themeFile = "GruvboxMaterialDarkSoft";
     enable = true;
     shellIntegration.enableFishIntegration = true;
     enableGitIntegration = true;

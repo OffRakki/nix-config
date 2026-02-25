@@ -9,13 +9,15 @@
     extraPackages = [
       pkgs.alejandra
       pkgs.nixfmt
+      pkgs.marksman
     ];
     settings = {
-      theme = "kanagawa";
+      theme = "gruvbox";
       editor = {
         cursorline = true;
         soft-wrap.enable = true;
         color-modes = true;
+        gutters = ["diagnostics" "line-numbers" "spacer" "diff"]; # Add/remove "line-numbers" to toggle
         line-number = "relative";
         bufferline = "multiple";
         indent-guides.render = true;
@@ -44,6 +46,10 @@
           ];
         }
         {
+          name = "markdown";
+          language-servers = ["marksman"];
+        }
+        {
           name = "json";
         }
         {
@@ -65,7 +71,7 @@
     };
     themes = {
       catppuccin_mocha = {
-        "inherits" = "kanagawa";
+        "inherits" = "gruvbox";
         "ui.background" = {};
       };
     };
