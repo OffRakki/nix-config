@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   wallpaper = (
     pkgs.fetchFromGitHub {
       owner = "OffRakki";

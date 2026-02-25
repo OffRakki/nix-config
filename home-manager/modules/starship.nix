@@ -1,10 +1,4 @@
 {
-  pkgs,
-  config,
-  lib,
-  nix-colors,
-  ...
-}: {
   programs.starship = {
     enable = false;
     enableFishIntegration = true;

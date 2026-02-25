@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   home.persistence."/persist" = {
     directories = [
       "sync"

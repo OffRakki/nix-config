@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   services.kdeconnect = {
     enable = false;
     indicator = false;

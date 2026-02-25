@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   rbw = "${pkgs.rbw}/bin/rbw get google_client_secret";
 in {
   programs.oama = {

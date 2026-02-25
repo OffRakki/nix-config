@@ -1,9 +1,5 @@
 # Refer to https://wiki.nixos.org/wiki/Zed
-{
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   programs.zed-editor = lib.mkDefault {
     enable = true;
     extensions = [

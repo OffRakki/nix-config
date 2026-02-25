@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   programs = {
     nushell = lib.mkForce {
       enable = true;

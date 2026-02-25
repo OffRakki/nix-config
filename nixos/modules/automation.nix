@@ -1,8 +1,4 @@
 {
-  pkgs,
-  lib,
-  ...
-}: {
   # Automatic update
   system.autoUpgrade = {
     enable = true;

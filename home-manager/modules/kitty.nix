@@ -1,8 +1,6 @@
 {
   pkgs,
-  config,
   lib,
-  nix-colors,
   ...
 }: {
   programs.kitty = {

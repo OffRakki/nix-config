@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   modelsPath = "/home/rakki/Opencode/Models";
 in {
   services = {

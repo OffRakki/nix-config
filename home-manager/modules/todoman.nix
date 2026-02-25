@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   programs.todoman = {
     enable = false;
     glob = "~/todos/*";

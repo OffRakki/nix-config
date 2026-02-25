@@ -1,9 +1,4 @@
 {
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
   # xdg.mimeApps.defaultApplications = {
   #   "text/html" = [ "org.qutebrowser.qutebrowser.desktop" ];
   #   "text/xml" = [ "org.qutebrowser.qutebrowser.desktop" ];

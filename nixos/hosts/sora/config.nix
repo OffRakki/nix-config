@@ -1,12 +1,6 @@
 {
-  config,
   pkgs,
-  host,
-  username,
   options,
-  lib,
-  inputs,
-  system,
   ...
 }: {
   imports = [

@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: {
+{lib, ...}: {
   programs.waybar = lib.mkForce {
     enable = true;
     systemd = {

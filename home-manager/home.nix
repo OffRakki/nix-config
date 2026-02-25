@@ -3,8 +3,6 @@
 {
   inputs,
   lib,
-  config,
-  pkgs,
   ...
 }: {
   imports = [
@@ -50,19 +48,46 @@
     mimeApps = {
       enable = true;
       defaultApplications = lib.mkBefore {
-        "application/pdf" = ["evince.desktop"];
-        "text/html" = ["brave-browser.desktop"];
-        "text/xml" = ["brave-browser.desktop"];
-        "x-scheme-handler/http" = ["brave-browser.desktop"];
-        "x-scheme-handler/https" = ["brave-browser.desktop"];
-        "inode/directory" = ["pcmanfm-qt.desktop"];
+        "image/jpeg" = ["imv.desktop"];
+        "image/jpg" = ["imv.desktop"];
+        "image/png" = ["imv.desktop"];
+        "image/gif" = ["imv.desktop"];
+        "image/webp" = ["imv.desktop"];
+        "image/bmp" = ["imv.desktop"];
+        "image/svg" = ["imv.desktop"];
+        "image/x-tga" = ["imv.desktop"];
         "text/plain" = ["helix.desktop"];
         "text/x-ini" = ["helix.desktop"];
         "application/x-ini" = ["helix.desktop"];
         "text/markdown" = ["helix.desktop"];
+        "text/html" = ["brave-browser.desktop"];
+        "text/xml" = ["brave-browser.desktop"];
+        "x-scheme-handler/http" = ["brave-browser.desktop"];
+        "x-scheme-handler/https" = ["brave-browser.desktop"];
+        "application/pdf" = ["evince.desktop"];
+        "inode/directory" = ["pcmanfm-qt.desktop"];
       };
     };
     desktopEntries = {
+      imv = {
+        name = "imv";
+        genericName = "Image Viewer";
+        exec = "imv %F";
+        terminal = false;
+        categories = [
+          "Graphics"
+          "Viewer"
+        ];
+        mimeType = [
+          "image/jpeg"
+          "image/jpg"
+          "image/png"
+          "image/gif"
+          "image/webp"
+          "image/bmp"
+          "image/svg"
+        ];
+      };
       helix = {
         name = "Helix";
         genericName = "Text Editor";
@@ -72,7 +97,6 @@
           "Utility"
           "TextEditor"
         ];
-        # Adding Markdown here helps file managers "discover" Helix for .md files
         mimeType = [
           "text/plain"
           "text/markdown"

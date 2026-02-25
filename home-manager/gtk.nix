@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home.sessionVariables = {
     GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
   };

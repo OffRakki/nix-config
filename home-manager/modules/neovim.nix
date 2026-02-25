@@ -1,10 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  nix-colors,
-  ...
-}: {
+{lib, ...}: {
   programs.neovim = lib.mkDefault {
     enable = true;
     defaultEditor = false;
