@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  programs.helix = lib.mkForce {
+  programs.helix = {
     enable = true;
     defaultEditor = true;
     extraPackages = [
