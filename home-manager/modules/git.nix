@@ -9,7 +9,7 @@
       core.editor = "hx";
       init.defaultBranch = "master";
       credential.helper = "${lib.getExe pkgs.libsecret}";
-      user.name = "offrakki";
+      user.name = "Fernando Marques";
       user.email = "offrakki@gmail.com";
       commit.verbose = true;
       column.ui = "auto";
