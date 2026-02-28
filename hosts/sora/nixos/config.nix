@@ -80,7 +80,7 @@
     rpcbind.enable = false;
     nfs.server.enable = false;
 
-    flatpak.enable = false;
+    flatpak.enable = true;
 
     blueman.enable = true;
 
@@ -186,10 +186,6 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
-    XDG_DATA_DIRS = [
-      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
-      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
-    ];
   };
 
   # Open ports in the firewall.

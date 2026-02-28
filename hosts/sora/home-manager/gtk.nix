@@ -6,9 +6,17 @@
   themeName = "Colloid-Dark-Gruvbox";
 in {
   home.sessionVariables = {
-    GTK_THEME = themeName;
     ADW_DEBUG_COLOR_SCHEME = "prefer-dark";
   };
+
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     "org/gnome/desktop/interface" = {
+  #       icon-theme = "Gruvbox-Plus-Dark";
+  #     };
+  #   };
+  # };
 
   gtk = {
     enable = true;

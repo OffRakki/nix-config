@@ -9,6 +9,7 @@
     sops
     age
 
+    android-tools
     marksman
     bitwarden-cli
     libreoffice-fresh

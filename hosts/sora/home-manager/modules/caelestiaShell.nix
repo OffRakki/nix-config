@@ -82,7 +82,7 @@
         #   ];
         # };
       };
-      paths.wallpaperDir = "${../../assets/wallpapers}";
+      paths.wallpaperDir = "${../../../../assets/wallpapers}";
       wallpaper.postHook = "echo $WALLPAPER_PATH";
       border = {
         thickness = 6;

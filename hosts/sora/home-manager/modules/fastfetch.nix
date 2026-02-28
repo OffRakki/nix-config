@@ -4,7 +4,7 @@
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
       logo = {
-        source = "${../../assets/svgs/animePurpleHair.png}";
+        source = "${../../../../assets/svgs/animePurpleHair.png}";
         type = "auto";
         position = "left";
         height = 14;

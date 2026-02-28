@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   swayosd = {
@@ -13,6 +14,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
     systemd = {
       enable = true;
@@ -78,6 +80,17 @@ in {
         "col.active_border" = "rgba(BFA16Eff)";
         "col.inactive_border" = "rgba(BFA16E44)";
       };
+      scrolling = {
+        # Set to true so the 'camera' follows the window you focus
+        follow_focus = true;
+
+        # 0 = Center the window, 1 = Fit it to the nearest edge
+        focus_fit_method = 1;
+        fullscreen_on_one_column = true;
+
+        # Default width of new windows (0.1 to 1.0)
+        column_width = 0.5;
+      };
 
       input = {
         kb_layout = "us,us";
@@ -91,7 +104,8 @@ in {
         sensitivity = -0.9;
         numlock_by_default = true;
         left_handed = false;
-        follow_mouse = true;
+        follow_mouse = 2;
+        mouse_refocus = false;
         float_switch_override_focus = true;
         tablet = {
           transform = 0;
@@ -229,6 +243,20 @@ in {
       ];
 
       windowrule = [
+        # 1. Float everything that IS NOT the main client window
+        {
+          name = "SteamPopups";
+          "match:class" = "^(steam)$";
+          "match:title" = "negative:^(Steam)$";
+          float = true;
+        }
+        # 2. Force the main library window to stay tiled
+        {
+          name = "SteamMainTile";
+          "match:class" = "^(steam)$";
+          "match:title" = "^(Steam)$";
+          float = false;
+        }
         # fix for brave border color not being displayed correctly.
         {
           name = "braveBorderColorFix";
@@ -426,7 +454,7 @@ in {
         "$mod, F2, exec, caelestia toggle music"
 
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
-        "$mod SHIFT, P, exec,  '${../../../scripts/pass-wofi.sh}'"
+        "$mod SHIFT, P, exec,  '${../../../../../scripts/pass-wofi.sh}'"
         "$mod SHIFT, W, exec, waypaper"
         "$mod,g,togglegroup"
         "$mod,i,pin"
@@ -443,7 +471,10 @@ in {
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" # Main Menu
         "$mod, V, exec, pkill clipse & $terminal --class middleFloat -e clipse"
         "$mod, SPACE, togglefloating"
-        "$mod, F, fullscreen, 1" # fake full screen
+        # "$mod, F, layoutmsg, togglefit || " # niri like fullscreen
+        # "$mod, F, fullscreen, 1" # fake fullscreen
+        "$mod, F, layoutmsg , fit active"
+        "$mod CTRL, F, layoutmsg , colresize 0.5"
         "$mod SHIFT, F, fullscreen"
         "$mod SHIFT, Q, killactive"
         "$mod, A, exec, pkill wofi || true && ags -t 'overview'"
@@ -492,10 +523,10 @@ in {
         "$mod CTRL, 0, movetoworkspacesilent, 10"
 
         # Move focus with mod + arrow keys
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
+        "$mod, left, layoutmsg, focus l"
+        "$mod, right, layoutmsg, focus r"
+        "$mod, up, layoutmsg, focus u"
+        "$mod, down, layoutmsg, focus d"
 
         # Move windows
         "$mod SHIFT, left, movewindow, l"

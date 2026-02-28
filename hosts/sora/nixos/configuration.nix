@@ -9,6 +9,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
+    inputs.hyprland.nixosModules.default
     ../../modules
     ./config.nix
     ./hardware-configuration.nix
@@ -45,12 +46,12 @@
     useGlobalPkgs = true;
     users = {
       # Import your home-manager config
-      rakki = import ../../../home-manager/home.nix;
+      rakki = import ../home-manager/home.nix;
     };
   };
 
   sops = {
-    defaultSopsFile = ../../secrets.yaml;
+    defaultSopsFile = ../../../secrets.yaml;
 
     secrets.syncthing_cert = {
       owner = "rakki";
@@ -100,8 +101,7 @@
     hyprland = {
       enable = true;
       withUWSM = false;
-      package = pkgs.hyprland;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
 
     dconf.enable = true;

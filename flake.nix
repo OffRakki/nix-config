@@ -1,10 +1,10 @@
 {
-  description = "declarative mess";
+  description = "Declarative mess";
 
   inputs = {
     # Nix
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
     flake-parts.url = "github:hercules-ci/flake-parts";
     disko = {
       url = "github:nix-community/disko";
@@ -15,11 +15,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
+    # Home manager
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Secrets
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # WM
+    hyprland.url = "github:hyprwm/Hyprland";
     caelestia-shell.url = "github:caelestia-dots/shell";
     # Walker
     elephant.url = "github:abenz1267/elephant";
@@ -32,7 +40,6 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hardware.url = "github:nixos/nixos-hardware";
-    nur.url = "github:nix-community/NUR";
 
     # Ministerio
     ministerio.url = "github:misterio77/nix-config";
@@ -42,21 +49,22 @@
       url = "github:TNAZEP/HytaleLauncherFlake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Home manager
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    # OpenGL/Vulkan wrapper
+    nixgl = {
+      url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   nixConfig = {
     extra-substituters = [
+      "https://hyprland.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://walker.cachix.org"
       "https://walker-git.cachix.org"
     ];
     extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
       "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
@@ -69,9 +77,11 @@
     caelestia-shell,
     home-manager,
     catppuccin,
+    hyprland,
+    nixgl,
     ...
   } @ inputs: {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra; # Default .nix code formatter
     nixosConfigurations = {
       sora = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -79,9 +89,19 @@
           inherit (self) outputs;
         };
         modules = [
-          ./nixos/hosts/sora/configuration.nix
+          ./hosts/sora/nixos/configuration.nix
         ];
       };
+      # HomeServer
+      # tempest = nixpkgs.lib.nixosSystem {
+      #   specialArgs = {
+      #     inherit inputs;
+      #     inherit (self) outputs;
+      #   };
+      #   modules = [
+      #     ./hosts/tempest/nixos/configuration.nix
+      #   ];
+      # };
     };
   };
 }

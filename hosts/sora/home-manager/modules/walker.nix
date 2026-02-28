@@ -83,10 +83,6 @@
             provider = "files";
           }
           {
-            prefix = ".";
-            provider = "bitwarden";
-          }
-          {
             prefix = "!";
             provider = "todo";
           }
