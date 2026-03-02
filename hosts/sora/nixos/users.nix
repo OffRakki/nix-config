@@ -11,7 +11,6 @@
       rakki = {
         isNormalUser = true;
         hashedPasswordFile = config.sops.secrets.user-password.path;
-        openssh.authorizedKeys.keys = [];
         extraGroups = [
           "networkmanager"
           "storage"

@@ -92,16 +92,15 @@
           ./hosts/sora/nixos/configuration.nix
         ];
       };
-      # HomeServer
-      # tempest = nixpkgs.lib.nixosSystem {
-      #   specialArgs = {
-      #     inherit inputs;
-      #     inherit (self) outputs;
-      #   };
-      #   modules = [
-      #     ./hosts/tempest/nixos/configuration.nix
-      #   ];
-      # };
+      tempest = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit (self) outputs;
+        };
+        modules = [
+          ./hosts/tempest/nixos/configuration.nix
+        ];
+      };
     };
   };
 }

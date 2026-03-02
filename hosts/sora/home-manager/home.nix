@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   lib,
@@ -19,12 +17,12 @@
     ./onedrive.nix
   ];
 
+  programs.home-manager.enable = true;
+
   home = {
     username = "rakki";
     homeDirectory = "/home/rakki";
     sessionVariables = {
-      # XCURSOR_THEME = "catppuccin-mocha-peach-cursors";
-      # XCURSOR_SIZE = "24";
       NH_FLAKE = "$HOME/Documents/NixConfig";
     };
     persistence."/persist".directories = [
@@ -117,7 +115,6 @@
   };
 
   # Enable home-manager
-  programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user = {

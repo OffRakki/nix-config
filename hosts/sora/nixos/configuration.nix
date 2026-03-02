@@ -173,7 +173,6 @@
       wheelNeedsPassword = true;
     };
     wrappers.sudo-rs = {
-      #source = "${lib.getExe pkgs.sudo-rs}";
       source = "${lib.getExe pkgs.sudo-rs}";
       setuid = true;
       setgid = true;
@@ -272,12 +271,11 @@
       ];
     };
     smartd = {
-      enable = false;
+      enable = true;
       autodetect = true;
     };
 
     gvfs.enable = true;
-    tumbler.enable = true;
 
     pipewire = {
       enable = true;
@@ -318,14 +316,14 @@
     # pkgs.hplipWithPlugin
     #  ];
     #};
-
-    #avahi = {
-    #  enable = true;
-    #  nssmdns4 = true;
-    #  openFirewall = true;
-    #};
-
+    #
     #ipp-usb.enable = true;
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 
   # Select internationalisation properties.
