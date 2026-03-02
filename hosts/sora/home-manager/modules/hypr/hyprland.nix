@@ -383,16 +383,8 @@ in {
       env = [
         "HYPRCURSOR_THEME,catppuccin-mocha-peach-cursors"
         "HYPRCURSOR_SIZE,24"
-        "AQ_DRM_DEVICES,/dev/dri/card1"
-        "CLUTTER_BACKEND,wayland"
-        "EDITOR,hx" # default editor
-        "EGL_PLATFORM,wayland"
-        "GDK_BACKEND,wayland,x11"
-        "GDK_SCALE,1"
-        "MOZ_ENABLE_WAYLAND,1"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
-        "XDG_SESSION_TYPE,wayland"
       ];
 
       exec-once = [
@@ -408,7 +400,6 @@ in {
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "sleep 3 && systemctl --user restart clip-notify"
-        "sleep 10 && systemctl --user restart caelestia"
         "steam"
         "Telegram"
         "goofcord"

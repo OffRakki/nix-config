@@ -23,11 +23,9 @@
     username = "rakki";
     homeDirectory = "/home/rakki";
     sessionVariables = {
-      XCURSOR_THEME = "catppuccin-mocha-peach-cursors";
-      XCURSOR_SIZE = "24";
+      # XCURSOR_THEME = "catppuccin-mocha-peach-cursors";
+      # XCURSOR_SIZE = "24";
       NH_FLAKE = "$HOME/Documents/NixConfig";
-      QT_QPA_PLATFORM = "wayland";
-      TERMINAL = "kitty";
     };
     persistence."/persist".directories = [
       "Documents"

@@ -11,12 +11,13 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.hyprland.nixosModules.default
     ../../modules
-    ./config.nix
+    ./containers
     ./hardware-configuration.nix
+    ./packages.nix
+    ./fonts.nix
+    ./users.nix
+    ./tailscale.nix
   ];
-
-  programs.river-classic.enable = true;
-  programs.river-classic.xwayland.enable = true;
 
   nixpkgs = {
     overlays = [
@@ -80,9 +81,39 @@
     '';
   };
 
+  environment.sessionVariables = {
+    __GL_SHADER_DISK_CACHE = 1;
+    __GL_SHADER_DISK_CACHE_PATH = "/home/rakki/.nv/shaderCache";
+    __GL_SHADER_DISK_CACHE_SIZE = 107374182400; # 100GB
+    # __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1; # Essentially unlimited cache
+    AQ_DRM_DEVICES = "/dev/dri/card1";
+    NVD_BACKEND = "direct";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    QT_QPA_PLATFORM = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    EGL_PLATFORM = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+    GDK_BACKEND = "wayland,x11";
+    GDK_SCALE = "1";
+    NIXOS_OZONE_WL = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    MOZ_ENABLE_WAYLAND = 1;
+    WLR_NO_HARDWARE_CURSORS = 1;
+    PROTON_USE_NTSYNC = 1;
+    TERMINAL = "kitty";
+    EDITOR = "hx";
+  };
+
   console.useXkbConfig = true;
 
   programs = {
+    river-classic = {
+      enable = true;
+      xwayland.enable = true;
+    };
+
     gpu-screen-recorder.enable = true;
 
     nix-ld = {
@@ -134,7 +165,6 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  # Defaults sudo-rs as sudo
   security = {
     sudo.enable = false;
     sudo-rs = {
@@ -149,6 +179,28 @@
       setgid = true;
       owner = "0";
       group = "0";
+    };
+    rtkit.enable = true;
+    polkit.enable = true;
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          subject.isInGroup("users")
+            && (
+              action.id == "org.freedesktop.login1.reboot" ||
+              action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+              action.id == "org.freedesktop.login1.power-off" ||
+              action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+            )
+          )
+        {
+          return polkit.Result.YES;
+        }
+      })
+    '';
+    pam.services = {
+      gdm-password.enableGnomeKeyring = true;
+      hyprlock = {};
     };
   };
 
@@ -213,6 +265,85 @@
         }
       ];
     };
+    dbus = {
+      packages = [
+        pkgs.gsettings-desktop-schemas
+        pkgs.dconf
+      ];
+    };
+    smartd = {
+      enable = false;
+      autodetect = true;
+    };
+
+    gvfs.enable = true;
+    tumbler.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+
+    pulseaudio.enable = false; # unstable
+    udev.enable = true;
+    envfs.enable = true;
+    dbus.enable = true;
+
+    fstrim = {
+      enable = true;
+      interval = "weekly";
+    };
+
+    libinput.enable = true;
+
+    rpcbind.enable = false;
+    nfs.server.enable = false;
+
+    flatpak.enable = true;
+
+    blueman.enable = true;
+
+    fwupd.enable = true;
+
+    upower.enable = true;
+
+    gnome.gnome-keyring.enable = true;
+
+    #printing = {
+    #  enable = false;
+    #  drivers = [
+    # pkgs.hplipWithPlugin
+    #  ];
+    #};
+
+    #avahi = {
+    #  enable = true;
+    #  nssmdns4 = true;
+    #  openFirewall = true;
+    #};
+
+    #ipp-usb.enable = true;
+  };
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LANGUAGE = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   environment = {
@@ -225,6 +356,14 @@
       name=DP-1
       mode=preferred
     '';
+  };
+
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    memoryPercent = 30;
+    swapDevices = 1;
+    algorithm = "zstd";
   };
 
   systemd = {

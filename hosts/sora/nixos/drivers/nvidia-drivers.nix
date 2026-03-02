@@ -1,69 +1,53 @@
 {
-  lib,
   pkgs,
   config,
   ...
-}:
-with lib; let
-  cfg = config.drivers.nvidia;
-in {
-  imports = [
-    ./nvidia-prime-drivers.nix
-  ];
-  options.drivers.nvidia = {
-    enable = mkEnableOption "Enable Nvidia Drivers";
+}: {
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware = {
+    uinput.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        libva
+        vdpauinfo
+        libva-utils
+      ];
+    };
   };
 
-  config = mkIf cfg.enable {
-    services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    # Modesetting is required.
+    modesetting.enable = true;
 
-    hardware = {
-      uinput.enable = true;
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = with pkgs; [
-          nvidia-vaapi-driver
-          libva
-          vdpauinfo
-          libva-utils
-        ];
-      };
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement = {
+      enable = true;
+      # Fine-grained power management. Turns off GPU when not in use.
+      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+      # needs nvidia-prime
+      finegrained = false;
     };
+    dynamicBoost.enable = false; # Dynamic Boost for laptops
+    nvidiaPersistenced = false; # Not useful atm
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+    # Only available from driver 515.43.04+
+    # Currently alpha-quality/buggy, so false is currently the recommended setting.
+    open = true;
 
-    # not need on desktop
-    drivers.nvidia-prime.enable = false;
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
 
-    hardware.nvidia = {
-      # Modesetting is required.
-      modesetting.enable = true;
+    nvidiaSettings = true;
 
-      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement = {
-        enable = true;
-        # Fine-grained power management. Turns off GPU when not in use.
-        # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-        # needs nvidia-prime
-        finegrained = false;
-      };
-      dynamicBoost.enable = false; # Dynamic Boost for laptops
-      nvidiaPersistenced = false; # Not useful atm
-      # Use the NVidia open source kernel module (not to be confused with the
-      # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of
-      # supported GPUs is at:
-      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-      # Only available from driver 515.43.04+
-      # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = true;
-
-      # Enable the Nvidia settings menu,
-      # accessible via `nvidia-settings`.
-
-      nvidiaSettings = false;
-
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-    };
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }
