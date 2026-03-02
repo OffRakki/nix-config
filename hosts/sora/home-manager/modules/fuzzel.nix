@@ -4,7 +4,7 @@
     settings = {
       main = {
         font = "FiraSans:size=14";
-        icon-theme = "Papirus-Dark";
+        icon-theme = "Gruvbox-Plus-Dark";
         placeholder = "Generate luminous element!";
         line-height = 24;
         width = 24;

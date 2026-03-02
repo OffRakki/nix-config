@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   # systemd.user.services.caelestia = {
@@ -34,7 +35,7 @@
         record = {
           extraArgs = ["--audio"];
         };
-        theme = {
+        theme = lib.mkForce {
           enableGTK = false;
           enableTerm = false;
           enableHypr = false;

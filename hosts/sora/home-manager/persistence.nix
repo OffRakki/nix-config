@@ -4,6 +4,7 @@
       "sync"
       "Games"
       "Tailscale"
+      ".nv"
       ".var/app/ai.moeru.airi"
       ".local/share/flatpak"
       ".local/share/Steam"
