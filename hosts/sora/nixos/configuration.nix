@@ -61,7 +61,7 @@
       owner = "rakki";
     };
 
-    secrets.user-password = {
+    secrets.soraPass = {
       neededForUsers = true;
     };
 

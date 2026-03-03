@@ -10,7 +10,7 @@
     users = {
       rakki = {
         isNormalUser = true;
-        hashedPasswordFile = config.sops.secrets.user-password.path;
+        hashedPasswordFile = config.sops.secrets.soraPass.path;
         extraGroups = [
           "networkmanager"
           "storage"
