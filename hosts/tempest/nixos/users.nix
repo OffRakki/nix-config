@@ -15,9 +15,11 @@
         ];
         extraGroups = [
           "wheel"
+          "networkmanager"
           "podman"
           "video"
           "render"
+          "storage"
         ];
       };
     };

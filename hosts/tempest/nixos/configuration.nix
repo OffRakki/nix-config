@@ -10,6 +10,9 @@
     # ./containers
     ../../modules/automation.nix
     ../../modules/fish.nix
+    ../../modules/btrfs-ephemeral.nix
+    ../../modules/optin-persistence.nix
+    ./hardware-configuration.nix
     ./users.nix
     ./tailscale.nix
     ./packages.nix
@@ -100,10 +103,6 @@
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
-    };
-    logind = {
-      lidSwitch = "ignore";
-      lidSwitchExternalPower = "ignore";
     };
   };
   # Select internationalisation properties.
