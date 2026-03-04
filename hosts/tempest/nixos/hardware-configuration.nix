@@ -77,9 +77,9 @@
   };
 
   services = {
-    logind = {
-      lidSwitch = "ignore";
-      lidSwitchExternalPower = "ignore";
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
     };
   };
 }

@@ -48,6 +48,7 @@
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
+      trusted-users = ["root" "tmpst"];
       accept-flake-config = true;
       # Enable flakes and new 'nix' command
       experimental-features = ["nix-command flakes"];
@@ -112,6 +113,12 @@
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        userServices = true;
+        workstation = true;
+      };
     };
   };
   # Select internationalisation properties.
