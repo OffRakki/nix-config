@@ -85,7 +85,7 @@
       enable = true;
       settings = {
         # Opinionated: forbid root login through SSH.
-        PermitRootLogin = "no";
+        PermitRootLogin = "prohibit-password";
         PasswordAuthentication = true;
       };
       hostKeys = [
