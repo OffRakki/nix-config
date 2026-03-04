@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    nh
     podman-compose
     btop
     intel-gpu-tools

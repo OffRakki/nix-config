@@ -16,6 +16,14 @@
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/NixConfig";
     };
+    persistence."/persist".directories = [
+      "Documents"
+      "Downloads"
+      "Pictures"
+      "Videos"
+      ".local/bin"
+      ".local/share/nix" # trusted settings and repl history
+    ];
   };
 
   # Nicely reload system units when changing configs
