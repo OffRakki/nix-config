@@ -16,6 +16,8 @@
     lxqt.pcmanfm-qt
     foot
     swaybg
+    onlyoffice-desktopeditors
+    onlyoffice-documentserver
 
     # Langs
     nil

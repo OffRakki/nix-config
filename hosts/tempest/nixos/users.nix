@@ -5,11 +5,11 @@
 }: {
   users = {
     defaultUserShell = pkgs.fish;
-    mutableUsers = true;
+    mutableUsers = false;
     users = {
       tmpst = {
         isNormalUser = true;
-        initalPssword = "123123123";
+        hashedPasswordFile = config.sops.secrets.tmpstPass.path;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjf4oKMc8ZFzSAJXO5YYOQM9alEUxph80pA67ePwiOA rakki@igris"
         ];

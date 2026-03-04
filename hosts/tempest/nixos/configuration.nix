@@ -6,7 +6,8 @@
   ...
 }: {
   imports = [
-    ../home-manager
+    inputs.sops-nix.nixosModules.sops
+    inputs.home-manager.nixosModules.home-manager
     # ./containers
     ../../modules/automation.nix
     ../../modules/fish.nix
@@ -17,6 +18,14 @@
     ./tailscale.nix
     ./packages.nix
   ];
+
+  sops = {
+    defaultSopsFile = ../../../secrets.yaml;
+
+    secrets.tmpstPass = {
+      neededForUsers = true;
+    };
+  };
 
   nixpkgs.config = {
     allowUnfree = true;

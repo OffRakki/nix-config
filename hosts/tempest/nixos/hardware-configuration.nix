@@ -48,7 +48,7 @@
   };
 
   networking = {
-    hostName = "sora";
+    hostName = "tempest";
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
@@ -68,7 +68,7 @@
       extraPackages = with pkgs; [
         intel-media-driver
         intel-vaapi-driver
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
         intel-compute-runtime
       ];

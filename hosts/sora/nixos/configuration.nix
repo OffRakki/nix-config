@@ -310,14 +310,13 @@
 
     gnome.gnome-keyring.enable = true;
 
-    #printing = {
-    #  enable = false;
-    #  drivers = [
-    # pkgs.hplipWithPlugin
-    #  ];
-    #};
-    #
-    #ipp-usb.enable = true;
+    printing = {
+      enable = false;
+      drivers = [
+        pkgs.hplipWithPlugin
+      ];
+    };
+    ipp-usb.enable = true;
 
     avahi = {
       enable = true;
