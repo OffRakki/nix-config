@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   services.kdeconnect = {
-    enable = false;
+    enable = true;
     indicator = false;
     package = pkgs.kdePackages.kdeconnect-kde;
   };
