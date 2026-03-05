@@ -374,7 +374,7 @@ in {
         }
         {
           name = "sshColorTmpst";
-          "match:title" = ".*/home/deby.*";
+          "match:title" = ".*tempest.*";
           border_size = 2;
           border_color = "rgba(7287fdff) rgba(7287fdaa)";
         }

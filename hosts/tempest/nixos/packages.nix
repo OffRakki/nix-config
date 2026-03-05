@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    kitty.terminfo
+    ethtool
     nh
     podman-compose
     btop

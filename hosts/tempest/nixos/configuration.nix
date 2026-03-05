@@ -8,7 +8,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
-    # ./containers
+    ./containers
     ../../modules/automation.nix
     ../../modules/fish.nix
     ../../modules/btrfs-ephemeral.nix
@@ -20,6 +20,7 @@
   ];
 
   sops = {
+    age.sshKeyPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];
     defaultSopsFile = ../../../secrets.yaml;
 
     secrets.tmpstPass = {
@@ -87,7 +88,8 @@
       settings = {
         # Opinionated: forbid root login through SSH.
         PermitRootLogin = "prohibit-password";
-        PasswordAuthentication = true;
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
       };
       hostKeys = [
         {

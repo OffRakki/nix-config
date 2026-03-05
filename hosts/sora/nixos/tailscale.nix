@@ -16,7 +16,7 @@
 
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = lib.mkDefault "client";
+    useRoutingFeatures = "client";
   };
   networking.firewall.allowedUDPPorts = [41641]; # Facilitate firewall punching
 }

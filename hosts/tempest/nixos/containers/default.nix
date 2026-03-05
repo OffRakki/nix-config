@@ -1,7 +1,11 @@
 {
   imports = [
-    ./containers.nix
+    # ./containers.nix
   ];
+
+  networking = {
+    firewall.trustedInterfaces = ["podman0"];
+  };
 
   virtualisation = {
     podman = {

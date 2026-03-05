@@ -9,6 +9,10 @@
   ];
 
   boot = {
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
+    };
     kernelPackages = pkgs.linuxPackages;
     loader = {
       timeout = 0;
@@ -30,6 +34,7 @@
     };
     kernelModules = ["kvm-intel"];
     kernelParams = [
+      "consoleblank=60"
       "loglevel=3"
       "systemd.show_status=auto"
       "udev.log_level=3"

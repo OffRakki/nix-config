@@ -63,7 +63,7 @@
         # file management
 
         # better copy copy
-        cp = "cp --archive --recursive --verbose --interactive --progress";
+        cp = "cp --archive --recursive --verbose --interactive";
         rsync = "rsync --archive --verbose --progress --inplace";
 
         ls = "eza";

@@ -92,6 +92,7 @@
         # nix
         ncg = "nix-collect-garbage";
         nrd = "sudo nixos-rebuild switch --flake ~/Documents/NixConfig#sora";
+        nrdtmpst = "nixos-rebuild switch --flake ~/Documents/NixConfig#tempest --target-host root@192.168.15.12 --sudo --no-reexec";
         # nhos = "nh os switch ~/Documents/nix-config";
         nixdev = "nix develop -c $SHELL";
         nix-shell = "nix-shell --command $SHELL";
