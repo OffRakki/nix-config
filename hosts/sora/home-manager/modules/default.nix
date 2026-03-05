@@ -38,5 +38,6 @@
     ./fuzzel.nix
     ./walker.nix
     ./noctalia.nix
+    ./spicetify.nix
   ];
 }
