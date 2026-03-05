@@ -12,6 +12,7 @@
         isNormalUser = true;
         hashedPasswordFile = config.sops.secrets.soraPass.path;
         extraGroups = [
+          "corectrl"
           "networkmanager"
           "storage"
           "wheel"
@@ -22,6 +23,7 @@
           "scanner"
           "lp"
           "video"
+          "render"
           "audio"
           "docker"
           "podman"

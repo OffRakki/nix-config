@@ -9,6 +9,12 @@
     ./partitions.nix
   ];
 
+  environment.systemPackages = [
+    # pkgs.zenmonitor3
+  ];
+
+  programs.corectrl.enable = true;
+
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     loader = {
@@ -31,7 +37,11 @@
         "ntsync"
       ];
     };
-    kernelModules = ["kvm-amd"];
+    kernelModules = [
+      "kvm-amd"
+      "zenpower"
+    ];
+    blacklistedKernelModules = ["k10temp"];
     kernelParams = [
       "amd_pstate=active"
       "quiet"
@@ -42,7 +52,9 @@
       "rd.udev.log_level=3"
       "vt.global_cursor_default=0"
     ];
-    extraModulePackages = [];
+    extraModulePackages = [
+      config.boot.kernelPackages.zenpower
+    ];
     supportedFilesystems = ["ntfs"];
     # Fix for wireless keyboard's FN keys not working properly
     extraModprobeConfig = ''
@@ -105,7 +117,7 @@
       settings = {
         General = {
           Enable = "Source,Sink,Media,Socket";
-          Experimental = true;
+          Experimental = false;
         };
       };
     };
