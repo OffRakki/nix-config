@@ -9,6 +9,11 @@
     sops
     age
 
+    qt6.qtwayland
+    qt5.qtwayland
+    # hyprpolkitagent # Using polkit from noctalia shell plugin
+    qgnomeplatform-qt6
+    lprint
     android-tools
     marksman
     bitwarden-cli
@@ -206,10 +211,7 @@
     pamixer
     pavucontrol
     playerctl
-    polkit_gnome
     pyprland
-    qt5.qtbase
-    qt6.qtbase
     libsForQt5.qtstyleplugins
     rofi
     slurp
