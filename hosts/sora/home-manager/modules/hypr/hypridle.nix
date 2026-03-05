@@ -1,26 +1,20 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{...}: {
   services.hypridle = {
     enable = true;
-    settings = let
-      locker = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
-    in {
+    settings = {
       general = {
-        lock_cmd = "caelestia shell lock lock";
-        inhibit_sleep = 3;
-        before_sleep_cmd = "${locker}";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        lock_cmd = "noctalia-shell ipc call lockScreen lock";
+        before_sleep_cmd = "loginctl lock-session";
+        ignore_dbus_inhibit = false;
       };
       listener = [
         {
-          timeout = 600;
-          on-timeout = "${locker}";
+          timeout = 300;
+          # Only run lock if the Noctalia lock screen isn't already active
+          on-timeout = "noctalia-shell ipc call lockScreen lock";
         }
         {
-          timeout = 900;
+          timeout = 600;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }

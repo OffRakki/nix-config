@@ -32,11 +32,11 @@
     ./qutebrowser.nix
     ./opencode.nix
     ./hytale.nix
-    ./caelestiaShell.nix
     ./quickshell/quickshell.nix
     ./brave.nix
     ./river.nix
     ./fuzzel.nix
     ./walker.nix
+    ./noctalia.nix
   ];
 }

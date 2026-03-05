@@ -28,7 +28,7 @@ in {
       "$qalc" = "${lib.getExe pkgs.qalculate-gtk}";
       "$slurp" = "${lib.getExe pkgs.slurp}";
       "$hyprshot" = "${lib.getExe pkgs.hyprshot}";
-      "$lock" = "caelestia shell lock lock";
+      "$lock" = "noctalia-shell ipc call lockScreen lock";
 
       monitorv2 = [
         {
@@ -388,8 +388,10 @@ in {
       ];
 
       exec-once = [
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME"
+        # "systemctl --user start hyprpolkitagent"
+        "noctalia-shell -d"
         "clipse -listen" # Clipboard history
         "nm-applet --indicator"
         "ags"
@@ -432,8 +434,8 @@ in {
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+" # ; ${swayosd.output-volume}"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" # ; ${swayosd.output-volume}"
         "SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" # ; ${swayosd.input-volume}"
-        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+; ${swayosd.input-volume}"
-        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+" #; ${swayosd.input-volume}"
+        "SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-" #; ${swayosd.input-volume}"
         # ",Caps_Lock,exec,${swayosd.caps-lock}"
       ];
 
@@ -442,23 +444,18 @@ in {
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod SHIFT, V, exec, pypr toggle volume" # Pavucontrol
 
-        "$mod, F2, exec, caelestia toggle music"
-
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
         "$mod SHIFT, P, exec,  '${../../../../../scripts/pass-wofi.sh}'"
-        "$mod SHIFT, W, exec, waypaper"
+        "$mod SHIFT, W, exec, noctalia-shell ipc call wallpaper toggle"
         "$mod,g,togglegroup"
         "$mod,i,pin"
-        ", Print, exec, caelestia shell picker openFreezeClip"
+        ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
         "CTRL, Print, exec, $hyprshot -z --clipboard-only -m output --freeze"
         "$mod, L, exec, $lock"
         # "$mod SHIFT, D, exec, pkill wofi || wofi --show drun -G --insensitive" # Main Menu
         # "$mod SHIFT, D, exec, vicinae open"
-        # "$mod, D, exec, caelestia shell drawers toggle launcher"
         "$mod, D, exec, walker"
         "$mod SHIFT, D, exec, fuzzel"
-        "$mod, K, exec, caelestia shell drawers toggle sidebar"
-        "$mod SHIFT, K, exec, caelestia toggle music"
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" # Main Menu
         "$mod, V, exec, pkill clipse & $terminal --class middleFloat -e clipse"
         "$mod, SPACE, togglefloating"

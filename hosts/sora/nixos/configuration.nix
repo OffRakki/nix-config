@@ -92,6 +92,7 @@
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    QT_STYLE_OVERRIDE = "gtk3";
     QT_QPA_PLATFORM = "wayland";
     CLUTTER_BACKEND = "wayland";
     EGL_PLATFORM = "wayland";
@@ -181,23 +182,25 @@
       group = "0";
     };
     rtkit.enable = true;
-    polkit.enable = true;
-    polkit.extraConfig = ''
-      polkit.addRule(function(action, subject) {
-        if (
-          subject.isInGroup("users")
-            && (
-              action.id == "org.freedesktop.login1.reboot" ||
-              action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-              action.id == "org.freedesktop.login1.power-off" ||
-              action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+    polkit = {
+      enable = true;
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (
+            subject.isInGroup("wheel")
+              && (
+                action.id == "org.freedesktop.login1.reboot" ||
+                action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+                action.id == "org.freedesktop.login1.power-off" ||
+                action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+              )
             )
-          )
-        {
-          return polkit.Result.YES;
-        }
-      })
-    '';
+          {
+            return polkit.Result.YES;
+          }
+        })
+      '';
+    };
     pam.services = {
       gdm-password.enableGnomeKeyring = true;
       hyprlock = {};
@@ -222,6 +225,9 @@
     };
     xserver = {
       enable = true;
+      deviceSection = ''
+        Option "Coolbits" "28"
+      '';
       displayManager = {
         lightdm.enable = false;
       };
@@ -312,9 +318,9 @@
     gnome.gnome-keyring.enable = true;
 
     printing = {
-      enable = false;
+      enable = true;
       drivers = [
-        pkgs.hplipWithPlugin
+        pkgs.cnijfilter2
       ];
     };
     ipp-usb.enable = true;

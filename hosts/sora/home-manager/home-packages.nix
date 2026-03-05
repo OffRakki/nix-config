@@ -1,5 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    quickshell
+    kdePackages.qttools
+    lm_sensors
     r2modman
     evince
     anki

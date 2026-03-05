@@ -5,8 +5,9 @@
 }: {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    inputs.caelestia-shell.homeManagerModules.default
+    inputs.noctalia.homeModules.default
     inputs.walker.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.spicetify
     ./modules
     ./home-packages.nix
     ./gtk.nix

@@ -28,13 +28,23 @@
 
     # WM
     hyprland.url = "github:hyprwm/Hyprland";
-    caelestia-shell.url = "github:caelestia-dots/shell";
     # Walker
     elephant.url = "github:abenz1267/elephant";
     walker = {
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     # Catppuccin
     catppuccin.url = "github:catppuccin/nix";
@@ -74,7 +84,7 @@
   outputs = {
     self,
     nixpkgs,
-    caelestia-shell,
+    noctalia,
     home-manager,
     catppuccin,
     hyprland,
