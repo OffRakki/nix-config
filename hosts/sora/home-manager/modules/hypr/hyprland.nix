@@ -243,20 +243,6 @@ in {
       ];
 
       windowrule = [
-        # 1. Float everything that IS NOT the main client window
-        {
-          name = "SteamPopups";
-          "match:class" = "^(steam)$";
-          "match:title" = "negative:^(Steam)$";
-          float = true;
-        }
-        # 2. Force the main library window to stay tiled
-        {
-          name = "SteamMainTile";
-          "match:class" = "^(steam)$";
-          "match:title" = "^(Steam)$";
-          float = false;
-        }
         # fix for brave border color not being displayed correctly.
         {
           name = "braveBorderColorFix";
@@ -286,7 +272,7 @@ in {
           name = "steamClient";
           "match:initial_class" = "steam";
           no_initial_focus = "on";
-          tile = "on";
+          # tile = "on"; # Popus become glitchy with this on
           workspace = "Extra";
           monitor = "DP-1";
         }
