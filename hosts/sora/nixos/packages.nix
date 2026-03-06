@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     # NH
     nh
@@ -9,8 +13,10 @@
     sops
     age
 
+    inputs.nuls.packages.${system}.default
     qt6.qtwayland
     qt5.qtwayland
+    parallel-full
     # hyprpolkitagent # Using polkit from noctalia shell plugin
     qgnomeplatform-qt6
     lprint

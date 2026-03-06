@@ -22,7 +22,7 @@
 
 
         # Use terminal colors
-        set -x fish_color_autosuggestion      brblack
+        set -x fish_color_autosuggestion      BE9F6E
         set -x fish_color_cancel              -r
         set -x fish_color_command             brgreen
         set -x fish_color_comment             brmagenta
@@ -45,7 +45,7 @@
         set -x fish_color_status              red
         set -x fish_color_user                brgreen
         set -x fish_color_valid_path          --underline
-        set -x fish_pager_color_completion    normal
+        set -x fish_pager_color_completion    BE9F6E
         set -x fish_pager_color_description   yellow
         set -x fish_pager_color_prefix        'white' '--bold' '--underline'
         set -x fish_pager_color_progress      'brwhite' '--background=cyan'
@@ -66,8 +66,8 @@
         cp = "cp --archive --recursive --verbose --interactive --progress";
         rsync = "rsync --archive --verbose --progress --inplace";
 
-        ls = "eza";
-        la = "eza -a";
+        ls = "nuls -g";
+        la = "nuls -ag";
         mv = "mv -i";
         rm = "rm -i";
         df = "duf";

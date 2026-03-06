@@ -26,9 +26,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nuls = {
+      url = "github:cesarferreira/nuls";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # WM
     hyprland.url = "github:hyprwm/Hyprland";
-    # Walker
     elephant.url = "github:abenz1267/elephant";
     walker = {
       url = "github:abenz1267/walker";
@@ -85,6 +89,7 @@
     self,
     nixpkgs,
     noctalia,
+    nuls,
     home-manager,
     catppuccin,
     hyprland,
