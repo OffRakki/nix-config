@@ -190,7 +190,7 @@
         fontScale = 1;
         backgroundOpacity = 0.93;
         useSeparateOpacity = false;
-        floating = false;
+        floating = true;
         marginVertical = 4;
         marginHorizontal = 4;
         frameThickness = 8;
@@ -207,9 +207,9 @@
               id = "ControlCenter";
               useDistroLogo = true;
               colorizeDistroLogo = true;
-              colorizeSystemIcon = "none";
+              colorizeSystemIcon = "primary";
               customIconPath = "";
-              enableColorization = false;
+              enableColorization = true;
               icon = "noctalia";
             }
             {
@@ -220,7 +220,7 @@
               showCpuFreq = false;
               showCpuTemp = true;
               showCpuUsage = true;
-              showCpuCores = true;
+              showCpuCores = false;
               showDiskAvailable = false;
               showDiskUsage = false;
               showDiskUsageAsPercent = false;
@@ -389,7 +389,7 @@
         schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "18:30";
-        generationMethod = "M3-Tonal Spot";
+        generationMethod = "vibrant";
         monitorForColors = "";
       };
       templates = {
@@ -509,7 +509,7 @@
         shadowOffsetY = 3;
         language = "";
         allowPanelsOnScreenWithoutBar = true;
-        showChangelogOnStartup = true;
+        showChangelogOnStartup = false;
         telemetryEnabled = false;
         enableLockScreenCountdown = true;
         lockScreenCountdownDuration = 10000;
@@ -519,7 +519,7 @@
         clockFormat = "hh\nmm";
         passwordChars = true;
         lockScreenMonitors = ["DP-1"];
-        lockScreenBlur = 2;
+        lockScreenBlur = 1;
         lockScreenTint = 0;
         keybinds = {
           keyUp = ["Up"];
