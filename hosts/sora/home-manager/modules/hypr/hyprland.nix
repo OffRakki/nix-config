@@ -24,7 +24,7 @@ in {
       "$mod" = "SUPER";
       "$terminal" = "${lib.getExe pkgs.kitty}";
       "$files" = "${lib.getExe pkgs.yazi}";
-      "$filesGUI" = "${lib.getExe pkgs.lxqt.pcmanfm-qt}";
+      "$filesGUI" = "${lib.getExe pkgs.nemo-with-extensions}";
       "$qalc" = "${lib.getExe pkgs.qalculate-gtk}";
       "$slurp" = "${lib.getExe pkgs.slurp}";
       "$hyprshot" = "${lib.getExe pkgs.hyprshot}";
@@ -36,6 +36,7 @@ in {
           mode = "1920x1080@239.76";
           position = "0x0";
           scale = 1;
+          vrr = 1;
           # addreserved = "30,0,0,0";
         }
         {
@@ -116,8 +117,8 @@ in {
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        vfr = false;
-        vrr = 2;
+        vfr = true;
+        vrr = 1;
         mouse_move_enables_dpms = true;
         enable_swallow = true;
         focus_on_activate = false;
@@ -139,7 +140,7 @@ in {
       };
 
       decoration = {
-        rounding = 4;
+        rounding = 12;
         rounding_power = 4;
 
         active_opacity = 1.0;
@@ -284,17 +285,17 @@ in {
           monitor = "DP-1";
         }
         {
-          name = "minceraft";
-          "match:initial_title" = "Minecraft.*";
+          name = "steamGames";
+          "match:initial_class" = "steam_app.*";
           no_blur = "on";
           no_initial_focus = "on";
-          tile = "on";
+          # tile = "on";
           workspace = "Games";
           monitor = "DP-1";
         }
         {
-          name = "steamGames";
-          "match:initial_class" = "steam_app.*";
+          name = "minceraft";
+          "match:initial_title" = "Minecraft.*";
           no_blur = "on";
           no_initial_focus = "on";
           tile = "on";

@@ -63,7 +63,7 @@
         "x-scheme-handler/http" = ["brave-browser.desktop"];
         "x-scheme-handler/https" = ["brave-browser.desktop"];
         "application/pdf" = ["evince.desktop"];
-        "inode/directory" = ["pcmanfm-qt.desktop"];
+        "inode/directory" = ["nemo.desktop"];
       };
     };
     desktopEntries = {
