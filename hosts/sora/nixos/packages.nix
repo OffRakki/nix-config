@@ -13,7 +13,28 @@
     sops
     age
 
+    pomodoro-gtk
+    qbittorrent-nox
+    passmark-performancetest
+    s-tui
+    qdiskinfo
+    kdiskmark
+    (pkgs.nemo-with-extensions.override {
+      extensions = [
+        pkgs.nemo-python
+        pkgs.folder-color-switcher
+        pkgs.nemo-fileroller
+        pkgs.nemo-emblems
+        pkgs.nemo-preview
+      ];
+    })
+    glib
+    gsettings-desktop-schemas
     inputs.nuls.packages.${system}.default
+    lsfg-vk
+    lsfg-vk-ui
+    mangohud
+    mangojuice
     qt6.qtwayland
     qt5.qtwayland
     parallel-full
@@ -166,7 +187,6 @@
     zenith-nvidia
     libvirt
     qemu
-    mangohud
     baobab
     btrfs-progs
     clang

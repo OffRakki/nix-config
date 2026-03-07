@@ -14,6 +14,7 @@
   ];
 
   programs.corectrl.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;

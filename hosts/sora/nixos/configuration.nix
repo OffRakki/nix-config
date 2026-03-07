@@ -83,6 +83,8 @@
   };
 
   environment.sessionVariables = {
+    __GL_GSYNC_ALLOWED = 1;
+    __GL_VRR_ALLOWED = 1;
     __GL_SHADER_DISK_CACHE = 1;
     __GL_SHADER_DISK_CACHE_PATH = "/home/rakki/.nv/shaderCache";
     __GL_SHADER_DISK_CACHE_SIZE = 107374182400; # 100GB
