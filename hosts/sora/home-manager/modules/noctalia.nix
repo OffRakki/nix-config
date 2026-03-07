@@ -307,6 +307,9 @@
             {
               id = "NotificationHistory";
             }
+            {
+              id = "plugin:catwalk";
+            }
           ];
         };
         mouseWheelAction = "none";
@@ -323,17 +326,17 @@
 
       notifications = {
         enabled = true;
-        enableMarkdown = false;
+        enableMarkdown = true;
         density = "compact";
         monitors = ["DP-1"];
-        location = "top_right";
+        location = "top_center";
         overlayLayer = true;
         backgroundOpacity = 1;
         respectExpireTimeout = false;
         lowUrgencyDuration = 3;
         normalUrgencyDuration = 8;
         criticalUrgencyDuration = 15;
-        clearDismissed = true;
+        clearDismissed = false;
         saveToHistory = {
           low = true;
           normal = true;
@@ -379,7 +382,7 @@
       brightness = {
         brightnessStep = 5;
         enforceMinimum = true;
-        enableDdcSupport = false;
+        enableDdcSupport = true;
         backlightDeviceMappings = [];
       };
       colorSchemes = {
