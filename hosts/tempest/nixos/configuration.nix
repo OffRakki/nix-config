@@ -42,6 +42,7 @@
   };
 
   environment.sessionVariables = {
+    PODMAN_COMPOSE_WARNING_LOGS = "false";
     EDITOR = "hx";
   };
 
@@ -112,6 +113,7 @@
     fwupd.enable = true;
     upower.enable = true;
     avahi = {
+      interfaces = ["enp2s0"];
       enable = true;
       nssmdns4 = true;
       openFirewall = true;

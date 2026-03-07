@@ -20,7 +20,6 @@
   };
 
   virtualisation.oci-containers = {
-    backend = "podman";
     containers = {
       glance = {
         hostname = "glance";

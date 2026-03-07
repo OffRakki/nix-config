@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    pkgs.python311
     kitty.terminfo
     ethtool
     nh

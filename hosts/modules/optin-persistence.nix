@@ -15,6 +15,7 @@
         "/var/lib/systemd"
         "/var/lib/nixos"
         "/var/lib/tailscale"
+        "/var/lib/containers"
         "/var/log"
       ];
     };

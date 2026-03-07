@@ -1,6 +1,7 @@
 {
   imports = [
     # ./containers.nix
+    ./n8n.nix
   ];
 
   networking = {
@@ -13,6 +14,7 @@
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
+    oci-containers.backend = "podman";
   };
 
   # systemd.services.podman-glance = {
