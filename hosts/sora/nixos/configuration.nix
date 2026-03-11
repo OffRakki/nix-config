@@ -83,6 +83,10 @@
   };
 
   environment.sessionVariables = {
+    # DLSS 4+
+    PROTON_DLSS_UPGRADE = 1;
+    DXVK_NVAPI_DRS_NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION = "DEFAULT";
+
     __GL_GSYNC_ALLOWED = 1;
     __GL_VRR_ALLOWED = 1;
     __GL_SHADER_DISK_CACHE = 1;

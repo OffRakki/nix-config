@@ -33,6 +33,8 @@
         "sd_mod"
       ];
       kernelModules = [
+        "i2c-dev"
+        "i2c-piix4"
         "i915"
         "uinput"
         "ntsync"
