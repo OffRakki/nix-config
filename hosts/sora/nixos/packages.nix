@@ -13,9 +13,19 @@
     sops
     age
 
+    _7zip-zstd
     catppuccin-kvantum
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
+    vulkan-loader
+    (prismlauncher.override {
+      jdks = [
+        pkgs.temurin-bin-8
+        pkgs.temurin-bin-17
+        pkgs.temurin-bin-21
+      ];
+      additionalLibs = [vulkan-loader];
+    })
     pomodoro-gtk
     qbittorrent-nox
     passmark-performancetest
@@ -34,8 +44,6 @@
     glib
     gsettings-desktop-schemas
     inputs.nuls.packages.${system}.default
-    lsfg-vk
-    lsfg-vk-ui
     mangohud
     mangojuice
     qt6.qtwayland
@@ -123,6 +131,8 @@
     #gaming
     lutris
     wine
+    winetricks
+    protontricks
     osu-lazer-bin
     heroic
 

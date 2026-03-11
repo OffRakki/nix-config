@@ -60,15 +60,6 @@
     yt-dlp
     zip
 
-    # Gaming
-    (prismlauncher.override {
-      jdks = [
-        pkgs.temurin-bin-8
-        pkgs.temurin-bin-17
-        pkgs.temurin-bin-21
-      ];
-    })
-
     # Coding stuff
     nodejs
     python311

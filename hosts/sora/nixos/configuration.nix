@@ -17,6 +17,7 @@
     ./fonts.nix
     ./users.nix
     ./tailscale.nix
+    ./kdeconnect.nix
   ];
 
   nixpkgs = {
@@ -31,8 +32,6 @@
               packages // legacyPackages
           )
           inputs;
-        caelestia-shell = inputs.caelestia-shell.packages.${pkgs.system}.caelestia-shell;
-        caelestia-cli = inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.system}.caelestia-cli;
       })
     ];
     # Configure your nixpkgs instance
@@ -127,6 +126,9 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        vulkan-loader
+        libGL
+        glfw
         fuse
         glib
       ];
@@ -156,14 +158,17 @@
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
+    package = pkgs.lixPackageSets.stable.lix;
     settings = {
+      trusted-users = ["root" "rakki"];
       accept-flake-config = true;
       # Enable flakes and new 'nix' command
       experimental-features = ["nix-command flakes"];
       # Opinionated: disable global registry
       flake-registry = "";
       # Workaround to get rid of the download buffer size warning
-      download-buffer-size = 524288000;
+      ### Disabled for lix
+      # download-buffer-size = 524288000;
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -242,13 +247,23 @@
         variant = "intl";
       };
     };
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --sessions /run/current-system/sw/share/wayland-sessions:/run/current-system/sw/share/xsessions --user-menu --cmd start-hyprland";
+          user = "greeter";
+        };
+      };
+    };
     displayManager = {
+      ly.enable = false;
       sessionPackages = [
         pkgs.hyprland
       ];
       defaultSession = "hyprland";
       sddm = {
-        enable = true;
+        enable = false;
         wayland.enable = true;
         theme = "sddm-astronaut-theme";
         extraPackages = with pkgs; [

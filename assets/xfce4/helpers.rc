@@ -1,4 +1,4 @@
-FileManager=Dolphin
-TerminalEmulator=alacritty
+FileManager=nemo
+TerminalEmulator=kitty
 #WebBrowser=firefox
 #MailReader=evolution

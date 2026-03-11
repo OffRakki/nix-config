@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,196 +7,254 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #07080d; --surface: #0e1018; --surface2: #141720; --border: #1e2230;
-  --gold: #c9a84c; --gold-light: #e8c97a; --gold-dim: rgba(201,168,76,0.12);
-  --text: #e8e9f0; --muted: #6b7085; --green: #4caf82; --blue: #5b8def;
-  --red: #e05c5c; --purple: #a78bfa;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── TOKENS ───────────────────────────────────────── */
+:root{
+  --bg:#07080d;--surface:#0e1018;--surface2:#141720;--border:#1e2230;
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:rgba(201,168,76,.12);
+  --text:#e8e9f0;--muted:#6b7085;--green:#4caf82;--blue:#5b8def;
+  --red:#e05c5c;--purple:#a78bfa;--orange:#f59e0b;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --radius:18px;--radius-sm:10px;
 }
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
-body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
-.page-wrap { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 48px 24px 100px; }
+[data-theme="light"]{
+  --bg:#f5f3ec;--surface:#ffffff;--surface2:#ede9df;--border:#ddd9ce;
+  --gold:#a87520;--gold-light:#8a5e10;--gold-dim:rgba(168,117,32,.1);
+  --text:#1a1a28;--muted:#7a788a;--shadow:0 4px 24px rgba(0,0,0,.1);
+}
 
-header { text-align: center; margin-bottom: 44px; }
-.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; opacity:0; animation: fadeUp 0.6s 0.1s ease forwards; }
-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; line-height: 1.1; opacity:0; animation: fadeUp 0.6s 0.2s ease forwards; }
-header h1 em { color: var(--gold); font-style: italic; }
-header p { margin-top: 12px; color: var(--muted); font-size: 13px; font-weight: 300; opacity:0; animation: fadeUp 0.6s 0.3s ease forwards; }
+/* ── BASE ─────────────────────────────────────────── */
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;font-size:14px;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+[data-theme="light"] body::before{opacity:.5}
+.page-wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:44px 24px 100px}
 
-.mode-tabs { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 5px; gap: 4px; width: fit-content; margin: 0 auto 36px; flex-wrap: wrap; justify-content: center; opacity:0; animation: fadeUp 0.6s 0.4s ease forwards; }
-.tab-btn { padding: 9px 20px; border: none; border-radius: 10px; font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.22s; background: transparent; color: var(--muted); white-space: nowrap; }
-.tab-btn.active { background: var(--gold); color: #07080d; font-weight: 600; }
+/* ── HEADER ───────────────────────────────────────── */
+header{text-align:center;margin-bottom:40px;position:relative}
+.header-actions{position:absolute;top:0;right:0;display:flex;gap:8px;align-items:center}
+.icon-btn{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--muted);font-size:13px;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;opacity:0;animation:fadeUp .6s .1s ease forwards}
+header h1{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,5vw,3.3rem);font-weight:400;line-height:1.1;opacity:0;animation:fadeUp .6s .2s ease forwards}
+header h1 em{color:var(--gold);font-style:italic}
+header p{margin-top:10px;color:var(--muted);font-size:13px;font-weight:300;opacity:0;animation:fadeUp .6s .3s ease forwards}
 
-.main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 18px; opacity:0; animation: fadeUp 0.7s 0.5s ease forwards; }
-@media (max-width: 820px) { .main-grid { grid-template-columns: 1fr; } }
+/* ── TABS ─────────────────────────────────────────── */
+.mode-tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:5px;gap:4px;width:fit-content;margin:0 auto 32px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .6s .4s ease forwards}
+.tab-btn{padding:8px 18px;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .22s;background:transparent;color:var(--muted);white-space:nowrap}
+.tab-btn.active{background:var(--gold);color:#07080d;font-weight:600}
 
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
-.card-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+/* ── MAIN GRID ────────────────────────────────────── */
+.main-grid{display:grid;grid-template-columns:370px 1fr;gap:18px;opacity:0;animation:fadeUp .7s .5s ease forwards}
+@media(max-width:860px){.main-grid{grid-template-columns:1fr}}
 
-.field { margin-bottom: 15px; }
-.field label { display: block; font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.03em; }
-.input-wrap { position: relative; display: flex; align-items: center; }
-.input-prefix { position: absolute; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); pointer-events: none; }
-.input-suffix { position: absolute; right: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); pointer-events: none; }
-input[type="number"] { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 42px 10px 32px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); outline: none; transition: border-color 0.2s; -moz-appearance: textfield; }
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-input[type="number"]:focus { border-color: var(--gold); }
-input[type="range"] { width: 100%; -webkit-appearance: none; height: 3px; background: var(--border); border-radius: 2px; outline: none; cursor: pointer; margin-top: 8px; display: block; }
-input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); cursor: pointer; transition: transform 0.15s; }
-input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.25); }
-.group-btns { display: flex; gap: 5px; margin-top: 7px; }
-.group-btn { flex: 1; padding: 7px 0; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--muted); font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.group-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+/* ── CARDS ────────────────────────────────────────── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:background .3s,border-color .3s}
+.card-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
 
-.toggle-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.toggle-label { font-size: 11px; font-weight: 500; color: var(--muted); }
-.toggle { position: relative; width: 34px; height: 18px; cursor: pointer; flex-shrink: 0; }
-.toggle input { opacity: 0; width: 0; height: 0; }
-.toggle-track { position: absolute; inset: 0; background: var(--border); border-radius: 9px; transition: background 0.2s; }
-.toggle input:checked + .toggle-track { background: var(--gold); }
-.toggle-thumb { position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; background: #fff; border-radius: 50%; transition: transform 0.2s; pointer-events: none; }
-.toggle input:checked ~ .toggle-thumb { transform: translateX(16px); }
-.sub-field { padding-left: 8px; border-left: 2px solid var(--gold-dim); margin-top: 8px; }
+/* ── FORM ─────────────────────────────────────────── */
+.field{margin-bottom:13px}
+.field-label-row{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.field label,.field-label-row>span{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-prefix{position:absolute;left:11px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);pointer-events:none;z-index:1}
+.input-suffix{position:absolute;right:11px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);pointer-events:none}
+input.finput{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 40px 9px 30px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);outline:none;transition:border-color .2s,background .3s;-moz-appearance:textfield}
+input.finput::-webkit-outer-spin-button,input.finput::-webkit-inner-spin-button{-webkit-appearance:none}
+input.finput:focus{border-color:var(--gold)}
+input.finput.no-prefix{padding-left:12px}
+input[type="range"]{width:100%;-webkit-appearance:none;height:3px;background:var(--border);border-radius:2px;outline:none;cursor:pointer;margin-top:7px;display:block}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;transition:transform .15s}
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.25)}
+.group-btns{display:flex;gap:5px;margin-top:6px}
+.group-btn{flex:1;padding:6px 0;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-family:'Sora',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
+.group-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
-.result-panel { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-top: 18px; }
-.result-main-label { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-.result-main-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--gold-light); letter-spacing: -0.02em; }
-.result-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 3px; }
-.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-.res-item { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 11px 13px; }
-.res-item .rl { font-size: 9px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-.res-item .rv { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; }
-.c-green{color:var(--green)} .c-gold{color:var(--gold-light)} .c-blue{color:var(--blue)} .c-red{color:var(--red)} .c-purple{color:var(--purple)} .c-muted{color:var(--muted)}
+/* ── TOOLTIP ──────────────────────────────────────── */
+.tip{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--border);color:var(--muted);font-size:9px;font-weight:700;cursor:help;position:relative;font-family:'Sora',sans-serif;flex-shrink:0;user-select:none}
+.tip::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border);opacity:0;transition:opacity .2s;pointer-events:none;z-index:101}
+.tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border);padding:9px 12px;border-radius:9px;font-size:11px;color:var(--text);line-height:1.55;white-space:pre-line;width:220px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:100;font-family:'Sora',sans-serif;font-weight:400;box-shadow:var(--shadow)}
+.tip:hover::before,.tip:hover::after{opacity:1}
 
-.chart-tabs { display: flex; gap: 5px; margin-bottom: 16px; flex-wrap: wrap; }
-.chart-tab { padding: 5px 13px; border: 1px solid var(--border); border-radius: 7px; background: transparent; color: var(--muted); font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.chart-tab.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-.chart-area { height: 260px; position: relative; }
+/* ── TOGGLE ───────────────────────────────────────── */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.toggle-label{font-size:11px;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:6px}
+.toggle{position:relative;width:34px;height:18px;cursor:pointer;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:var(--border);border-radius:9px;transition:background .2s}
+.toggle input:checked+.toggle-track{background:var(--gold)}
+.toggle-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s;pointer-events:none}
+.toggle input:checked~.toggle-thumb{transform:translateX(16px)}
+.sub-field{padding-left:8px;border-left:2px solid var(--gold-dim);margin-top:7px}
 
-.section-wrap { margin-top: 28px; opacity:0; animation: fadeUp 0.7s 0.6s ease forwards; }
-.section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
-.section-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--text); }
-.section-title em { color: var(--gold); font-style: italic; }
-.section-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; background: var(--gold-dim); color: var(--gold); }
+/* ── CDI PANEL ────────────────────────────────────── */
+.cdi-panel{background:var(--gold-dim);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px;margin-bottom:10px}
+.cdi-panel .card-title{margin-bottom:10px;color:var(--gold)}
 
-.milestones-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-@media(max-width:700px) { .milestones-row { grid-template-columns: 1fr 1fr; } }
-.milestone-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; position: relative; overflow: hidden; transition: border-color 0.3s; }
-.milestone-card.reached { border-color: rgba(201,168,76,0.45); background: linear-gradient(135deg, var(--surface) 0%, rgba(201,168,76,0.05) 100%); }
-.milestone-mult { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--gold); line-height: 1; margin-bottom: 5px; }
-.milestone-label { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; }
-.milestone-when { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); font-weight: 600; }
-.milestone-badge { display: inline-block; margin-top: 5px; padding: 2px 8px; border-radius: 4px; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-.badge-reached { background: rgba(76,175,130,0.15); color: var(--green); }
-.badge-pending { background: rgba(107,112,133,0.1); color: var(--muted); }
-.milestone-r72 { font-size: 9px; color: var(--muted); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+/* ── IRREGULAR CONTRIBS ───────────────────────────── */
+.irr-wrap{margin-top:6px}
+.irr-item{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.irr-item input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);outline:none;transition:border-color .2s}
+.irr-item input:focus{border-color:var(--gold)}
+.irr-item .irr-label{font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
+.irr-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;transition:color .2s;padding:2px 5px}
+.irr-del:hover{color:var(--red)}
+.btn-link{background:none;border:none;color:var(--gold);font-family:'Sora',sans-serif;font-size:11px;font-weight:500;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
 
-.compare-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.cmp-label { width: 84px; font-size: 10px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
-.bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 3px; transition: width 0.7s cubic-bezier(0.4,0,0.2,1); }
-.cmp-val { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; min-width: 80px; text-align: right; }
+/* ── IR INFO ──────────────────────────────────────── */
+.ir-info{background:rgba(107,112,133,.07);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-top:7px}
+.ir-info-title{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.ir-row{display:flex;justify-content:space-between;font-size:10px;font-family:'JetBrains Mono',monospace;padding:3px 0;color:var(--muted)}
+.ir-row.active-ir{color:var(--gold-light)!important}
+.ir-row.active-ir span:last-child{color:var(--gold-light)!important;font-weight:700}
+.ir-row span:last-child{color:var(--red)}
 
-.both-compare { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-top: 16px; }
+/* ── RESULTS ──────────────────────────────────────── */
+.result-panel{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:16px;transition:background .3s}
+.result-main-label{font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.result-main-val{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:600;color:var(--gold-light);letter-spacing:-.02em}
+.result-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.infl-badge{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:6px 11px;border-radius:8px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;transition:all .3s}
+.infl-badge.win{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.25)}
+.infl-badge.lose{background:rgba(224,92,92,.1);color:var(--red);border:1px solid rgba(224,92,92,.2)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.res-item{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;transition:background .3s}
+.res-item .rl{font-size:9px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.res-item .rv{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
+.c-green{color:var(--green)}.c-gold{color:var(--gold-light)}.c-blue{color:var(--blue)}.c-red{color:var(--red)}.c-purple{color:var(--purple)}.c-muted{color:var(--muted)}
 
-.scenarios-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
-.scenario-item { display: flex; align-items: center; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; }
-.sc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.sc-name { font-size: 12px; font-weight: 600; }
-.sc-detail { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
-.sc-info { flex: 1; }
-.sc-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--gold-light); margin-left: auto; white-space: nowrap; }
-.sc-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 5px; transition: color 0.2s; margin-left: 8px; }
-.sc-del:hover { color: var(--red); }
-.empty-state { text-align: center; padding: 28px; color: var(--muted); font-size: 12px; border: 1px dashed var(--border); border-radius: 12px; line-height: 1.7; }
+/* ── CHARTS ───────────────────────────────────────── */
+.chart-tabs{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
+.chart-tab{padding:5px 12px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--muted);font-family:'Sora',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
+.chart-tab.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.chart-area{height:260px;position:relative}
 
-/* ── SCENARIO MODAL ── */
-.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; animation: fadeIn 0.18s ease forwards; }
-@keyframes fadeIn { to { opacity:1; } }
-.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px 28px 24px; width: min(520px, 95vw); box-shadow: 0 24px 64px rgba(0,0,0,0.6); animation: slideUp 0.22s ease forwards; }
-@keyframes slideUp { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-.modal-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 20px; }
-.modal-title em { color: var(--gold); font-style: italic; }
-.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.modal-field { display: flex; flex-direction: column; gap: 5px; }
-.modal-field.full { grid-column: 1/-1; }
-.modal-field label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-.modal-field input[type="text"], .modal-field input[type="number"] { background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; padding: 9px 12px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); outline: none; transition: border-color 0.2s; width: 100%; -moz-appearance: textfield; }
-.modal-field input:focus { border-color: var(--gold); }
-.modal-field input[type="number"]::-webkit-outer-spin-button, .modal-field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-.modal-mode-btns { display: flex; gap: 5px; }
-.modal-mode-btn { flex: 1; padding: 8px 0; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--muted); font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.modal-mode-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
-.modal-color-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 6px; }
-.modal-color-swatch { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s; }
-.modal-color-swatch:hover { transform: scale(1.2); }
-.modal-color-swatch.selected { border-color: #fff; transform: scale(1.15); }
-.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
-.sc-edit-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 12px; padding: 3px 7px; border-radius: 6px; transition: all 0.2s; font-family: 'Sora', sans-serif; }
-.sc-edit-btn:hover { background: var(--gold-dim); color: var(--gold); }
-.sc-edit-btn.del:hover { background: rgba(224,92,92,0.1); color: var(--red); }
+/* ── SECTIONS ─────────────────────────────────────── */
+.section-wrap{margin-top:26px;opacity:0;animation:fadeUp .7s .6s ease forwards}
+.section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.section-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text)}
+.section-title em{color:var(--gold);font-style:italic}
+.section-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--gold-dim);color:var(--gold)}
 
-.btn { padding: 10px 20px; border-radius: 10px; font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid; }
-.btn-primary { background: var(--gold); color: #07080d; border-color: var(--gold); }
-.btn-primary:hover { background: var(--gold-light); }
-.btn-outline { background: transparent; color: var(--muted); border-color: var(--border); }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+/* ── MILESTONES ───────────────────────────────────── */
+.milestones-row{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:700px){.milestones-row{grid-template-columns:1fr 1fr}}
+.milestone-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.milestone-card.reached{border-color:rgba(201,168,76,.45);background:linear-gradient(135deg,var(--surface) 0%,rgba(201,168,76,.05) 100%)}
+.milestone-mult{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--gold);line-height:1;margin-bottom:4px}
+.milestone-label{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.milestone-when{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);font-weight:600}
+.milestone-badge{display:inline-block;margin-top:5px;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.badge-reached{background:rgba(76,175,130,.15);color:var(--green)}
+.badge-pending{background:rgba(107,112,133,.1);color:var(--muted)}
+.milestone-r72{font-size:9px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace}
 
-.ir-info { background: rgba(107,112,133,0.07); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-top: 8px; }
-.ir-info-title { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-.ir-row { display: flex; justify-content: space-between; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 3px 0; color: var(--muted); }
-.ir-row.active-ir { color: var(--gold-light) !important; }
-.ir-row.active-ir span:last-child { color: var(--gold-light) !important; font-weight: 700; }
-.ir-row span:last-child { color: var(--red); }
+/* ── COMPARE BARS ─────────────────────────────────── */
+.compare-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cmp-label{width:82px;font-size:10px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.bar-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.cmp-val{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;min-width:78px;text-align:right}
+.both-compare{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:14px;transition:background .3s}
 
-.breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media(max-width:700px) { .breakdown-grid { grid-template-columns: 1fr; } }
-.table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
-.table-header { padding: 12px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
-.table-scroll { max-height: 320px; overflow-y: auto; }
-.table-scroll::-webkit-scrollbar { width: 3px; }
-.table-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-table { width: 100%; border-collapse: collapse; }
-thead th { padding: 8px 13px; text-align: left; font-size: 9px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; background: var(--surface2); position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--border); }
-tbody tr { border-bottom: 1px solid rgba(30,34,48,0.7); transition: background 0.15s; }
-tbody tr:hover { background: var(--surface2); }
-tbody tr:last-child { border-bottom: none; }
-tbody td { padding: 8px 13px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text); }
-tbody td:first-child { color: var(--muted); font-size: 10px; }
-.td-green{color:var(--green)!important} .td-gold{color:var(--gold-light)!important;font-weight:600} .td-red{color:var(--red)!important} .td-blue{color:var(--blue)!important}
+/* ── PRODUCT COMPARATOR ───────────────────────────── */
+.products-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:flex-end}
+.products-controls .field{margin:0;min-width:120px}
+.products-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr 1fr}}
+.product-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;transition:border-color .2s,background .3s;position:relative}
+.product-card.best{border-color:var(--gold);background:linear-gradient(135deg,var(--surface2) 0%,rgba(201,168,76,.07) 100%)}
+.product-card.best::after{content:'MELHOR';position:absolute;top:8px;right:8px;background:var(--gold);color:#07080d;font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.08em}
+.prod-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.prod-rate{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--gold);margin-bottom:2px}
+.prod-amount{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px}
+.prod-net{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green)}
+.prod-ir{font-size:9px;color:var(--red);margin-top:2px;font-family:'JetBrains Mono',monospace}
 
-.reverse-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-@media(max-width:700px) { .reverse-grid { grid-template-columns: 1fr; } }
-.reverse-result { background: var(--surface2); border: 1px solid var(--gold-dim); border-radius: 12px; padding: 18px; text-align: center; }
-.rev-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-.rev-val { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--gold-light); margin-bottom: 4px; line-height: 1.2; }
-.rev-sub { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+/* ── SCENARIOS ────────────────────────────────────── */
+.scenario-item{display:flex;align-items:center;gap:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 13px;margin-bottom:7px;transition:background .3s}
+.sc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sc-info{flex:1}
+.sc-name{font-size:12px;font-weight:600}
+.sc-detail{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.sc-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--gold-light);white-space:nowrap}
+.sc-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 6px;border-radius:5px;transition:color .2s;margin-left:7px}
+.sc-del:hover{color:var(--red)}
+.empty-state{text-align:center;padding:26px;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:12px;line-height:1.7}
 
-.divider { height: 1px; background: var(--border); margin: 28px 0; opacity: 0.5; }
+/* ── BUTTONS ──────────────────────────────────────── */
+.btn{padding:9px 18px;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid}
+.btn-primary{background:var(--gold);color:#07080d;border-color:var(--gold)}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-outline{background:transparent;color:var(--muted);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
 
-@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+/* ── TABLES ───────────────────────────────────────── */
+.breakdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.breakdown-grid{grid-template-columns:1fr}}
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:background .3s}
+.table-header{padding:11px 15px;background:var(--surface2);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+.table-scroll{max-height:300px;overflow-y:auto}
+.table-scroll::-webkit-scrollbar{width:3px}
+.table-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+table{width:100%;border-collapse:collapse}
+thead th{padding:8px 12px;text-align:left;font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;background:var(--surface2);position:sticky;top:0;z-index:1;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid rgba(30,34,48,.6);transition:background .15s}
+tbody tr:hover{background:var(--surface2)}
+tbody tr:last-child{border-bottom:none}
+tbody td{padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text)}
+tbody td:first-child{color:var(--muted);font-size:10px}
+.td-green{color:var(--green)!important}.td-gold{color:var(--gold-light)!important;font-weight:600}.td-red{color:var(--red)!important}.td-blue{color:var(--blue)!important}
 
-@media print {
-  body { background:#fff!important; color:#000!important; }
-  .mode-tabs,.btn-row,.chart-tabs,.group-btns,input[type="range"],.sc-del,.toggle { display:none!important; }
-  .card,.table-card,.milestone-card,.result-panel,.reverse-result { border:1px solid #ccc!important; background:#f9f9f9!important; }
-  .page-wrap { padding:20px!important; }
-  body::before { display:none; }
+/* ── REVERSE ──────────────────────────────────────── */
+.reverse-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:700px){.reverse-grid{grid-template-columns:1fr}}
+.reverse-result{background:var(--surface2);border:1px solid var(--gold-dim);border-radius:12px;padding:16px;text-align:center;transition:background .3s}
+.rev-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.rev-val{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--gold-light);margin-bottom:4px;line-height:1.2}
+.rev-sub{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+/* ── TOAST ────────────────────────────────────────── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--gold);border-radius:10px;padding:10px 20px;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--gold);opacity:0;transition:all .3s;z-index:999;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── DIVIDER / MISC ───────────────────────────────── */
+.divider{height:1px;background:var(--border);margin:24px 0;opacity:.5}
+
+/* ── ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── PRINT ────────────────────────────────────────── */
+@media print{
+  body{background:#fff!important;color:#000!important}
+  .mode-tabs,.btn-row,.chart-tabs,.group-btns,.header-actions,input[type="range"],.toggle,.sc-del{display:none!important}
+  .card,.table-card,.milestone-card,.result-panel,.product-card,.reverse-result{border:1px solid #ccc!important;background:#f9f9f9!important}
+  .page-wrap{padding:20px!important}
+  body::before{display:none}
 }
 </style>
 </head>
 <body>
 <div class="page-wrap">
+<div class="toast" id="toast"></div>
 
+<!-- HEADER -->
 <header>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="shareURL()" title="Copiar link com parâmetros">🔗 Compartilhar</button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">☀️ Claro</button>
+  </div>
   <div class="eyebrow">Ferramenta Financeira Completa</div>
   <h1>Calculadora de <em>Juros</em></h1>
-  <p>Simples · Compostos · Aportes · Inflação · IR/IOF · Cenários · Meta Reversa · Exportar</p>
+  <p>Simples · Compostos · Aportes · CDI · Inflação · IR · Cenários · Comparador de Produtos</p>
 </header>
 
+<!-- TABS -->
 <div class="mode-tabs">
   <button class="tab-btn active" onclick="setMode('simple')">Juros Simples</button>
   <button class="tab-btn" onclick="setMode('compound')">Juros Compostos</button>
@@ -204,44 +262,89 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
   <button class="tab-btn" onclick="setMode('reverse')">Meta Reversa</button>
 </div>
 
+<!-- MAIN GRID -->
 <div class="main-grid">
-  <!-- LEFT PANEL -->
+
+  <!-- LEFT: INPUTS -->
   <div class="card">
     <div class="card-title" id="inputPanelTitle">Parâmetros</div>
 
     <!-- Normal inputs -->
     <div id="normalInputs">
+
+      <!-- CDI/SELIC quick fill -->
       <div class="field">
-        <label>Capital inicial</label>
-        <div class="input-wrap">
-          <span class="input-prefix">R$</span>
-          <input type="number" id="principal" value="10000" min="0" step="100" oninput="calculate()">
+        <div class="toggle-row">
+          <span class="toggle-label">
+            ⚡ Usar CDI / SELIC
+            <span class="tip" data-tip="Preenche a taxa automaticamente como percentual do CDI. Útil para CDBs, LCIs e outros indexados.">?</span>
+          </span>
+          <label class="toggle"><input type="checkbox" id="cdiToggle" onchange="toggleCDI()"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        </div>
+        <div id="cdiPanel" style="display:none">
+          <div class="cdi-panel">
+            <div class="card-title">Parâmetros CDI</div>
+            <div class="two-col">
+              <div class="field">
+                <label>CDI atual (% a.a.)</label>
+                <div class="input-wrap"><input type="number" id="cdiRate" value="10.65" min="0" step="0.05" class="finput no-prefix" style="padding-right:12px" oninput="applyCDI()"></div>
+              </div>
+              <div class="field">
+                <label>% do CDI</label>
+                <div class="input-wrap"><input type="number" id="cdiPct" value="100" min="0" step="1" class="finput no-prefix" style="padding-right:12px" oninput="applyCDI()"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Capital -->
       <div class="field">
-        <label>Aporte mensal</label>
+        <div class="field-label-row">
+          <span>Capital inicial</span>
+          <span class="tip" data-tip="Valor que você investe hoje, de uma só vez. Também chamado de Principal ou Valor Presente (PV).">?</span>
+        </div>
         <div class="input-wrap">
           <span class="input-prefix">R$</span>
-          <input type="number" id="monthly" value="0" min="0" step="50" oninput="calculate()">
+          <input type="text" id="principal" class="finput" value="10.000,00" data-raw="10000" oninput="maskCurrency(this);calculate()" onblur="formatBlur(this)" onfocus="formatFocus(this)">
         </div>
       </div>
 
+      <!-- Aporte mensal -->
       <div class="field">
-        <label>Taxa de juros</label>
+        <div class="field-label-row">
+          <span>Aporte mensal</span>
+          <span class="tip" data-tip="Valor que você deposita todo mês. Nos juros compostos, cada aporte também passa a render juros sobre juros a partir do mês seguinte.">?</span>
+        </div>
+        <div class="input-wrap">
+          <span class="input-prefix">R$</span>
+          <input type="text" id="monthly" class="finput" value="0,00" data-raw="0" oninput="maskCurrency(this);calculate()" onblur="formatBlur(this)" onfocus="formatFocus(this)">
+        </div>
+      </div>
+
+      <!-- Taxa -->
+      <div class="field">
+        <div class="field-label-row">
+          <span>Taxa de juros</span>
+          <span class="tip" data-tip="Taxa Nominal Anual. Nos juros compostos, é convertida para taxa mensal equivalente usando a fórmula: (1+i)^(1/12)−1.\n\nEx: 12% a.a. → 0,949% a.m. (compostos) vs 1,000% a.m. (simples).">?</span>
+        </div>
         <div class="input-wrap">
           <span class="input-prefix" style="color:var(--muted)">%</span>
-          <input type="number" id="rate" value="12" min="0" max="200" step="0.1" oninput="syncSlider();calculate()">
+          <input type="number" id="rate" class="finput" value="12" min="0" max="200" step="0.1" oninput="syncSlider();calculate()">
           <span class="input-suffix">a.a.</span>
         </div>
         <input type="range" id="rateSlider" min="0" max="60" step="0.5" value="12" oninput="syncRate();calculate()">
       </div>
 
+      <!-- Período -->
       <div class="field">
-        <label>Período</label>
+        <div class="field-label-row">
+          <span>Período</span>
+          <span class="tip" data-tip="Tempo total da aplicação. Nos juros compostos, quanto maior o prazo, mais o 'efeito bola de neve' se manifesta — os juros crescem de forma exponencial.">?</span>
+        </div>
         <div class="input-wrap">
           <span class="input-prefix" style="color:var(--muted)">#</span>
-          <input type="number" id="period" value="24" min="1" max="600" step="1" style="padding-left:28px" oninput="calculate()">
+          <input type="number" id="period" class="finput" value="24" min="1" max="600" step="1" style="padding-left:28px;padding-right:12px" oninput="calculate()">
         </div>
         <div class="group-btns">
           <button class="group-btn active" onclick="setPeriodUnit('months',this)">Meses</button>
@@ -249,84 +352,98 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
         </div>
       </div>
 
+      <!-- Capitalização -->
       <div class="field" id="capField" style="display:none">
-        <label>Capitalização</label>
+        <div class="field-label-row">
+          <span>Capitalização</span>
+          <span class="tip" data-tip="Define com que frequência os juros são calculados e reinvestidos.\n\nMensal: juros incidem 12×/ano → taxa efetiva maior.\nAnual: juros incidem 1×/ano → taxa efetiva = taxa nominal.">?</span>
+        </div>
         <div class="group-btns">
           <button class="group-btn active" onclick="setCap('monthly',this)">Mensal</button>
           <button class="group-btn" onclick="setCap('yearly',this)">Anual</button>
         </div>
       </div>
 
+      <!-- Aportes irregulares -->
       <div class="field">
         <div class="toggle-row">
-          <span class="toggle-label">📉 Descontar Inflação</span>
-          <label class="toggle">
-            <input type="checkbox" id="inflToggle" onchange="toggleInfl()">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </label>
+          <span class="toggle-label">
+            📅 Aportes irregulares
+            <span class="tip" data-tip="Adicione aportes pontuais em meses específicos — 13º salário, bônus, restituição de IR, etc. Cada aporte entra na simulação de juros compostos no mês exato indicado.">?</span>
+          </span>
+          <label class="toggle"><input type="checkbox" id="irrToggle" onchange="toggleIrr()"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        </div>
+        <div id="irrPanel" style="display:none">
+          <div class="irr-wrap" id="irrList"></div>
+          <button class="btn-link" onclick="addIrr()">+ Adicionar aporte</button>
+        </div>
+      </div>
+
+      <!-- Inflação -->
+      <div class="field">
+        <div class="toggle-row">
+          <span class="toggle-label">
+            📉 Descontar Inflação
+            <span class="tip" data-tip="Mostra o Valor Real do seu montante — quanto ele vale hoje em termos de poder de compra, descontada a perda pela inflação.\n\nUsa a Equação de Fisher:\nRetorno real = (1+nominal)÷(1+inflação)−1">?</span>
+          </span>
+          <label class="toggle"><input type="checkbox" id="inflToggle" onchange="toggleInfl()"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
         </div>
         <div class="sub-field" id="inflField" style="display:none">
           <div class="input-wrap">
             <span class="input-prefix" style="color:var(--muted)">%</span>
-            <input type="number" id="inflation" value="4.5" min="0" max="50" step="0.1" style="padding-left:28px" oninput="calculate()">
+            <input type="number" id="inflation" class="finput" value="4.5" min="0" max="50" step="0.1" style="padding-right:12px" oninput="calculate()">
             <span class="input-suffix">a.a.</span>
           </div>
         </div>
       </div>
 
+      <!-- IR/IOF -->
       <div class="field">
         <div class="toggle-row">
-          <span class="toggle-label">🧾 Aplicar IR / IOF</span>
-          <label class="toggle">
-            <input type="checkbox" id="irToggle" onchange="toggleIR()">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </label>
+          <span class="toggle-label">
+            🧾 Aplicar IR / IOF
+            <span class="tip" data-tip="Tabela regressiva de IR (Renda Fixa):\n• Até 180 dias → 22,5%\n• 181–360 dias → 20%\n• 361–720 dias → 17,5%\n• Acima 720 dias → 15%\n\nIOF: 0% após 30 dias corridos.">?</span>
+          </span>
+          <label class="toggle"><input type="checkbox" id="irToggle" onchange="toggleIR()"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
         </div>
         <div id="irInfo" style="display:none">
           <div class="ir-info">
-            <div class="ir-info-title">Tabela Regressiva (Renda Fixa)</div>
+            <div class="ir-info-title">Tabela Regressiva</div>
             <div class="ir-row" id="ir1"><span>Até 180 dias</span><span>22,5%</span></div>
             <div class="ir-row" id="ir2"><span>181 – 360 dias</span><span>20,0%</span></div>
             <div class="ir-row" id="ir3"><span>361 – 720 dias</span><span>17,5%</span></div>
             <div class="ir-row" id="ir4"><span>Acima de 720 dias</span><span>15,0%</span></div>
-            <div style="margin-top:8px;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">IOF: 0% após 30 dias corridos</div>
+            <div style="margin-top:6px;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">IOF zerado após 30 dias corridos</div>
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /normalInputs -->
 
     <!-- Reverse inputs -->
     <div id="reverseInputs" style="display:none">
       <div class="field">
         <label>Meta (valor alvo)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">R$</span>
-          <input type="number" id="revTarget" value="100000" min="0" step="1000" oninput="calcReverse()">
+        <div class="input-wrap"><span class="input-prefix">R$</span>
+          <input type="text" id="revTarget" class="finput" value="100.000,00" data-raw="100000" oninput="maskCurrency(this);calcReverse()" onblur="formatBlur(this)" onfocus="formatFocus(this)">
         </div>
       </div>
       <div class="field">
-        <label>Taxa de juros</label>
-        <div class="input-wrap">
-          <span class="input-prefix" style="color:var(--muted)">%</span>
-          <input type="number" id="revRate" value="12" min="0" step="0.1" oninput="calcReverse()">
+        <label>Taxa de juros (% a.a.)</label>
+        <div class="input-wrap"><span class="input-prefix" style="color:var(--muted)">%</span>
+          <input type="number" id="revRate" class="finput" value="12" min="0" step="0.1" oninput="calcReverse()">
           <span class="input-suffix">a.a.</span>
         </div>
       </div>
       <div class="field">
-        <label>Prazo</label>
-        <div class="input-wrap">
-          <span class="input-prefix" style="color:var(--muted)">#</span>
-          <input type="number" id="revPeriod" value="60" min="1" step="1" style="padding-left:28px" oninput="calcReverse()">
-          <span class="input-suffix">meses</span>
+        <label>Prazo (meses)</label>
+        <div class="input-wrap"><span class="input-prefix" style="color:var(--muted)">#</span>
+          <input type="number" id="revPeriod" class="finput" value="60" min="1" step="1" style="padding-left:28px;padding-right:12px" oninput="calcReverse()">
         </div>
       </div>
       <div class="field">
         <label>Aporte mensal previsto (opcional)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">R$</span>
-          <input type="number" id="revMonthly" value="0" min="0" step="50" oninput="calcReverse()">
+        <div class="input-wrap"><span class="input-prefix">R$</span>
+          <input type="text" id="revMonthly" class="finput" value="0,00" data-raw="0" oninput="maskCurrency(this);calcReverse()" onblur="formatBlur(this)" onfocus="formatFocus(this)">
         </div>
       </div>
       <div class="field">
@@ -344,6 +461,7 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
         <div class="result-main-label">Montante bruto</div>
         <div class="result-main-val" id="totalAmount">R$ 0,00</div>
         <div class="result-sub" id="totalSub">—</div>
+        <div id="inflBadge" style="display:none"><div class="infl-badge" id="inflBadgeInner">—</div></div>
         <div class="result-grid">
           <div class="res-item"><div class="rl">Capital</div><div class="rv c-blue" id="r-principal">—</div></div>
           <div class="res-item"><div class="rl">Aportes</div><div class="rv c-blue" id="r-contribs">—</div></div>
@@ -352,37 +470,28 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
           <div class="res-item" id="ri-net" style="display:none"><div class="rl">Líquido (IR)</div><div class="rv c-gold" id="r-net">—</div></div>
           <div class="res-item" id="ri-tax" style="display:none"><div class="rl">Imposto</div><div class="rv c-red" id="r-tax">—</div></div>
           <div class="res-item" id="ri-real" style="display:none"><div class="rl">Valor Real</div><div class="rv c-purple" id="r-real">—</div></div>
-          <div class="res-item" id="ri-pwr" style="display:none"><div class="rl">Poder compra</div><div class="rv" id="r-pwr">—</div></div>
+          <div class="res-item" id="ri-pwr" style="display:none"><div class="rl">Retorno real</div><div class="rv" id="r-pwr">—</div></div>
         </div>
       </div>
     </div>
 
-    <div style="margin-top:12px" id="saveScBtn">
-      <div style="display:flex;gap:6px">
-        <input type="text" id="scNameInput" placeholder="Nome do cenário (opcional)"
-          style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-family:'Sora',sans-serif;font-size:11px;color:var(--text);outline:none;transition:border-color 0.2s"
-          onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"
-          onkeydown="if(event.key==='Enter')saveScenario()">
-        <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;padding:9px 14px" onclick="saveScenario()">+ Salvar</button>
-      </div>
+    <div style="margin-top:11px" id="saveScBtn">
+      <button class="btn btn-outline" style="width:100%;font-size:11px" onclick="saveScenario()">+ Salvar como cenário</button>
     </div>
   </div>
 
-  <!-- RIGHT PANEL -->
+  <!-- RIGHT: CHART -->
   <div class="card">
     <div class="card-title" id="chartCardTitle">Evolução Patrimonial</div>
-    <div class="chart-tabs" id="chartTabsNormal">
+    <div id="chartTabsNormal" class="chart-tabs">
       <button class="chart-tab active" onclick="setChartType('line',this)">Linha</button>
       <button class="chart-tab" onclick="setChartType('bar',this)">Barras</button>
       <button class="chart-tab" onclick="setChartType('pie',this)">Composição</button>
     </div>
-    <div class="chart-area" id="mainChartWrap">
-      <canvas id="mainChart"></canvas>
-    </div>
+    <div class="chart-area" id="mainChartWrap"><canvas id="mainChart"></canvas></div>
 
-    <!-- Both compare -->
-    <div class="both-compare" id="bothCompare" style="display:none;margin-top:16px">
-      <div class="card-title" style="margin-bottom:12px">Comparação de Resultados</div>
+    <div class="both-compare" id="bothCompare" style="display:none;margin-top:14px">
+      <div class="card-title" style="margin-bottom:12px">Comparação Final</div>
       <div class="compare-bar-row">
         <div class="cmp-label">Simples</div>
         <div class="bar-track"><div class="bar-fill" id="barSimple" style="width:0%;background:var(--blue)"></div></div>
@@ -393,34 +502,21 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
         <div class="bar-track"><div class="bar-fill" id="barCompound" style="width:0%;background:var(--gold)"></div></div>
         <div class="cmp-val" id="cmpCompound" style="color:var(--gold)">—</div>
       </div>
-      <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+      <div style="border-top:1px solid var(--border);padding-top:11px;margin-top:6px;display:flex;justify-content:space-between;align-items:center">
         <span style="font-size:11px;color:var(--muted)">Vantagem dos compostos:</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--green)" id="cmpDiff">—</span>
       </div>
     </div>
 
-    <!-- Reverse results -->
     <div id="reverseResults" style="display:none;margin-top:8px">
       <div class="reverse-grid">
-        <div class="reverse-result">
-          <div class="rev-label">Só capital inicial</div>
-          <div class="rev-val" id="revCapital">R$ 0</div>
-          <div class="rev-sub">sem aportes mensais</div>
-        </div>
-        <div class="reverse-result">
-          <div class="rev-label">Só aportes mensais</div>
-          <div class="rev-val" id="revPmt">R$ 0/mês</div>
-          <div class="rev-sub">partindo do zero</div>
-        </div>
-        <div class="reverse-result">
-          <div class="rev-label">Capital com aporte</div>
-          <div class="rev-val" id="revMixed">R$ 0</div>
-          <div class="rev-sub" id="revMixedSub">informe um aporte</div>
-        </div>
+        <div class="reverse-result"><div class="rev-label">Só capital inicial</div><div class="rev-val" id="revCapital">—</div><div class="rev-sub">sem aportes mensais</div></div>
+        <div class="reverse-result"><div class="rev-label">Só aportes mensais</div><div class="rev-val" id="revPmt">—</div><div class="rev-sub">partindo do zero</div></div>
+        <div class="reverse-result"><div class="rev-label">Capital com aporte</div><div class="rev-val" id="revMixed">—</div><div class="rev-sub" id="revMixedSub">informe um aporte</div></div>
       </div>
     </div>
   </div>
-</div>
+</div><!-- /main-grid -->
 
 <!-- MILESTONES -->
 <div class="section-wrap" id="milestonesSection">
@@ -432,35 +528,52 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
 </div>
 
 <!-- SNOWBALL -->
-<div class="section-wrap" id="snowballSection" style="animation-delay:0.7s">
+<div class="section-wrap" id="snowballSection" style="animation-delay:.65s">
   <div class="section-header">
     <div class="section-title">Efeito <em>Bola de Neve</em></div>
     <div class="section-badge">Capital × Juros ao longo do tempo</div>
   </div>
+  <div class="card"><div class="chart-area" style="height:230px"><canvas id="snowballChart"></canvas></div></div>
+</div>
+
+<!-- PRODUCT COMPARATOR -->
+<div class="section-wrap" id="productsSection" style="animation-delay:.7s">
+  <div class="section-header">
+    <div class="section-title">Comparador de <em>Produtos</em></div>
+    <div class="section-badge">Taxas atualizáveis</div>
+  </div>
   <div class="card">
-    <div class="chart-area" style="height:230px">
-      <canvas id="snowballChart"></canvas>
+    <div class="products-controls">
+      <div class="field" style="min-width:110px">
+        <label>CDI (% a.a.)</label>
+        <div class="input-wrap"><input type="number" id="prodCDI" class="finput no-prefix" style="padding-right:10px" value="10.65" step="0.05" oninput="renderProducts()"></div>
+      </div>
+      <div class="field" style="min-width:110px">
+        <label>IPCA (% a.a.)</label>
+        <div class="input-wrap"><input type="number" id="prodIPCA" class="finput no-prefix" style="padding-right:10px" value="4.50" step="0.05" oninput="renderProducts()"></div>
+      </div>
+      <div class="field" style="min-width:110px">
+        <label>SELIC (% a.a.)</label>
+        <div class="input-wrap"><input type="number" id="prodSELIC" class="finput no-prefix" style="padding-right:10px" value="10.75" step="0.05" oninput="renderProducts()"></div>
+      </div>
+      <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;align-self:flex-end;padding-bottom:2px">usando capital e prazo da simulação atual</span>
     </div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="chart-area" style="height:200px"><canvas id="productsChart"></canvas></div>
   </div>
 </div>
 
 <!-- SCENARIOS -->
-<div class="section-wrap" id="scenariosSection" style="animation-delay:0.8s">
+<div class="section-wrap" style="animation-delay:.75s">
   <div class="section-header">
     <div class="section-title">Comparador de <em>Cenários</em></div>
   </div>
   <div class="card">
-    <div id="scenariosList">
-      <div class="empty-state" id="emptyScenarios">
-        Nenhum cenário salvo ainda.<br>Configure os parâmetros e clique em <strong style="color:var(--gold)">+ Salvar como cenário</strong>.
-      </div>
+    <div id="scenariosList"><div class="empty-state" id="emptyScenarios">Nenhum cenário salvo ainda.<br>Configure os parâmetros e clique em <strong style="color:var(--gold)">+ Salvar como cenário</strong>.</div></div>
+    <div id="scenariosChartWrap" style="display:none;margin-top:14px">
+      <div class="chart-area" style="height:210px"><canvas id="scenariosChart"></canvas></div>
     </div>
-    <div id="scenariosChartWrap" style="display:none;margin-top:16px">
-      <div class="chart-area" style="height:210px">
-        <canvas id="scenariosChart"></canvas>
-      </div>
-    </div>
-    <div class="btn-row" style="margin-top:14px">
+    <div class="btn-row" style="margin-top:12px">
       <button class="btn btn-outline" onclick="clearScenarios()">Limpar todos</button>
     </div>
   </div>
@@ -469,28 +582,22 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
 <div class="divider"></div>
 
 <!-- BREAKDOWN -->
-<div class="section-wrap" style="animation-delay:0.9s">
-  <div class="section-header">
-    <div class="section-title">Destrinchamento <em>detalhado</em></div>
-  </div>
+<div class="section-wrap" style="animation-delay:.8s">
+  <div class="section-header"><div class="section-title">Destrinchamento <em>detalhado</em></div></div>
   <div class="breakdown-grid" id="breakdownGrid">
     <div class="table-card" id="simpleTableCard">
       <div class="table-header" id="simpleTableTitle">Juros Simples</div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Período</th><th>Juros</th><th>Jur. Acum.</th><th>Investido</th><th>Montante</th></tr></thead>
-          <tbody id="simpleBody"></tbody>
-        </table>
-      </div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Período</th><th>Juros</th><th>Jur.Acum.</th><th>Investido</th><th>Montante</th></tr></thead>
+        <tbody id="simpleBody"></tbody>
+      </table></div>
     </div>
     <div class="table-card" id="compoundTableCard">
       <div class="table-header" id="compoundTableTitle">Juros Compostos</div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Período</th><th>Juros</th><th>Jur. Acum.</th><th>Investido</th><th>Montante</th></tr></thead>
-          <tbody id="compoundBody"></tbody>
-        </table>
-      </div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Período</th><th>Juros</th><th>Jur.Acum.</th><th>Investido</th><th>Montante</th></tr></thead>
+        <tbody id="compoundBody"></tbody>
+      </table></div>
     </div>
   </div>
 </div>
@@ -498,326 +605,528 @@ tbody td:first-child { color: var(--muted); font-size: 10px; }
 <div class="divider"></div>
 
 <!-- EXPORT -->
-<div class="section-wrap" style="animation-delay:1s">
-  <div class="section-header">
-    <div class="section-title">Exportar <em>Relatório</em></div>
-  </div>
+<div class="section-wrap" style="animation-delay:.85s">
+  <div class="section-header"><div class="section-title">Exportar <em>Relatório</em></div></div>
   <div class="card">
     <div class="btn-row">
       <button class="btn btn-primary" onclick="exportCSV()">⬇ Exportar CSV</button>
       <button class="btn btn-outline" onclick="window.print()">🖨 Imprimir / PDF</button>
-      <span style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;align-self:center">Inclui dados de simples e compostos</span>
+      <span style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;align-self:center">Inclui simples, compostos e aportes</span>
     </div>
   </div>
 </div>
 
-</div>
-
-<!-- EDIT SCENARIO MODAL -->
-<div id="scModal" style="display:none">
-  <div class="modal-backdrop" onclick="closeModal(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div class="modal-title">Editar <em>Cenário</em></div>
-      <div class="modal-grid">
-        <div class="modal-field full">
-          <label>Nome</label>
-          <input type="text" id="medit-name" placeholder="Ex: SELIC 2025">
-        </div>
-        <div class="modal-field">
-          <label>Capital inicial (R$)</label>
-          <input type="number" id="medit-principal" min="0" step="100">
-        </div>
-        <div class="modal-field">
-          <label>Aporte mensal (R$)</label>
-          <input type="number" id="medit-monthly" min="0" step="50">
-        </div>
-        <div class="modal-field">
-          <label>Taxa a.a. (%)</label>
-          <input type="number" id="medit-rate" min="0" step="0.1">
-        </div>
-        <div class="modal-field">
-          <label>Prazo (meses)</label>
-          <input type="number" id="medit-months" min="1" step="1">
-        </div>
-        <div class="modal-field full">
-          <label>Tipo de juros</label>
-          <div class="modal-mode-btns">
-            <button class="modal-mode-btn active" id="medit-simple" onclick="setModalMode('simple')">Simples</button>
-            <button class="modal-mode-btn" id="medit-compound" onclick="setModalMode('compound')">Compostos</button>
-          </div>
-        </div>
-        <div class="modal-field full">
-          <label>Cor</label>
-          <div class="modal-color-row" id="medit-colors"></div>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-primary" onclick="applyModalEdit()">Salvar alterações</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+</div><!-- /page-wrap -->
 <script>
-// ── STATE ──────────────────────────────────────────────
-let mode = 'simple', periodUnit = 'months', cap = 'monthly';
-let chartType = 'line', revMode = 'compound';
-let mainChart = null, snowChart = null, scenChart = null;
-let scenarios = [];
-const SC_COLORS = ['#c9a84c','#5b8def','#4caf82','#a78bfa','#f59e0b','#e05c5c','#38bdf8','#fb7185','#34d399','#f97316'];
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+let mode='simple', periodUnit='months', cap='monthly';
+let chartType='line', revMode='compound';
+let mainChart=null, snowChart=null, scenChart=null, prodChart=null;
+let scenarios=[], irregularContribs=[];
+let prevAnimValues={totalAmount:0,interest:0,net:0,real:0};
+const SC_COLORS=['#c9a84c','#5b8def','#4caf82','#a78bfa','#f59e0b','#e05c5c'];
 
-// ── FORMAT ─────────────────────────────────────────────
-const fmt = n => 'R$ ' + Math.max(n,0).toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+// ═══════════════════════════════════════════════════════
+//  FORMATTERS
+// ═══════════════════════════════════════════════════════
+const fmtFull = n => {
+  const v=Math.max(n,0);
+  return 'R$ '+v.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+};
 const fmtS = n => {
-  const v = Math.max(n,0);
+  const v=Math.max(n,0);
   if(v>=1e9) return 'R$ '+(v/1e9).toFixed(2).replace('.',',')+'B';
   if(v>=1e6) return 'R$ '+(v/1e6).toFixed(2).replace('.',',')+'M';
   if(v>=1e3) return 'R$ '+(v/1e3).toFixed(1).replace('.',',')+'k';
-  return fmt(v);
+  return fmtFull(v);
 };
-const fmtPct = (n,d=1) => (n>=0?'+':'')+n.toFixed(d).replace('.',',')+'%';
-const mStr = m => {
-  if(m < 0) return '—';
-  const y = Math.floor(m/12), mo = Math.round(m%12);
-  if(y===0) return mo+'m';
-  if(mo===0) return y+'a';
-  return y+'a '+mo+'m';
+const fmtPct=(n,d=1)=>(n>=0?'+':'')+n.toFixed(d).replace('.',',')+'%';
+const mStr=m=>{
+  if(m<0)return'—';
+  const y=Math.floor(m/12),mo=Math.round(m%12);
+  if(y===0)return mo+'m';if(mo===0)return y+'a';return y+'a '+mo+'m';
+};
+const rawVal=id=>{
+  const el=document.getElementById(id);
+  if(!el)return 0;
+  if(el.dataset.raw!==undefined)return parseFloat(el.dataset.raw)||0;
+  return parseFloat(el.value)||0;
 };
 
-// ── UI ─────────────────────────────────────────────────
-function setMode(m) {
-  mode = m;
-  const tabs = ['simple','compound','both','reverse'];
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===m));
-  const isRev = m==='reverse';
-  document.getElementById('normalInputs').style.display = isRev?'none':'';
-  document.getElementById('reverseInputs').style.display = isRev?'':'none';
-  document.getElementById('resultPanel').style.display = isRev?'none':'';
-  document.getElementById('saveScBtn').style.display = isRev?'none':'';
-  document.getElementById('reverseResults').style.display = isRev?'':'none';
-  document.getElementById('mainChartWrap').style.display = isRev?'none':'';
-  document.getElementById('bothCompare').style.display = (m==='both'&&!isRev)?'':'none';
-  document.getElementById('chartTabsNormal').style.display = isRev?'none':'';
-  document.getElementById('capField').style.display = (m!=='simple'&&!isRev)?'':'none';
-  document.getElementById('milestonesSection').style.display = isRev?'none':'';
-  document.getElementById('snowballSection').style.display = isRev?'none':'';
-  document.getElementById('chartCardTitle').textContent = isRev?'Resultado da Meta':'Evolução Patrimonial';
-  isRev ? calcReverse() : calculate();
+// ═══════════════════════════════════════════════════════
+//  CURRENCY INPUT MASKING
+// ═══════════════════════════════════════════════════════
+function maskCurrency(el){
+  let v=el.value.replace(/[^\d]/g,'');
+  if(!v){el.dataset.raw='0';return}
+  const num=parseInt(v)/100;
+  el.dataset.raw=num.toString();
+  const formatted=num.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const caret=el.selectionStart;
+  el.value=formatted;
+  // restore caret approximately
+  try{el.setSelectionRange(caret,caret)}catch(e){}
 }
-function setPeriodUnit(u,btn) { periodUnit=u; activateBtn(btn); calculate(); }
-function setCap(c,btn) { cap=c; activateBtn(btn); calculate(); }
-function setChartType(t,btn) { chartType=t; document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); calculate(); }
-function setRevMode(m,btn) { revMode=m; activateBtn(btn); calcReverse(); }
-function activateBtn(btn) { btn.parentElement.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-function syncSlider() { document.getElementById('rateSlider').value = Math.min(parseFloat(document.getElementById('rate').value)||0,60); }
-function syncRate() { document.getElementById('rate').value = document.getElementById('rateSlider').value; }
-function toggleInfl() { document.getElementById('inflField').style.display = document.getElementById('inflToggle').checked?'':'none'; calculate(); }
-function toggleIR() { document.getElementById('irInfo').style.display = document.getElementById('irToggle').checked?'':'none'; calculate(); }
+function formatFocus(el){
+  const raw=el.dataset.raw||'0';
+  el.value=raw==='0'?'':parseFloat(raw).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  el.select();
+}
+function formatBlur(el){
+  const raw=parseFloat(el.dataset.raw)||0;
+  el.value=raw.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
 
-// ── MATH ───────────────────────────────────────────────
-function inputs() {
-  return {
-    P: parseFloat(document.getElementById('principal').value)||0,
-    PMT: parseFloat(document.getElementById('monthly').value)||0,
-    rate: parseFloat(document.getElementById('rate').value)||0,
-    months: (parseInt(document.getElementById('period').value)||1) * (periodUnit==='years'?12:1),
-    infl: document.getElementById('inflToggle').checked ? (parseFloat(document.getElementById('inflation').value)||0) : 0,
-    useIR: document.getElementById('irToggle').checked
+// ═══════════════════════════════════════════════════════
+//  NUMBER ANIMATION
+// ═══════════════════════════════════════════════════════
+function animNum(elId,from,to,fmtFn,dur=550){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  if(Math.abs(to-from)<0.01){el.textContent=fmtFn(to);return}
+  const start=performance.now();
+  const step=now=>{
+    const p=Math.min((now-start)/dur,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent=fmtFn(from+(to-from)*e);
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════════════════════════════
+//  THEME
+// ═══════════════════════════════════════════════════════
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.dataset.theme==='dark';
+  html.dataset.theme=isDark?'light':'dark';
+  document.getElementById('themeBtn').textContent=isDark?'🌙 Escuro':'☀️ Claro';
+  setTimeout(()=>{if(mainChart)calculate();},50);
+}
+
+// ═══════════════════════════════════════════════════════
+//  URL SHARING
+// ═══════════════════════════════════════════════════════
+function shareURL(){
+  const state={
+    p:rawVal('principal'),pmt:rawVal('monthly'),
+    r:parseFloat(document.getElementById('rate').value)||0,
+    per:parseInt(document.getElementById('period').value)||1,
+    pu:periodUnit,mode,
+    ir:document.getElementById('irToggle').checked?1:0,
+    infl:document.getElementById('inflToggle').checked?(parseFloat(document.getElementById('inflation').value)||0):0,
+    irr:irregularContribs
+  };
+  try{
+    const hash=btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    const url=location.origin+location.pathname+'#'+hash;
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(()=>toast('🔗 Link copiado para a área de transferência!'));
+    } else {
+      const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+      toast('🔗 Link copiado!');
+    }
+    history.replaceState(null,'','#'+hash);
+  }catch(e){toast('Erro ao gerar link.');}
+}
+function loadFromURL(){
+  if(!location.hash||location.hash.length<4)return;
+  try{
+    const state=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))));
+    if(state.p!==undefined){const el=document.getElementById('principal');el.dataset.raw=state.p;formatBlur(el);}
+    if(state.pmt!==undefined){const el=document.getElementById('monthly');el.dataset.raw=state.pmt;formatBlur(el);}
+    if(state.r!==undefined)document.getElementById('rate').value=state.r;
+    if(state.per!==undefined)document.getElementById('period').value=state.per;
+    if(state.pu){periodUnit=state.pu;document.querySelectorAll('.group-btns')[1]?.querySelectorAll('.group-btn').forEach((b,i)=>b.classList.toggle('active',['months','years'][i]===state.pu));}
+    if(state.ir){document.getElementById('irToggle').checked=true;toggleIR();}
+    if(state.infl&&state.infl>0){document.getElementById('inflToggle').checked=true;document.getElementById('inflation').value=state.infl;toggleInfl();}
+    if(state.irr?.length){irregularContribs=state.irr;document.getElementById('irrToggle').checked=true;toggleIrr(true);}
+    if(state.mode)setMode(state.mode);
+  }catch(e){console.warn('Could not load URL state',e);}
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ═══════════════════════════════════════════════════════
+//  UI HELPERS
+// ═══════════════════════════════════════════════════════
+function setMode(m){
+  mode=m;
+  const tabs=['simple','compound','both','reverse'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===m));
+  const isRev=m==='reverse';
+  _show('normalInputs',!isRev);_show('reverseInputs',isRev);
+  _show('resultPanel',!isRev);_show('saveScBtn',!isRev);
+  _show('reverseResults',isRev);_show('mainChartWrap',!isRev);
+  _show('bothCompare',m==='both'&&!isRev);
+  _show('chartTabsNormal',!isRev);
+  _show('capField',m!=='simple'&&!isRev);
+  _show('milestonesSection',!isRev);_show('snowballSection',!isRev);
+  document.getElementById('chartCardTitle').textContent=isRev?'Resultado da Meta':'Evolução Patrimonial';
+  isRev?calcReverse():calculate();
+}
+function _show(id,v){const el=document.getElementById(id);if(el)el.style.display=v?'':'none';}
+function setPeriodUnit(u,btn){periodUnit=u;activateBtn(btn);calculate();}
+function setCap(c,btn){cap=c;activateBtn(btn);calculate();}
+function setChartType(t,btn){chartType=t;document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');calculate();}
+function setRevMode(m,btn){revMode=m;activateBtn(btn);calcReverse();}
+function activateBtn(btn){btn.parentElement.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function syncSlider(){document.getElementById('rateSlider').value=Math.min(parseFloat(document.getElementById('rate').value)||0,60);}
+function syncRate(){document.getElementById('rate').value=document.getElementById('rateSlider').value;}
+function toggleInfl(){_show('inflField',document.getElementById('inflToggle').checked);calculate();}
+function toggleIR(){_show('irInfo',document.getElementById('irToggle').checked);calculate();}
+function toggleCDI(){_show('cdiPanel',document.getElementById('cdiToggle').checked);if(document.getElementById('cdiToggle').checked)applyCDI();}
+function applyCDI(){
+  const cdi=parseFloat(document.getElementById('cdiRate').value)||10.65;
+  const pct=parseFloat(document.getElementById('cdiPct').value)||100;
+  document.getElementById('rate').value=(cdi*pct/100).toFixed(2);
+  syncSlider();calculate();
+}
+function toggleIrr(skipRender){
+  _show('irrPanel',document.getElementById('irrToggle').checked);
+  if(!skipRender)renderIrrList();
+  calculate();
+}
+
+// ═══════════════════════════════════════════════════════
+//  IRREGULAR CONTRIBUTIONS
+// ═══════════════════════════════════════════════════════
+function addIrr(){irregularContribs.push({month:1,amount:0});renderIrrList();calculate();}
+function removeIrr(i){irregularContribs.splice(i,1);renderIrrList();calculate();}
+function renderIrrList(){
+  const list=document.getElementById('irrList');
+  if(!list)return;
+  list.innerHTML=irregularContribs.map((c,i)=>`
+    <div class="irr-item">
+      <span class="irr-label">Mês</span>
+      <input type="number" value="${c.month}" min="1" style="max-width:60px" onchange="irregularContribs[${i}].month=parseInt(this.value)||1;calculate()">
+      <span class="irr-label" style="width:auto;margin-left:4px">R$</span>
+      <input type="number" value="${c.amount}" min="0" step="100" onchange="irregularContribs[${i}].amount=parseFloat(this.value)||0;calculate()">
+      <button class="irr-del" onclick="removeIrr(${i})">✕</button>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  CDI MODE
+// ═══════════════════════════════════════════════════════
+function getIrrAtMonth(m){
+  if(!document.getElementById('irrToggle').checked)return 0;
+  return irregularContribs.filter(c=>c.month===m).reduce((a,c)=>a+c.amount,0);
+}
+
+// ═══════════════════════════════════════════════════════
+//  MATH
+// ═══════════════════════════════════════════════════════
+function getInputs(){
+  return{
+    P:rawVal('principal'),
+    PMT:rawVal('monthly'),
+    rate:parseFloat(document.getElementById('rate').value)||0,
+    months:(parseInt(document.getElementById('period').value)||1)*(periodUnit==='years'?12:1),
+    infl:document.getElementById('inflToggle').checked?(parseFloat(document.getElementById('inflation').value)||0):0,
+    useIR:document.getElementById('irToggle').checked
   };
 }
-
-function compoundSeries(P, PMT, rate, months) {
-  const r = Math.pow(1+rate/100,1/12)-1;
-  const s = [P]; let b = P;
-  for(let m=1;m<=months;m++) { b=b*(1+r)+PMT; s.push(b); }
+function buildCompound(P,PMT,rate,months){
+  const r=Math.pow(1+rate/100,1/12)-1;
+  const s=[P];let b=P;
+  for(let m=1;m<=months;m++){b=b*(1+r)+PMT+getIrrAtMonth(m);s.push(b);}
   return s;
 }
-
-function simpleSeries(P, PMT, rate, months) {
-  const r = rate/100/12;
-  const s = [P];
-  for(let m=1;m<=months;m++) {
-    const fvP = P*(1+r*m);
-    const fvPMT = PMT*m + PMT*r*m*(m-1)/2;
-    s.push(fvP+fvPMT);
+function buildSimple(P,PMT,rate,months){
+  const r=rate/100/12;
+  const s=[P];
+  for(let m=1;m<=months;m++){
+    const fvP=P*(1+r*m);
+    const fvPMT=PMT*m+PMT*r*m*(m-1)/2;
+    // Irregular contribs: each earns simple interest for remaining months
+    let fvIrr=0;
+    if(document.getElementById('irrToggle').checked){
+      irregularContribs.forEach(c=>{
+        if(c.month<=m){const rem=m-c.month;fvIrr+=c.amount*(1+r*rem);}
+      });
+    }
+    s.push(fvP+fvPMT+fvIrr);
   }
   return s;
 }
-
-function irRate(months) {
-  const d = months*30.44;
-  if(d<=180) return 0.225;
-  if(d<=360) return 0.20;
-  if(d<=720) return 0.175;
-  return 0.15;
-}
-
-function highlightIR(months) {
-  ['ir1','ir2','ir3','ir4'].forEach(id=>document.getElementById(id).classList.remove('active-ir'));
+function irRate(months){const d=months*30.44;if(d<=180)return.225;if(d<=360)return.20;if(d<=720)return.175;return.15;}
+function highlightIR(months){
+  ['ir1','ir2','ir3','ir4'].forEach(id=>document.getElementById(id)?.classList.remove('active-ir'));
   const d=months*30.44;
-  if(d<=180) document.getElementById('ir1').classList.add('active-ir');
-  else if(d<=360) document.getElementById('ir2').classList.add('active-ir');
-  else if(d<=720) document.getElementById('ir3').classList.add('active-ir');
-  else document.getElementById('ir4').classList.add('active-ir');
+  if(d<=180)document.getElementById('ir1')?.classList.add('active-ir');
+  else if(d<=360)document.getElementById('ir2')?.classList.add('active-ir');
+  else if(d<=720)document.getElementById('ir3')?.classList.add('active-ir');
+  else document.getElementById('ir4')?.classList.add('active-ir');
 }
-
-function chartLabels(months) {
+function chartLabels(months){
   const l=[];
-  for(let m=0;m<=months;m++) {
-    if(months<=24) l.push('M'+m);
-    else if(months<=60) l.push(m%3===0?'M'+m:'');
+  for(let m=0;m<=months;m++){
+    if(months<=24)l.push('M'+m);
+    else if(months<=60)l.push(m%3===0?'M'+m:'');
     else l.push(m%12===0?'A'+(m/12|0):'');
   }
   return l;
 }
+function totalIrrContribs(months){
+  if(!document.getElementById('irrToggle').checked)return 0;
+  return irregularContribs.filter(c=>c.month<=months).reduce((a,c)=>a+c.amount,0);
+}
 
-// ── CALCULATE ──────────────────────────────────────────
-function calculate() {
-  const {P,PMT,rate,months,infl,useIR} = inputs();
-  const cSeries = compoundSeries(P,PMT,rate,months);
-  const sSeries = simpleSeries(P,PMT,rate,months);
-  const totalInv = P+PMT*months;
-  const cTotal = cSeries[months], sTotal = sSeries[months];
-  const activeTotal = mode==='compound' ? cTotal : sTotal;
-  const activeSeries = mode==='compound' ? cSeries : sSeries;
-  const grossInt = activeTotal-totalInv;
+// ═══════════════════════════════════════════════════════
+//  MAIN CALCULATE
+// ═══════════════════════════════════════════════════════
+function calculate(){
+  const {P,PMT,rate,months,infl,useIR}=getInputs();
+  const cS=buildCompound(P,PMT,rate,months);
+  const sS=buildSimple(P,PMT,rate,months);
+  const irrTotal=totalIrrContribs(months);
+  const totalInv=P+PMT*months+irrTotal;
+  const cTotal=cS[months],sTotal=sS[months];
+  const activeTotal=mode==='compound'?cTotal:sTotal;
+  const activeSeries=mode==='compound'?cS:sS;
+  const grossInt=activeTotal-totalInv;
 
   // IR
-  const ir = useIR ? irRate(months) : 0;
-  if(useIR) highlightIR(months);
-  const tax = useIR ? Math.max(grossInt,0)*ir : 0;
-  const netTotal = activeTotal-tax;
+  const ir=useIR?irRate(months):0;
+  if(useIR)highlightIR(months);
+  const tax=useIR?Math.max(grossInt,0)*ir:0;
+  const netTotal=activeTotal-tax;
 
-  // Inflation
-  const realVal = infl>0 ? netTotal/Math.pow(1+infl/100,months/12) : null;
+  // Inflation / real value
+  const realVal=infl>0?netTotal/Math.pow(1+infl/100,months/12):null;
 
-  // DOM updates
-  document.getElementById('totalAmount').textContent = fmt(activeTotal);
-  document.getElementById('r-principal').textContent = fmtS(P);
-  document.getElementById('r-contribs').textContent = fmtS(PMT*months);
-  document.getElementById('r-interest').textContent = fmtS(grossInt);
-  document.getElementById('r-growth').textContent = totalInv>0 ? fmtPct((activeTotal/totalInv-1)*100) : '0%';
-  document.getElementById('totalSub').textContent = `${months}m · ${rate}% a.a. · investido: ${fmtS(totalInv)}`;
+  // Animate main value
+  animNum('totalAmount',prevAnimValues.totalAmount,activeTotal,fmtFull,600);
+  prevAnimValues.totalAmount=activeTotal;
 
-  document.getElementById('ri-net').style.display = useIR?'':'none';
-  document.getElementById('ri-tax').style.display = useIR?'':'none';
-  document.getElementById('r-net').textContent = fmtS(netTotal);
-  document.getElementById('r-tax').textContent = '-'+fmtS(tax)+` (${(ir*100).toFixed(1)}%)`;
+  // DOM updates (non-animated)
+  document.getElementById('r-principal').textContent=fmtS(P);
+  document.getElementById('r-contribs').textContent=fmtS(PMT*months+irrTotal);
+  animNum('r-interest',prevAnimValues.interest,grossInt,fmtS,500);prevAnimValues.interest=grossInt;
+  document.getElementById('r-growth').textContent=totalInv>0?fmtPct((activeTotal/totalInv-1)*100):'0%';
+  document.getElementById('totalSub').textContent=`${months}m · ${rate}% a.a. · investido: ${fmtS(totalInv)}`;
 
-  document.getElementById('ri-real').style.display = infl>0?'':'none';
-  document.getElementById('ri-pwr').style.display = infl>0?'':'none';
-  if(realVal!==null) {
-    document.getElementById('r-real').textContent = fmtS(realVal);
-    const pwr = totalInv>0?(realVal/totalInv-1)*100:0;
-    const pwrEl = document.getElementById('r-pwr');
-    pwrEl.textContent = fmtPct(pwr)+' real';
-    pwrEl.className = 'rv '+(pwr>=0?'c-purple':'c-red');
+  _show('ri-net',useIR);_show('ri-tax',useIR);
+  if(useIR){
+    animNum('r-net',prevAnimValues.net,netTotal,fmtS,500);prevAnimValues.net=netTotal;
+    document.getElementById('r-tax').textContent='-'+fmtS(tax)+` (${(ir*100).toFixed(1)}%)`;
+  }
+
+  const showInfl=infl>0&&realVal!==null;
+  _show('ri-real',showInfl);_show('ri-pwr',showInfl);_show('inflBadge',showInfl);
+  if(showInfl){
+    animNum('r-real',prevAnimValues.real,realVal,fmtS,500);prevAnimValues.real=realVal;
+    const annualNominal=Math.pow(activeTotal/Math.max(totalInv,1),12/months)-1;
+    const realAnnual=((1+annualNominal)/(1+infl/100)-1)*100;
+    const badge=document.getElementById('inflBadgeInner');
+    const won=realAnnual>0;
+    badge.className='infl-badge '+(won?'win':'lose');
+    badge.textContent=(won?'✓ Ganhou da inflação: ':'✗ Perdeu para a inflação: ')+fmtPct(realAnnual)+' real a.a.';
+    const pwr=totalInv>0?(realVal/totalInv-1)*100:0;
+    const pwrEl=document.getElementById('r-pwr');
+    pwrEl.textContent=fmtPct(pwr)+' total real';
+    pwrEl.className='rv '+(pwr>=0?'c-purple':'c-red');
   }
 
   // Both compare
-  if(mode==='both') {
-    const mx = Math.max(sTotal,cTotal);
-    document.getElementById('cmpSimple').textContent = fmtS(sTotal);
-    document.getElementById('cmpCompound').textContent = fmtS(cTotal);
-    document.getElementById('cmpDiff').textContent = '+'+fmtS(cTotal-sTotal);
-    document.getElementById('barSimple').style.width = mx>0?(sTotal/mx*100)+'%':'0%';
-    document.getElementById('barCompound').style.width = mx>0?(cTotal/mx*100)+'%':'0%';
+  if(mode==='both'){
+    const mx=Math.max(sTotal,cTotal);
+    document.getElementById('cmpSimple').textContent=fmtS(sTotal);
+    document.getElementById('cmpCompound').textContent=fmtS(cTotal);
+    document.getElementById('cmpDiff').textContent='+'+fmtS(cTotal-sTotal);
+    document.getElementById('barSimple').style.width=mx>0?(sTotal/mx*100)+'%':'0%';
+    document.getElementById('barCompound').style.width=mx>0?(cTotal/mx*100)+'%':'0%';
   }
 
-  const labels = chartLabels(months);
-  drawMain(labels, sSeries, cSeries, P, PMT, months, totalInv, tax, grossInt);
-  drawSnowball(labels, cSeries, P, PMT, months);
-  drawMilestones(activeSeries, P, months, rate);
-  buildTables(P, PMT, rate, months, useIR);
+  const labels=chartLabels(months);
+  drawMain(labels,sS,cS,totalInv,months);
+  drawSnowball(labels,cS,P,PMT,months);
+  drawMilestones(activeSeries,P,months,rate);
+  buildTables(P,PMT,rate,months,useIR,irrTotal);
+  renderProducts();
 }
 
-// ── MAIN CHART ─────────────────────────────────────────
-function drawMain(labels, sS, cS, P, PMT, months, totalInv, tax, grossInt) {
-  const ctx = document.getElementById('mainChart').getContext('2d');
-  if(mainChart) mainChart.destroy();
-  const gold='#c9a84c', blue='#5b8def';
-  const axisStyle = { ticks:{color:'#6b7085',font:{family:'JetBrains Mono',size:9},maxRotation:0,autoSkip:true,maxTicksLimit:12}, grid:{color:'rgba(30,34,48,0.5)'}, border:{color:'#1e2230'} };
-  const ttStyle = { backgroundColor:'#0e1018', borderColor:'#1e2230', borderWidth:1, titleColor:'#6b7085', bodyColor:'#e8e9f0', titleFont:{family:'JetBrains Mono',size:9}, bodyFont:{family:'JetBrains Mono',size:11}, callbacks:{label:c=>' '+fmtS(c.raw)} };
+// ═══════════════════════════════════════════════════════
+//  CHART: MAIN
+// ═══════════════════════════════════════════════════════
+function chartDefaults(){
+  const isDark=document.documentElement.dataset.theme==='dark';
+  return{
+    gridColor:isDark?'rgba(30,34,48,0.5)':'rgba(200,200,200,0.4)',
+    axisColor:isDark?'#6b7085':'#9a98a8',
+    tooltipBg:isDark?'#0e1018':'#ffffff',
+    tooltipBorder:isDark?'#1e2230':'#ddd9ce',
+    legendColor:isDark?'#6b7085':'#7a788a',
+  };
+}
+function axisStyle(){
+  const d=chartDefaults();
+  return{ticks:{color:d.axisColor,font:{family:'JetBrains Mono',size:9},maxRotation:0,autoSkip:true,maxTicksLimit:12},grid:{color:d.gridColor},border:{color:d.gridColor}};
+}
+function ttStyle(extraCb={}){
+  const d=chartDefaults();
+  return{backgroundColor:d.tooltipBg,borderColor:d.tooltipBorder,borderWidth:1,titleColor:d.axisColor,bodyColor:document.documentElement.dataset.theme==='dark'?'#e8e9f0':'#1a1a28',titleFont:{family:'JetBrains Mono',size:9},bodyFont:{family:'JetBrains Mono',size:11},callbacks:{label:c=>' '+fmtS(c.raw),...extraCb}};
+}
 
-  if(chartType==='pie') {
-    let dataArr, bgArr, lblArr;
-    if(mode==='both') {
-      dataArr=[totalInv, Math.max(sS[months]-totalInv,0), Math.max((cS[months]-sS[months]),0)];
-      bgArr=['#1e2230',blue,gold]; lblArr=['Capital investido','Juros simples','Extra compostos'];
-    } else {
-      dataArr=[totalInv, Math.max((mode==='compound'?cS:sS)[months]-totalInv,0)];
-      bgArr=['#1e2230',mode==='compound'?gold:blue]; lblArr=['Capital investido','Rendimento'];
+function drawMain(labels,sS,cS,totalInv,months){
+  const ctx=document.getElementById('mainChart').getContext('2d');
+  if(mainChart)mainChart.destroy();
+  const gold='#c9a84c',blue='#5b8def';
+  const ax=axisStyle(),tt=ttStyle();
+  const responsive={responsive:true,maintainAspectRatio:false};
+
+  if(chartType==='pie'){
+    let dataArr,bgArr,lblArr;
+    if(mode==='both'){
+      dataArr=[totalInv,Math.max(sS[months]-totalInv,0),Math.max(cS[months]-sS[months],0)];
+      bgArr=['#1e2230',blue,gold];lblArr=['Capital investido','Juros simples','Extra compostos'];
+    }else{
+      dataArr=[totalInv,Math.max((mode==='compound'?cS:sS)[months]-totalInv,0)];
+      bgArr=['#1e2230',mode==='compound'?gold:blue];lblArr=['Capital investido','Rendimento'];
     }
     mainChart=new Chart(ctx,{type:'doughnut',data:{labels:lblArr,datasets:[{data:dataArr,backgroundColor:bgArr,borderColor:'#07080d',borderWidth:2}]},
-      options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{labels:{color:'#6b7085',font:{family:'JetBrains Mono',size:10},padding:14}},tooltip:{...ttStyle}}}});
+      options:{...responsive,cutout:'62%',plugins:{legend:{labels:{color:chartDefaults().legendColor,font:{family:'JetBrains Mono',size:10},padding:14}},tooltip:tt}}});
     return;
   }
-
   const ds=[];
-  if(mode!=='compound') ds.push({label:'Juros Simples',data:sS,borderColor:blue,backgroundColor:chartType==='bar'?blue+'88':'transparent',fill:chartType==='line'?{target:'origin',above:'rgba(91,141,239,0.05)'}:false,borderWidth:2,pointRadius:0,tension:0.35});
-  if(mode!=='simple') ds.push({label:'Juros Compostos',data:cS,borderColor:gold,backgroundColor:chartType==='bar'?gold+'88':'transparent',fill:chartType==='line'?{target:'origin',above:'rgba(201,168,76,0.07)'}:false,borderWidth:2,pointRadius:0,tension:0.35});
-
+  if(mode!=='compound')ds.push({label:'Juros Simples',data:sS,borderColor:blue,backgroundColor:chartType==='bar'?blue+'88':'transparent',fill:chartType==='line'?{target:'origin',above:'rgba(91,141,239,0.05)'}:false,borderWidth:2,pointRadius:0,tension:.35});
+  if(mode!=='simple')ds.push({label:'Juros Compostos',data:cS,borderColor:gold,backgroundColor:chartType==='bar'?gold+'88':'transparent',fill:chartType==='line'?{target:'origin',above:'rgba(201,168,76,0.07)'}:false,borderWidth:2,pointRadius:0,tension:.35});
   mainChart=new Chart(ctx,{type:chartType==='bar'?'bar':'line',data:{labels,datasets:ds},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-      plugins:{legend:{labels:{color:'#6b7085',font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:14}},tooltip:ttStyle},
-      scales:{x:{...axisStyle},y:{...axisStyle,ticks:{...axisStyle.ticks,callback:v=>fmtS(v)}}}}});
+    options:{...responsive,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{labels:{color:chartDefaults().legendColor,font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:14}},tooltip:tt},
+      scales:{x:ax,y:{...ax,ticks:{...ax.ticks,callback:v=>fmtS(v)}}}}});
 }
 
-// ── SNOWBALL ───────────────────────────────────────────
-function drawSnowball(labels, cS, P, PMT, months) {
-  const ctx = document.getElementById('snowballChart').getContext('2d');
-  if(snowChart) snowChart.destroy();
-  const capData = cS.map((_,m)=>P+PMT*m);
-  const intData = cS.map((v,m)=>Math.max(0,v-(P+PMT*m)));
+// ═══════════════════════════════════════════════════════
+//  CHART: SNOWBALL
+// ═══════════════════════════════════════════════════════
+function drawSnowball(labels,cS,P,PMT,months){
+  const ctx=document.getElementById('snowballChart').getContext('2d');
+  if(snowChart)snowChart.destroy();
+  const capData=cS.map((_,m)=>P+PMT*m+totalIrrContribs(m));
+  const intData=cS.map((v,m)=>Math.max(0,v-capData[m]));
+  const ax=axisStyle(),tt=ttStyle({
+    afterBody:items=>{
+      const m=items[0].dataIndex,tot=cS[m],pct=tot>0?(intData[m]/tot*100).toFixed(1):0;
+      return['─────────────',' Total: '+fmtS(tot),' Juros = '+pct+'% do montante'];
+    }
+  });
   snowChart=new Chart(ctx,{type:'line',data:{labels,datasets:[
-    {label:'Capital investido',data:capData,fill:true,backgroundColor:'rgba(91,141,239,0.15)',borderColor:'#5b8def',borderWidth:1.5,pointRadius:0,tension:0.35},
-    {label:'Juros acumulados',data:intData,fill:true,backgroundColor:'rgba(201,168,76,0.18)',borderColor:'#c9a84c',borderWidth:1.5,pointRadius:0,tension:0.35}
+    {label:'Capital investido',data:capData,fill:true,backgroundColor:'rgba(91,141,239,0.15)',borderColor:'#5b8def',borderWidth:1.5,pointRadius:0,tension:.35},
+    {label:'Juros acumulados',data:intData,fill:true,backgroundColor:'rgba(201,168,76,0.18)',borderColor:'#c9a84c',borderWidth:1.5,pointRadius:0,tension:.35}
   ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{labels:{color:'#6b7085',font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:14}},
-      tooltip:{backgroundColor:'#0e1018',borderColor:'#1e2230',borderWidth:1,bodyFont:{family:'JetBrains Mono',size:11},
-        callbacks:{label:c=>' '+c.dataset.label+': '+fmtS(c.raw),
-          afterBody:items=>{const m=items[0].dataIndex,tot=cS[m],pct=tot>0?(intData[m]/tot*100).toFixed(1):0;return['─────────────',' Total: '+fmtS(tot),' Juros = '+pct+'% do montante'];}}}},
-    scales:{x:{ticks:{color:'#6b7085',font:{family:'JetBrains Mono',size:9},maxRotation:0,autoSkip:true,maxTicksLimit:12},grid:{color:'rgba(30,34,48,0.4)'},border:{color:'#1e2230'}},
-      y:{ticks:{color:'#6b7085',font:{family:'JetBrains Mono',size:9},callback:v=>fmtS(v)},grid:{color:'rgba(30,34,48,0.4)'},border:{color:'#1e2230'}}}}});
+    plugins:{legend:{labels:{color:chartDefaults().legendColor,font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:14}},tooltip:tt},
+    scales:{x:ax,y:{...ax,ticks:{...ax.ticks,callback:v=>fmtS(v)}}}}});
 }
 
-// ── MILESTONES ─────────────────────────────────────────
-function drawMilestones(series, P, months, rate) {
-  const targets=[{m:2,emoji:'×2',lbl:'Dobrou'},{m:3,emoji:'×3',lbl:'Triplicou'},{m:5,emoji:'×5',lbl:'Quintuplicou'},{m:10,emoji:'×10',lbl:'Decuplicou'}];
+// ═══════════════════════════════════════════════════════
+//  MILESTONES
+// ═══════════════════════════════════════════════════════
+function drawMilestones(series,P,months,rate){
+  const targets=[{m:2,e:'×2',l:'Dobrou'},{m:3,e:'×3',l:'Triplicou'},{m:5,e:'×5',l:'Quintuplicou'},{m:10,e:'×10',l:'Decuplicou'}];
   const base=Math.max(P,1);
-  const mstones=targets.map(t=>{
+  const ms=targets.map(t=>{
     let found=-1;
-    for(let i=0;i<series.length;i++) { if(series[i]>=base*t.m){found=i;break;} }
-    const r72 = rate>0 ? (Math.log(t.m)/Math.log(1+rate/100))*12 : null;
+    for(let i=0;i<series.length;i++){if(series[i]>=base*t.m){found=i;break;}}
+    const r72=rate>0?(Math.log(t.m)/Math.log(1+rate/100))*12:null;
     return{...t,found,r72,reached:found>=0&&found<=months};
   });
-  document.getElementById('milestonesRow').innerHTML=mstones.map(ms=>`
+  document.getElementById('milestonesRow').innerHTML=ms.map(ms=>`
     <div class="milestone-card ${ms.reached?'reached':''}">
-      <div class="milestone-mult">${ms.emoji}</div>
-      <div class="milestone-label">${ms.lbl}</div>
+      <div class="milestone-mult">${ms.e}</div>
+      <div class="milestone-label">${ms.l}</div>
       <div class="milestone-when">${ms.found>=0?mStr(ms.found):'Além do prazo'}</div>
       <div class="milestone-badge ${ms.reached?'badge-reached':'badge-pending'}">${ms.reached?'✓ Atingido':'Não atingido'}</div>
       ${ms.r72?`<div class="milestone-r72">R72: ${mStr(ms.r72)}</div>`:''}
     </div>`).join('');
 }
 
-// ── REVERSE ────────────────────────────────────────────
-function calcReverse() {
-  const target=parseFloat(document.getElementById('revTarget').value)||0;
+// ═══════════════════════════════════════════════════════
+//  PRODUCT COMPARATOR
+// ═══════════════════════════════════════════════════════
+function renderProducts(){
+  const {P,PMT,months,useIR}=getInputs();
+  const cdi=parseFloat(document.getElementById('prodCDI').value)||10.65;
+  const ipca=parseFloat(document.getElementById('prodIPCA').value)||4.5;
+  const selic=parseFloat(document.getElementById('prodSELIC').value)||10.75;
+  const irrTotal=totalIrrContribs(months);
+  const totalInv=P+PMT*months+irrTotal;
+
+  // Product definitions
+  const products=[
+    {name:'Poupança',  rate:selic>8.5?0.7*selic:0.005*12*100, ir:false, tag:'70% SELIC', color:'#6b9ce8'},
+    {name:'CDB 100% CDI', rate:cdi, ir:true, tag:'100% CDI', color:'#c9a84c'},
+    {name:'CDB 110% CDI', rate:cdi*1.1, ir:true, tag:'110% CDI', color:'#e8c97a'},
+    {name:'LCI/LCA 90%', rate:cdi*0.9, ir:false, tag:'90% CDI', color:'#4caf82'},
+    {name:'Tesouro Selic', rate:cdi-0.1, ir:true, tag:'CDI-0,1%', color:'#a78bfa'},
+  ];
+
+  const results=products.map(pr=>{
+    const r=Math.pow(1+pr.rate/100,1/12)-1;
+    let b=P;
+    for(let m=1;m<=months;m++){b=b*(1+r)+PMT+getIrrAtMonth(m);}
+    const gross=b;
+    const grossInt=gross-totalInv;
+    const ir=pr.ir?irRate(months):0;
+    const tax=Math.max(grossInt,0)*ir;
+    const net=gross-tax;
+    const real=net/Math.pow(1+ipca/100,months/12);
+    return{...pr,gross,net,real,tax,grossInt,ir};
+  });
+
+  const bestNetIdx=results.reduce((bi,r,i)=>r.net>results[bi].net?i:bi,0);
+
+  // Render cards
+  document.getElementById('productsGrid').innerHTML=results.map((r,i)=>`
+    <div class="product-card ${i===bestNetIdx?'best':''}">
+      <div class="prod-name">${r.name}</div>
+      <div class="prod-rate">${r.rate.toFixed(2).replace('.',',')}% a.a.</div>
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">${r.tag} · ${r.ir?'IR incide':'Isento IR'}</div>
+      <div class="prod-amount">${fmtS(r.gross)}</div>
+      <div class="prod-net">→ ${fmtS(r.net)} líquido</div>
+      ${r.ir?`<div class="prod-ir">-${fmtS(r.tax)} IR (${(r.ir*100).toFixed(1)}%)</div>`:'<div class="prod-ir" style="color:var(--green)">Isento de IR ✓</div>'}
+      <div style="font-size:9px;color:var(--purple);font-family:'JetBrains Mono',monospace;margin-top:4px">Real: ${fmtS(r.real)}</div>
+    </div>`).join('');
+
+  // Chart
+  if(prodChart)prodChart.destroy();
+  const ctx=document.getElementById('productsChart').getContext('2d');
+  const ax=axisStyle(),d=chartDefaults();
+  prodChart=new Chart(ctx,{type:'bar',
+    data:{labels:results.map(r=>r.name),datasets:[
+      {label:'Montante bruto',data:results.map(r=>r.gross),backgroundColor:results.map(r=>r.color+'55'),borderColor:results.map(r=>r.color),borderWidth:2,borderRadius:5},
+      {label:'Líquido (após IR)',data:results.map(r=>r.net),backgroundColor:results.map(r=>r.color+'99'),borderColor:results.map(r=>r.color),borderWidth:1,borderRadius:5},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{labels:{color:d.legendColor,font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:12}},
+        tooltip:{...ttStyle()}},
+      scales:{x:{...ax,ticks:{...ax.ticks,font:{family:'JetBrains Mono',size:9}}},y:{...ax,ticks:{...ax.ticks,callback:v=>fmtS(v)}}}}});
+}
+
+// ═══════════════════════════════════════════════════════
+//  REVERSE CALCULATOR
+// ═══════════════════════════════════════════════════════
+function calcReverse(){
+  const target=rawVal('revTarget');
   const rate=parseFloat(document.getElementById('revRate').value)||0;
   const months=parseInt(document.getElementById('revPeriod').value)||1;
-  const pmt=parseFloat(document.getElementById('revMonthly').value)||0;
+  const pmt=rawVal('revMonthly');
   let capNeeded=0,pmtNeeded=0,mixedCap=0;
-
-  if(revMode==='compound') {
+  if(revMode==='compound'){
     const r=Math.pow(1+rate/100,1/12)-1;
     const gf=Math.pow(1+r,months);
     capNeeded=r>0?target/gf:target;
     pmtNeeded=r>0?target*r/(gf-1):target/months;
     if(pmt>0){const fvPmt=r>0?pmt*(gf-1)/r:pmt*months;mixedCap=Math.max(0,(target-fvPmt)/gf);}
     else mixedCap=capNeeded;
-  } else {
+  }else{
     const r=rate/100/12;
     const sf=1+r*months;
     capNeeded=sf>0?target/sf:target;
@@ -826,141 +1135,51 @@ function calcReverse() {
     if(pmt>0){const fvPmt=pmt*months+pmt*r*months*(months-1)/2;mixedCap=Math.max(0,(target-fvPmt)/sf);}
     else mixedCap=capNeeded;
   }
-
   document.getElementById('revCapital').textContent=fmtS(capNeeded);
   document.getElementById('revPmt').textContent=fmtS(pmtNeeded)+'/mês';
   document.getElementById('revMixed').textContent=fmtS(mixedCap);
-  document.getElementById('revMixedSub').textContent=pmt>0?`mais ${fmtS(pmt)}/mês`:'informe um aporte';
+  document.getElementById('revMixedSub').textContent=pmt>0?`+ ${fmtS(pmt)}/mês`:'informe um aporte';
 }
 
-// ── SCENARIOS ──────────────────────────────────────────
-// ── SCENARIO SAVE ──────────────────────────────────────
-function saveScenario() {
-  if(scenarios.length>=10){ alert('Máximo de 10 cenários atingido.'); return; }
-  const {P,PMT,rate,months} = inputs();
-  const nameInput = document.getElementById('scNameInput');
-  const defaultName = `Cenário ${scenarios.length+1}`;
-  const name = nameInput.value.trim() || defaultName;
-  nameInput.value = '';
-
-  const cS=compoundSeries(P,PMT,rate,months);
-  const sS=simpleSeries(P,PMT,rate,months);
-  const totalInv=P+PMT*months;
-  const scMode=mode==='both'?'compound':mode;
-  const activeTotal=scMode==='compound'?cS[months]:sS[months];
+// ═══════════════════════════════════════════════════════
+//  SCENARIOS
+// ═══════════════════════════════════════════════════════
+function saveScenario(){
+  if(scenarios.length>=6){toast('Máximo 6 cenários.');return;}
+  const {P,PMT,rate,months}=getInputs();
+  const cS=buildCompound(P,PMT,rate,months);
+  const sS=buildSimple(P,PMT,rate,months);
+  const irrTotal=totalIrrContribs(months);
+  const totalInv=P+PMT*months+irrTotal;
+  const activeTotal=mode==='compound'?cS[months]:sS[months];
   const idx=scenarios.length;
-  scenarios.push({
-    name, P, PMT, rate, months, mode:scMode,
-    total:activeTotal, totalInv, cS, sS,
-    color:SC_COLORS[idx % SC_COLORS.length],
-    label:`${rate}% · ${months}m · ${fmtS(P)}`
-  });
+  const scMode=mode==='both'?'compound':mode==='reverse'?'compound':mode;
+  scenarios.push({name:`Cenário ${idx+1}`,P,PMT,rate,months,mode:scMode,total:activeTotal,totalInv,cS,sS,color:SC_COLORS[idx],label:`${rate}% · ${months}m · ${fmtS(P)}`});
   renderScenarios();
+  toast(`✓ Cenário ${idx+1} salvo!`);
 }
-
-// ── SCENARIO RENDER ────────────────────────────────────
-function renderScenarios() {
+function renderScenarios(){
   const list=document.getElementById('scenariosList');
   const empty=document.getElementById('emptyScenarios');
-  if(scenarios.length===0){
-    list.innerHTML=''; list.appendChild(empty);
-    document.getElementById('scenariosChartWrap').style.display='none';
-    return;
-  }
+  if(!scenarios.length){list.innerHTML='';list.appendChild(empty);_show('scenariosChartWrap',false);return;}
   empty.style.display='none';
-  list.innerHTML=`<div class="scenarios-list">`+scenarios.map((sc,i)=>`
-    <div class="scenario-item" id="sc-item-${i}">
+  list.innerHTML=scenarios.map((sc,i)=>`
+    <div class="scenario-item">
       <div class="sc-dot" style="background:${sc.color}"></div>
-      <div class="sc-info">
-        <div class="sc-name">${sc.name}</div>
-        <div class="sc-detail">${sc.rate}% a.a. · ${sc.months}m · cap. ${fmtS(sc.P)}${sc.PMT>0?' · +'+fmtS(sc.PMT)+'/mês':''} · ${sc.mode}</div>
-      </div>
+      <div class="sc-info"><div class="sc-name">${sc.name}</div><div class="sc-detail">${sc.label} · ${sc.mode}</div></div>
       <div class="sc-val">${fmtS(sc.total)}</div>
-      <button class="sc-edit-btn" title="Editar cenário" onclick="openModal(${i})">✎ Editar</button>
-      <button class="sc-edit-btn del" title="Remover" onclick="removeScenario(${i})">✕</button>
-    </div>`).join('')+'</div>';
-  document.getElementById('scenariosChartWrap').style.display='';
+      <button class="sc-del" onclick="removeScenario(${i})">✕</button>
+    </div>`).join('');
+  _show('scenariosChartWrap',true);
   drawScenarios();
 }
-
-function removeScenario(i) {
+function removeScenario(i){
   scenarios.splice(i,1);
+  scenarios.forEach((sc,idx)=>{sc.name=`Cenário ${idx+1}`;sc.color=SC_COLORS[idx];});
   renderScenarios();
 }
-function clearScenarios() { scenarios=[]; renderScenarios(); }
-
-// ── MODAL ──────────────────────────────────────────────
-let editingIdx = -1;
-let modalMode = 'compound';
-let modalColor = SC_COLORS[0];
-
-function openModal(i) {
-  editingIdx = i;
-  const sc = scenarios[i];
-  document.getElementById('medit-name').value = sc.name;
-  document.getElementById('medit-principal').value = sc.P;
-  document.getElementById('medit-monthly').value = sc.PMT;
-  document.getElementById('medit-rate').value = sc.rate;
-  document.getElementById('medit-months').value = sc.months;
-  setModalMode(sc.mode);
-  modalColor = sc.color;
-
-  // Build color swatches
-  const row = document.getElementById('medit-colors');
-  row.innerHTML = SC_COLORS.map(c=>`
-    <div class="modal-color-swatch ${c===sc.color?'selected':''}"
-      style="background:${c}" onclick="selectModalColor('${c}',this)"></div>`).join('');
-
-  document.getElementById('scModal').style.display='';
-  document.getElementById('medit-name').focus();
-}
-
-function closeModal(e) {
-  if(e && e.target !== document.querySelector('.modal-backdrop')) return;
-  document.getElementById('scModal').style.display='none';
-  editingIdx = -1;
-}
-
-function setModalMode(m) {
-  modalMode = m;
-  document.getElementById('medit-simple').classList.toggle('active', m==='simple');
-  document.getElementById('medit-compound').classList.toggle('active', m==='compound');
-}
-
-function selectModalColor(c, el) {
-  modalColor = c;
-  document.querySelectorAll('.modal-color-swatch').forEach(s=>s.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-function applyModalEdit() {
-  if(editingIdx < 0) return;
-  const name = document.getElementById('medit-name').value.trim() || `Cenário ${editingIdx+1}`;
-  const P    = parseFloat(document.getElementById('medit-principal').value)||0;
-  const PMT  = parseFloat(document.getElementById('medit-monthly').value)||0;
-  const rate = parseFloat(document.getElementById('medit-rate').value)||0;
-  const months=parseInt(document.getElementById('medit-months').value)||1;
-
-  const cS = compoundSeries(P,PMT,rate,months);
-  const sS = simpleSeries(P,PMT,rate,months);
-  const totalInv = P+PMT*months;
-  const activeTotal = modalMode==='compound'?cS[months]:sS[months];
-
-  scenarios[editingIdx] = {
-    name, P, PMT, rate, months, mode:modalMode,
-    total:activeTotal, totalInv, cS, sS,
-    color:modalColor,
-    label:`${rate}% · ${months}m · ${fmtS(P)}`
-  };
-  document.getElementById('scModal').style.display='none';
-  editingIdx = -1;
-  renderScenarios();
-}
-
-// Close on Escape
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') { document.getElementById('scModal').style.display='none'; editingIdx=-1; } });
-
-function drawScenarios() {
+function clearScenarios(){scenarios=[];renderScenarios();}
+function drawScenarios(){
   const ctx=document.getElementById('scenariosChart').getContext('2d');
   if(scenChart)scenChart.destroy();
   if(!scenarios.length)return;
@@ -970,82 +1189,78 @@ function drawScenarios() {
     const series=sc.mode==='compound'?sc.cS:sc.sS;
     const padded=[...series];
     while(padded.length<=maxM)padded.push(padded[padded.length-1]);
-    return{label:sc.name,data:padded,borderColor:sc.color,backgroundColor:'transparent',borderWidth:2,pointRadius:0,tension:0.35};
+    return{label:sc.name,data:padded,borderColor:sc.color,backgroundColor:'transparent',borderWidth:2,pointRadius:0,tension:.35};
   });
+  const ax=axisStyle(),d=chartDefaults();
   scenChart=new Chart(ctx,{type:'line',data:{labels,datasets:ds},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-      plugins:{legend:{labels:{color:'#6b7085',font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:12}},
-        tooltip:{backgroundColor:'#0e1018',borderColor:'#1e2230',borderWidth:1,bodyFont:{family:'JetBrains Mono',size:11},callbacks:{label:c=>' '+c.dataset.label+': '+fmtS(c.raw)}}},
-      scales:{x:{ticks:{color:'#6b7085',font:{family:'JetBrains Mono',size:9},maxRotation:0,autoSkip:true,maxTicksLimit:12},grid:{color:'rgba(30,34,48,0.4)'},border:{color:'#1e2230'}},
-        y:{ticks:{color:'#6b7085',font:{family:'JetBrains Mono',size:9},callback:v=>fmtS(v)},grid:{color:'rgba(30,34,48,0.4)'},border:{color:'#1e2230'}}}}});
+      plugins:{legend:{labels:{color:d.legendColor,font:{family:'JetBrains Mono',size:10},usePointStyle:true,padding:12}},tooltip:ttStyle()},
+      scales:{x:ax,y:{...ax,ticks:{...ax.ticks,callback:v=>fmtS(v)}}}}});
 }
 
-// ── TABLES ─────────────────────────────────────────────
-function buildTables(P, PMT, rate, months, useIR) {
-  const useY=months>36, step=useY?12:1;
+// ═══════════════════════════════════════════════════════
+//  TABLES
+// ═══════════════════════════════════════════════════════
+function buildTables(P,PMT,rate,months,useIR,irrTotal){
+  const useY=months>36,step=useY?12:1;
   const periods=[];
   for(let m=step;m<=months;m+=step)periods.push(m);
   if(!periods.length||periods[periods.length-1]!==months)periods.push(months);
-
-  const rS=rate/100/12;
-
+  document.getElementById('simpleTableTitle').textContent=`Juros Simples — ${useY?'Anual':'Mensal'}`;
+  document.getElementById('compoundTableTitle').textContent=`Juros Compostos — ${useY?'Anual':'Mensal'}`;
   let prevS=P,prevC=P;
   document.getElementById('simpleBody').innerHTML='';
   document.getElementById('compoundBody').innerHTML='';
-  document.getElementById('simpleTableTitle').textContent=`Juros Simples — ${useY?'Anual':'Mensal'}`;
-  document.getElementById('compoundTableTitle').textContent=`Juros Compostos — ${useY?'Anual':'Mensal'}`;
-
   periods.forEach(m=>{
-    const ti=P+PMT*m;
-    const simT=P*(1+rS*m)+PMT*m+PMT*rS*m*(m-1)/2;
-    const cmpT=compoundSeries(P,PMT,rate,m)[m];
+    const ti=P+PMT*m+totalIrrContribs(m);
+    const simT=buildSimple(P,PMT,rate,m)[m];
+    const cmpT=buildCompound(P,PMT,rate,m)[m];
     const lbl=useY?`Ano ${Math.round(m/12)}`:`Mês ${m}`;
-    const sJ=simT-prevS, cJ=cmpT-prevC;
+    const sJ=simT-prevS,cJ=cmpT-prevC;
     const irR=useIR?irRate(m):0;
-
+    const sNet=useIR?simT-Math.max(simT-ti,0)*irR:null;
+    const cNet=useIR?cmpT-Math.max(cmpT-ti,0)*irR:null;
     document.getElementById('simpleBody').innerHTML+=`<tr>
-      <td>${lbl}</td><td class="td-green">${fmtS(sJ)}</td>
-      <td>${fmtS(simT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
-      <td class="td-gold">${fmtS(simT)}${useIR?` <span style="color:var(--red);font-size:9px">→${fmtS(simT-Math.max(simT-ti,0)*irR)}</span>`:''}</td></tr>`;
-
+      <td>${lbl}</td><td class="td-green">${fmtS(sJ)}</td><td>${fmtS(simT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
+      <td class="td-gold">${fmtS(simT)}${sNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(sNet)}</span>`:''}</td></tr>`;
     document.getElementById('compoundBody').innerHTML+=`<tr>
-      <td>${lbl}</td><td class="td-green">${fmtS(cJ)}</td>
-      <td>${fmtS(cmpT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
-      <td class="td-gold">${fmtS(cmpT)}${useIR?` <span style="color:var(--red);font-size:9px">→${fmtS(cmpT-Math.max(cmpT-ti,0)*irR)}</span>`:''}</td></tr>`;
-
-    prevS=simT; prevC=cmpT;
+      <td>${lbl}</td><td class="td-green">${fmtS(cJ)}</td><td>${fmtS(cmpT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
+      <td class="td-gold">${fmtS(cmpT)}${cNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(cNet)}</span>`:''}</td></tr>`;
+    prevS=simT;prevC=cmpT;
   });
-
-  document.getElementById('simpleTableCard').style.display=mode==='compound'?'none':'';
-  document.getElementById('compoundTableCard').style.display=mode==='simple'?'none':'';
+  _show('simpleTableCard',mode!=='compound');
+  _show('compoundTableCard',mode!=='simple');
   document.getElementById('breakdownGrid').style.gridTemplateColumns=(mode==='simple'||mode==='compound')?'1fr':'1fr 1fr';
 }
 
-// ── EXPORT CSV ─────────────────────────────────────────
-function exportCSV() {
-  const {P,PMT,rate,months} = inputs();
-  const rS=rate/100/12;
-  const useY=months>36, step=useY?12:1;
+// ═══════════════════════════════════════════════════════
+//  EXPORT CSV
+// ═══════════════════════════════════════════════════════
+function exportCSV(){
+  const {P,PMT,rate,months}=getInputs();
+  const useY=months>36,step=useY?12:1;
   let csv='Periodo,Total Investido,Simples - Juros,Simples - Montante,Compostos - Juros,Compostos - Montante\n';
   let prevS=P,prevC=P;
   for(let m=step;m<=months;m+=step){
-    const ti=P+PMT*m;
-    const simT=P*(1+rS*m)+PMT*m+PMT*rS*m*(m-1)/2;
-    const cmpT=compoundSeries(P,PMT,rate,m)[m];
+    const ti=P+PMT*m+totalIrrContribs(m);
+    const sT=buildSimple(P,PMT,rate,m)[m];
+    const cT=buildCompound(P,PMT,rate,m)[m];
     const lbl=useY?`Ano ${Math.round(m/12)}`:`Mes ${m}`;
-    csv+=`${lbl},${ti.toFixed(2)},${(simT-prevS).toFixed(2)},${simT.toFixed(2)},${(cmpT-prevC).toFixed(2)},${cmpT.toFixed(2)}\n`;
-    prevS=simT;prevC=cmpT;
+    csv+=`${lbl},${ti.toFixed(2)},${(sT-prevS).toFixed(2)},${sT.toFixed(2)},${(cT-prevC).toFixed(2)},${cT.toFixed(2)}\n`;
+    prevS=sT;prevC=cT;
   }
   const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download='simulacao_juros.csv';a.click();
+  const a=document.createElement('a');a.href=url;a.download='simulacao_juros.csv';a.click();
   URL.revokeObjectURL(url);
 }
 
-// ── INIT ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
 document.getElementById('compoundTableCard').style.display='none';
 document.getElementById('breakdownGrid').style.gridTemplateColumns='1fr';
+loadFromURL();
 calculate();
 </script>
 </body>

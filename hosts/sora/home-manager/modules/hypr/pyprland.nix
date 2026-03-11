@@ -4,7 +4,7 @@
 in {
   xdg.enable = true;
 
-  xdg.configFile."hypr/pyprland.toml".source = (pkgs.formats.toml {}).generate "pyprland-config" {
+  xdg.configFile."pypr/config.toml".source = (pkgs.formats.toml {}).generate "pyprland-config" {
     pyprland.plugins = [
       "scratchpads"
       "toggle_special"

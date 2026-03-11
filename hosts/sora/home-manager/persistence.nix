@@ -19,6 +19,7 @@
     ".config/spotify"
     ".config/dconf"
     ".config/noctalia"
+    ".config/OpenRGB"
     ".cache/nix-index"
     ".steam"
     {

@@ -9,7 +9,6 @@
     ./rbw.nix
     ./oama.nix
     ./vicinae.nix
-    ./kdeconnect.nix
     ./mako.nix
     ./clipnotify.nix
     ./swayosd.nix
@@ -39,5 +38,6 @@
     ./walker.nix
     ./noctalia.nix
     ./spicetify.nix
+    ./mangohud.nix
   ];
 }

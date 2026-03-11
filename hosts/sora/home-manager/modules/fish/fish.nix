@@ -98,6 +98,7 @@
         nix-shell = "nix-shell --command $SHELL";
 
         ff = "fastfetch";
+        myip = "curl ifconfig.me -4";
 
         # fish
         src = "source ~/.config/fish/config.fish";

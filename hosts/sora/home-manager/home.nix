@@ -25,6 +25,7 @@
     homeDirectory = "/home/rakki";
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/NixConfig";
+      MANGOHUD = 1;
     };
     persistence."/persist".directories = [
       "Documents"
@@ -63,7 +64,7 @@
         "x-scheme-handler/http" = ["brave-browser.desktop"];
         "x-scheme-handler/https" = ["brave-browser.desktop"];
         "application/pdf" = ["evince.desktop"];
-        "inode/directory" = ["nemo.desktop"];
+        "inode/directory" = ["nemo.desktop;pcmanfm-qt"];
       };
     };
     desktopEntries = {
