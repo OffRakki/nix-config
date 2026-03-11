@@ -16,6 +16,7 @@
         "/var/lib/nixos"
         "/var/lib/tailscale"
         "/var/lib/containers"
+        "/var/lib/private"
         "/var/log"
       ];
     };
