@@ -117,7 +117,7 @@ in {
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        vfr = true;
+        vfr = false;
         vrr = 1;
         mouse_move_enables_dpms = true;
         enable_swallow = true;
@@ -140,8 +140,8 @@ in {
       };
 
       decoration = {
-        rounding = 12;
-        rounding_power = 4;
+        rounding = 0;
+        rounding_power = 0;
 
         active_opacity = 1.0;
         inactive_opacity = 0.8;
@@ -431,9 +431,11 @@ in {
         "$mod SHIFT, Return, exec, pypr toggle term" # Dropdown terminal
         "$mod SHIFT, V, exec, pypr toggle volume" # Pavucontrol
 
+        "$mod, M, exec, noctalia-shell ipc call sessionMenu toggle"
+        "$mod SHIFT, W, exec, noctalia-shell ipc call wallpaper toggle"
+
         "CTRL ALT, N, exec, $terminal --class middleFloat -e hx"
         "$mod SHIFT, P, exec,  '${../../../../../scripts/pass-wofi.sh}'"
-        "$mod SHIFT, W, exec, noctalia-shell ipc call wallpaper toggle"
         "$mod,g,togglegroup"
         "$mod,i,pin"
         ", Print, exec, $hyprshot -z --clipboard-only -m region --freeze"
@@ -510,7 +512,7 @@ in {
         "$mod SHIFT, down, movewindow, d"
 
         # Dwindle Layout
-        "$mod SHIFT, I, togglesplit # only works on dwindle layout"
+        # "$mod SHIFT, I, togglesplit # only works on dwindle layout"
         "$mod, P, pseudo, # dwindle"
       ];
 

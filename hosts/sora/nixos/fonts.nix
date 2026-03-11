@@ -1,6 +1,12 @@
 {pkgs, ...}: {
   fonts = {
     packages = with pkgs; [
+      carlito
+      dejavu_fonts
+      ipafont
+      kochi-substitute
+      source-code-pro
+      ttf_bitstream_vera
       plemoljp
       corefonts
       noto-fonts

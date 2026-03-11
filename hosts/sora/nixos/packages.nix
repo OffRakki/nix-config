@@ -13,6 +13,9 @@
     sops
     age
 
+    catppuccin-kvantum
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
     pomodoro-gtk
     qbittorrent-nox
     passmark-performancetest
