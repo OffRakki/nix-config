@@ -31,8 +31,8 @@ in {
       };
       volume = {
         animation = "fromRight";
-        command = "pavucontrol";
-        class = "org.pulseaudio.pavucontrol";
+        command = "pwvucontrol";
+        class = "com.saivert.pwvucontrol";
         lazy = "true";
         size = "40% 90%";
         max_size = "1080px 100%";

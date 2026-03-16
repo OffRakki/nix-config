@@ -17,6 +17,7 @@
   services.power-profiles-daemon.enable = true;
 
   boot = {
+    kernel.sysctl."vm.max_map_count" = 2147483642;
     kernelPackages = pkgs.linuxPackages_zen;
     loader = {
       timeout = 0;
@@ -86,7 +87,7 @@
 
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "powersave";
+    cpuFreqGovernor = "schedutil";
   };
 
   networking = {
@@ -130,4 +131,19 @@
     enable = true;
     motherboard = "amd";
   };
+  # systemd.services.openrgb-load-profile = {
+  #   description = "Load OpenRGB white profile at boot";
+
+  #   # Wait until the hardware and OpenRGB server/udev are ready
+  #   after = ["multi-user.target" "openrgb.service"];
+  #   wantedBy = ["multi-user.target"];
+
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     # Use the absolute path from the openrgb package
+  #     ExecStart = "${pkgs.openrgb}/bin/openrgb --profile white";
+  #     User = "rakki"; # Replace with your actual username where the profile is saved
+  #     RemainAfterExit = true;
+  #   };
+  # };
 }

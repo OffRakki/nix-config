@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -13,6 +14,11 @@
     sops
     age
 
+    floorp-bin
+    lmstudio
+    gollama
+    gparted
+    i2c-tools
     _7zip-zstd
     catppuccin-kvantum
     libsForQt5.qtstyleplugin-kvantum

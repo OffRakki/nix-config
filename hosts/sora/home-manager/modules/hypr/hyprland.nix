@@ -251,6 +251,11 @@ in {
           border_color = "rgba(5c4826ff) rgba(5c482644)";
         }
         {
+          name = "floorpBorderColorFix";
+          "match:class" = "floorp";
+          border_color = "rgba(5c4826ff) rgba(5c482644)";
+        }
+        {
           name = "middleFloatClass";
           "match:class" = "middleFloat";
           float = "on";
@@ -324,21 +329,30 @@ in {
           monitor = "HDMI-A-1";
         }
         {
-          name = "browser";
+          name = "BraveBrowser";
           "match:class" = "brave-browser";
           opacity = "2 2 2";
           workspace = "Browser";
           monitor = "DP-1";
         }
         {
+          name = "FloorpBrowser";
+          "match:class" = "floorp";
+          opacity = "2 2 2";
+          workspace = "Browser";
+          monitor = "DP-1";
+        }
+        # not working for some reason
+        {
           name = "bitwardenBrowser";
-          "match:initial_class" = "brave-nngceckbapebfimnlniiiahkandclblb-Default";
+          "match:class" = "floorp";
+          "match:title" = "Extension.*Bitwarden.*";
           float = "on";
           size = "window_w/2 window_h/2";
         }
         {
-          name = "pavucontrol";
-          "match:initial_class" = "org.pulseaudio.pavucontrol";
+          name = "pwvucontrol";
+          "match:initial_class" = "com.saivert.pwvucontrol";
           float = "on";
           size = "window_w/2 window_h/2";
         }
@@ -392,7 +406,7 @@ in {
         "steam"
         "Telegram"
         "goofcord"
-        "brave --profile-directory=Default --app=https://web.whatsapp.com"
+        # "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];
 
       binde = [
@@ -443,8 +457,8 @@ in {
         "$mod, L, exec, $lock"
         # "$mod SHIFT, D, exec, pkill wofi || wofi --show drun -G --insensitive" # Main Menu
         # "$mod SHIFT, D, exec, vicinae open"
-        "$mod, D, exec, walker"
-        "$mod SHIFT, D, exec, fuzzel"
+        "$mod SHIFT, D, exec, walker"
+        "$mod, D, exec, fuzzel"
         "$mod ALT, D, exec, pkill wofi || wofi --show run -G --insensitive" # Main Menu
         "$mod, V, exec, pkill clipse & $terminal --class middleFloat -e clipse"
         "$mod, SPACE, togglefloating"

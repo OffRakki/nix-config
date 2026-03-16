@@ -59,6 +59,7 @@
     ministerio.url = "github:misterio77/nix-config";
 
     # Games
+    # millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     hytale = {
       url = "github:TNAZEP/HytaleLauncherFlake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,6 +93,7 @@
     self,
     nixpkgs,
     noctalia,
+    # millennium,
     nuls,
     home-manager,
     catppuccin,

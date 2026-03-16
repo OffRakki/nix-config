@@ -22,6 +22,7 @@
 
   nixpkgs = {
     overlays = [
+      # inputs.millennium.overlays.default
       (final: _: {
         inputs =
           builtins.mapAttrs (
@@ -97,6 +98,7 @@
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    GTK_IM_MODULE = "";
     QT_STYLE_OVERRIDE = "gtk3";
     QT_QPA_PLATFORM = "wayland";
     CLUTTER_BACKEND = "wayland";
@@ -236,6 +238,7 @@
     };
     xserver = {
       enable = true;
+      # Enable nvidia OC
       deviceSection = ''
         Option "Coolbits" "28"
       '';
@@ -257,7 +260,6 @@
       };
     };
     displayManager = {
-      ly.enable = false;
       sessionPackages = [
         pkgs.hyprland
       ];

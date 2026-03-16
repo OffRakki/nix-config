@@ -8,15 +8,15 @@
         placeholder = "Generate luminous element!";
         line-height = 24;
         width = 24;
-        tabs = 2;
+        tabs = 3;
         horizontal-pad = 10;
         vertical-pad = 10;
         inner-pad = 10;
-        image-size-ratio = 1;
+        image-size-ratio = 2;
 
         use-bold = true;
         counter = false;
-        auto-select = true;
+        auto-select = false;
         mouse-bindings = false;
       };
 

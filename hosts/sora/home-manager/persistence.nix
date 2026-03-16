@@ -4,6 +4,7 @@
     "Games"
     "Tailscale"
     ".nv"
+    ".steam"
     ".var/app/ai.moeru.airi"
     ".local/share/flatpak"
     ".local/share/Steam"
@@ -21,7 +22,8 @@
     ".config/noctalia"
     ".config/OpenRGB"
     ".cache/nix-index"
-    ".steam"
+    ".cache/floorp"
+    ".floorp"
     {
       directory = ".ssh";
       mode = "0700";
