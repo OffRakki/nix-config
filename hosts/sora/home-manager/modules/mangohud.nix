@@ -1,7 +1,7 @@
 {...}: {
   programs.mangohud = {
     enable = true;
-    enableSessionWide = true;
+    enableSessionWide = false;
     settings = {
       # Display
       legacy_layout = true;

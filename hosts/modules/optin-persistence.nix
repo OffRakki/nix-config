@@ -18,6 +18,7 @@
         "/var/lib/containers"
         "/var/lib/private"
         "/var/lib/OpenRGB"
+        "/var/lib/waydroid"
         "/var/log"
       ];
     };

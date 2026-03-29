@@ -10,23 +10,13 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        libva
-        vdpauinfo
-        libva-utils
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-      ];
+      extraPackages = with pkgs; [mesa];
     };
   };
 
   hardware.nvidia = {
-    # Modesetting is required.
     modesetting.enable = true;
 
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement = {
       enable = false;
       # Fine-grained power management. Turns off GPU when not in use.
@@ -42,7 +32,6 @@
     # supported GPUs is at:
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = true;
 
     # Enable the Nvidia settings menu,
@@ -51,6 +40,6 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 }

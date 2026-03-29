@@ -42,7 +42,7 @@ in {
         {
           output = "HDMI-A-1";
           mode = "1920x1080@60";
-          position = "-1920x0";
+          position = "1920x0";
           scale = 1;
           # addreserved = "30,0,0,0";
         }
@@ -54,7 +54,7 @@ in {
         "name:Browser,monitor:DP-1,persistent:true,default:true"
         "name:Social,monitor:HDMI-A-1,persistent:true,default:true"
         "name:Games,monitor:DP-1,persistent:true"
-        "name:Extra,monitor:DP-1,persistent:true"
+        "name:Extra,monitor:HDMI-A-1,persistent:true"
       ];
 
       dwindle = {
@@ -75,8 +75,8 @@ in {
         allow_tearing = false;
         layout = "scrolling";
         border_size = 2;
-        gaps_in = 4;
-        gaps_out = 4;
+        gaps_in = 6;
+        gaps_out = 8;
 
         "col.active_border" = "rgba(BFA16Eff)";
         "col.inactive_border" = "rgba(BFA16E44)";
@@ -322,8 +322,15 @@ in {
           monitor = "HDMI-A-1";
         }
         {
+          name = "vesktop";
+          "match:initial_class" = "vesktop";
+          no_initial_focus = "on";
+          workspace = "Social";
+          monitor = "HDMI-A-1";
+        }
+        {
           name = "whatsapp";
-          "match:initial_title" = "web.whatsapp.com.*";
+          "match:initial_class" = "floorp-3aff5da4-1373-44b8-b15b-10ca84519621";
           no_initial_focus = "on";
           workspace = "Social";
           monitor = "HDMI-A-1";
@@ -405,7 +412,8 @@ in {
         "sleep 3 && systemctl --user restart clip-notify"
         "steam"
         "Telegram"
-        "goofcord"
+        "vesktop"
+        # "floorp --name floorp-3aff5da4-1373-44b8-b15b-10ca84519621 --profile /home/rakki/.floorp/r0ncjdot.default --start-ssb '{3aff5da4-1373-44b8-b15b-10ca84519621}'"
         # "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];
 

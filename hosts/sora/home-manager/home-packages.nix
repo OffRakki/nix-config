@@ -21,6 +21,7 @@
     swaybg
     onlyoffice-desktopeditors
     onlyoffice-documentserver
+    runelite
 
     # Langs
     nil

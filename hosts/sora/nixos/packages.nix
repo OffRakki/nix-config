@@ -14,6 +14,7 @@
     sops
     age
 
+    vulkan-tools
     floorp-bin
     lmstudio
     gollama
@@ -23,14 +24,12 @@
     catppuccin-kvantum
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
-    vulkan-loader
     (prismlauncher.override {
       jdks = [
         pkgs.temurin-bin-8
         pkgs.temurin-bin-17
         pkgs.temurin-bin-21
       ];
-      additionalLibs = [vulkan-loader];
     })
     pomodoro-gtk
     qbittorrent-nox
@@ -105,7 +104,6 @@
     os-prober
     nixd
     nixfmt
-    vulkan-tools
     nushell
     tmux
     evil-helix

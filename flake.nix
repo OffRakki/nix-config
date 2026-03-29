@@ -33,11 +33,6 @@
 
     # WM
     hyprland.url = "github:hyprwm/Hyprland";
-    elephant.url = "github:abenz1267/elephant";
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +55,7 @@
 
     # Games
     # millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     hytale = {
       url = "github:TNAZEP/HytaleLauncherFlake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -93,6 +89,7 @@
     self,
     nixpkgs,
     noctalia,
+    nix-minecraft,
     # millennium,
     nuls,
     home-manager,

@@ -27,6 +27,7 @@
       terminus_font
     ];
     fontconfig = {
+      enable = true;
       defaultFonts = {
         serif = ["Noto Serif"];
         sansSerif = ["Noto Sans"];

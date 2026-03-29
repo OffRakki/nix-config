@@ -35,7 +35,6 @@
     ./brave.nix
     ./river.nix
     ./fuzzel.nix
-    ./walker.nix
     ./noctalia.nix
     ./spicetify.nix
     ./mangohud.nix

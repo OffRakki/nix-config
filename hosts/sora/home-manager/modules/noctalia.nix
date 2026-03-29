@@ -179,7 +179,7 @@
         ];
       };
       bar = {
-        position = "top";
+        position = "bottom";
         density = "confortable";
         showOutline = false;
         showCapsule = true;
@@ -190,11 +190,11 @@
         fontScale = 1;
         backgroundOpacity = 0.93;
         useSeparateOpacity = false;
-        floating = true;
+        floating = false;
         marginVertical = 4;
         marginHorizontal = 4;
         frameThickness = 8;
-        frameRadius = 12;
+        frameRadius = 0;
         outerCorners = false;
         hideOnOverview = false;
         displayMode = "always_visible";

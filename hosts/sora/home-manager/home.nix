@@ -6,7 +6,6 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     inputs.noctalia.homeModules.default
-    inputs.walker.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
     ./modules
     ./home-packages.nix

@@ -1,33 +1,27 @@
-{pkgs, ...}: let
-  colloidGruvbox = pkgs.colloid-gtk-theme.override {
-    tweaks = ["gruvbox"];
-    colorVariants = ["dark"];
-  };
-  themeName = "Colloid-Dark-Gruvbox";
-in {
+{pkgs, ...}: {
   home.sessionVariables = {
     ADW_DEBUG_COLOR_SCHEME = "prefer-dark";
+    GTK_THEME = "catppuccin-mocha-lavender-standard+normal";
   };
-
-  # dconf = {
-  #   enable = true;
-  #   settings = {
-  #     "org/gnome/desktop/interface" = {
-  #       icon-theme = "Gruvbox-Plus-Dark";
-  #     };
-  #   };
-  # };
 
   gtk = {
     enable = true;
     colorScheme = "dark";
     theme = {
-      name = themeName;
-      package = colloidGruvbox;
+      name = "catppuccin-mocha-lavender-standard+normal";
+      package = pkgs.catppuccin-gtk.override {
+        accents = ["lavender"];
+        size = "standard";
+        tweaks = ["normal"];
+        variant = "mocha";
+      };
     };
     iconTheme = {
-      name = "Gruvbox-Plus-Dark";
-      package = pkgs.gruvbox-plus-icons;
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      };
     };
     font = {
       name = "FiraSans";
@@ -39,9 +33,12 @@ in {
         gtk-application-prefer-dark-theme=1
       '';
     };
-    gtk4.extraConfig.settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
+    gtk4 = {
+      enable = true;
+      extraConfig.settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
   };
 
   home = {
@@ -59,8 +56,8 @@ in {
   services.xsettingsd = {
     enable = true;
     settings = {
-      "Net/ThemeName" = themeName;
-      "Net/IconThemeName" = "Gruvbox-Plus-Dark";
+      "Net/ThemeName" = "catppuccin-mocha-lavender-standard+normal";
+      "Net/IconThemeName" = "Papirus-Dark";
     };
   };
 }

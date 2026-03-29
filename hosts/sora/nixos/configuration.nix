@@ -7,6 +7,7 @@
   ...
 }: {
   imports = [
+    inputs.nix-minecraft.nixosModules.minecraft-servers
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
     inputs.hyprland.nixosModules.default
@@ -18,10 +19,12 @@
     ./users.nix
     ./tailscale.nix
     ./kdeconnect.nix
+    # ./mcServer.nix
   ];
 
   nixpkgs = {
     overlays = [
+      inputs.nix-minecraft.overlay
       # inputs.millennium.overlays.default
       (final: _: {
         inputs =
@@ -49,6 +52,11 @@
       # Import your home-manager config
       rakki = import ../home-manager/home.nix;
     };
+  };
+
+  virtualisation.waydroid = {
+    enable = true;
+    package = pkgs.waydroid-nftables;
   };
 
   sops = {
@@ -92,7 +100,7 @@
     __GL_SHADER_DISK_CACHE = 1;
     __GL_SHADER_DISK_CACHE_PATH = "/home/rakki/.nv/shaderCache";
     __GL_SHADER_DISK_CACHE_SIZE = 107374182400; # 100GB
-    # __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1; # Essentially unlimited cache
+    __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1; # Essentially unlimited cache
     AQ_DRM_DEVICES = "/dev/dri/card1";
     NVD_BACKEND = "direct";
     LIBVA_DRIVER_NAME = "nvidia";
@@ -103,13 +111,11 @@
     QT_QPA_PLATFORM = "wayland";
     CLUTTER_BACKEND = "wayland";
     EGL_PLATFORM = "wayland";
-    XDG_SESSION_TYPE = "wayland";
     GDK_BACKEND = "wayland,x11";
     GDK_SCALE = "1";
     NIXOS_OZONE_WL = "1";
     MOZ_DISABLE_RDD_SANDBOX = "1";
     MOZ_ENABLE_WAYLAND = 1;
-    WLR_NO_HARDWARE_CURSORS = 1;
     PROTON_USE_NTSYNC = 1;
     TERMINAL = "kitty";
     EDITOR = "hx";
