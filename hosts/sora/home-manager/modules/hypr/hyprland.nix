@@ -244,15 +244,9 @@ in {
       ];
 
       windowrule = [
-        # fix for brave border color not being displayed correctly.
         {
-          name = "braveBorderColorFix";
-          "match:class" = "brave-browser";
-          border_color = "rgba(5c4826ff) rgba(5c482644)";
-        }
-        {
-          name = "floorpBorderColorFix";
-          "match:class" = "floorp";
+          name = "firefoxBorderColorFix";
+          "match:class" = "firefox";
           border_color = "rgba(5c4826ff) rgba(5c482644)";
         }
         {
@@ -329,22 +323,8 @@ in {
           monitor = "HDMI-A-1";
         }
         {
-          name = "whatsapp";
-          "match:initial_class" = "floorp-3aff5da4-1373-44b8-b15b-10ca84519621";
-          no_initial_focus = "on";
-          workspace = "Social";
-          monitor = "HDMI-A-1";
-        }
-        {
-          name = "BraveBrowser";
-          "match:class" = "brave-browser";
-          opacity = "2 2 2";
-          workspace = "Browser";
-          monitor = "DP-1";
-        }
-        {
-          name = "FloorpBrowser";
-          "match:class" = "floorp";
+          name = "firefoxBrowser";
+          "match:class" = "firefox";
           opacity = "2 2 2";
           workspace = "Browser";
           monitor = "DP-1";
@@ -352,8 +332,8 @@ in {
         # not working for some reason
         {
           name = "bitwardenBrowser";
-          "match:class" = "floorp";
-          "match:title" = "Extension.*Bitwarden.*";
+          "match:class" = "firefox";
+          "match:title" = "Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox";
           float = "on";
           size = "window_w/2 window_h/2";
         }
@@ -374,11 +354,6 @@ in {
           "match:initial_title" = "Bluetooth Devices";
           float = "on";
           size = "window_w/4 window_h/2";
-        }
-        {
-          name = "idle_inhibitFullscreen";
-          "match:class" = "brave-browser"; # Change to ".*" if want to apply to any fullscreen application
-          idle_inhibit = "fullscreen";
         }
         {
           name = "sshColorTmpst";
@@ -413,8 +388,6 @@ in {
         "steam"
         "Telegram"
         "vesktop"
-        # "floorp --name floorp-3aff5da4-1373-44b8-b15b-10ca84519621 --profile /home/rakki/.floorp/r0ncjdot.default --start-ssb '{3aff5da4-1373-44b8-b15b-10ca84519621}'"
-        # "brave --profile-directory=Default --app=https://web.whatsapp.com"
       ];
 
       binde = [

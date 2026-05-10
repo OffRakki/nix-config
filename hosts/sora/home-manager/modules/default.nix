@@ -32,7 +32,6 @@
     ./opencode.nix
     ./hytale.nix
     ./quickshell/quickshell.nix
-    ./brave.nix
     ./river.nix
     ./fuzzel.nix
     ./noctalia.nix
