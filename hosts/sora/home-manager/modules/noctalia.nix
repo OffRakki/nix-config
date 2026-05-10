@@ -197,7 +197,7 @@
         frameRadius = 0;
         outerCorners = false;
         hideOnOverview = false;
-        displayMode = "always_visible";
+        displayMode = "auto_hide";
         autoHideDelay = 500;
         autoShowDelay = 150;
         showOnWorkspaceSwitch = true;
@@ -275,7 +275,7 @@
               unfocusedIconsOpacity = 1;
               displayMode = "labels";
               labelMode = "name";
-              hideUnoccupied = false;
+              hideUnoccupied = true;
               characterCount = 7;
             }
           ];
