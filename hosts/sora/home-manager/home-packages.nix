@@ -22,11 +22,13 @@
     onlyoffice-desktopeditors
     onlyoffice-documentserver
     runelite
+    cockatrice
 
     # Langs
     nil
 
     # CLI utils
+    wine64
     satty
     flatpak
     yazi

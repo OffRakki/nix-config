@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -29,6 +28,7 @@
         pkgs.temurin-bin-8
         pkgs.temurin-bin-17
         pkgs.temurin-bin-21
+        pkgs.temurin-bin-25
       ];
     })
     pomodoro-gtk
