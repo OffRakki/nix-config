@@ -259,6 +259,10 @@
     greetd = {
       enable = true;
       settings = {
+        initial_session = {
+          command = "start-hyprland";
+          user = "rakki";
+        };
         default_session = {
           command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --sessions /run/current-system/sw/share/wayland-sessions:/run/current-system/sw/share/xsessions --user-menu --cmd start-hyprland";
           user = "greeter";
@@ -274,9 +278,12 @@
         enable = false;
         wayland.enable = true;
         theme = "sddm-astronaut-theme";
+        package = pkgs.kdePackages.sddm;
         extraPackages = with pkgs; [
           kdePackages.qtmultimedia
           kdePackages.qt5compat
+          pkgs.kdePackages.qtsvg
+          pkgs.kdePackages.qtdeclarative
         ];
         settings = {
           Wayland = {

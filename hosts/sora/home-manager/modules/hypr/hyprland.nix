@@ -377,6 +377,7 @@ in {
         "noctalia-shell -d"
         "clipse -listen" # Clipboard history
         "nm-applet --indicator"
+        "sleep 5 && noctalia-shell ipc call lockScreen lock"
         "ags"
         "blueman-applet"
         "pypr"
