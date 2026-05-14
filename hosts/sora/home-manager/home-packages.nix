@@ -24,6 +24,9 @@
     runelite
     cockatrice
 
+    portfolio
+    wealthfolio
+
     # Langs
     nil
 

@@ -14,6 +14,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
     systemd = {
@@ -36,7 +37,7 @@ in {
           mode = "1920x1080@239.76";
           position = "0x0";
           scale = 1;
-          vrr = 1;
+          vrr = 0;
           # addreserved = "30,0,0,0";
         }
         {
@@ -58,7 +59,6 @@ in {
       ];
 
       dwindle = {
-        pseudotile = "yes";
         preserve_split = "yes";
         special_scale_factor = 0.8;
       };
@@ -117,8 +117,7 @@ in {
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        vfr = false;
-        vrr = 1;
+        vrr = 0;
         mouse_move_enables_dpms = true;
         enable_swallow = true;
         focus_on_activate = false;

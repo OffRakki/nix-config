@@ -118,7 +118,6 @@
     fastfetch
     wireplumber
     pwvucontrol
-    pipecontrol
     btop
     qutebrowser
     vesktop
@@ -259,7 +258,7 @@
     rofi
     slurp
     swappy
-    swww
+    awww
     unzip
     wallust
     wl-clipboard

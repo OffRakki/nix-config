@@ -2,7 +2,6 @@
   programs.opencode = {
     enable = true;
     settings = {
-      theme = "flexoki";
       model = "ollama/llama3.1";
       provider = {
         ollama = {

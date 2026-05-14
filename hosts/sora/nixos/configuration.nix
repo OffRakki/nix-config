@@ -25,6 +25,11 @@
   nixpkgs = {
     overlays = [
       inputs.nix-minecraft.overlay
+      (final: prev: {
+        openldap = prev.openldap.overrideAttrs (_: {
+          doCheck = false;
+        });
+      })
       # inputs.millennium.overlays.default
       (final: _: {
         inputs =

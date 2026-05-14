@@ -3,7 +3,7 @@
     enable = true;
     systemd = {
       enable = false;
-      target = "graphical-session.target";
+      # target = "graphical-session.target";
     };
     settings = {
       mainBar = {

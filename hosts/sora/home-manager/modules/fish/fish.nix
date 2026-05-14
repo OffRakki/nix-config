@@ -66,8 +66,6 @@
         cp = "cp --archive --recursive --verbose --interactive --progress";
         rsync = "rsync --archive --verbose --progress --inplace";
 
-        ls = "nuls -g";
-        la = "nuls -ag";
         mv = "mv -i";
         rm = "rm -i";
         df = "duf";

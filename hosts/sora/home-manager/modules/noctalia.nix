@@ -329,7 +329,7 @@
         enableMarkdown = true;
         density = "compact";
         monitors = ["DP-1"];
-        location = "top_center";
+        location = "top_right";
         overlayLayer = true;
         backgroundOpacity = 1;
         respectExpireTimeout = false;
@@ -490,7 +490,7 @@
       };
 
       general = {
-        avatarImage = "${../../../../assets/svgs/animePurpleHair.png}";
+        avatarImage = "${../../../../assets/svgs/pelucio.jpg}";
         radiusRatio = 0.2;
         lockOnSuspend = true;
         showScreenCorners = false;
