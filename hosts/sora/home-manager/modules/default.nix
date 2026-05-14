@@ -37,5 +37,6 @@
     ./noctalia.nix
     ./spicetify.nix
     ./mangohud.nix
+    ./firefox.nix
   ];
 }
