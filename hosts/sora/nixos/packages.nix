@@ -4,6 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    inputs.kopuz.packages.${pkgs.stdenv.hostPlatform.system}.default
     # NH
     nh
     nix-output-monitor
