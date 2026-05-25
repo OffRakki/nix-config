@@ -61,6 +61,9 @@
         {
           name = "python";
         }
+        {
+          name = "lua";
+        }
       ];
       language-server = {
         nixd = {
