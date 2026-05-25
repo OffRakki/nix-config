@@ -200,7 +200,7 @@
         displayMode = "auto_hide";
         autoHideDelay = 500;
         autoShowDelay = 150;
-        showOnWorkspaceSwitch = true;
+        showOnWorkspaceSwitch = false;
         widgets = {
           left = [
             {

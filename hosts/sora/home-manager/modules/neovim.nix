@@ -1,6 +1,8 @@
 {lib, ...}: {
   programs.neovim = lib.mkDefault {
     enable = true;
+    withRuby = true;
+    withPython3 = true;
     defaultEditor = false;
     extraConfig = ''
       set number relativenumber
