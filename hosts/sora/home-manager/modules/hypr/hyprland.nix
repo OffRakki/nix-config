@@ -360,7 +360,8 @@ in {
         hl.bind("${mod} + mouse:272", hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
         hl.bind("${mod} + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
 
-        hl.bind("${mod} + SHIFT + Q", hl.dsp.window.kill())
+        hl.bind("${mod} + SHIFT + Q", hl.dsp.window.close())
+        hl.bind("${mod} + SHIFT + CTRL + Q", hl.dsp.window.kill())
         hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
         hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
         hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
@@ -386,7 +387,16 @@ in {
         hl.bind("${mod} + D", hl.dsp.exec_cmd("fuzzel"))
         hl.bind("${mod} + ALT + D", hl.dsp.exec_cmd("pkill wofi || wofi --show run -G --insensitive")) -- Main Menu
         hl.bind("${mod} + V", hl.dsp.exec_cmd("pkill clipse & ${terminal} --class middleFloat -e clipse"))
-        hl.bind("${mod} + SPACE", hl.dsp.window.float({ action = "toggle" }))
+
+        hl.bind("${mod} + SPACE", function()
+          local w = hl.get_active_window()
+          -- Don't float pyprland scratchpads — they manage their own float state
+          if w ~= nil and (w.class == "kitty-dropterm" or w.class == "com.saivert.pwvucontrol") then
+            return
+          end
+          hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+        end)
+
         -- hl.bind("${mod} + F", hl.dsp.layout("togglefit || ")) -- niri like fullscreen, does not work yet tho
         -- hl.bind("${mod} + F", hl.dsp.window.fullscreen({ mode = "maximized"})) -- fake fullscreen
         hl.bind("${mod} + SHIFT + Q", hl.dsp.window.kill)
