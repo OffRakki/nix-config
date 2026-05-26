@@ -16,7 +16,7 @@
   qalc = "${lib.getExe pkgs.qalculate-gtk}";
   slurp = "${lib.getExe pkgs.slurp}";
   hyprshot = "${lib.getExe pkgs.hyprshot}";
-  lock = "noctalia-shell ipc call lockScreen lock";
+  lock = "touch /tmp/session.lock && noctalia-shell ipc call lockScreen lock";
 in {
   imports = [];
 
@@ -337,19 +337,18 @@ in {
         hl.on("hyprland.start", function ()
           hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME")
           hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME")
-          -- hl.exec_cmd("systemctl --user start hyprpolkitagent")
           hl.exec_cmd("noctalia-shell -d")
           hl.exec_cmd("clipse -listen")
           hl.exec_cmd("nm-applet --indicator")
-          hl.exec_cmd("sleep 5 && noctalia-shell ipc call lockScreen lock")
+          hl.exec_cmd("sleep 5 && touch /tmp/session.lock && noctalia-shell ipc call lockScreen lock")
           hl.exec_cmd("ags")
           hl.exec_cmd("blueman-applet")
           hl.exec_cmd("pypr")
-          hl.exec_cmd("vicinae server")
           hl.exec_cmd("swww-daemon")
           hl.exec_cmd("wl-paste --type text --watch cliphist store")
           hl.exec_cmd("wl-paste --type image --watch cliphist store")
           hl.exec_cmd("sleep 3 && systemctl --user restart clip-notify")
+          hl.exec_cmd("sleep 2 && pywalfox start")
           hl.exec_cmd("steam")
           hl.exec_cmd("Telegram")
           hl.exec_cmd("vesktop")
@@ -357,37 +356,64 @@ in {
         ----------------------------------------------------------------
 
         ------------------------------- BINDS -------------------------------
-        hl.bind("${mod} + mouse:272", hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
-        hl.bind("${mod} + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
-
-        hl.bind("${mod} + SHIFT + Q", hl.dsp.window.close())
-        hl.bind("${mod} + SHIFT + CTRL + Q", hl.dsp.window.kill())
-        hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-        hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-        hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
-        hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true }) -- ; ${swayosd.output-volume}
-        hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true }) -- ; ${swayosd.output-volume}
-        hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true }) -- ; ${swayosd.output-volume}
-        hl.bind("SHIFT + XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true }) -- ; ${swayosd.input-volume}
+        hl.bind("${mod} + mouse:272",           hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
+        hl.bind("${mod} + mouse:273",           hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
+        hl.bind("${mod} + SHIFT + Q",           hl.dsp.window.close())
+        hl.bind("${mod} + SHIFT + CTRL + Q",    hl.dsp.window.kill())
+        hl.bind("XF86AudioPlay",                hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+        hl.bind("XF86AudioNext",                hl.dsp.exec_cmd("playerctl next"), { locked = true })
+        hl.bind("XF86AudioPrev",                hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+        hl.bind("XF86AudioMute",                hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true }) -- ; ${swayosd.output-volume}
+        hl.bind("XF86AudioRaiseVolume",         hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true }) -- ; ${swayosd.output-volume}
+        hl.bind("XF86AudioLowerVolume",         hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true }) -- ; ${swayosd.output-volume}
+        hl.bind("SHIFT + XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true }) -- ; ${swayosd.input-volume}
         hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), { locked = true, repeating = true }) -- ; ${swayosd.input-volume}"
         hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), { locked = true, repeating = true }) -- ; ${swayosd.input-volume}"
-        -- ",Caps_Lock,exec,${swayosd.caps-lock}"
-        hl.bind("${mod} + SHIFT + Return", hl.dsp.exec_cmd("pypr toggle term")) -- Dropdown terminal
-        hl.bind("${mod} + SHIFT + V", hl.dsp.exec_cmd("pypr toggle volume")) -- Pavucontrol
-        hl.bind("${mod} + M", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
-        hl.bind("${mod} + SHIFT + W", hl.dsp.exec_cmd("noctalia-shell ipc call wallpaper toggle"))
-        hl.bind("CTRL + ALT + N", hl.dsp.exec_cmd("${terminal} --class middleFloat -e hx"))
-        hl.bind("${mod} + SHIFT + P", hl.dsp.exec_cmd("'${../../../../../scripts/pass-wofi.sh}'"))
-        hl.bind("${mod} + I", hl.dsp.window.pin({ action = "toggle" }))
-        hl.bind("Print", hl.dsp.exec_cmd("${hyprshot} -z --clipboard-only -m region --freeze"))
-        hl.bind("CTRL + Print", hl.dsp.exec_cmd("${hyprshot} -z --clipboard-only -m output --freeze"))
-        hl.bind("${mod} + L", hl.dsp.exec_cmd("${lock}"))
-        -- "${mod} + SHIFT + D", hl.dsp.exec_cmd("pkill wofi || wofi --show drun -G --insensitive" -- Main Menu
-        -- "${mod} + SHIFT + D", hl.dsp.exec_cmd("vicinae open"
-        hl.bind("${mod} + D", hl.dsp.exec_cmd("fuzzel"))
-        hl.bind("${mod} + ALT + D", hl.dsp.exec_cmd("pkill wofi || wofi --show run -G --insensitive")) -- Main Menu
-        hl.bind("${mod} + V", hl.dsp.exec_cmd("pkill clipse & ${terminal} --class middleFloat -e clipse"))
+        -- hl.bind("Caps_Lock",                 hl.dsp.exec_cmd(${swayosd.caps-lock}))
+        hl.bind("${mod} + SHIFT + Return",      hl.dsp.exec_cmd("pypr toggle term")) -- Dropdown terminal
+        hl.bind("${mod} + SHIFT + V",           hl.dsp.exec_cmd("pypr toggle volume")) -- Pavucontrol
+        hl.bind("${mod} + M",                   hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
+        hl.bind("${mod} + SHIFT + W",           hl.dsp.exec_cmd("noctalia-shell ipc call wallpaper toggle"))
+        hl.bind("CTRL + ALT + N",               hl.dsp.exec_cmd("${terminal} --class middleFloat -e hx"))
+        hl.bind("${mod} + SHIFT + P",           hl.dsp.exec_cmd("'${../../../../../scripts/pass-wofi.sh}'"))
+        hl.bind("${mod} + I",                   hl.dsp.window.pin({ action = "toggle" }))
+        hl.bind("Print",                        hl.dsp.exec_cmd("${hyprshot} -z --clipboard-only -m region --freeze"))
+        hl.bind("CTRL + Print",                 hl.dsp.exec_cmd("${hyprshot} -z --clipboard-only -m output --freeze"))
+        hl.bind("${mod} + L",                   hl.dsp.exec_cmd("${lock}"))
+        -- "${mod} + SHIFT + D",                hl.dsp.exec_cmd("pkill wofi || wofi --show drun -G --insensitive" -- Main Menu))
+        hl.bind("${mod} + D",                   hl.dsp.exec_cmd("fuzzel"))
+        hl.bind("${mod} + ALT + D",             hl.dsp.exec_cmd("pkill wofi || wofi --show run -G --insensitive")) -- Main Menu
+        hl.bind("${mod} + V",                   hl.dsp.exec_cmd("pkill clipse & ${terminal} --class middleFloat -e clipse"))
+        hl.bind("${mod} + SHIFT + Q",           hl.dsp.window.kill)
+        hl.bind("${mod} + A",                   hl.dsp.exec_cmd("pkill wofi || true && ags -t 'overview'"))
+        hl.bind("${mod} + RETURN",              hl.dsp.exec_cmd("${terminal}")) -- terminal
+        hl.bind("${mod} + ALT + C",             hl.dsp.exec_cmd("pkill qalc & ${terminal} --class middleFloat -e qalc")) -- calculator (qalculate)
+        hl.bind("${mod} + Z",                   hl.dsp.exec_cmd("pypr zoom")) -- Toggle Desktop Zoom
+        hl.bind("${mod} + E",                   hl.dsp.exec_cmd("${filesGUI}"))
+        hl.bind("${mod} + SHIFT + E",           hl.dsp.exec_cmd("${terminal} -e ${files}"))
+        hl.bind("${mod} + SHIFT + F",           hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
+        -- Dynamic maximized toggle
+        local maximized = {}
+        hl.bind("${mod} + F", function()
+          local window = hl.get_active_window()
+
+          if window == nil then return end
+
+          if maximized[window.address] then
+            hl.dispatch(hl.dsp.layout("colresize 0.5"))
+            maximized[window.address] = nil
+
+          else
+            hl.dispatch(hl.dsp.layout("fit active"))
+            maximized[window.address] = true
+          end
+        end)
+        hl.on("window.close", function(w)
+          maximized[window.address] = nil
+        end)
+
+        -- Dont float kitty-dropterm and pwvycontrol
         hl.bind("${mod} + SPACE", function()
           local w = hl.get_active_window()
           -- Don't float pyprland scratchpads — they manage their own float state
@@ -395,36 +421,6 @@ in {
             return
           end
           hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
-        end)
-
-        -- hl.bind("${mod} + F", hl.dsp.layout("togglefit || ")) -- niri like fullscreen, does not work yet tho
-        -- hl.bind("${mod} + F", hl.dsp.window.fullscreen({ mode = "maximized"})) -- fake fullscreen
-        hl.bind("${mod} + SHIFT + Q", hl.dsp.window.kill)
-        hl.bind("${mod} + A", hl.dsp.exec_cmd("pkill wofi || true && ags -t 'overview'"))
-        hl.bind("${mod} + RETURN", hl.dsp.exec_cmd("${terminal}")) -- terminal
-        hl.bind("${mod} + ALT + C", hl.dsp.exec_cmd("pkill qalc & ${terminal} --class middleFloat -e qalc")) -- calculator (qalculate)
-        hl.bind("${mod} + Z", hl.dsp.exec_cmd("pypr zoom")) -- Toggle Desktop Zoom
-        hl.bind("${mod} + E", hl.dsp.exec_cmd("${filesGUI}"))
-        hl.bind("${mod} + SHIFT + E", hl.dsp.exec_cmd("${terminal} -e ${files}"))
-        hl.bind("${mod} + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-
-        -- Dynamic maximized toggle
-        local maximized = {}
-        hl.bind("${mod} + F", function()
-          local w = hl.get_active_window()
-          if w == nil then return end
-
-          if maximized[w.address] then
-            hl.dispatch(hl.dsp.layout("colresize 0.5"))
-            maximized[w.address] = nil
-          else
-            hl.dispatch(hl.dsp.layout("fit active"))
-            maximized[w.address] = true
-          end
-        end)
-        -- Clean up when a window closes so the table doesn't leak
-        hl.on("window.close", function(w)
-          maximized[w.address] = nil
         end)
         -----------------------------------------------------------------------
 
@@ -434,13 +430,13 @@ in {
           local key = i % 10  -- Maps index 10 to key "0"
 
           -- Focus workspace
-          hl.bind("${mod} +" .. key, hl.dsp.focus({ workspace = i }))
+          hl.bind("${mod} + "         .. key, hl.dsp.focus({ workspace = i }))
 
           -- Move active window to workspace and follow
           hl.bind("${mod} + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = true }))
 
           -- Move active window to workspace and DON'T follow
-          hl.bind("${mod} + CTRL + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
+          hl.bind("${mod} + CTRL + "  .. key, hl.dsp.window.move({ workspace = i, follow = false }))
         end
         -- Switch workspaces [1-4]
         hl.bind("${mod} + 1", hl.dsp.focus({ workspace = "Browser"}))
