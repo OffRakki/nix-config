@@ -488,7 +488,20 @@
         overviewLayer = false;
         density = "default";
       };
-
+      idle = {
+        enabled = true;
+        screenOffTimeout = 600;
+        lockTimeout = 300;
+        suspendTimeout = 0;
+        fadeDuration = 1;
+        screenOffCommand = "hyprctl dispatch \"hl.dsp.dpms({ action = 'disable' })\"";
+        lockCommand = "[ -f /tmp/session.lock ] && hyprctl dispatch \"hl.dsp.dpms({ action = 'disable' })\" || (touch /tmp/session.lock && loginctl lock-session)";
+        suspendCommand = "";
+        resumeScreenOffCommand = "hyprctl dispatch \"hl.dsp.dpms({ action = 'enable' })\" && rm-f /tmp/session.lock";
+        resumeLockCommand = "rm -f /tmp/session.lock";
+        resumeSuspendCommand = "";
+        customCommands = "[]";
+      };
       general = {
         avatarImage = "${../../../../assets/svgs/pelucio.jpg}";
         radiusRatio = 0.2;
@@ -522,8 +535,8 @@
         clockFormat = "hh\nmm";
         passwordChars = true;
         lockScreenMonitors = ["DP-1"];
-        lockScreenBlur = 1;
-        lockScreenTint = 0;
+        lockScreenBlur = 0.8;
+        lockScreenTint = 0.1;
         keybinds = {
           keyUp = ["Up"];
           keyDown = ["Down"];
