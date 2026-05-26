@@ -31,7 +31,9 @@ in {
     };
     settings = {};
     extraConfig =
-      #language=lua
+      /*
+      lua
+      */
       ''
         ------------------------------- GENERAL -------------------------------
         hl.config({
@@ -131,26 +133,20 @@ in {
         hl.curve("easeout", { type = "bezier", points = { {0.5, 1}, {0.9, 1} } })
         hl.curve("easeoutback", { type = "bezier", points = { {0.34, 1.22}, {0.65, 1} } })
 
-        local elements = {
-          {"fadeIn", 3, "easeout"},
-          {"fadeLayersIn", 3, "easeout"},
-          {"fadeOut", 3, "easeout"},
-          {"fadeLayersOut", 3, "easeout"},
-          {"fadeSwitch", 2, "easeout"},
-          {"fadeDim", 3, "easeout"},
-          {"fadeShadow", 2, "easeout"},
-          {"border", 2, "easeout"},
-          {"layersIn", 3, "easeoutback", "slide"},
-          {"layersOut", 3, "easeoutback", "slide"},
-          {"windowsOut", 3, "easeout", "slide"},
-          {"windowsMove", 3, "easeoutback"},
-          {"windowsIn", 3, "easeoutback", "slide"},
-          {"workspaces", 2.5, "easeoutback", "slidefade"},
-        }
-
-        for _, v in ipairs(elements) do
-          hl.animation({ leaf = v[1], enabled = true, speed = v[2], bezier = v[3], style = v[4] })
-        end
+        hl.animation({ leaf = "fadeIn", enabled = true, speed = 3, bezier = "easeout" })
+        hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 3, bezier = "easeout" })
+        hl.animation({ leaf = "fadeOut", enabled = true, speed = 3, bezier = "easeout" })
+        hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 3, bezier = "easeout" })
+        hl.animation({ leaf = "fadeSwitch", enabled = true, speed = 2, bezier = "easeout" })
+        hl.animation({ leaf = "fadeDim", enabled = true, speed = 3, bezier = "easeout" })
+        hl.animation({ leaf = "fadeShadow", enabled = true, speed = 2, bezier = "easeout" })
+        hl.animation({ leaf = "border", enabled = true, speed = 2, bezier = "easeout" })
+        hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, bezier = "easeoutback" })
+        hl.animation({ leaf = "windowsIn", enabled = true, speed = 3, bezier = "easeoutback", style = "slide" })
+        hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "easeout", style = "slide" })
+        hl.animation({ leaf = "layersIn", enabled = true, speed = 3, bezier = "easeoutback", style = "slide" })
+        hl.animation({ leaf = "layersOut", enabled = true, speed = 3, bezier = "easeoutback", style = "slide" })
+        hl.animation({ leaf = "workspaces", enabled = true, speed = 2.5, bezier = "easeoutback", style = "slidefade" })
         -----------------------------------------------------------------------
 
         ------------------------------- MONITORS -------------------------------
@@ -174,6 +170,14 @@ in {
         hl.layer_rule({ match = {namespace = "selection"}, animation = "fade" })
         hl.layer_rule({ match = {namespace = "hyprpaper"}, animation = "fade" })
 
+        local suppressMaximizeRule = hl.window_rule({
+            -- Ignore maximize requests from all apps.
+            name  = "suppress-maximize-events",
+            match = { class = ".*" },
+
+            suppress_event = "maximize",
+        })
+        suppressMaximizeRule:set_enabled(true)
         hl.window_rule({
           name = "firefoxBorderColorFix",
           match = {class = "firefox"},
