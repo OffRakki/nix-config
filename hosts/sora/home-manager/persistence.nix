@@ -20,6 +20,7 @@
     ".local/share/icons"
     ".config/qutebrowser"
     ".config/mozilla"
+    ".config/jj"
     ".config/vesktop"
     ".config/spotify"
     ".config/dconf"
