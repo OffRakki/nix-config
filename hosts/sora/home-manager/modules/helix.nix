@@ -12,7 +12,7 @@
       pkgs.marksman
     ];
     settings = {
-      theme = "gruvbox";
+      theme = "kanagawa";
       editor = {
         cursorline = true;
         soft-wrap.enable = true;
@@ -74,7 +74,7 @@
     };
     themes = {
       catppuccin_mocha = {
-        "inherits" = "gruvbox";
+        "inherits" = "kanagawa";
         "ui.background" = {};
       };
     };
