@@ -2,7 +2,6 @@
   home.persistence."/persist".directories = [
     "sync"
     "Games"
-    "Tailscale"
     ".nv"
     ".steam"
     ".runelite"

@@ -8,7 +8,6 @@
     ./aerc.nix
     ./rbw.nix
     ./oama.nix
-    ./vicinae.nix
     ./mako.nix
     ./clipnotify.nix
     ./swayosd.nix
