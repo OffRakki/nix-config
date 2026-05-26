@@ -409,19 +409,23 @@ in {
         hl.bind("${mod} + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
         -- Dynamic maximized toggle
-        local is_maximized = false
+        local maximized = {}
         hl.bind("${mod} + F", function()
-          if is_maximized then
-            hl.dispatch(hl.dsp.layout("colresize 0.5")) -- Returns column to 0.5
-            is_maximized = false
+          local w = hl.get_active_window()
+          if w == nil then return end
+
+          if maximized[w.address] then
+            hl.dispatch(hl.dsp.layout("colresize 0.5"))
+            maximized[w.address] = nil
           else
-            hl.dispatch(hl.dsp.layout("fit active")) -- Maximizes active column
-            is_maximized = true
+            hl.dispatch(hl.dsp.layout("fit active"))
+            maximized[w.address] = true
           end
         end)
-        -- TODO: Remove if function above works
-        -- hl.bind("${mod} + F", hl.dsp.layout("fit active"))
-        -- hl.bind("${mod} + CTRL + F", hl.dsp.layout("colresize 0.5"))
+        -- Clean up when a window closes so the table doesn't leak
+        hl.on("window.close", function(w)
+          maximized[w.address] = nil
+        end)
         -----------------------------------------------------------------------
 
         ------------------------------- Workspace/Window keys -------------------------------
