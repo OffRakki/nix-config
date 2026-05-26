@@ -178,6 +178,23 @@ in {
             suppress_event = "maximize",
         })
         suppressMaximizeRule:set_enabled(true)
+
+        -- Bitwarden extension window float
+        local function floatBitwarden(w)
+          if w.class == "firefox" and w.title:match("Bitwarden Password Manager") and not w.floating then
+            hl.dispatch(hl.dsp.window.float({ action = "set", window = w }))
+            hl.dispatch(hl.dsp.window.center(w))
+          end
+        end
+        -- Handles initial open via shortcut
+        hl.on("window.open", function(w)
+          if w.class == "firefox" then
+            hl.timer(function()
+              floatBitwarden(w) -- w.title should be populated by now
+            end, { timeout = 150, type = "oneshot" })
+          end
+        end)
+
         hl.window_rule({
           name = "firefoxBorderColorFix",
           match = {class = "firefox"},
@@ -273,15 +290,6 @@ in {
           opacity = "2 2 2",
           workspace = "Browser",
           monitor = "DP-1",
-        })
-
-        -- not working for some reason
-        hl.window_rule({
-          name = "bitwardenBrowser",
-          match = { class = "firefox" },
-          match = { title = "Extension: (Bitwarden Password Manager) - Bitwarden.*" },
-          float = true,
-          size = "window_w/2 window_h/2",
         })
 
         hl.window_rule({
