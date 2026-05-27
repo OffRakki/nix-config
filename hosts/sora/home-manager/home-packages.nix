@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    pywalfox-native
     quickshell
     kdePackages.qttools
     lm_sensors

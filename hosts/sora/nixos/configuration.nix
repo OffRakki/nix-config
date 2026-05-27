@@ -22,6 +22,8 @@
     # ./mcServer.nix
   ];
 
+  programs.ydotool.enable = true;
+
   nixpkgs = {
     overlays = [
       inputs.nix-minecraft.overlay

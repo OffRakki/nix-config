@@ -196,6 +196,12 @@ in {
         end)
 
         hl.window_rule({
+          name = "inhibit-idle-fullscreen",
+          match = { fullscreen = true },
+          idle_inhibit = "fullscreen",
+        })
+
+        hl.window_rule({
           name = "firefoxBorderColorFix",
           match = {class = "firefox"},
           border_color = "rgba(5c4826ff) rgba(5c482644)",
@@ -348,7 +354,6 @@ in {
           hl.exec_cmd("wl-paste --type text --watch cliphist store")
           hl.exec_cmd("wl-paste --type image --watch cliphist store")
           hl.exec_cmd("sleep 3 && systemctl --user restart clip-notify")
-          hl.exec_cmd("sleep 2 && pywalfox start")
           hl.exec_cmd("steam")
           hl.exec_cmd("Telegram")
           hl.exec_cmd("vesktop")
@@ -358,6 +363,7 @@ in {
         ------------------------------- BINDS -------------------------------
         hl.bind("${mod} + mouse:272",           hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
         hl.bind("${mod} + mouse:273",           hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
+        hl.bind("CTRL + SHIFT + ALT + C",       hl.dsp.exec_cmd("notify-send macro_toggled && '${../../../macros/autoClicker.sh}'"))
         hl.bind("${mod} + SHIFT + Q",           hl.dsp.window.close())
         hl.bind("${mod} + SHIFT + CTRL + Q",    hl.dsp.window.kill())
         hl.bind("XF86AudioPlay",                hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -409,7 +415,7 @@ in {
             maximized[window.address] = true
           end
         end)
-        hl.on("window.close", function(w)
+        hl.on("window.close", function(window)
           maximized[window.address] = nil
         end)
 

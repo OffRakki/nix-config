@@ -29,6 +29,7 @@
           "podman"
           "input"
           "uinput"
+          "ydotool"
         ];
       };
     };
