@@ -39,6 +39,16 @@ in {
         unfocus = "hide";
         preserve_aspect = true;
       };
+      spotify = {
+        animation = "fromBottom";
+        command = "spotify";
+        class = "spotify";
+        lazy = "true";
+        size = "50% 50%";
+        max_size = "1080px 100%";
+        unfocus = "hide";
+        preserve_aspect = true;
+      };
     };
   };
 }
