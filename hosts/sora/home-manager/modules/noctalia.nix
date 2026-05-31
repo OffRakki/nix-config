@@ -329,10 +329,10 @@
         enableMarkdown = true;
         density = "compact";
         monitors = ["DP-1"];
-        location = "top_right";
+        location = "top_center";
         overlayLayer = true;
         backgroundOpacity = 1;
-        respectExpireTimeout = false;
+        respectExpireTimeout = true;
         lowUrgencyDuration = 3;
         normalUrgencyDuration = 8;
         criticalUrgencyDuration = 15;
