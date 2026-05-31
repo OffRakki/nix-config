@@ -355,7 +355,7 @@ in {
           hl.exec_cmd("wl-paste --type image --watch cliphist store")
           hl.exec_cmd("sleep 3 && systemctl --user restart clip-notify")
           hl.exec_cmd("steam")
-          hl.exec_cmd("Telegram")
+          -- hl.exec_cmd("Telegram")
           hl.exec_cmd("vesktop")
         end)
         ----------------------------------------------------------------
