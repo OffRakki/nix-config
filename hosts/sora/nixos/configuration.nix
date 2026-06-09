@@ -19,6 +19,7 @@
     ./users.nix
     ./tailscale.nix
     ./kdeconnect.nix
+    ./sunshine.nix
     # ./mcServer.nix
   ];
 

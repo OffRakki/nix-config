@@ -17,7 +17,42 @@
     ./users.nix
     ./tailscale.nix
     ./packages.nix
+    ./sunshine.nix
   ];
+
+  #fix for bug with python
+  documentation = {
+    enable = true; # Keeps man pages enabled
+    doc.enable = false; # Disables standard HTML/PDF manuals (Bypasses the bug!)
+    info.enable = false; # Disables GNU Info pages
+  };
+
+  environment.etc."skel/.config/powermanagementprofilesrc".text = ''
+    [AC]
+    icon=battery-charging
+    name=AC Power
+
+    [AC][DPMSControl]
+    idleTime=0
+    lockBeforeTurnOff=0
+
+    [Battery]
+    icon=battery
+    name=Battery
+
+    [Battery][DPMSControl]
+    idleTime=300
+    lockBeforeTurnOff=1
+  '';
+
+  services.xserver.enable = true;
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
+  services.desktopManager.plasma6.enable = true;
 
   sops = {
     age.sshKeyPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];
@@ -31,6 +66,7 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
+  hardware.enableAllFirmware = true;
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
@@ -113,7 +149,7 @@
     fwupd.enable = true;
     upower.enable = true;
     avahi = {
-      interfaces = ["enp2s0"];
+      allowInterfaces = ["enp2s0"];
       enable = true;
       nssmdns4 = true;
       openFirewall = true;

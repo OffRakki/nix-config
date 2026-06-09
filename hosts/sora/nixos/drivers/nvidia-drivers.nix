@@ -5,15 +5,6 @@
 }: {
   services.xserver.videoDrivers = ["nvidia"];
 
-  hardware = {
-    uinput.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [mesa];
-    };
-  };
-
   hardware.nvidia = {
     modesetting.enable = true;
 

@@ -18,6 +18,7 @@
     ".local/share/qutebrowser"
     ".local/state/wireplumber"
     ".local/share/icons"
+    ".config/sunshine"
     ".config/qutebrowser"
     ".config/mozilla"
     ".config/jj"

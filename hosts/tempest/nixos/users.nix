@@ -6,10 +6,15 @@
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = false;
+    groups.rakki = {};
     users = {
       root.openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjf4oKMc8ZFzSAJXO5YYOQM9alEUxph80pA67ePwiOA rakki@sora"
       ];
+      rakki = {
+        isSystemUser = true;
+        group = "rakki";
+      };
       tmpst = {
         isNormalUser = true;
         hashedPasswordFile = config.sops.secrets.tmpstPass.path;
@@ -17,12 +22,23 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjf4oKMc8ZFzSAJXO5YYOQM9alEUxph80pA67ePwiOA rakki@sora"
         ];
         extraGroups = [
-          "wheel"
+          "corectrl"
           "networkmanager"
-          "podman"
+          "storage"
+          "wheel"
+          "disk"
+          "libvirtd"
+          "libvirt"
+          "qemu-libvirtd"
+          "scanner"
+          "lp"
           "video"
           "render"
-          "storage"
+          "audio"
+          "docker"
+          "podman"
+          "input"
+          "uinput"
         ];
       };
     };

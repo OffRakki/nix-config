@@ -14,7 +14,7 @@
       "net.ipv6.conf.all.forwarding" = 1;
       "net.ipv4.ip_unprivileged_port_start" = 80;
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       timeout = 0;
       systemd-boot.enable = true;
@@ -42,6 +42,9 @@
       "rd.udev.log_level=3"
       "vt.global_cursor_default=0"
     ];
+    extraModprobeConfig = ''
+      options bluetooth disable_ertm=1
+    '';
     extraModulePackages = [];
     supportedFilesystems = [];
     consoleLogLevel = 0;
@@ -55,11 +58,13 @@
 
   networking = {
     hostName = "tempest";
+    networkmanager.enable = true;
+    wireless.enable = true;
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
     ]; # Set default DNS to google's # this is a fix for conectivity problems i was having from iso to system
-    useDHCP = true;
+    useDHCP = lib.mkForce true;
     interfaces.enp2s0.useDHCP = true;
     firewall.allowedTCPPorts = [
     ];
@@ -69,6 +74,16 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = false;
+        };
+      };
+    };
     graphics = {
       enable = true;
       extraPackages = with pkgs; [

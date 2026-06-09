@@ -79,6 +79,7 @@
     packages = with pkgs; [game-devices-udev-rules];
     extraRules = ''
       KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+      KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
     '';
   };
 
@@ -119,6 +120,12 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
+    uinput.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [mesa];
+    };
     steam-hardware.enable = true;
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     bluetooth = {
