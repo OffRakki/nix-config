@@ -96,28 +96,28 @@
           }
           {
             action = "hibernate";
-            enabled = true;
+            enabled = false;
             keybind = "3";
           }
           {
             action = "reboot";
             enabled = true;
-            keybind = "4";
+            keybind = "3";
           }
           {
             action = "logout";
             enabled = true;
-            keybind = "5";
+            keybind = "4";
           }
           {
             action = "shutdown";
             enabled = true;
-            keybind = "6";
+            keybind = "5";
           }
           {
             action = "rebootToUefi";
             enabled = true;
-            keybind = "7";
+            keybind = "6";
           }
         ];
       };
@@ -411,11 +411,11 @@
         manualSunset = "18:30";
       };
       hooks = {
-        enabled = false;
+        enabled = true;
         wallpaperChange = "";
         darkModeChange = "";
         screenLock = "";
-        screenUnlock = "";
+        screenUnlock = "rm -f /tmp/session.lock";
         performanceModeEnabled = "";
         performanceModeDisabled = "";
         startup = "";
@@ -499,10 +499,13 @@
         screenOffCommand = "hyprctl dispatch \"hl.dsp.dpms({ action = 'disable' })\"";
         lockCommand = "[ -f /tmp/session.lock ] && hyprctl dispatch \"hl.dsp.dpms({ action = 'disable' })\" || (touch /tmp/session.lock && loginctl lock-session)";
         suspendCommand = "";
-        resumeScreenOffCommand = "hyprctl dispatch \"hl.dsp.dpms({ action = 'enable' })\" && rm-f /tmp/session.lock";
-        resumeLockCommand = "rm -f /tmp/session.lock";
+        resumeScreenOffCommand = "hyprctl dispatch \"hl.dsp.dpms({ action = 'enable' })\"";
+        resumeLockCommand = "";
         resumeSuspendCommand = "";
         customCommands = "[]";
+      };
+      lockscreen = {
+        backgroundSource = "screenshot";
       };
       general = {
         avatarImage = "${../../../../assets/svgs/pelucio.jpg}";
@@ -519,7 +522,7 @@
         compactLockScreen = false;
         lockScreenAnimations = true;
         showSessionButtonsOnLockScreen = true;
-        showHibernateOnLockScreen = true;
+        showHibernateOnLockScreen = false;
         enableLockScreenMediaControls = false;
         enableShadows = true;
         shadowDirection = "bottom_right";
@@ -529,7 +532,7 @@
         allowPanelsOnScreenWithoutBar = true;
         showChangelogOnStartup = false;
         telemetryEnabled = false;
-        enableLockScreenCountdown = true;
+        enableLockScreenCountdown = true; # Countdown on power options
         lockScreenCountdownDuration = 10000;
         autoStartAuth = false;
         allowPasswordWithFprintd = false;

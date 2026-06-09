@@ -1,6 +1,6 @@
 {...}: {
   services.hypridle = {
-    enable = true;
+    enable = false;
     settings = {
       general = {
         on_unlock_cmd = "rm -f /tmp/session.lock";
