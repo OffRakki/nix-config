@@ -179,10 +179,10 @@
         ];
       };
       bar = {
-        position = "bottom";
-        density = "confortable";
+        position = "top";
+        density = "compact";
         showOutline = false;
-        showCapsule = true;
+        showCapsule = false;
         capsuleOpacity = 1;
         capsuleColorKey = "none";
         widgetSpacing = 6;
@@ -190,14 +190,14 @@
         fontScale = 1;
         backgroundOpacity = 0.93;
         useSeparateOpacity = false;
-        floating = false;
-        marginVertical = 4;
-        marginHorizontal = 4;
+        floating = true;
+        marginVertical = 3;
+        marginHorizontal = 3;
         frameThickness = 8;
         frameRadius = 0;
         outerCorners = false;
         hideOnOverview = false;
-        displayMode = "auto_hide";
+        displayMode = "always_visible";
         autoHideDelay = 500;
         autoShowDelay = 150;
         showOnWorkspaceSwitch = false;
@@ -235,9 +235,6 @@
               usePadding = false;
             }
             {
-              id = "ActiveWindow";
-            }
-            {
               id = "MediaMini";
               compactMode = false;
               compactShowAlbumArt = true;
@@ -255,6 +252,13 @@
               textColor = "none";
               useFixedWidth = false;
               visualizerType = "wave";
+            }
+            {
+              id = "ActiveWindow";
+              maxWidth = 200;
+              scrollingMode = "never";
+              showAppIcon = true;
+              showWindowTitle = true;
             }
           ];
           center = [
@@ -275,6 +279,7 @@
               unfocusedIconsOpacity = 1;
               displayMode = "labels";
               labelMode = "name";
+              fontWeight = "semibold";
               hideUnoccupied = true;
               characterCount = 7;
             }
@@ -282,9 +287,6 @@
           right = [
             {
               id = "plugin:privacy-indicator";
-            }
-            {
-              id = "plugin:todo";
             }
             {
               id = "plugin:tailscale";
@@ -333,8 +335,8 @@
         overlayLayer = true;
         backgroundOpacity = 1;
         respectExpireTimeout = true;
-        lowUrgencyDuration = 3;
-        normalUrgencyDuration = 8;
+        lowUrgencyDuration = 2;
+        normalUrgencyDuration = 4;
         criticalUrgencyDuration = 15;
         clearDismissed = false;
         saveToHistory = {
@@ -490,7 +492,7 @@
       };
       idle = {
         enabled = true;
-        screenOffTimeout = 600;
+        screenOffTimeout = 360;
         lockTimeout = 300;
         suspendTimeout = 0;
         fadeDuration = 1;
@@ -504,8 +506,8 @@
       };
       general = {
         avatarImage = "${../../../../assets/svgs/pelucio.jpg}";
-        radiusRatio = 0.2;
-        lockOnSuspend = true;
+        radiusRatio = 0.75;
+        lockOnSuspend = false;
         showScreenCorners = false;
         forceBlackScreenCorneros = false;
         scaleRatio = 1;
@@ -517,7 +519,7 @@
         compactLockScreen = false;
         lockScreenAnimations = true;
         showSessionButtonsOnLockScreen = true;
-        showHibernateOnLockScreen = false;
+        showHibernateOnLockScreen = true;
         enableLockScreenMediaControls = false;
         enableShadows = true;
         shadowDirection = "bottom_right";
@@ -554,8 +556,8 @@
         fontDefaultScale = 1;
         fontFixedScale = 1;
         tooltipsEnabled = true;
-        boxBorderEnabled = false;
-        panelBackgroundOpacity = 0.93;
+        boxBorderEnabled = true;
+        panelBackgroundOpacity = 0.8;
         panelsAttachedToBar = true;
         settingsPanelMode = "attached";
         settingsPanelSideBarCardStyle = false;

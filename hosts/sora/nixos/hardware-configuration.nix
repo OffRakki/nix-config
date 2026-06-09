@@ -36,6 +36,7 @@
       kernelModules = [
         "i2c-dev"
         "i2c-piix4"
+        "i2c-i801"
         "i915"
         "uinput"
         "ntsync"
@@ -63,6 +64,7 @@
     # Fix for wireless keyboard's FN keys not working properly
     extraModprobeConfig = ''
       options hid_apple fnmode=0
+      options bluetooth disable_ertm=1
     '';
     plymouth = {
       enable = true;
@@ -73,9 +75,12 @@
     initrd.verbose = false;
   };
 
-  services.udev.extraRules = ''
-    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
+  services.udev = {
+    packages = with pkgs; [game-devices-udev-rules];
+    extraRules = ''
+      KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+    '';
+  };
 
   users.groups.uinput = {};
   systemd.services.kanata-internalKeyboard.serviceConfig = {
@@ -131,6 +136,7 @@
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
+    package = pkgs.openrgb-with-all-plugins;
   };
   # systemd.services.openrgb-load-profile = {
   #   description = "Load OpenRGB white profile at boot";

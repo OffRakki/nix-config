@@ -7,6 +7,7 @@
   users = {
     defaultUserShell = "${lib.getExe pkgs.fish}";
     mutableUsers = false;
+    groups.i2c.members = ["rakki"];
     users = {
       rakki = {
         isNormalUser = true;

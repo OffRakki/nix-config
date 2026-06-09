@@ -47,7 +47,7 @@ in {
             allow_tearing = false,
             layout = "scrolling",
             border_size = 2,
-            gaps_in = 6, gaps_out = 8,
+            gaps_in = 5, gaps_out = 10,
             col = { active_border = "rgba(BFA16Eff)", inactive_border = "rgba(BFA16E44)" },
           },
 
@@ -78,27 +78,27 @@ in {
             mouse_move_enables_dpms = true,
             enable_swallow = true,
             focus_on_activate = false,
-            initial_workspace_tracking = 1,
+            initial_workspace_tracking = 2,
             middle_click_paste = false,
           },
 
           binds = {
-            workspace_back_and_forth = true,
-            allow_workspace_cycles = true,
-            pass_mouse_when_bound = true
+            workspace_back_and_forth = false,
+            allow_workspace_cycles = false,
+            pass_mouse_when_bound = false
           },
 
           cursor = {
-            no_hardware_cursors = true,
+            no_hardware_cursors = false,
             enable_hyprcursor = true,
-            warp_on_change_workspace = 1,
+            warp_on_change_workspace = 0,
             no_warps = true,
           },
 
           decoration = {
-            rounding = 0,
-            rounding_power = 0,
-            active_opacity = 1.0,
+            rounding = 12,
+            rounding_power = 2,
+            active_opacity = 0.98,
             inactive_opacity = 0.8,
             fullscreen_opacity = 1.0,
             dim_inactive = false,
@@ -106,18 +106,19 @@ in {
             dim_special = 0.8,
 
             shadow = {
-              enabled = false,
-              range = 1,
-              render_power = 1,
-              offset = "2.5 5",
-              scale = 1,
-              color = "rgba(00000044)",
-              color_inactive = "rgba(00000022)",
+              enabled = true,
+              range = 4,
+              render_power = 3,
+              -- offset = "2.5 5",
+              -- scale = 1,
+              color = "rgba(1a1a1aee)",
+              -- color_inactive = "rgba(00000022)",
             },
             blur = {
               enabled = true,
-              size = 2,
-              passes = 4,
+              size = 3,
+              passes = 2,
+              vibrancy = 0.1696;
               ignore_opacity = true,
               new_optimizations = true,
               special = true,
@@ -155,10 +156,10 @@ in {
         ------------------------------------------------------------------------
 
         ------------------------------- WORKSPACE RULES -------------------------------
-        hl.workspace_rule({ workspace = "name:Browser", monitor = "DP-1", persistent = true, default = true })
-        hl.workspace_rule({ workspace = "name:Social", monitor = "HDMI-A-1", persistent = true, default = true })
-        hl.workspace_rule({ workspace = "name:Games", monitor = "DP-1", persistent = true, default = true })
-        hl.workspace_rule({ workspace = "name:Extra", monitor = "DP-1", persistent = true, default = true })
+        hl.workspace_rule({ workspace = "1", monitor = "DP-1", persistent = true, default = true })
+        hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-1", persistent = true,})
+        hl.workspace_rule({ workspace = "3", monitor = "DP-1", persistent = true,})
+        hl.workspace_rule({ workspace = "4", monitor = "DP-1", persistent = true,})
         -------------------------------------------------------------------------------
 
         ------------------------------- WINDOW/LAYER RULES -------------------------------
@@ -169,6 +170,7 @@ in {
         hl.layer_rule({ match = {namespace = "hyprpicker"}, animation = "fade" })
         hl.layer_rule({ match = {namespace = "selection"}, animation = "fade" })
         hl.layer_rule({ match = {namespace = "hyprpaper"}, animation = "fade" })
+        hl.layer_rule({ match = {namespace = "noctalia-background-.*$"}, ignore_alpha = 0.5, blur = true, blur_popups = true })
 
         local suppressMaximizeRule = hl.window_rule({
             -- Ignore maximize requests from all apps.
@@ -225,7 +227,7 @@ in {
           name = "prismLauncher",
           match = { initial_class = "org.prismlauncher.PrismLauncher" },
           no_initial_focus = true,
-          workspace = "Extra",
+          workspace = "4",
           monitor = "DP-1",
         })
 
@@ -234,7 +236,7 @@ in {
           match = { initial_class = "steam" },
           no_initial_focus = true,
           -- tile = true, -- Popups become glitchy with this on
-          workspace = "Extra",
+          workspace = "4",
           monitor = "DP-1",
         })
 
@@ -242,17 +244,18 @@ in {
           name = "steamSettings",
           match = { initial_title = "Steam Settings" },
           float = true,
-          workspace = "Extra",
+          workspace = "4",
           monitor = "DP-1",
         })
 
         hl.window_rule({
           name = "steamGames",
           match = { initial_class = "steam_app.*" },
+          opacity = "2 2 2",
           no_blur = true,
           no_initial_focus = true,
           -- tile = true,
-          workspace = "Games",
+          workspace = "3",
           monitor = "DP-1",
         })
 
@@ -262,7 +265,7 @@ in {
           no_blur = true,
           no_initial_focus = true,
           tile = true,
-          workspace = "Games",
+          workspace = "3",
           monitor = "DP-1",
         })
 
@@ -270,7 +273,7 @@ in {
           name = "telegram",
           match = { initial_class = "org.telegram.desktop" },
           no_initial_focus = true,
-          workspace = "Social",
+          workspace = "2",
           monitor = "HDMI-A-1",
         })
 
@@ -278,7 +281,7 @@ in {
           name = "goofcord",
           match = { initial_class = "goofcord" },
           no_initial_focus = true,
-          workspace = "Social",
+          workspace = "2",
           monitor = "HDMI-A-1",
         })
 
@@ -286,7 +289,7 @@ in {
           name = "vesktop",
           match = { initial_class = "vesktop" },
           no_initial_focus = true,
-          workspace = "Social",
+          workspace = "2",
           monitor = "HDMI-A-1",
         })
 
@@ -294,15 +297,8 @@ in {
           name = "firefoxBrowser",
           match = { class = "firefox" },
           opacity = "2 2 2",
-          workspace = "Browser",
+          workspace = "1",
           monitor = "DP-1",
-        })
-
-        hl.window_rule({
-          name = "pwvucontrol",
-          match = { initial_class = "com.saivert.pwvucontrol" },
-          float = true,
-          size = "window_w/2 window_h/2",
         })
 
         hl.window_rule({
@@ -324,6 +320,13 @@ in {
           match = { title = ".*tempest.*" },
           border_size = 2,
           border_color = "rgba(7287fdff) rgba(7287fdaa)",
+        })
+
+        hl.window_rule({
+          name = "scratchpadBorderColorFix",
+          match = { class = "^(pypr-.*|com\\.saivert\\.pwvucontrol|spotify)$" },
+          border_color = "rgba(BFA16Eff) rgba(BFA16E44)",
+          border_size = 2,
         })
         -----------------------------------------------------------------------
 
@@ -363,7 +366,7 @@ in {
         ------------------------------- BINDS -------------------------------
         hl.bind("${mod} + mouse:272",           hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
         hl.bind("${mod} + mouse:273",           hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
-        hl.bind("CTRL + SHIFT + ALT + C",       hl.dsp.exec_cmd("notify-send macro_toggled && '${../../../macros/autoClicker.sh}'"))
+        hl.bind("CTRL + SHIFT + ALT + C",       hl.dsp.exec_cmd("notify-send -t 1000 macro_toggled && '${../../../macros/autoClicker.sh}'"))
         hl.bind("${mod} + SHIFT + Q",           hl.dsp.window.close())
         hl.bind("${mod} + SHIFT + CTRL + Q",    hl.dsp.window.kill())
         hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -433,7 +436,7 @@ in {
 
         ------------------------------- Workspace/Window keys -------------------------------
         -- Map keys 1 through 9, and 0 (for workspace 10)
-        for i = 5, 10 do
+        for i = 1, 10 do
           local key = i % 10  -- Maps index 10 to key "0"
 
           -- Focus workspace
@@ -445,21 +448,6 @@ in {
           -- Move active window to workspace and DON'T follow
           hl.bind("${mod} + CTRL + "  .. key, hl.dsp.window.move({ workspace = i, follow = false }))
         end
-        -- Switch workspaces [1-4]
-        hl.bind("${mod} + 1", hl.dsp.focus({ workspace = "Browser"}))
-        hl.bind("${mod} + 2", hl.dsp.focus({ workspace = "Social"}))
-        hl.bind("${mod} + 3", hl.dsp.focus({ workspace = "Games"}))
-        hl.bind("${mod} + 4", hl.dsp.focus({ workspace = "Extra"}))
-        -- Move active window to workspace and follow [1-4]
-        hl.bind("${mod} + SHIFT + 1", hl.dsp.window.move({ workspace = "Browser", follow = true }))
-        hl.bind("${mod} + SHIFT + 2", hl.dsp.window.move({ workspace = "Social", follow = true }))
-        hl.bind("${mod} + SHIFT + 3", hl.dsp.window.move({ workspace = "Games", follow = true }))
-        hl.bind("${mod} + SHIFT + 4", hl.dsp.window.move({ workspace = "Extra", follow = true }))
-        -- Move active to workspace window and DON'T follow [1-4]
-        hl.bind("${mod} + CTRL + 1", hl.dsp.window.move({ workspace = "Browser", follow = false }))
-        hl.bind("${mod} + CTRL + 2", hl.dsp.window.move({ workspace = "Social", follow = false }))
-        hl.bind("${mod} + CTRL + 3", hl.dsp.window.move({ workspace = "Games", follow = false }))
-        hl.bind("${mod} + CTRL + 4", hl.dsp.window.move({ workspace = "Extra", follow = false }))
         -- Move focus with arrow keys
         hl.bind("${mod} + left",  hl.dsp.layout("focus l"))
         hl.bind("${mod} + right", hl.dsp.layout("focus r"))

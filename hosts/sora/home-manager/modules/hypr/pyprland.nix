@@ -1,9 +1,9 @@
 {pkgs, ...}: let
   term = "kitty";
-  term_classed = "${term} --class";
+  topMargin = 40;
+  bottomMargin = 0;
 in {
   xdg.enable = true;
-
   xdg.configFile."pypr/config.toml".source = (pkgs.formats.toml {}).generate "pyprland-config" {
     pyprland.plugins = [
       "scratchpads"
@@ -22,20 +22,22 @@ in {
     scratchpads = {
       term = {
         animation = "fromTop";
-        command = "${term_classed} ${term}-dropterm";
-        class = "${term}-dropterm";
+        command = "${term} --class pypr-${term}";
+        class = "pypr-${term}";
         size = "75% 60%";
         max_size = "1920px 100%";
+        margin = topMargin;
         unfocus = "hide";
         preserve_aspect = true;
       };
       volume = {
-        animation = "fromRight";
+        animation = "fromTop";
         command = "pwvucontrol";
         class = "com.saivert.pwvucontrol";
         lazy = "true";
-        size = "40% 90%";
-        max_size = "1080px 100%";
+        size = "75% 60%";
+        max_size = "1920px 100%";
+        margin = topMargin;
         unfocus = "hide";
         preserve_aspect = true;
       };
@@ -43,9 +45,10 @@ in {
         animation = "fromBottom";
         command = "spotify";
         class = "spotify";
-        lazy = "true";
-        size = "50% 50%";
-        max_size = "1080px 100%";
+        lazy = "false";
+        size = "70% 40%";
+        max_size = "1920px 100%";
+        margin = bottomMargin;
         unfocus = "hide";
         preserve_aspect = true;
       };
