@@ -349,6 +349,7 @@ in {
           hl.exec_cmd("noctalia-shell -d")
           hl.exec_cmd("clipse -listen")
           hl.exec_cmd("nm-applet --indicator")
+          hl.exec_cmd("openrgb --startminimized")
           hl.exec_cmd("sleep 5 && touch /tmp/session.lock && noctalia-shell ipc call lockScreen lock")
           hl.exec_cmd("ags")
           hl.exec_cmd("blueman-applet")
@@ -360,6 +361,7 @@ in {
           hl.exec_cmd("steam")
           -- hl.exec_cmd("Telegram")
           hl.exec_cmd("vesktop")
+          hl.exec_cmd("sleep 5 && podman compose -f ~/Documents/odysseus/docker-compose.yml up -d")
         end)
         ----------------------------------------------------------------
 
