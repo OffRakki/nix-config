@@ -179,7 +179,7 @@ in {
 
             suppress_event = "maximize",
         })
-        suppressMaximizeRule:set_enabled(true)
+        suppressMaximizeRule:set_enabled(false)
 
         -- Bitwarden extension window float
         local function floatBitwarden(w)
@@ -366,6 +366,63 @@ in {
         ----------------------------------------------------------------
 
         ------------------------------- BINDS -------------------------------
+        ------------------------------- TOUCHPAD -------------------------------
+        hl.config({
+          input = {
+            touchpad = {
+              -- True physical movement direction (content follows finger)
+              natural_scroll = true,
+
+              -- Tap the pad surface to left-click
+              tap_to_click = true,
+
+              -- Multi-finger taps (e.g., 2 fingers = right click)
+              clickfinger_behavior = true,
+
+              -- Disables trackpad momentarily while keys are pressed
+              disable_while_typing = true,
+
+              -- Emulate middle click by clicking left + right simultaneously
+              middle_button_emulation = true,
+
+              -- Scroll speed modifier
+              scroll_factor = 1.0,
+            },
+          },
+        })
+        -- Switch workspaces left/right
+        hl.gesture({
+            fingers = 3,
+            direction = "horizontal",
+            action = "workspace"
+        })
+
+        -- Down fullscreen
+        hl.gesture({
+          fingers = 3,
+          direction = "down",
+          mods = "SUPER",
+          action = "fullscreen"
+        })
+
+        -- Swipe up to open your terminal (lambda execution example)
+        hl.gesture({
+          fingers = 4,
+          direction = "up",
+          action = function()
+            hl.exec_cmd("kitty")
+          end
+        })
+
+        -- Tracks your fingers smoothly. Spreading zooms in, squeezing zooms out.
+        hl.gesture({
+          fingers = 2,
+          direction = "pinch", -- Catch-all direction handles both in and out
+          action = "cursorZoom",
+          mode = "live",
+          zoom_level = 1.0 -- Ignored by live mode, but kept as a valid placeholder
+        })
+        ---------------------------------------------------------------
         hl.bind("${mod} + mouse:272",           hl.dsp.window.drag(), { mouse = true }) -- mouse:272 = left click
         hl.bind("${mod} + mouse:273",           hl.dsp.window.resize(), { mouse = true }) -- mouse:273 = right click
         hl.bind("CTRL + SHIFT + ALT + C",       hl.dsp.exec_cmd("notify-send -t 1000 macro_toggled && '${../../../macros/autoClicker.sh}'"))
