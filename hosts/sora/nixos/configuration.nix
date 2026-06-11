@@ -85,6 +85,10 @@
     secrets.onedriveToken = {
       owner = "rakki";
     };
+
+    secrets.deepseekApiKey = {
+      owner = "rakki";
+    };
   };
 
   sops.templates."rclone-onedrive.conf" = {

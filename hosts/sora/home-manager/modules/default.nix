@@ -28,7 +28,7 @@
     ./zsh.nix
     ./kitty.nix
     ./qutebrowser.nix
-    ./opencode.nix
+    ./opencode
     ./hytale.nix
     ./quickshell/quickshell.nix
     ./river.nix
