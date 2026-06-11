@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    firefox
     pkgs.python311
     kitty.terminfo
     ethtool

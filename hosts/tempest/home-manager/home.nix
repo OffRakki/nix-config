@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./persistence.nix
     ./fish.nix
     ./git.nix
     ./jujutsu.nix
