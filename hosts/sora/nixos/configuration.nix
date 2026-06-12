@@ -35,11 +35,13 @@
         openldap = prev.openldap.overrideAttrs (_: {
           doCheck = false;
         });
-        perl5Packages = prev.perl5Packages // {
-          DBDCSV = prev.perl5Packages.DBDCSV.overrideAttrs (_: {
-            doCheck = false;
-          });
-        };
+        perl5Packages =
+          prev.perl5Packages
+          // {
+            DBDCSV = prev.perl5Packages.DBDCSV.overrideAttrs (_: {
+              doCheck = false;
+            });
+          };
       })
       # inputs.millennium.overlays.default
       (final: _: {

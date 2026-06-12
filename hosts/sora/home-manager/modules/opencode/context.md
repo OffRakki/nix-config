@@ -7,17 +7,22 @@ via `alt+e` (`editor_open` in tui.json).
 
 ## Terminal
 
-When spawning a terminal window, use handlr launch x-scheme-handler/terminal -- -e <cmd>
-instead of a hardcoded terminal name (e.g., `alacritty -e <cmd>`). This respects the
-user's configured default terminal and works across different environments.
+When spawning a terminal window for commands that need sudo, use `kitty` directly:
+kitty --directory <workdir> --hold -e <cmd>
+
+The `--hold` flag keeps the terminal open after the command finishes, so you can
+read output. This supports interactive password entry, which the built-in Bash
+tool's non-interactive TTY cannot do.
+
 Detach with & so it doesn't block the session.
 
-Prefer this for any local command that needs sudo — a spawned terminal
-supports interactive password entry, while the built-in Bash tool's
-non-interactive TTY cannot.
+For NixOS rebuilds, always split into two steps:
+1. Run `nh os build` in the chat first (no sudo needed)
+2. Then spawn a terminal with just the switch step:
+   kitty --directory <workdir> --hold -e nh os switch
 
-Example:
-handlr launch x-scheme-handler/terminal -- -e sudo ls
+This way the build output is visible in the chat and the terminal opens
+straight to the sudo password prompt for the fast activation step.
 
 ## Package Management
 
@@ -33,6 +38,18 @@ IMPORTANT: if you run into e.g. `python3: command not found`, ALWAYS try again w
 Whenever a `.jj/` directory is present in the project, use `jj` (Jujutsu) instead of `git` for all version control operations. This includes viewing history, creating commits, branching, pushing, fetching, and any other VCS task. Never run `git` commands in a repo that uses jj.
 
 Before making any file edits in a jj repo, run `jj new` first to create a fresh working-copy commit. This keeps each set of write actions isolated in its own change.
+
+## Rebuild
+
+Always use `nh os <option>` for NixOS rebuilds instead of `nixos-rebuild`.
+This enables the alejandra formatter, shows a diff and build timer, and logs
+to the nix-joy database.
+
+Never run `nh` with sudo or as root — nh handles privilege escalation internally.
+
+Split rebuilds into two steps:
+1. First run `nh os build` in the chat (no sudo needed, output visible here)
+2. Then spawn a terminal for `nh os switch` (triggers sudo prompt for activation)
 
 # Operator
 
