@@ -8,20 +8,23 @@ via `alt+e` (`editor_open` in tui.json).
 ## Terminal
 
 When spawning a terminal window for commands that need sudo, use `kitty` directly.
-Wrap the command in a shell that stays open until the user closes the window:
+Wrap the command in a shell that stays open only if the command fails:
 
-kitty --directory <workdir> --hold -e sh -c '<cmd>; exec bash'
+kitty --directory <workdir> -e sh -c '<cmd> || exec bash'
 
-The `--hold` + `exec bash` ensures the window stays open after the command
-finishes so you can read all output. The spawned terminal has a real TTY,
-which supports interactive password entry (unlike the Bash tool).
+The `|| exec bash` keeps the window open for debugging only when the command
+fails. On success, the window closes automatically. The spawned terminal has a
+real TTY, which supports interactive password entry (unlike the Bash tool).
 
-Detach with & so it doesn't block the session.
+Detach with & so it doesn't block the session. When calling the Bash tool for
+this, do NOT set a timeout — let it default (or omit it entirely). The `&`
+detaches the process and it returns immediately anyway, and a short timeout
+just generates a confusing warning in the output.
 
 For NixOS rebuilds, always split into two steps:
-1. Run `nh os build` in the chat first (no sudo needed)
+1. Run `nh os build` in the chat first (no sudo needed, output visible here)
 2. Then spawn a terminal for the switch:
-   kitty --directory <workdir> --hold -e sh -c 'nh os switch; exec bash' &
+   kitty --directory <workdir> -e sh -c 'nh os switch || exec bash' &
 
 ## Package Management
 

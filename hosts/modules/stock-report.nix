@@ -15,75 +15,76 @@ let
     "HGRE11.SA" "BCFF11.SA" "KNCR11.SA" "VISC11.SA" "XPML11.SA"
   ];
   allTickers = [ benchmark ] ++ tickers;
+  tickersPy = builtins.replaceStrings [","] [", "] (builtins.toJSON allTickers);
 
-  stockReport = pkgs.writers.writePython3Bin "stock-report" {
-    libraries = [ pkgs.python3Packages.yfinance ];
-  } ''
-    import os
-    import sys
-    from datetime import date
+  pythonEnv = pkgs.python3.withPackages (ps: [ ps.yfinance ]);
 
-    import yfinance as yf
+  stockReport = pkgs.writers.writeBashBin "stock-report" ''
+    export PATH="${pythonEnv}/bin:$PATH"
+    exec ${pythonEnv}/bin/python3 -c 'import os, sys
+from datetime import date
 
-    TICKERS = ${builtins.toJSON allTickers}
-    BENCHMARK = ${builtins.toJSON benchmark}
-    OUTPUT_DIR = "/home/rakki/Documents/Stocks"
+import yfinance as yf
 
-    def main():
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
+TICKERS = ${tickersPy}
+BENCHMARK = ${builtins.toJSON benchmark}
+OUTPUT_DIR = "/home/rakki/Documents/Stocks"
 
-        try:
-            data = yf.download(TICKERS, period="5d", interval="1d", auto_adjust=True)
-        except Exception:
-            return
+def main():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-        if data.empty:
-            return
+    try:
+        data = yf.download(TICKERS, period="5d", interval="1d", auto_adjust=True)
+    except Exception:
+        return
 
-        close = data["Close"].dropna(how="all")
-        if len(close) < 2:
-            return
+    if data.empty:
+        return
 
-        yesterday = close.iloc[-2]
-        today = close.iloc[-1]
-        changes = ((today - yesterday) / yesterday * 100).dropna()
+    close = data["Close"].dropna(how="all")
+    if len(close) < 2:
+        return
 
-        dt = date.today()
-        lines = [
-            "===== Resumo do Mercado - {} =====".format(dt.strftime("%d/%m/%Y")),
-            "",
-        ]
+    yesterday = close.iloc[-2]
+    today = close.iloc[-1]
+    changes = ((today - yesterday) / yesterday * 100).dropna()
 
-        bench = changes.get(BENCHMARK)
-        if bench is not None:
-            lines.append("Benchmark {}: {:+.2f}%".format(BENCHMARK, bench))
-            lines.append("")
+    dt = date.today()
+    lines = [
+        "===== Resumo do Mercado - {} =====".format(dt.strftime("%d/%m/%Y")),
+        "",
+    ]
 
-        sorted_ch = changes.reindex(changes.abs().sort_values(ascending=False).index)
-        gainers = sorted_ch[sorted_ch > 0]
-        losers = sorted_ch[sorted_ch < 0]
-
-        lines.append("Top 5 altas:")
-        for t, v in gainers.head(5).items():
-            lines.append("  {}: +{:.2f}%".format(t.replace(".SA", ""), v))
-
+    bench = changes.get(BENCHMARK)
+    if bench is not None:
+        lines.append("Benchmark {}: {:+.2f}%".format(BENCHMARK, bench))
         lines.append("")
-        lines.append("Top 5 baixas:")
-        for t, v in losers.head(5).items():
-            lines.append("  {}: {:.2f}%".format(t.replace(".SA", ""), v))
 
-        lines.append("")
-        up = int((changes > 0).sum())
-        down = int((changes < 0).sum())
-        flat = len(changes) - up - down
-        lines.append("Resumo: {} altas, {} baixas, {} estaveis".format(up, down, flat))
+    sorted_ch = changes.reindex(changes.abs().sort_values(ascending=False).index)
+    gainers = sorted_ch[sorted_ch > 0]
+    losers = sorted_ch[sorted_ch < 0]
 
-        path = "{}/{}.txt".format(OUTPUT_DIR, dt.isoformat())
-        with open(path, "w", encoding="utf-8") as f:
-            f.write("\n".join(lines) + "\n")
+    lines.append("Top 5 altas:")
+    for t, v in gainers.head(5).items():
+        lines.append("  {}: +{:.2f}%".format(t.replace(".SA", ""), v))
 
-    if __name__ == "__main__":
-        main()
+    lines.append("")
+    lines.append("Top 5 baixas:")
+    for t, v in losers.head(5).items():
+        lines.append("  {}: {:.2f}%".format(t.replace(".SA", ""), v))
+
+    lines.append("")
+    up = int((changes > 0).sum())
+    down = int((changes < 0).sum())
+    flat = len(changes) - up - down
+    lines.append("Resumo: {} altas, {} baixas, {} estaveis".format(up, down, flat))
+
+    path = "{}/{}.txt".format(OUTPUT_DIR, dt.isoformat())
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+main()
+'
   '';
 in {
   systemd.services.stock-report = {

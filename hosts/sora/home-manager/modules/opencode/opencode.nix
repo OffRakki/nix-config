@@ -19,6 +19,9 @@
   programs.opencode = {
     enable = true;
     context = ./context.md;
+    skills = {
+      jujutsu = ./skills/jujutsu;
+    };
     tui = {
       theme = "system";
       keybinds = {
