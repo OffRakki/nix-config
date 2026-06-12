@@ -94,8 +94,8 @@ in {
     serviceConfig = {
       Type = "oneshot";
       User = "rakki";
+      ExecStart = "${stockReport}/bin/stock-report";
     };
-    script = "${stockReport}/bin/stock-report";
   };
 
   systemd.timers.stock-report = {

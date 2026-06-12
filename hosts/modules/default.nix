@@ -7,5 +7,6 @@
     ./ai.nix
     ./btrfs-ephemeral.nix
     ./optin-persistence.nix
+    ./stock-report.nix
   ];
 }

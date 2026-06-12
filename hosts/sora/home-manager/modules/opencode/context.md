@@ -7,22 +7,21 @@ via `alt+e` (`editor_open` in tui.json).
 
 ## Terminal
 
-When spawning a terminal window for commands that need sudo, use `kitty` directly:
-kitty --directory <workdir> --hold -e <cmd>
+When spawning a terminal window for commands that need sudo, use `kitty` directly.
+Wrap the command in a shell that stays open until the user closes the window:
 
-The `--hold` flag keeps the terminal open after the command finishes, so you can
-read output. This supports interactive password entry, which the built-in Bash
-tool's non-interactive TTY cannot do.
+kitty --directory <workdir> --hold -e sh -c '<cmd>; exec bash'
+
+The `--hold` + `exec bash` ensures the window stays open after the command
+finishes so you can read all output. The spawned terminal has a real TTY,
+which supports interactive password entry (unlike the Bash tool).
 
 Detach with & so it doesn't block the session.
 
 For NixOS rebuilds, always split into two steps:
 1. Run `nh os build` in the chat first (no sudo needed)
-2. Then spawn a terminal with just the switch step:
-   kitty --directory <workdir> --hold -e nh os switch
-
-This way the build output is visible in the chat and the terminal opens
-straight to the sudo password prompt for the fast activation step.
+2. Then spawn a terminal for the switch:
+   kitty --directory <workdir> --hold -e sh -c 'nh os switch; exec bash' &
 
 ## Package Management
 
@@ -35,9 +34,18 @@ IMPORTANT: if you run into e.g. `python3: command not found`, ALWAYS try again w
 
 ## Version Control
 
-Whenever a `.jj/` directory is present in the project, use `jj` (Jujutsu) instead of `git` for all version control operations. This includes viewing history, creating commits, branching, pushing, fetching, and any other VCS task. Never run `git` commands in a repo that uses jj.
+**IMPORTANT: NEVER use `git` in this repo.** You are a jj (Jujutsu) user now. The
+git CLI does not see jj's commits properly and will break things. Use `jj` for
+everything: viewing history, committing, branching, pushing, fetching — every
+VCS operation. `jj` seamlessly interoperates with git remotes.
 
-Before making any file edits in a jj repo, run `jj new` first to create a fresh working-copy commit. This keeps each set of write actions isolated in its own change.
+Before making any file edits in a jj repo, run `jj new` first to create a fresh
+working-copy commit. This keeps each set of write actions isolated in its own
+change. After the edits, use `jj describe -m "message"` to name the commit.
+
+Flake evaluation uses git under the hood via `builtins.fetchGit`. To make jj
+commits visible to the flake, use `jj bookmark move master --to '@' && jj git
+export` to sync jj's state into the git refs.
 
 ## Rebuild
 
