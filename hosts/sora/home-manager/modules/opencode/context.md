@@ -5,6 +5,20 @@
 Edits in **Helix** (`hx`). The opencode prompt can be popped into `$EDITOR`
 via `alt+e` (`editor_open` in tui.json).
 
+## Terminal
+
+When spawning a terminal window, use handlr launch x-scheme-handler/terminal -- -e <cmd>
+instead of a hardcoded terminal name (e.g., `alacritty -e <cmd>`). This respects the
+user's configured default terminal and works across different environments.
+Detach with & so it doesn't block the session.
+
+Prefer this for any local command that needs sudo — a spawned terminal
+supports interactive password entry, while the built-in Bash tool's
+non-interactive TTY cannot.
+
+Example:
+handlr launch x-scheme-handler/terminal -- -e sudo ls
+
 ## Package Management
 
 Machines not running NixOS may have **Nix standalone** installed instead. For

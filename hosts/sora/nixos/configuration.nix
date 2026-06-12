@@ -26,12 +26,20 @@
   programs.ydotool.enable = true;
 
   nixpkgs = {
+    config.permittedInsecurePackages = [
+      "electron-39.8.10"
+    ];
     overlays = [
       inputs.nix-minecraft.overlay
       (final: prev: {
         openldap = prev.openldap.overrideAttrs (_: {
           doCheck = false;
         });
+        perl5Packages = prev.perl5Packages // {
+          DBDCSV = prev.perl5Packages.DBDCSV.overrideAttrs (_: {
+            doCheck = false;
+          });
+        };
       })
       # inputs.millennium.overlays.default
       (final: _: {
@@ -429,9 +437,6 @@
     settings.Manager = {
       DefaultTimeoutStopSec = "10s";
     };
-    user.extraConfig = ''
-      DefaultTimeoutStopSec=10s;
-    '';
   };
 
   time.timeZone = lib.mkDefault "America/Sao_Paulo";

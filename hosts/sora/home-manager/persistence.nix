@@ -5,6 +5,7 @@
     ".nv"
     ".steam"
     ".runelite"
+    ".local/share/opencode"
     ".local/share/waydroid"
     ".local/share/flatpak"
     ".local/share/containers"

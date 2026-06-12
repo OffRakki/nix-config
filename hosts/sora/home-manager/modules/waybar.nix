@@ -1,10 +1,6 @@
 {lib, ...}: {
   programs.waybar = lib.mkForce {
-    enable = true;
-    systemd = {
-      enable = false;
-      # target = "graphical-session.target";
-    };
+    enable = false;
     settings = {
       mainBar = {
         exclusive = false;
