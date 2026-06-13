@@ -30,6 +30,7 @@ When working in a jj repo:
 - After making changes, auto-describe the current change with `jj describe -m "<description>"` that summarizes what was done.
 - When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
 - After finishing ALL work for the session, do one more `jj new` so the final state is an empty working copy ready for the next session.
+- **Clean up empty commits**: If you accumulate empty, descriptionless commits from past sessions (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon -r 'all:<revset>'` — they have no diff and serve no purpose.
 
 ## Nix-managed dotfiles
 
