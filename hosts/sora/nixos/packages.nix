@@ -82,10 +82,8 @@
     dialog
     freerdp
     iproute2
-    libnotify
     nmap
     netcat
-    hypridle
     tailscale
     nyxt
     sudo-rs
@@ -96,37 +94,29 @@
     pass
     msmtp
     uutils-coreutils-noprefix
-    ueberzugpp
     ueberzug
-    w3m
     direnv
     dragon-drop
     refind
     os-prober
     nixd
     nixfmt
-    nushell
     tmux
     evil-helix
     # sublime
     neovim
-    wget
     curl
     rofi
     kitty
     firefox
     starship
-    fastfetch
     wireplumber
-    pwvucontrol
     btop
     qutebrowser
-    vesktop
     waybar-mpris
     wl-clipboard-rs
     wl-clip-persist
     clipse
-    fzf
     fishPlugins.done
     fishPlugins.fzf-fish
     fishPlugins.forgit
@@ -148,23 +138,19 @@
     # User Packages
     rust-paddle-ocr
     television
-    silicon
     dgop
     goofcord
-    imagemagick
     gdu
     ncdu
     element-desktop
-    glow # Render markdown files on terminal
-    gitlogue # Screen protection with git logs animated
+    glow
+    gitlogue
     vial
     abaddon
-    duf
     dnd-tools
     waypaper
     spotify
     ttyper
-    ripgrep
     ripgrep-all
     fd
     zoxide
@@ -174,7 +160,6 @@
     dust
     dua
     hyperfine
-    evil-helix
     bacon
     cargo-info
     fselect
@@ -207,66 +192,44 @@
     baobab
     btrfs-progs
     clang
-    curl
     cpufrequtils
-    duf
     eza
-    ffmpeg
-    glib
     gsettings-qt
     killall
     libappindicator
-    libnotify
     openssl
     pciutils
     vim
-    wget
     xdg-user-dirs
     xdg-utils
-    fastfetch
     oh-my-fish
     spicetify-cli
-    mpv
-    ranger
-    todo
 
     # WM Stuff
     hyprpaper
-    ags_1 # desktop overview
+    ags_1
     wl-color-picker
     wofi
-    btop
-    brightnessctl # for brightness control
     cava
-    cliphist
     eog
     gnome-system-monitor
     grim
-    gtk-engine-murrine # for gtk themes
-    hypridle
-    imagemagick
+    gtk-engine-murrine
     inxi
     jq
     alacritty
-    kitty
     nwg-look
     nvitop
     pamixer
-    pavucontrol
-    playerctl
     pyprland
     libsForQt5.qtstyleplugins
-    rofi
     slurp
     swappy
     awww
-    unzip
     wallust
-    wl-clipboard
     wlogout
     xarchiver
     yad
-    yt-dlp
     hyprshot
   ];
 

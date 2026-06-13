@@ -1,4 +1,8 @@
-{config, pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   attachScript = pkgs.writeShellScript "opencode-attach" ''
     OPENCODE_SERVER_PASSWORD=$(cat /run/secrets/opencodeServerPassword) \
       OPENCODE_SERVER_USERNAME=rakki \
@@ -25,7 +29,7 @@ in {
   systemd.user.services.opencode-web = {
     Unit = {
       Description = "OpenCode Web Server";
-      After = [ "network.target" ];
+      After = ["network.target"];
     };
     Service = {
       Type = "simple";
@@ -35,7 +39,7 @@ in {
       RestartSec = "5";
     };
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = ["default.target"];
     };
   };
 
@@ -45,6 +49,7 @@ in {
     skills = {
       jujutsu = ./skills/jujutsu;
       nix = ./skills/nix;
+      nix-config-audit = ./skills/nixRefactor;
     };
     tui = {
       theme = "system";

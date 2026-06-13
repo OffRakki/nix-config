@@ -25,6 +25,10 @@ just generates a confusing warning in the output.
 
 **IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
 
+When working in a jj repo:
+- ALWAYS start a new change with `jj new` before making edits. Never edit the working copy of an existing change.
+- After making changes, auto-describe the current change with `jj describe -m "<description>"` that summarizes what was done.
+
 # Operator
 
 - The user is Lucky (he/him).

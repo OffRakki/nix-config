@@ -212,7 +212,7 @@
           reserve_space = true;
           capsule = true;
 
-          start = ["launcher" "CPU" "media"];
+          start = ["launcher" "CPU" "media" "active_window"];
           center = ["workspaces"];
           end = ["tray" "notifications" "bluetooth" "volume" "brightness" "clock" "session"];
         };
