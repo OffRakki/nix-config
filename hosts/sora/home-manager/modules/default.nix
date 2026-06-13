@@ -16,6 +16,7 @@
     ./alacritty.nix
     ./helix.nix
     ./mail.nix
+    ./calendar.nix
     ./wofi.nix
     ./fastfetch.nix
     ./git.nix

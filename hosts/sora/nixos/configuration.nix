@@ -104,6 +104,10 @@
     secrets.opencodeServerPassword = {
       owner = "rakki";
     };
+
+    secrets.caldavPass = {
+      owner = "rakki";
+    };
   };
 
   sops.templates."rclone-onedrive.conf" = {

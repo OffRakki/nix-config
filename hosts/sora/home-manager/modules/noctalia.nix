@@ -72,12 +72,12 @@
 
       theme = {
         mode = "dark";
-        source = "wallpaper";
-        builtin = "m3_content";
+        source = "community";
+        builtin = "kanagawa_dragon";
         templates = {
           enable_builtin_templates = false;
           builtin_ids = [];
-          enable_community_templates = false;
+          enable_community_templates = true;
           community_ids = [];
         };
       };
@@ -203,7 +203,7 @@
           thickness = 32;
           background_opacity = 1;
           radius = 12;
-          margin_h = 10;
+          margin_h = 14;
           margin_v = 2;
           padding = 8;
           widget_spacing = 6;
