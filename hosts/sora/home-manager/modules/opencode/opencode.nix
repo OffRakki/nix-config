@@ -9,6 +9,11 @@
       exec ${pkgs.opencode}/bin/opencode attach http://localhost:4096
   '';
 in {
+  home.persistence."/persist".directories = [
+    ".local/share/opencode"
+    ".config/opencode"
+  ];
+
   xdg.desktopEntries.opencode = {
     name = "Opencode";
     genericName = "AI CLI Assistant";
@@ -23,10 +28,9 @@ in {
     mimeType = ["x-scheme-handler/opencode"];
     type = "Application";
   };
-
   xdg.mimeApps.defaultApplications."x-scheme-handler/opencode" = "opencode.desktop";
 
-  systemd.user.services.opencode-web = {
+  systemd.user.services.opencode-server = {
     Unit = {
       Description = "OpenCode Web Server";
       After = ["network.target"];
@@ -49,10 +53,10 @@ in {
     skills = {
       jujutsu = ./skills/jujutsu;
       nix = ./skills/nix;
-      nix-config-audit = ./skills/nixRefactor;
+      nix-refactor = ./skills/nix-refactor;
     };
     tui = {
-      theme = "system";
+      theme = "kanagawa";
       keybinds = {
         editor_open = "alt+e";
       };

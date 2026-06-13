@@ -37,6 +37,7 @@ When working in a jj repo:
 - When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
 - After finishing ALL work for the session, do one more `jj new` so the final state is an empty working copy ready for the next session.
 - **Clean up empty commits**: If you accumulate empty, descriptionless commits from past sessions (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon -r 'all:<revset>'` — they have no diff and serve no purpose.
+- **`jj git export` is only for non-co-located repos.** Don't reach for it to "make Git see new files" — in a co-located workspace (`.jj/` + `.git/` in the same directory) the export is automatic. `jj new` is the correct way to create a commit. Never use `jj git export` as a substitute.
 
 ## Nix-managed dotfiles
 

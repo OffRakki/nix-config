@@ -14,6 +14,7 @@
     sops
     age
 
+    pwvucontrol
     vulkan-tools
     floorp-bin
     lmstudio

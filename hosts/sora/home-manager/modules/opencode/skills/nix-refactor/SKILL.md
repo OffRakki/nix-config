@@ -1,5 +1,5 @@
 ---
-name: nix-config-audit
+name: nix-refactor
 description: Systematic NixOS flake audit and refactoring. Covers full-read discovery, redundancy detection, dead code cleanup, package deduplication, unused input removal, and flake validation. Use when the user asks for a config review, cleanup, or refactor.
 ---
 
