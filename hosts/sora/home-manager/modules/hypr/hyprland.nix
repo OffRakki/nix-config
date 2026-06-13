@@ -197,6 +197,13 @@ in {
           end
         end)
 
+        hl.window_rule ({
+          name = "floating-screen-select",
+          match = {initial_title = "Select what to share"},
+          float = true,
+          size = "monitor_w/4 monitor_h/4",
+        })
+
         hl.window_rule({
           name = "inhibit-idle-fullscreen",
           match = { fullscreen = true },
@@ -517,6 +524,7 @@ in {
         hl.bind("${mod} + SHIFT + right", hl.dsp.window.move({ direction = "r"}))
         hl.bind("${mod} + SHIFT + up",    hl.dsp.window.move({ direction = "u"}))
         hl.bind("${mod} + SHIFT + down",  hl.dsp.window.move({ direction = "d"}))
+
         -- Intake/expel windows from/to right column (scrolling layout)
         hl.bind("${mod} + bracketleft", function()
           hl.dispatch(hl.dsp.layout("focus r"))

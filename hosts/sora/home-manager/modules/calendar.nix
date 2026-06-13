@@ -6,6 +6,8 @@ in
 {
   home.packages = with pkgs; [ vdirsyncer khal khard ];
 
+  accounts.calendar.basePath = "Calendars";
+
   xdg.configFile."vdirsyncer/config".text = ''
     [general]
     status_path = "${config.xdg.dataHome}/vdirsyncer/status"
@@ -18,6 +20,7 @@ in
     [pair personal_contacts]
     a = "personal_contacts_remote"
     b = "personal_contacts_local"
+    collections = null
 
     [storage personal_calendar_local]
     type = "filesystem"
@@ -26,7 +29,7 @@ in
 
     [storage personal_calendar_remote]
     type = "caldav"
-    url = "https://apidata.googleusercontent.com/caldav/v2/fernandomarques1505@gmail.com/user"
+    url = "https://www.googleapis.com/calendar/dav/fernandomarques1505@gmail.com/user"
     username = "fernandomarques1505@gmail.com"
     password.fetch = ["command", "cat", "${caldavPass}"]
 
@@ -37,18 +40,23 @@ in
 
     [storage personal_contacts_remote]
     type = "carddav"
-    url = "https://www.googleapis.com/carddav/v1/fernandomarques1505@gmail.com"
+    url = "https://www.googleapis.com/carddav/v1/principals/fernandomarques1505@gmail.com/lists/default"
     username = "fernandomarques1505@gmail.com"
     password.fetch = ["command", "cat", "${caldavPass}"]
   '';
 
   xdg.configFile."khal/config".text = ''
     [calendars]
-    [[personal]]
-    path = ~/Calendars/
-    type = discover
+    [[events]]
+    path = ~/Calendars/events/
     color = light blue
     priority = 10
+
+    [default]
+    highlight_event_days = True
+
+    [highlight_days]
+    color = light blue
 
     [locale]
     firstweekday = 0
@@ -57,20 +65,25 @@ in
   '';
 
   xdg.configFile."khard/khard.conf".text = ''
+    [contact table]
+    localize_dates = True
+
     [addressbooks]
     [[contacts]]
     path = ~/Contacts/
   '';
 
-  xdg.configFile."todoman/config".text = ''
-    [DEFAULT]
-    date_format = %d/%m/%Y
-    time_format = %H:%M
-    humanize = True
-    default_due = 0
-    glob = ~/Calendars/*/*
-    default_list = personal
-  '';
+  programs.todoman = {
+    enable = true;
+    glob = "*";
+    extraConfig = ''
+      default_list = "events"
+      date_format = "%d/%m/%Y"
+      time_format = "%H:%M"
+      humanize = True
+      default_due = 0
+    '';
+  };
 
   systemd.user.services.vdirsyncer = {
     Unit = {

@@ -4,7 +4,7 @@
   ...
 }: {
   programs.kitty = {
-    themeFile = "kanagawa_dragon";
+    themeFile = "kanagawabones";
     enable = true;
     shellIntegration.enableFishIntegration = true;
     enableGitIntegration = true;
@@ -24,8 +24,8 @@
       mouse_hide_wait = 3.0;
       window_padding_width = 4;
       # background = "#212226";
-      # background_opacity = "0.95";
-      # background_blur = 2;
+      background_opacity = "0.9";
+      background_blur = 2;
     };
   };
 }

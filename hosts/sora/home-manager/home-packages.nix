@@ -35,7 +35,6 @@
     satty
     flatpak
     yazi
-    todo
     ranger
     libqalculate
     comma

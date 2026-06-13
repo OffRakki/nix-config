@@ -24,6 +24,7 @@
     homeDirectory = "/home/rakki";
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/NixConfig";
+
     };
     persistence."/persist".directories = [
       "Documents"
