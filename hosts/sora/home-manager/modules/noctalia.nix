@@ -72,8 +72,8 @@
 
       theme = {
         mode = "dark";
-        source = "builtin";
-        builtin = "Noctalia";
+        source = "wallpaper";
+        builtin = "m3_content";
         templates = {
           enable_builtin_templates = false;
           builtin_ids = [];
@@ -92,10 +92,11 @@
         enable_daemon = true;
         show_app_name = true;
         show_actions = true;
-        layer = "top";
+        position = "top_center";
+        layer = "overlay";
         scale = 0.85;
         background_opacity = 0.9;
-        offset_x = 20;
+        offset_x = 10;
         offset_y = 2;
       };
 

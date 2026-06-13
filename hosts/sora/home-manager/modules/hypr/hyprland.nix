@@ -346,7 +346,7 @@ in {
         hl.on("hyprland.start", function ()
           hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME")
           hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME")
-
+          hl.exec_cmd("sleep 1 && noctalia")
           hl.exec_cmd("clipse -listen")
           hl.exec_cmd("nm-applet --indicator")
           hl.exec_cmd("openrgb --startminimized")

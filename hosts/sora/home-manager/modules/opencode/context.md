@@ -31,6 +31,18 @@ When working in a jj repo:
 - When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
 - After finishing ALL work for the session, do one more `jj new` so the final state is an empty working copy ready for the next session.
 
+## Nix-managed dotfiles
+
+**Never edit files under `~/.config/` that are managed by Nix.** If a file is
+declared in the Nix flake (e.g. via `home.file`, `xdg.configFile`,
+`programs.*.config`, or `home-manager` modules), editing the symlinked copy
+under `~/.config/` is pointless — the change will be overwritten on the next
+rebuild.
+
+Instead, locate the Nix source under `~/Documents/NixConfig/` and edit that.
+If unsure whether a file is Nix-managed, check if it's a symlink into the Nix
+store (`readlink -f ~/.config/<file>` should show a `/nix/store/...` path).
+
 # Operator
 
 - The user is Lucky (he/him).
