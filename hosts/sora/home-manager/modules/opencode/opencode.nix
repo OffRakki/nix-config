@@ -1,9 +1,15 @@
-{config, ...}: {
+{config, pkgs, ...}: let
+  attachScript = pkgs.writeShellScript "opencode-attach" ''
+    OPENCODE_SERVER_PASSWORD=$(cat /run/secrets/opencodeServerPassword) \
+      OPENCODE_SERVER_USERNAME=rakki \
+      exec ${pkgs.opencode}/bin/opencode attach http://localhost:4096
+  '';
+in {
   xdg.desktopEntries.opencode = {
     name = "Opencode";
     genericName = "AI CLI Assistant";
     comment = "Terminal-based AI coding assistant";
-    exec = "opencode";
+    exec = "${attachScript}";
     icon = "terminal";
     terminal = true;
     categories = [
@@ -16,11 +22,29 @@
 
   xdg.mimeApps.defaultApplications."x-scheme-handler/opencode" = "opencode.desktop";
 
+  systemd.user.services.opencode-web = {
+    Unit = {
+      Description = "OpenCode Web Server";
+      After = [ "network.target" ];
+    };
+    Service = {
+      Type = "simple";
+      Environment = "OPENCODE_SERVER_USERNAME=rakki";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'OPENCODE_SERVER_PASSWORD=$(cat /run/secrets/opencodeServerPassword) exec ${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 4096'";
+      Restart = "on-failure";
+      RestartSec = "5";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   programs.opencode = {
     enable = true;
     context = ./context.md;
     skills = {
       jujutsu = ./skills/jujutsu;
+      nix = ./skills/nix;
     };
     tui = {
       theme = "system";
@@ -30,7 +54,7 @@
     };
     settings = {
       autoupdate = false;
-      model = "Deepseek V4 Flash";
+      model = "deepseek/deepseek-v4-flash";
       provider = {
         deepseek = {
           options = {

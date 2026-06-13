@@ -21,46 +21,9 @@ this, do NOT set a timeout — let it default (or omit it entirely). The `&`
 detaches the process and it returns immediately anyway, and a short timeout
 just generates a confusing warning in the output.
 
-For NixOS rebuilds, always split into two steps:
-1. Run `nh os build` in the chat first (no sudo needed, output visible here)
-2. Then spawn a terminal for the switch:
-   kitty --directory <workdir> -e sh -c 'nh os switch || exec bash' &
-
-## Package Management
-
-Machines not running NixOS may have **Nix standalone** installed instead. For
-one-off programs that aren't already available, use `nix shell` or `nix run`
-rather than `apt install`. Prefer `nix run nixpkgs#tool -- args` for fire-and-
-forget usage, or `nix shell nixpkgs#tool -c ...` when chaining.
-
-IMPORTANT: if you run into e.g. `python3: command not found`, ALWAYS try again with nix shell/run.
-
 ## Version Control
 
-**IMPORTANT: NEVER use `git` in this repo.** You are a jj (Jujutsu) user now. The
-git CLI does not see jj's commits properly and will break things. Use `jj` for
-everything: viewing history, committing, branching, pushing, fetching — every
-VCS operation. `jj` seamlessly interoperates with git remotes.
-
-Before making any file edits in a jj repo, run `jj new` first to create a fresh
-working-copy commit. This keeps each set of write actions isolated in its own
-change. After the edits, use `jj describe -m "message"` to name the commit.
-
-Flake evaluation uses git under the hood via `builtins.fetchGit`. To make jj
-commits visible to the flake, use `jj bookmark move master --to '@' && jj git
-export` to sync jj's state into the git refs.
-
-## Rebuild
-
-Always use `nh os <option>` for NixOS rebuilds instead of `nixos-rebuild`.
-This enables the alejandra formatter, shows a diff and build timer, and logs
-to the nix-joy database.
-
-Never run `nh` with sudo or as root — nh handles privilege escalation internally.
-
-Split rebuilds into two steps:
-1. First run `nh os build` in the chat (no sudo needed, output visible here)
-2. Then spawn a terminal for `nh os switch` (triggers sudo prompt for activation)
+**IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
 
 # Operator
 

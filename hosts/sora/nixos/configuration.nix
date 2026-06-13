@@ -99,6 +99,10 @@
     secrets.deepseekApiKey = {
       owner = "rakki";
     };
+
+    secrets.opencodeServerPassword = {
+      owner = "rakki";
+    };
   };
 
   sops.templates."rclone-onedrive.conf" = {

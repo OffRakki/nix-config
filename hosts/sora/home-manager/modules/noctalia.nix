@@ -93,8 +93,8 @@
         show_app_name = true;
         show_actions = true;
         layer = "top";
-        scale = 1;
-        background_opacity = 0.97;
+        scale = 0.85;
+        background_opacity = 0.9;
         offset_x = 20;
         offset_y = 2;
       };
@@ -124,7 +124,7 @@
 
       lockscreen = {
         enabled = true;
-        blurred_desktop = false;
+        blurred_desktop = true;
         blur_intensity = 0.8;
         tint_intensity = 0.1;
         monitors = ["DP-1"];
