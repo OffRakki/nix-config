@@ -21,6 +21,12 @@ this, do NOT set a timeout — let it default (or omit it entirely). The `&`
 detaches the process and it returns immediately anyway, and a short timeout
 just generates a confusing warning in the output.
 
+**Bash tool doesn't inherit desktop env vars.** Before running kitty, pull
+DISPLAY and WAYLAND_DISPLAY from systemd's user session:
+
+export $(systemctl --user show-environment | grep -E '^(DISPLAY|WAYLAND_DISPLAY)=' | xargs)
+kitty --directory <workdir> -e sh -c '<cmd> || exec bash' &
+
 ## Version Control
 
 **IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
