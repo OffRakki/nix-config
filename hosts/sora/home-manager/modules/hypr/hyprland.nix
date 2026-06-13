@@ -517,6 +517,15 @@ in {
         hl.bind("${mod} + SHIFT + right", hl.dsp.window.move({ direction = "r"}))
         hl.bind("${mod} + SHIFT + up",    hl.dsp.window.move({ direction = "u"}))
         hl.bind("${mod} + SHIFT + down",  hl.dsp.window.move({ direction = "d"}))
+        -- Intake/expel windows from/to right column (scrolling layout)
+        hl.bind("${mod} + bracketleft", function()
+          hl.dispatch(hl.dsp.layout("focus r"))
+          hl.dispatch(hl.dsp.window.move({ direction = "l" }))
+        end)
+        hl.bind("${mod} + bracketright", function()
+          hl.dispatch(hl.dsp.window.move({ direction = "r" }))
+          hl.dispatch(hl.dsp.layout("focus l"))
+        end)
         -----------------------------------------------------------------------
       '';
   };
