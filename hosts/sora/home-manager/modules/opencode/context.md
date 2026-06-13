@@ -51,6 +51,11 @@ Instead, locate the Nix source under `~/Documents/NixConfig/` and edit that.
 If unsure whether a file is Nix-managed, check if it's a symlink into the Nix
 store (`readlink -f ~/.config/<file>` should show a `/nix/store/...` path).
 
+## Nix flake management
+
+**Never run `nix flake update`.** If you add a new input to `flake.nix`,
+always use `nix flake lock` instead to pin it to a specific version.
+
 # Operator
 
 - The user is Lucky (he/him).

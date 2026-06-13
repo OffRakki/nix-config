@@ -19,6 +19,7 @@
         "/var/lib/private"
         "/var/lib/OpenRGB"
         "/var/lib/waydroid"
+        "/var/lib/sbctl"
         "/var/log"
       ];
     };

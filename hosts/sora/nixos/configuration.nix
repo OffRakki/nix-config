@@ -7,6 +7,7 @@
   ...
 }: {
   imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nix-minecraft.nixosModules.minecraft-servers
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
@@ -435,6 +436,17 @@
   };
 
   time.timeZone = lib.mkDefault "America/Sao_Paulo";
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+
+  environment.systemPackages = with pkgs; [
+    sbctl
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";

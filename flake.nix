@@ -55,6 +55,11 @@
       url = "github:TNAZEP/HytaleLauncherFlake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -80,6 +85,7 @@
     home-manager,
     catppuccin,
     hyprland,
+    lanzaboote,
     ...
   } @ inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra; # Default .nix code formatter
