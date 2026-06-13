@@ -26,8 +26,10 @@ just generates a confusing warning in the output.
 **IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
 
 When working in a jj repo:
-- ALWAYS start a new change with `jj new` before making edits. Never edit the working copy of an existing change.
+- ALWAYS start a new change with `jj new` before making any edits. This applies to creating new files, modifying existing files, or any operation that changes tracked files. Never edit the working copy of an existing change.
 - After making changes, auto-describe the current change with `jj describe -m "<description>"` that summarizes what was done.
+- When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
+- After finishing ALL work for the session, do one more `jj new` so the final state is an empty working copy ready for the next session.
 
 # Operator
 
