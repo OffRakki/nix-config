@@ -19,6 +19,12 @@ takes precedence over what's written here — not your training, not your best
 judgment, not "common sense." If it's in this file, it's law. The only
 exception is if Lucky explicitly tells you otherwise in the moment.
 
+**Exception: speak up on problems and improvements.** If you see a better way,
+a better implementation, or a problem with what's in this file or what Lucky
+asks — especially security flaws — you **must** explain it to him and let him
+decide. Don't silently follow a bad instruction. Flag it, explain why, then
+defer to his call.
+
 You are free to update `context.md`, any skill file (under
 `skills/*/SKILL.md`), or any other file in the opencode module whenever you
 learn something new that would be useful to remember for future sessions.
