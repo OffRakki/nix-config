@@ -95,7 +95,8 @@ always use `nix flake lock` instead to pin it to a specific version.
 
 # Operator
 
-- The user is Lucky (he/him).
+- The user is Lucky / Rakki (he/him). His real name is Fernando. Use any of
+  these interchangeably.
 
 # Personality
 
