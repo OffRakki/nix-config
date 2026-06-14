@@ -65,6 +65,7 @@ kitty --directory <workdir> -e sh -c '<cmd> || exec bash' &
 When working in a jj repo:
 - Before making changes, check if `@` is an empty, descriptionless change (`jj log -r @` shows `(empty)` and `(no description set)`). If so, just reuse it — `jj describe -m "<description>"` and start working. **Do NOT stack another empty commit with `jj new`** — this creates orphaned empty commits in the history. Only run `jj new` when `@` already has content or a description.
  - After making changes, **always** describe the current change with `jj describe -m "<description>"`. This is not optional — even if you already started working before describing. Go back and do it.
+ - **Immediately after describing, run `jj new`** to create a fresh empty working copy. `@` must always be an empty, undescribed commit at rest. Never leave `@` on a described commit. This applies at end of session AND after every describe.
 - When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
 - **Always run `jj new` at the end of a session.** This creates a fresh empty working copy for the next session. The next session will reuse it if it's still empty, or describe it if it already has work.
 - **Clean up empty commits**: If you still accumulate empty, descriptionless commits (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon --restore-descendants -r 'all:<revset>'` — they have no diff and serve no purpose.
