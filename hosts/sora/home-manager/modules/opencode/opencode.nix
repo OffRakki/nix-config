@@ -71,6 +71,13 @@ in {
           options = {
             apiKey = "{file:/run/secrets/deepseekApiKey}";
           };
+          models = {
+            "deepseek-v4-flash" = {
+              options = {
+                reasoningEffort = "high";
+              };
+            };
+          };
         };
         ollama = {
           name = "Ollama";
