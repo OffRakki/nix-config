@@ -61,8 +61,8 @@ in {
         editor_open = "alt+e";
       };
     };
-    permission = "allow";
     settings = {
+      permission = "allow";
       autoupdate = false;
       model = "deepseek/deepseek-v4-flash";
       provider = {
