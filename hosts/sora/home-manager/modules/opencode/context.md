@@ -24,6 +24,11 @@ in the opencode module, read the full current file — and any related files it
 references — to ensure your edit is accurate and doesn't contradict or
 duplicate existing content.
 
+**"Make sure of it" = add to context.** Whenever Lucky tells you to "make
+sure" of something (or any variation like "make sure of it", "be sure", etc.),
+immediately add the thing you're making sure of to this file. This is
+non-negotiable — it's how context stays sharp.
+
 # Preferences
 
 ## Editor
