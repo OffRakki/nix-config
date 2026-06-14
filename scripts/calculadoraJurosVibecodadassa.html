@@ -255,11 +255,11 @@ tbody td:first-child{color:var(--muted);font-size:10px}
 </header>
 
 <!-- TABS -->
-<div class="mode-tabs">
-  <button class="tab-btn active" onclick="setMode('simple')">Juros Simples</button>
-  <button class="tab-btn" onclick="setMode('compound')">Juros Compostos</button>
-  <button class="tab-btn" onclick="setMode('both')">Comparar</button>
-  <button class="tab-btn" onclick="setMode('reverse')">Meta Reversa</button>
+<div class="mode-tabs" role="tablist" aria-label="Modo de cálculo">
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="setMode('simple')">Juros Simples</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="setMode('compound')">Juros Compostos</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="setMode('both')">Comparar</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="setMode('reverse')">Meta Reversa</button>
 </div>
 
 <!-- MAIN GRID -->
@@ -287,7 +287,7 @@ tbody td:first-child{color:var(--muted);font-size:10px}
             <div class="two-col">
               <div class="field">
                 <label>CDI atual (% a.a.)</label>
-                <div class="input-wrap"><input type="number" id="cdiRate" value="10.65" min="0" step="0.05" class="finput no-prefix" style="padding-right:12px" oninput="applyCDI()"></div>
+                <div class="input-wrap">          <input type="number" id="cdiRate" value="10.65" min="0" step="0.05" inputmode="decimal" class="finput no-prefix" style="padding-right:12px" oninput="applyCDI()"></div>
               </div>
               <div class="field">
                 <label>% do CDI</label>
@@ -330,10 +330,10 @@ tbody td:first-child{color:var(--muted);font-size:10px}
         </div>
         <div class="input-wrap">
           <span class="input-prefix" style="color:var(--muted)">%</span>
-          <input type="number" id="rate" class="finput" value="12" min="0" max="200" step="0.1" oninput="syncSlider();calculate()">
+          <input type="number" id="rate" class="finput" value="12" min="0" max="200" step="0.1" oninput="syncSlider();calcNow()">
           <span class="input-suffix">a.a.</span>
         </div>
-        <input type="range" id="rateSlider" min="0" max="60" step="0.5" value="12" oninput="syncRate();calculate()">
+        <input type="range" id="rateSlider" min="0" max="60" step="0.5" value="12" oninput="syncRate();calcNow()">
       </div>
 
       <!-- Período -->
@@ -483,12 +483,12 @@ tbody td:first-child{color:var(--muted);font-size:10px}
   <!-- RIGHT: CHART -->
   <div class="card">
     <div class="card-title" id="chartCardTitle">Evolução Patrimonial</div>
-    <div id="chartTabsNormal" class="chart-tabs">
-      <button class="chart-tab active" onclick="setChartType('line',this)">Linha</button>
-      <button class="chart-tab" onclick="setChartType('bar',this)">Barras</button>
-      <button class="chart-tab" onclick="setChartType('pie',this)">Composição</button>
+    <div id="chartTabsNormal" class="chart-tabs" role="tablist" aria-label="Tipo de gráfico">
+      <button class="chart-tab active" role="tab" aria-selected="true" onclick="setChartType('line',this)">Linha</button>
+      <button class="chart-tab" role="tab" aria-selected="false" onclick="setChartType('bar',this)">Barras</button>
+      <button class="chart-tab" role="tab" aria-selected="false" onclick="setChartType('pie',this)">Composição</button>
     </div>
-    <div class="chart-area" id="mainChartWrap"><canvas id="mainChart"></canvas></div>
+    <div class="chart-area" id="mainChartWrap"><canvas id="mainChart" aria-label="Gráfico de evolução patrimonial"></canvas></div>
 
     <div class="both-compare" id="bothCompare" style="display:none;margin-top:14px">
       <div class="card-title" style="margin-bottom:12px">Comparação Final</div>
@@ -533,7 +533,7 @@ tbody td:first-child{color:var(--muted);font-size:10px}
     <div class="section-title">Efeito <em>Bola de Neve</em></div>
     <div class="section-badge">Capital × Juros ao longo do tempo</div>
   </div>
-  <div class="card"><div class="chart-area" style="height:230px"><canvas id="snowballChart"></canvas></div></div>
+  <div class="card"><div class="chart-area" style="height:230px"><canvas id="snowballChart" aria-label="Gráfico de efeito bola de neve"></canvas></div></div>
 </div>
 
 <!-- PRODUCT COMPARATOR -->
@@ -617,7 +617,7 @@ tbody td:first-child{color:var(--muted);font-size:10px}
 </div>
 
 </div><!-- /page-wrap -->
-<script>
+<script>'use strict';
 // ═══════════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════════
@@ -625,6 +625,7 @@ let mode='simple', periodUnit='months', cap='monthly';
 let chartType='line', revMode='compound';
 let mainChart=null, snowChart=null, scenChart=null, prodChart=null;
 let scenarios=[], irregularContribs=[];
+let lastCS=[], lastSS=[], calcTimer=null;
 let prevAnimValues={totalAmount:0,interest:0,net:0,real:0};
 const SC_COLORS=['#c9a84c','#5b8def','#4caf82','#a78bfa','#f59e0b','#e05c5c'];
 
@@ -659,15 +660,11 @@ const rawVal=id=>{
 //  CURRENCY INPUT MASKING
 // ═══════════════════════════════════════════════════════
 function maskCurrency(el){
-  let v=el.value.replace(/[^\d]/g,'');
-  if(!v){el.dataset.raw='0';return}
-  const num=parseInt(v)/100;
+  const v=el.value.replace(/[^\d]/g,'');
+  if(!v){el.dataset.raw='0';el.value='0,00';return}
+  const num=parseInt(v,10)/100;
   el.dataset.raw=num.toString();
-  const formatted=num.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const caret=el.selectionStart;
-  el.value=formatted;
-  // restore caret approximately
-  try{el.setSelectionRange(caret,caret)}catch(e){}
+  el.value=num.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
 function formatFocus(el){
   const raw=el.dataset.raw||'0';
@@ -702,7 +699,9 @@ function animNum(elId,from,to,fmtFn,dur=550){
 function toggleTheme(){
   const html=document.documentElement;
   const isDark=html.dataset.theme==='dark';
-  html.dataset.theme=isDark?'light':'dark';
+  const next=isDark?'light':'dark';
+  html.dataset.theme=next;
+  try{localStorage.setItem('calc-theme',next);}catch(e){}
   document.getElementById('themeBtn').textContent=isDark?'🌙 Escuro':'☀️ Claro';
   setTimeout(()=>{if(mainChart)calculate();},50);
 }
@@ -759,7 +758,7 @@ function toast(msg){
 function setMode(m){
   mode=m;
   const tabs=['simple','compound','both','reverse'];
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===m));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{const a=tabs[i]===m;b.classList.toggle('active',a);b.setAttribute('aria-selected',a);});
   const isRev=m==='reverse';
   _show('normalInputs',!isRev);_show('reverseInputs',isRev);
   _show('resultPanel',!isRev);_show('saveScBtn',!isRev);
@@ -774,7 +773,7 @@ function setMode(m){
 function _show(id,v){const el=document.getElementById(id);if(el)el.style.display=v?'':'none';}
 function setPeriodUnit(u,btn){periodUnit=u;activateBtn(btn);calculate();}
 function setCap(c,btn){cap=c;activateBtn(btn);calculate();}
-function setChartType(t,btn){chartType=t;document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');calculate();}
+function setChartType(t,btn){chartType=t;document.querySelectorAll('.chart-tab').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});btn.classList.add('active');btn.setAttribute('aria-selected','true');calculate();}
 function setRevMode(m,btn){revMode=m;activateBtn(btn);calcReverse();}
 function activateBtn(btn){btn.parentElement.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function syncSlider(){document.getElementById('rateSlider').value=Math.min(parseFloat(document.getElementById('rate').value)||0,60);}
@@ -880,12 +879,18 @@ function totalIrrContribs(months){
 }
 
 // ═══════════════════════════════════════════════════════
+//  DEBOUNCED CALC (high-frequency inputs)
+// ═══════════════════════════════════════════════════════
+function calcNow(){clearTimeout(calcTimer);calcTimer=setTimeout(calculate,30);}
+
+// ═══════════════════════════════════════════════════════
 //  MAIN CALCULATE
 // ═══════════════════════════════════════════════════════
 function calculate(){
   const {P,PMT,rate,months,infl,useIR}=getInputs();
   const cS=buildCompound(P,PMT,rate,months);
   const sS=buildSimple(P,PMT,rate,months);
+  lastCS=cS;lastSS=sS;
   const irrTotal=totalIrrContribs(months);
   const totalInv=P+PMT*months+irrTotal;
   const cTotal=cS[months],sTotal=sS[months];
@@ -949,7 +954,7 @@ function calculate(){
   drawMain(labels,sS,cS,totalInv,months);
   drawSnowball(labels,cS,P,PMT,months);
   drawMilestones(activeSeries,P,months,rate);
-  buildTables(P,PMT,rate,months,useIR,irrTotal);
+  buildTables(P,PMT,rate,months,useIR,irrTotal,cS,sS);
   renderProducts();
 }
 
@@ -1201,33 +1206,39 @@ function drawScenarios(){
 // ═══════════════════════════════════════════════════════
 //  TABLES
 // ═══════════════════════════════════════════════════════
-function buildTables(P,PMT,rate,months,useIR,irrTotal){
+function buildTables(P,PMT,rate,months,useIR,irrTotal,cS,sS){
   const useY=months>36,step=useY?12:1;
   const periods=[];
   for(let m=step;m<=months;m+=step)periods.push(m);
   if(!periods.length||periods[periods.length-1]!==months)periods.push(months);
   document.getElementById('simpleTableTitle').textContent=`Juros Simples — ${useY?'Anual':'Mensal'}`;
   document.getElementById('compoundTableTitle').textContent=`Juros Compostos — ${useY?'Anual':'Mensal'}`;
-  let prevS=P,prevC=P;
-  document.getElementById('simpleBody').innerHTML='';
-  document.getElementById('compoundBody').innerHTML='';
+  const sBody=document.getElementById('simpleBody');
+  const cBody=document.getElementById('compoundBody');
+  sBody.textContent='';cBody.textContent='';
+  const sFrag=document.createDocumentFragment();
+  const cFrag=document.createDocumentFragment();
   periods.forEach(m=>{
     const ti=P+PMT*m+totalIrrContribs(m);
-    const simT=buildSimple(P,PMT,rate,m)[m];
-    const cmpT=buildCompound(P,PMT,rate,m)[m];
+    const simT=sS[m],cmpT=cS[m];
     const lbl=useY?`Ano ${Math.round(m/12)}`:`Mês ${m}`;
+    const prevS=m===periods[0]?P:sS[m-step];
+    const prevC=m===periods[0]?P:cS[m-step];
     const sJ=simT-prevS,cJ=cmpT-prevC;
     const irR=useIR?irRate(m):0;
     const sNet=useIR?simT-Math.max(simT-ti,0)*irR:null;
     const cNet=useIR?cmpT-Math.max(cmpT-ti,0)*irR:null;
-    document.getElementById('simpleBody').innerHTML+=`<tr>
-      <td>${lbl}</td><td class="td-green">${fmtS(sJ)}</td><td>${fmtS(simT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
-      <td class="td-gold">${fmtS(simT)}${sNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(sNet)}</span>`:''}</td></tr>`;
-    document.getElementById('compoundBody').innerHTML+=`<tr>
-      <td>${lbl}</td><td class="td-green">${fmtS(cJ)}</td><td>${fmtS(cmpT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
-      <td class="td-gold">${fmtS(cmpT)}${cNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(cNet)}</span>`:''}</td></tr>`;
-    prevS=simT;prevC=cmpT;
+    const sTr=document.createElement('tr');
+    sTr.innerHTML=`<td>${lbl}</td><td class="td-green">${fmtS(sJ)}</td><td>${fmtS(simT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
+      <td class="td-gold">${fmtS(simT)}${sNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(sNet)}</span>`:''}</td>`;
+    sFrag.appendChild(sTr);
+    const cTr=document.createElement('tr');
+    cTr.innerHTML=`<td>${lbl}</td><td class="td-green">${fmtS(cJ)}</td><td>${fmtS(cmpT-P)}</td><td class="td-blue">${fmtS(ti)}</td>
+      <td class="td-gold">${fmtS(cmpT)}${cNet!==null?` <span style="font-size:9px;color:var(--muted)">→${fmtS(cNet)}</span>`:''}</td>`;
+    cFrag.appendChild(cTr);
   });
+  sBody.appendChild(sFrag);
+  cBody.appendChild(cFrag);
   _show('simpleTableCard',mode!=='compound');
   _show('compoundTableCard',mode!=='simple');
   document.getElementById('breakdownGrid').style.gridTemplateColumns=(mode==='simple'||mode==='compound')?'1fr':'1fr 1fr';
@@ -1258,6 +1269,11 @@ function exportCSV(){
 // ═══════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════
+try{
+  const saved=localStorage.getItem('calc-theme');
+  if(saved==='light'||saved==='dark')document.documentElement.dataset.theme=saved;
+}catch(e){}
+document.getElementById('themeBtn').textContent=document.documentElement.dataset.theme==='dark'?'☀️ Claro':'🌙 Escuro';
 document.getElementById('compoundTableCard').style.display='none';
 document.getElementById('breakdownGrid').style.gridTemplateColumns='1fr';
 loadFromURL();

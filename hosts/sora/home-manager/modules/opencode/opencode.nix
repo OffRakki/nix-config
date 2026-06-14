@@ -38,7 +38,7 @@ in {
     Service = {
       Type = "simple";
       Environment = "OPENCODE_SERVER_USERNAME=rakki";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'OPENCODE_SERVER_PASSWORD=$(cat /run/secrets/opencodeServerPassword) exec ${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 4096'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'OPENCODE_SERVER_PASSWORD=$(cat /run/secrets/opencodeServerPassword) exec ${pkgs.opencode}/bin/opencode serve --hostname 0.0.0.0 --port 4096'";
       Restart = "on-failure";
       RestartSec = "5";
     };

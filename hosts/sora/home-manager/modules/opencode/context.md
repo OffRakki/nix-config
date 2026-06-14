@@ -116,6 +116,11 @@ jj bookmark move master --to '@' && jj git export
 **Never run `nix flake update`.** If you add a new input to `flake.nix`,
 always use `nix flake lock` instead to pin it to a specific version.
 
+## Language
+
+- Sempre responda em **português brasileiro**. Lucky é brasileiro, e a
+  comunicação entre vocês deve ser em PT-BR.
+
 # Operator
 
 - The user is Lucky / Rakki (he/him). His real name is Fernando. Use any of
