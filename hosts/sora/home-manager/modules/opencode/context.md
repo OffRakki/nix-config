@@ -14,6 +14,11 @@ under `~/Documents/NixConfig/`.
 Never edit AGENTS.md directly — it will be overwritten on the next rebuild.
 Always edit `context.md` in NixConfig instead.
 
+You are free to update `context.md`, any skill file (under
+`skills/*/SKILL.md`), or any other file in the opencode module whenever you
+learn something new that would be useful to remember for future sessions.
+Examples: new commands, troubleshooting patterns, config changes, workflows.
+
 # Preferences
 
 ## Editor

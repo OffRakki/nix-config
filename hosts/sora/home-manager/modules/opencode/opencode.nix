@@ -54,6 +54,7 @@ in {
       jujutsu = ./skills/jujutsu;
       nix = ./skills/nix;
       nix-refactor = ./skills/nix-refactor;
+      personal-tools = ./skills/personal-tools;
     };
     tui = {
       theme = "kanagawa";
