@@ -91,7 +91,6 @@
     mprime
     diffutils
     matugen
-    oama
     pass
     msmtp
     uutils-coreutils-noprefix
@@ -186,7 +185,6 @@
     bitwarden-desktop
     spotify-player
     dysk
-    #todoman
     zenith-nvidia
     libvirt
     qemu

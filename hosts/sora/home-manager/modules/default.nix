@@ -1,13 +1,11 @@
 {
   imports = [
-    #./todoman.nix
     ./obs.nix
     ./steam.nix
     ./fish
     ./hypr
     ./aerc.nix
     ./rbw.nix
-    ./oama.nix
     ./mako.nix
     ./clipnotify.nix
     ./swayosd.nix
@@ -15,7 +13,6 @@
     ./zed.nix
     ./alacritty.nix
     ./helix.nix
-    ./mail.nix
     ./calendar.nix
     ./wofi.nix
     ./fastfetch.nix

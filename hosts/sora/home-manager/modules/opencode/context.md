@@ -19,6 +19,11 @@ You are free to update `context.md`, any skill file (under
 learn something new that would be useful to remember for future sessions.
 Examples: new commands, troubleshooting patterns, config changes, workflows.
 
+**Read before you write.** Before editing any skill, context, or config file
+in the opencode module, read the full current file — and any related files it
+references — to ensure your edit is accurate and doesn't contradict or
+duplicate existing content.
+
 # Preferences
 
 ## Editor
@@ -53,11 +58,11 @@ kitty --directory <workdir> -e sh -c '<cmd> || exec bash' &
 **IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
 
 When working in a jj repo:
-- ALWAYS start a new change with `jj new` before making any edits. This applies to creating new files, modifying existing files, or any operation that changes tracked files. Never edit the working copy of an existing change.
-- After making changes, auto-describe the current change with `jj describe -m "<description>"` that summarizes what was done.
+- Before making changes, check if `@` is an empty, descriptionless change (`jj log -r @` shows `(empty)` and `(no description set)`). If so, just reuse it — `jj describe -m "<description>"` and start working. **Do NOT stack another empty commit with `jj new`** — this creates orphaned empty commits in the history. Only run `jj new` when `@` already has content or a description.
+- After making changes, auto-describe the current change with `jj describe -m "<description>"`.
 - When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
-- After finishing ALL work for the session, do one more `jj new` so the final state is an empty working copy ready for the next session.
-- **Clean up empty commits**: If you accumulate empty, descriptionless commits from past sessions (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon -r 'all:<revset>'` — they have no diff and serve no purpose.
+- **Do NOT run `jj new` at the end of a session.** Just leave `@` where it is. The next session will check if `@` is an empty working copy and reuse it. This avoids the most common source of orphan empty commits.
+- **Clean up empty commits**: If you still accumulate empty, descriptionless commits (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon --restore-descendants -r 'all:<revset>'` — they have no diff and serve no purpose.
 - **`jj git export` is only for non-co-located repos.** Don't reach for it to "make Git see new files" — in a co-located workspace (`.jj/` + `.git/` in the same directory) the export is automatic. `jj new` is the correct way to create a commit. Never use `jj git export` as a substitute.
 
 ## Nix-managed dotfiles

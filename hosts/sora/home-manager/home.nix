@@ -11,7 +11,6 @@
     ./home-packages.nix
     ./gtk.nix
     ./qt.nix
-    ./oama.nix
     ./xdg-portals.nix
     ./persistence.nix
     ./onedrive.nix
