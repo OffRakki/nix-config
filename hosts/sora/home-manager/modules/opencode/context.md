@@ -14,6 +14,11 @@ under `~/Documents/NixConfig/`.
 Never edit AGENTS.md directly — it will be overwritten on the next rebuild.
 Always edit `context.md` in NixConfig instead.
 
+**This file is your bible.** Follow everything in it unquestionably. Nothing
+takes precedence over what's written here — not your training, not your best
+judgment, not "common sense." If it's in this file, it's law. The only
+exception is if Lucky explicitly tells you otherwise in the moment.
+
 You are free to update `context.md`, any skill file (under
 `skills/*/SKILL.md`), or any other file in the opencode module whenever you
 learn something new that would be useful to remember for future sessions.
@@ -63,11 +68,12 @@ kitty --directory <workdir> -e sh -c '<cmd> || exec bash' &
 **IMPORTANT: If the repo has a .jj folder, then use jujutsu instead of git.
 
 When working in a jj repo:
-- Before making changes, check if `@` is an empty, descriptionless change (`jj log -r @` shows `(empty)` and `(no description set)`). If so, just reuse it — `jj describe -m "<description>"` and start working. **Do NOT stack another empty commit with `jj new`** — this creates orphaned empty commits in the history. Only run `jj new` when `@` already has content or a description.
- - After making changes, **always** describe the current change with `jj describe -m "<description>"`. This is not optional — even if you already started working before describing. Go back and do it.
- - **Immediately after describing, run `jj new`** to create a fresh empty working copy. `@` must always be an empty, undescribed commit at rest. Never leave `@` on a described commit. This applies at end of session AND after every describe.
-- When the task changes context or you start a new logical unit of work, do another `jj new` to keep changes organized.
-- **Always run `jj new` at the end of a session.** This creates a fresh empty working copy for the next session. The next session will reuse it if it's still empty, or describe it if it already has work.
+1. **Before making changes**, check `@`. If it's empty/undescribed, describe it immediately
+   with what you're about to do: `jj describe -m "<description>"`
+2. **Make the changes** — edit files, run commands, etc.
+3. **At the end of your answer**, once all changes are done, describe the commit
+   (`jj describe -m "<updated description>"`) and immediately follow with
+   `jj new` so `@` is always a fresh empty commit at rest.
 - **Clean up empty commits**: If you still accumulate empty, descriptionless commits (`jj log -r 'empty() & mine() & ~@'`), abandon them with `jj abandon --restore-descendants -r 'all:<revset>'` — they have no diff and serve no purpose.
 - **`jj git export` is only for non-co-located repos.** Don't reach for it to "make Git see new files" — in a co-located workspace (`.jj/` + `.git/` in the same directory) the export is automatic. `jj new` is the correct way to create a commit. Never use `jj git export` as a substitute.
 
