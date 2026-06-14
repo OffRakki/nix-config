@@ -77,6 +77,11 @@ in {
                 reasoningEffort = "high";
               };
             };
+            "deepseek-v4-pro" = {
+              options = {
+                reasoningEffort = "high";
+              };
+            };
           };
         };
         ollama = {
