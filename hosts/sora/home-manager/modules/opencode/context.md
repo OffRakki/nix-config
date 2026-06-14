@@ -1,3 +1,19 @@
+# CRITICAL — Nix file location
+
+**ALL `.nix` files are under `/home/rakki/Documents/NixConfig/`.** Never look
+anywhere else. Not in the current directory, not in the repo root, not in any
+other path. If Lucky asks you to find, read, or edit a `.nix` file, go to
+`~/Documents/NixConfig/` first — always.
+
+This also applies to `flake.nix`, `flake.lock`, `configuration.nix`,
+home-manager modules, hardware configs, and any Nix-adjacent file. They're all
+under `~/Documents/NixConfig/`.
+
+**`~/.config/opencode/AGENTS.md` is a Nix-managed symlink.** Its real source is
+`~/Documents/NixConfig/hosts/sora/home-manager/modules/opencode/context.md`.
+Never edit AGENTS.md directly — it will be overwritten on the next rebuild.
+Always edit `context.md` in NixConfig instead.
+
 # Preferences
 
 ## Editor
@@ -50,6 +66,22 @@ rebuild.
 Instead, locate the Nix source under `~/Documents/NixConfig/` and edit that.
 If unsure whether a file is Nix-managed, check if it's a symlink into the Nix
 store (`readlink -f ~/.config/<file>` should show a `/nix/store/...` path).
+
+## Nix builds
+
+Do **not** run `nh os switch` or `nh os build` without a flake path. Always
+pass the full path as the last positional argument:
+
+- Build first (no sudo): `nixos-rebuild build --flake /home/rakki/Documents/NixConfig`
+- Apply: `kitty --directory /home/rakki/Documents/NixConfig -e sh -c 'nh os switch /home/rakki/Documents/NixConfig || exec bash' &`
+
+`nh` does not auto-detect the flake from the working directory.
+
+Before building, sync jj state into git refs so the flake can see new commits:
+
+```
+jj bookmark move master --to '@' && jj git export
+```
 
 ## Nix flake management
 

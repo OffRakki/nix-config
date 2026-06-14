@@ -43,6 +43,22 @@ in
     url = "https://www.googleapis.com/carddav/v1/principals/fernandomarques1505@gmail.com/lists/default"
     username = "fernandomarques1505@gmail.com"
     password.fetch = ["command", "cat", "${caldavPass}"]
+
+    [pair feriados]
+    a = "feriados_remote"
+    b = "feriados_local"
+    collections = null
+
+    [storage feriados_local]
+    type = "filesystem"
+    path = "~/Calendars/feriados/"
+    fileext = ".ics"
+
+    [storage feriados_remote]
+    type = "caldav"
+    url = "https://www.googleapis.com/calendar/dav/pt.brazilian%23holiday@group.v.calendar.google.com/events"
+    username = "fernandomarques1505@gmail.com"
+    password.fetch = ["command", "cat", "${caldavPass}"]
   '';
 
   xdg.configFile."khal/config".text = ''
@@ -57,6 +73,11 @@ in
     type = birthdays
     color = dark magenta
     priority = 15
+
+    [[feriados]]
+    path = ~/Calendars/feriados/
+    color = dark green
+    priority = 20
 
     [default]
     highlight_event_days = True
