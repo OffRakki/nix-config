@@ -277,6 +277,29 @@ khal edit [--show-past] event_search_string
 Loops through all matching events, prompting to delete or edit each attribute
 interactively.
 
+### Deleting events non-interactively
+
+khal has no `delete` subcommand for non-interactive use. To delete an event
+programmatically (or when `khal edit` isn't suitable), find the `.ics` file
+and remove it:
+
+```bash
+# Find the event by title
+grep -rl "Event Title" ~/Calendars/events/
+# Remove it
+rm ~/Calendars/events/<uid>.ics
+```
+
+**Deleting a recurring event:** find the `.ics` containing the `RRULE` and
+delete it — all instances will vanish.
+
+**After manual .ics edits**, khal won't pick up the changes because it caches
+events in its sqlite database. Delete the cache to force a refresh:
+
+```bash
+rm ~/.cache/khal/khal.db
+```
+
 ## `khal interactive` / ikhal in detail
 
 Full TUI with three panes:
@@ -587,6 +610,13 @@ khard show --format=yaml -o john.yaml "John"
 
 ### Editing workflow
 
+`khard edit <name>` opens the contact in `$EDITOR`, but requires a TTY and may
+not work from within opencode. **Always try `khard show <name>` first** — it
+handles fuzzy matching and gives you everything (email, phone, notes, UID) in
+one shot. Only fall back to grep for bulk operations.
+
+**Primary workflow (YAML round-trip):**
+
 ```bash
 # 1. Export contact to YAML
 khard show --format=yaml -o contact.yaml "John"
@@ -596,13 +626,20 @@ hx contact.yaml
 
 # 3. Re-import the edited YAML
 khard edit -i contact.yaml "John"
-
-# Or pipe directly:
-khard show --format=yaml "John" | hx ...
-
-# Alternative: direct edit (opens editor)
-khard edit "John"
 ```
+
+**Fallback: edit the vCard directly.** When the YAML round-trip isn't working,
+find and edit the `.vcf` file:
+
+```bash
+# Option A: find by UID (shown in khard show output under Miscellaneous > UID)
+file=~/Contacts/<UID>.vcf
+
+# Option B: grep for the contact name
+grep -rl "<name>" ~/Contacts/
+```
+
+Then edit the `.vcf` directly. `NOTE:` is the notes field.
 
 ### Common khard usage patterns
 
@@ -863,6 +900,10 @@ unset). Fields may be added in future releases but never removed.
 - **Editing**: currently TUI-only (`todo edit ID`). No CLI editing of task
   fields beyond what `todo new` offers.
 - **No sub-tasks or dependencies**: todoman is intentionally simple.
+- **Cosmetic parse errors**: todoman may throw parse errors on some `.ics`
+  files due to a known upstream bug with `RELATED-TO` param handling
+  (`'list' object has no attribute 'params'`). The list still loads — these
+  are cosmetic warnings, not data loss.
 
 ## Common todoman usage patterns
 
@@ -965,3 +1006,4 @@ via `cat /run/secrets/caldavPass` in the vdirsyncer config.
 | vdirsyncer: auth error | Password wrong or expired | Check `/run/secrets/caldavPass` |
 | todoman: `todo` not found | Not installed from nixpkgs | `programs.todoman.enable = true` installs it |
 | khal: no birthdays showing | khard source search not enabled | Ensure khal has `[[birthdays]] type = birthdays` pointing at `~/Contacts/` |
+| khal: manual .ics edits not reflected | khal cache is stale | Delete `~/.cache/khal/khal.db` to force a full rebuild |
