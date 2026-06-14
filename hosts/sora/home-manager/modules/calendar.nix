@@ -15,21 +15,22 @@ in
     [pair personal_calendar]
     a = "personal_calendar_remote"
     b = "personal_calendar_local"
-    collections = ["from a", "from b"]
+    collections = null
 
     [pair personal_contacts]
     a = "personal_contacts_remote"
     b = "personal_contacts_local"
     collections = null
+    conflict_resolution = "a wins"
 
     [storage personal_calendar_local]
     type = "filesystem"
-    path = "~/Calendars/"
+    path = "~/Calendars/events/"
     fileext = ".ics"
 
     [storage personal_calendar_remote]
     type = "caldav"
-    url = "https://www.googleapis.com/calendar/dav/fernandomarques1505@gmail.com/user"
+    url = "https://www.googleapis.com/calendar/dav/fernandomarques1505@gmail.com/events"
     username = "fernandomarques1505@gmail.com"
     password.fetch = ["command", "cat", "${caldavPass}"]
 
