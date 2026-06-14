@@ -17,11 +17,6 @@ in
     b = "personal_calendar_local"
     collections = ["from a", "from b"]
 
-    [pair personal_tasks]
-    a = "personal_tasks_remote"
-    b = "personal_tasks_local"
-    collections = ["from a", "from b"]
-
     [pair personal_contacts]
     a = "personal_contacts_remote"
     b = "personal_contacts_local"
@@ -35,17 +30,6 @@ in
     [storage personal_calendar_remote]
     type = "caldav"
     url = "https://www.googleapis.com/calendar/dav/fernandomarques1505@gmail.com/user"
-    username = "fernandomarques1505@gmail.com"
-    password.fetch = ["command", "cat", "${caldavPass}"]
-
-    [storage personal_tasks_local]
-    type = "filesystem"
-    path = "~/Calendars/tasks/"
-    fileext = ".ics"
-
-    [storage personal_tasks_remote]
-    type = "caldav"
-    url = "https://apidata.googleusercontent.com/caldav/v2/fernandomarques1505@gmail.com/"
     username = "fernandomarques1505@gmail.com"
     password.fetch = ["command", "cat", "${caldavPass}"]
 
@@ -63,11 +47,6 @@ in
 
   xdg.configFile."khal/config".text = ''
     [calendars]
-    [[tasks]]
-    path = ~/Calendars/tasks/
-    color = dark green
-    priority = 20
-
     [[events]]
     path = ~/Calendars/events/
     color = light blue
