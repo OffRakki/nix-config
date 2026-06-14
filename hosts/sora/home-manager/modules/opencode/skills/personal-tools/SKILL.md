@@ -12,50 +12,64 @@ remote servers via **vdirsyncer**. They never talk to the network directly.
 ## Architecture
 
 ```
-CalDAV/CardDAV server  <--vdirsyncer-->  local vdir directory  <--khal/khard/todoman-->
+Google Calendar / Contacts  <--vdirsyncer-->  local vdir directory  <--khal/khard/todoman-->
 ```
 
-- **vdirsyncer** syncs `.ics` and `.vcf` files between remote servers and local directories.
+- **vdirsyncer** syncs `.ics` and `.vcf` files between Google (CalDAV/CardDAV) and local directories.
 - **khal** reads/writes iCalendar `.ics` files for calendar events.
 - **khard** reads/writes vCard `.vcf` files for contacts.
 - **todoman** (binary: `todo`) reads/writes iCalendar `.ics` files for tasks.
 
 Each tool maintains its own **sqlite cache** at `~/.cache/<tool>/` for fast startup.
 
+### Lucky's sync pairs
+
+Lucky has three vdirsyncer pairs:
+
+| Pair | Remote | Local | Type |
+|------|--------|-------|------|
+| `personal_calendar` | Google Calendar events (fernandomarques1505@gmail.com) | `~/Calendars/events/` | CalDAV |
+| `feriados` | Brazilian holidays (pt.brazilian#holiday@group.v.calendar.google.com) | `~/Calendars/feriados/` | CalDAV |
+| `personal_contacts` | Google Contacts | `~/Contacts/` | CardDAV |
+
+vdirsyncer syncs every 30 minutes via a systemd timer. Password stored at `/run/secrets/caldavPass`.
+Google Tasks are NOT synced — Google doesn't expose VTODO via CalDAV.
+
 ## Data Storage (vdir format)
 
-One file per item in a directory:
+One file per item in a directory. Lucky's directories:
 
 ```
-~/.local/share/calendars/
-├── personal/
-│   ├── color          # optional: hex color for this list
-│   ├── displayname    # optional: human-readable name override
+~/Calendars/
+├── events/           # Main calendar (Google Calendar, map color: light blue)
 │   ├── event1.ics
 │   └── event2.ics
-├── work/
-│   └── meeting.ics
-└── contacts/
-    ├── john.vcf
-    └── jane.vcf
+├── feriados/         # Brazilian holidays (map color: dark green)
+│   └── holiday.ics
+~/Contacts/           # Google Contacts, also used as khal birthdays source
+├── john.vcf
+└── jane.vcf
 ```
 
-The `color` file contains a hex color like `#FF0000`. The `displayname` file
-contains a human-readable name (otherwise the directory name is used).
+The `color` file (hex `#RRGGBB`) and `displayname` file can be placed in each
+vdir for per-list metadata. Directories under `~/Calendars/` are shared between
+khal (events) and todoman (tasks).
 
 ## How Lucky expects them to be used
 
 - Lucky uses these tools daily. He knows their syntax; what he needs from you
   is accurate syntax reminders, troubleshooting, or help constructing complex
   queries.
-- Never guess Lucky's config paths or calendar names. If you need to know
-  those, check his dotfiles in `~/Documents/NixConfig/` or ask.
 - When Lucky asks "what's on my calendar today" or similar, you should
-  construct and run the appropriate `khal` command.
+  construct and run the appropriate `khal` command — his calendar names are
+  `events`, `feriados`, and `birthdays`.
 - When Lucky asks about contacts, you should construct and run the appropriate
-  `khard` command.
+  `khard` command — his addressbook is `contacts` at `~/Contacts/`.
 - When Lucky asks about tasks, you should construct and run the appropriate
-  `todo` command.
+  `todo` command — his default list is `events`.
+- **Important**: Always use Lucky's actual paths and names (`~/Calendars/events/`,
+  `~/Calendars/feriados/`, `~/Contacts/`), not generic examples.
+- Lucky's email is offrakki@gmail.com, Google account is fernandomarques1505@gmail.com.
 
 ---
 
@@ -67,14 +81,14 @@ contains a human-readable name (otherwise the directory name is used).
 |--------|---------|
 | List today's events | `khal list` |
 | List events for N days | `khal list today 7d` |
-| List specific date range | `khal list 2026-06-15 2026-06-20` |
+| List specific date range | `khal list 15/06/2026 20/06/2026` |
 | Events at specific time | `khal at 14:00` |
 | Events right now | `khal at now` |
 | Calendar view (3 months) | `khal calendar` |
 | Add an event | `khal new 18:00 Event Title` |
 | Add with description | `khal new 18:00 20:00 Title :: Description text` |
-| Add to specific calendar | `khal new -a work 18:00 Meeting` |
-| Add all-day event | `khal new 2026-06-15 All Day Conference` |
+| Add to specific calendar | `khal new -a events 18:00 Meeting` |
+| Add all-day event | `khal new 15/06/2026 All Day Conference` |
 | Add recurring event | `khal new -r weekly 18:00 Team Standup` |
 | Add event with alarm | `khal new --alarms 15m 18:00 Dentist` |
 | Add with location | `khal new -l "Room 101" 18:00 Meeting` |
@@ -82,37 +96,43 @@ contains a human-readable name (otherwise the directory name is used).
 | Search events | `khal search party` |
 | Edit/delete interactively | `khal edit "search term"` |
 | Interactive TUI | `khal interactive` or `ikhal` |
-| Import .ics file | `khal import -a calendar file.ics` |
+| Import .ics file | `khal import -a events file.ics` |
 | List configured calendars | `khal printcalendars` |
 | Preview date/time formats | `khal printformats` |
 | Initial config wizard | `khal configure` |
 
 ## Configuration: `~/.config/khal/config`
 
-INI format. Three main sections: `[calendars]`, `[default]`, `[locale]`.
-
-### `[calendars]` section
+INI format. Lucky's actual config:
 
 ```ini
 [calendars]
+[[events]]
+path = ~/Calendars/events/
+color = light blue
+priority = 10
 
-  [[personal]]
-    path = ~/.local/share/calendars/personal/
-    color = dark green
-    priority = 20
+[[birthdays]]
+path = ~/Contacts/
+type = birthdays
+color = dark magenta
+priority = 15
 
-  [[work]]
-    path = ~/.local/share/calendars/work/
-    readonly = True
+[[feriados]]
+path = ~/Calendars/feriados/
+color = dark green
+priority = 20
 
-  [[all]]
-    path = ~/.local/share/calendars/*
-    type = discover
-    color = dark green
+[default]
+highlight_event_days = True
 
-  [[birthdays]]
-    path = ~/.local/share/contacts/
-    type = birthdays   # extracts from vCard .vcf files
+[highlight_days]
+color = light blue
+
+[locale]
+firstweekday = 0
+timeformat = %H:%M
+dateformat = %d/%m/%Y
 ```
 
 Per-calendar options:
@@ -126,38 +146,31 @@ Per-calendar options:
 ### `[locale]` section
 
 Controls date/time parsing and display. Python `strftime` format strings.
+Lucky uses `%d/%m/%Y` (dd/mm/yyyy) and `%H:%M` (24h time):
 
 ```ini
 [locale]
-local_timezone = Europe/Berlin
-default_timezone = Europe/Berlin
-
-timeformat = %H:%M
-dateformat = %d.%m.
-longdateformat = %d.%m.%Y
-datetimeformat = %d.%m. %H:%M
-longdatetimeformat = %d.%m.%Y %H:%M
-
 firstweekday = 0        # 0=Monday, 6=Sunday
-weeknumbers = off       # or 'left' or 'right'
-unicode_symbols = True  # or False for ASCII-only
+timeformat = %H:%M
+dateformat = %d/%m/%Y
+# No longdateformat/datetimeformat/longdatetimeformat set —
+# khal uses defaults (%x, %c). Lucky's events use the short format.
 ```
 
 ### `[default]` section
 
+Lucky only sets `highlight_event_days` — everything else uses khal defaults:
+
 ```ini
 [default]
-default_calendar = personal
-default_event_duration = 1h
-default_dayevent_duration = 1d
-default_event_alarm = 15m
-default_dayevent_alarm = 12h
-timedelta = 2d          # how far into the future to show by default
-show_all_days = False   # show empty days in list view
-print_new = False       # or 'event' or 'path'
-highlight_event_days = False
-enable_mouse = True
+highlight_event_days = True    # days with events get colored dots/bars
+
+[highlight_days]
+color = light blue              # highlight color for event days
 ```
+
+Note: `default_calendar` is **not set**, which means adding events requires
+`-a events` (or being prompted).
 
 ### `[keybindings]` section
 
@@ -224,10 +237,11 @@ khal list [-a CALENDAR | -d CALENDAR] [--format FORMAT] [--day-format DAYFORMAT]
 khal understands: `today`, `tomorrow`, weekday names (next occurrence), and dates in configured formats.
 
 ```
-khal new 18:00 Event Title                              # today at 18:00, 1h default
-khal new tomorrow 16:30 Coffee                          # tomorrow 16:30
-khal new 25.10. 18:00 24:00 Party :: With friends       # date with end time
-khal new 26.07. Conference -r weekly -g meeting         # all-day recurring
+khal new 18:00 Event Title                                      # today at 18:00, 1h default
+khal new -a events 18:00 Meeting                                # explicitly target events calendar
+khal new -a events tomorrow 16:30 Coffee                        # tomorrow 16:30
+khal new -a events 14/06/2026 18:00 Conference :: with slides    # date (dd/mm/yyyy) with description
+khal new -a events 15/06/2026 Conference -r weekly -g meeting   # all-day recurring
 ```
 
 Options for `khal new`:
@@ -346,11 +360,14 @@ khal list today 7d
 # This week (Monday-Sunday)
 khal list today week
 
-# Only work calendar
-khal list -a work
+# Only events calendar (Lucky's main one)
+khal list -a events
+
+# Only feriados (Brazilian holidays)
+khal list -a feriados
 
 # Exclude a calendar
-khal list -d trash_calendar
+khal list -d feriados
 
 # Custom format: compact
 khal list --format "{start-time} {title}"
@@ -370,11 +387,11 @@ khal at now
 # Search for "dentist" in all events
 khal search dentist
 
-# Add an event with alarm
-khal new -a personal --alarms 30m tomorrow 10:00 Dentist appointment :: Bring insurance card
+# Add an event with alarm (must specify -a since no default_calendar)
+khal new -a events --alarms 30m tomorrow 10:00 Dentist appointment :: Bring insurance card
 
 # Calendar view starting from a date
-khal calendar 2026-07-01
+khal calendar 01/07/2026
 ```
 
 ---
@@ -387,7 +404,7 @@ khal calendar 2026-07-01
 |--------|---------|
 | List all contacts | `khard list` |
 | List filtered | `khard list search_term` |
-| List specific addressbook | `khard list -a work` |
+| List specific addressbook | `khard list -a contacts` |
 | Field-specific search | `khard list name:Lucky emails:example.com` |
 | Show contact details | `khard show "Lucky"` |
 | Export as YAML | `khard show --format=yaml -o file.yaml "Lucky"` |
@@ -413,39 +430,15 @@ khal calendar 2026-07-01
 
 ## Configuration: `~/.config/khard/khard.conf`
 
+Lucky's config is minimal — just a single addressbook and locale flag:
+
 ```ini
-[addressbooks]
-[[family]]
-path = ~/.contacts/family/
-[[friends]]
-path = ~/.contacts/friends/
-[[work]]
-path = ~/.work/contacts/
-type = discover    # glob-expand path for multiple vdirs
-
-[general]
-debug = no
-default_action = list
-editor = vim, -i, NONE
-merge_editor = vimdiff
-
 [contact table]
-display = first_name          # first_name / last_name / formatted_name
-group_by_addressbook = no
-reverse = no
-show_nicknames = no
-show_uids = yes
-show_kinds = no
-sort = last_name
-localize_dates = yes
-preferred_phone_number_type = pref, cell, home   # descending priority
-preferred_email_address_type = pref, work, home
+localize_dates = True
 
-[vcard]
-private_objects = Jabber, Skype, Twitter   # custom X- fields
-preferred_version = 3.0                    # or 4.0
-search_in_source_files = no                # speed up search (may be incomplete)
-skip_unparsable = no
+[addressbooks]
+[[contacts]]
+path = ~/Contacts/
 ```
 
 ### Query language
@@ -544,8 +537,14 @@ khard copy -a family -t work "John Smith"    # copy to work
 khard move -a work -t personal "John Smith"  # move to personal
 ```
 
-### Email integration (mutt/neomutt)
+### Email integration (neomutt)
 
+Lucky's neomutt is configured to use khard for contact queries:
+```neomuttrc
+query_command = "khard email --parsable '%s'"
+```
+
+Manual usage:
 ```bash
 # List all email addresses (mutt query format)
 khard email Lucky
@@ -611,8 +610,8 @@ khard edit "John"
 # List all contacts, sorted by last name
 khard list
 
-# List contacts from a specific addressbook
-khard list -a work
+# List contacts from a specific addressbook (Lucky has one: "contacts")
+khard list -a contacts
 
 # Search by name
 khard list Lucky
@@ -633,7 +632,7 @@ khard email Lucky
 khard phone Lucky
 
 # Add a new contact (opens editor with YAML template)
-khard new -a personal
+khard new -a contacts
 
 # Add from pre-filled YAML
 khard new -i new-contact.yaml
@@ -656,11 +655,11 @@ khard birthdays
 | Action | Command |
 |--------|---------|
 | List all tasks | `todo` or `todo list` |
-| List for specific list | `todo list -l personal` |
+| List for specific list | `todo list -l events` |
 | Create a task | `todo new Summary text` |
-| Create with due date | `todo new -d 2026-06-20 Task` |
+| Create with due date | `todo new -d 15/06/2026 Task` |
 | Create with priority | `todo new -p 1 Urgent task` |
-| Create on a list | `todo new -l work Task` |
+| Create on a list | `todo new -l events Task` |
 | Show task details | `todo show 3` |
 | Edit task (TUI) | `todo edit 3` |
 | Mark as done | `todo done 3` |
@@ -732,9 +731,10 @@ todo new [-l LIST] [-d DUE_DATE] [--start START_DATE] [--priority N]
 
 Examples:
 ```bash
-todo new Buy groceries
-todo new -l personal -d tomorrow Buy groceries
-todo new -l work -p 1 -d "2026-06-20" --description "Prepare slides" Quarterly review
+todo new Buy groceries                                   # goes to "events" (default_list)
+todo new -d 15/06/2026 Buy groceries                     # due date in dd/mm/yyyy
+todo new -l events -p 1 -d 15/06/2026 Submit report      # explicitly target events list
+todo new -l events --description "Prepare slides" talk    # description without due date
 ```
 
 ### `todo edit`
@@ -786,50 +786,44 @@ Lists all configured task lists (vdir directories).
 
 Launches an interactive shell with tab-completion (requires `click-repl`).
 
-## Configuration: `~/.config/todoman/config.py`
+## Configuration
 
-This is a Python file (though it looks like INI). Simple key=value format.
+Lucky's todoman is configured via the Nix `programs.todoman` module in
+`calendar.nix` — not by writing `config.py` directly:
 
+```nix
+programs.todoman = {
+  enable = true;
+  glob = "*";   # match all dirs under accounts.calendar.basePath (~/Calendars/)
+  extraConfig = ''
+    default_list = "events"     # common list with khal's events calendar
+    date_format = "%d/%m/%Y"
+    time_format = "%H:%M"
+    humanize = True
+    default_due = 0             # no auto-due-date on new tasks
+  '';
+};
+```
+
+Equivalent manual `~/.config/todoman/config.py`:
 ```python
-# Glob pattern matching directories with .ics files. Each matching dir = one list.
-path = "~/.local/share/calendars/*"
-
-date_format = "%Y-%m-%d"
+path = "~/Calendars/*"          # shared directory tree with khal
+date_format = "%d/%m/%Y"
 time_format = "%H:%M"
-
-# Default list name (directory name)
-default_list = "Personal"
-
-# Default due date offset in hours (0 = no due date)
-default_due = 48
-
-# Default priority for new tasks (1-10, or None for no priority)
-default_priority = None
-
-# String separating date and time in display
-dt_separator = " "
-
-# Human-friendly dates like "tomorrow", "in 2 hours"
-humanize = False
-
-# Only show tasks whose start date has passed (or has no start date)
+default_list = "events"
+default_due = 0
+humanize = True
 startable = False
-
-# Cache database location
-# cache_path = "~/.cache/todoman/cache.sqlite3"
-
-# Color mode: auto, always, never
-color = "auto"
-
-# Default command when running `todo` with no args
-default_command = "list"
 ```
 
 ### Per-list metadata
 
 Like khal, todoman supports `color` and `displayname` files in each vdir:
-- `~/.local/share/calendars/personal/color` → `#FF0000`
-- `~/.local/share/calendars/personal/displayname` → `My Personal Tasks`
+- `~/Calendars/events/color` → `#87CEEB` (light blue, matching khal)
+- `~/Calendars/events/displayname` → optional human-readable override
+
+Note: todoman reads from the same `~/Calendars/` tree as khal — tasks are `.ics`
+files stored alongside calendar events in the same vdirs.
 
 ### Environment variables
 
@@ -876,17 +870,17 @@ unset). Fields may be added in future releases but never removed.
 # List all tasks sorted by due date (soonest first)
 todo list --sort -due
 
-# Add a task to personal list due tomorrow
-todo new -l personal -d tomorrow Buy milk
+# Add a task to events list due tomorrow
+todo new -l events -d tomorrow Buy milk
 
-# Add a high priority work task
-todo new -l work -p 1 -d 2026-06-20 Submit report
+# Add a high priority task
+todo new -l events -p 1 -d 15/06/2026 Submit report
 
 # Mark task as done
 todo done 3
 
 # See what's due this week
-todo list --due-before 2026-06-21
+todo list --due-before 17/06/2026
 
 # Clean up completed tasks
 todo flush
@@ -901,21 +895,42 @@ todo lists
 
 ## vdirsyncer integration
 
-While these tools don't sync themselves, Lucky likely has vdirsyncer set up.
-The typical workflow is:
+vdirsyncer runs automatically every 30 minutes via a systemd timer.
+Manual use:
 
 ```bash
-# Sync calendars/contacts/tasks from server
+# Sync everything
 vdirsyncer sync
+
+# Sync only a specific pair
+vdirsyncer sync personal_calendar
+
+# Discover collections
+vdirsyncer discover
 
 # Now use local tools
 khal list
 khard list
 todo list
 
-# After making changes, sync back
-vdirsyncer sync
+# After making local changes (e.g. adding events/contacts), sync is automatic
+# within 30 minutes. To force an immediate sync:
+systemctl --user start vdirsyncer
 ```
+
+### Password
+
+CalDAV/CardDAV password is stored at `/run/secrets/caldavPass`. It's fetched
+via `cat /run/secrets/caldavPass` in the vdirsyncer config.
+
+### Sync notes
+
+- **Personal calendar**: Google Calendar for fernandomarques1505@gmail.com
+- **Contacts**: Google Contacts for the same account
+- **Feriados**: Brazilian holidays (read-only, public Google Calendar)
+- **Conflict resolution**: For contacts, `a wins` (remote overrides local)
+- **No task sync**: Google doesn't expose VTODO via CalDAV, so todoman is
+  local-only. Tasks in `~/Calendars/events/` coexist with calendar events.
 
 ## Shared patterns
 
@@ -927,6 +942,11 @@ vdirsyncer sync
 4. **Displayname files**: khal and todoman support `displayname` files.
 5. **Multiple calendars/lists**: all three can work with multiple vdirs,
    filtering by name or addressbook.
+6. **Shared tree**: khal and todoman both read from `~/Calendars/` — the same
+   `.ics` files can be events (for khal) and tasks (for todoman). They coexist
+   fine because each tool only looks at its own type.
+7. **Persist**: `~/Calendars/`, `~/Contacts/`, and `~/.local/share/vdirsyncer`
+   are persisted (not ephemeral) via home-manager impermanence.
 
 ## Troubleshooting
 
@@ -934,10 +954,14 @@ vdirsyncer sync
 |---------|-------------|-----|
 | khal: "No such calendar" | Calendar name doesn't match config | Check `khal printcalendars` |
 | khal: events not showing | vdirsyncer not synced | Run `vdirsyncer sync` first |
-| khal: wrong timezone | Timezone not configured | Check `[locale] default_timezone` |
+| khal: wrong timezone | Timezone not configured | Lucky doesn't set timezone in khal; it uses system timezone |
+| khal: "Calendar \`foo\` not found" | No default_calendar set in config | Lucky has no default_calendar — use `-a events` explicitly |
 | khard: "Config file not found" | Missing or wrong path | Place at `~/.config/khard/khard.conf` |
 | khard: no contacts | Empty vdir or wrong path | Check `[addressbooks] path` in config |
 | khard: search returns nothing | Case-sensitive? | khard search is case-insensitive |
 | todo: "No default list" | not configured | Set `default_list` in config or use `-l` |
 | todo: task ID changed | Flush was run | IDs reset after `todo flush` |
 | Any tool: slow startup | Large cache/sync needed | Check `~/.cache/<tool>/` db size |
+| vdirsyncer: auth error | Password wrong or expired | Check `/run/secrets/caldavPass` |
+| todoman: `todo` not found | Not installed from nixpkgs | `programs.todoman.enable = true` installs it |
+| khal: no birthdays showing | khard source search not enabled | Ensure khal has `[[birthdays]] type = birthdays` pointing at `~/Contacts/` |
