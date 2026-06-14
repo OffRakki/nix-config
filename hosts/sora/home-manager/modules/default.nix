@@ -4,7 +4,6 @@
     ./steam.nix
     ./fish
     ./hypr
-    ./aerc.nix
     ./rbw.nix
     ./mako.nix
     ./clipnotify.nix
